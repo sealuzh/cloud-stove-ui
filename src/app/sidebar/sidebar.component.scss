@@ -1,0 +1,45 @@
+@import '../cloudstove-ui';
+
+// Width of Sidebar
+$width: 240px;
+
+.navbar-brand {
+  height: auto;
+  width: 100%;
+  line-height: 30px;
+
+  > img {
+    float: right;
+    height: 30px;
+  }
+}
+
+.navbar-inverse {
+  background-color: $brand-dark;
+}
+
+.navbar-fixed-left {
+  width: $width;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;  /* Cancel default li float: left */
+  width: $width - 1;
+}
+
+.container-navbar {
+  padding-left: 280px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+  margin-top: -50px;
+  margin-left: $width;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+  background-color: lighten($brand-dark, 20%);
+}

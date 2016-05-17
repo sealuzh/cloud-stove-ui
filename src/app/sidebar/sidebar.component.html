@@ -1,0 +1,31 @@
+<div class="navbar navbar-inverse navbar-fixed-left">
+    <a class="navbar-brand" href="#">CloudStove <img src="images/flame.svg"></a>
+    <ul class="nav navbar-nav">
+        <!--
+        <li class="dropdown" dropdown (on-toggle)="toggled($event)">
+            <a href="#" class="dropdown-toggle" dropdownToggle>
+            Dropdown <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">Sub Menu1</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Sub Menu2</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Sub Menu3</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Sub Menu4</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Sub Menu5</a></li>
+            </ul>
+        </li>
+        -->
+        <li><a href="#">Templates</a></li>
+        <li class="divider"></li>
+        <li><a [routerLink]="['/applications']">Applications</a></li>
+        <li><a [routerLink]="['/recommendations']">Recommendations</a></li>
+        <li><a [routerLink]="['/settings']">Settings</a></li>
+    </ul>
+</div>
+
+<div class="container-fluid container-navbar">
+    <div class="row">
+        <ng-content></ng-content>
+    </div>
+</div>
