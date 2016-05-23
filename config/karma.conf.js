@@ -4,13 +4,18 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     plugins: [
       require('karma-jasmine'),
-      require('karma-chrome-launcher')
+      require('karma-chrome-launcher'),
+      require('karma-phantomjs-launcher')
     ],
     customLaunchers: {
       // chrome setup for travis CI using chromium
       Chrome_travis_ci: {
         base: 'Chrome',
         flags: ['--no-sandbox']
+      },
+      phantomjsLauncher: {
+        // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
+        exitOnResourceError: true
       }
     },
     files: [
@@ -36,7 +41,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: false
   });
 };

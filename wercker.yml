@@ -1,0 +1,29 @@
+box: nodesource/trusty:4.4.4
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # Installs all Dependencies. We cannot use npm-install as it ignores dev-dependencies
+    - script:
+        name: Install Dependencies
+        code: |
+          npm install -g angular-cli@v1.0.0-beta.2-mobile.4 bower karma
+          npm install
+          bower install --allow-root
+
+    # Build!
+    - script:
+        name: Build App
+        code: |
+          ng build
+
+    # Runs Unit Tests
+    - npm-test
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"

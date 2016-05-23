@@ -1,0 +1,16 @@
+{
+  "name": "cloudstove-ui",
+  "description": "",
+  "main": "",
+  "authors": [
+    "seallab IFI"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/inz/cloud-stove-ui",
+  "moduleType": [],
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "fontawesome#~4.6.3"
+  }
+}
