@@ -6,19 +6,19 @@ import {
     inject,
 } from '@angular/core/testing';
 
-import {CloudstoveUiAppComponent} from '../app/cloudstove-ui.component';
+import {AppComponent} from '../app/app.component';
 import {Router} from '@angular/router';
 import {provide} from '@angular/core';
 
 beforeEachProviders(() => [
-        CloudstoveUiAppComponent,
+    AppComponent,
         provide(Router, {useValue: jasmine.createSpyObj('Router', ['navigate'])})
     ]
 );
 
 describe('App: CloudstoveUi', () => {
     it('should create the app',
-        inject([CloudstoveUiAppComponent, Router], (app:CloudstoveUiAppComponent) => {
+        inject([AppComponent, Router], (app:AppComponent) => {
             expect(app).toBeTruthy();
         }));
 });

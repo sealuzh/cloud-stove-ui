@@ -1,54 +1,48 @@
 import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
+    beforeEach,
+    beforeEachProviders,
+    describe,
+    expect,
+    it,
+    inject,
 } from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { WelcomeComponent } from './welcome.component';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {WelcomeComponent} from './welcome.component';
 
 describe('Component: Welcome', () => {
-  let builder: TestComponentBuilder;
+    let builder:TestComponentBuilder;
 
-  beforeEachProviders(() => [WelcomeComponent]);
-  beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
-    builder = tcb;
-  }));
+    beforeEachProviders(() => [WelcomeComponent]);
+    beforeEach(inject([TestComponentBuilder], function (tcb:TestComponentBuilder) {
+        builder = tcb;
+    }));
 
-  it('should inject the component', inject([WelcomeComponent],
-      (component: WelcomeComponent) => {
-    expect(component).toBeTruthy();
-  }));
+    it('should inject the component', inject([WelcomeComponent],
+        (component:WelcomeComponent) => {
+            expect(component).toBeTruthy();
+        }));
 
-  it('should create the component', inject([], () => {
-    return builder.createAsync(WelcomeComponentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(WelcomeComponent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
-  }));
-
-  /*
-   it('should have as title \'Welcome to the Stove.\'',
-   inject([CloudstoveUiAppComponent], (app: CloudstoveUiAppComponent) => {
-   expect(app.title).toEqual('Welcome to the Stove.');
-   }));
-   */
+    it('should create the component', inject([], () => {
+        return builder.createAsync(WelcomeComponentTestController)
+            .then((fixture:ComponentFixture<any>) => {
+                let query = fixture.debugElement.query(By.directive(WelcomeComponent));
+                expect(query).toBeTruthy();
+                expect(query.componentInstance).toBeTruthy();
+            });
+    }));
 
 });
 
 @Component({
-  selector: 'test',
-  template: `
-    <app-welcome></app-welcome>
+    selector: 'test',
+    template: `
+    <hb-welcome></hb-welcome>
   `,
-  directives: [WelcomeComponent]
+    directives: [WelcomeComponent]
 })
+
 class WelcomeComponentTestController {
 }
 

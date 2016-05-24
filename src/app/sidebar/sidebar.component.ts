@@ -3,14 +3,15 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
-    moduleId: module.id,
     selector: 'cs-sidebar',
-    templateUrl: 'sidebar.component.html',
-    styleUrls: ['sidebar.component.css'],
+    template: require('./sidebar.component.html'),
+    styles: [require('./sidebar.component.scss')],
     directives: [DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES],
 })
 
 export class SidebarComponent {
+
+    constructor() {}
 
     public toggled(open: boolean): void {
         console.log('Dropdown is now: ', open);

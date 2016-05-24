@@ -33,7 +33,7 @@ describe('Component: Sidebar', () => {
 @Component({
     selector: 'test',
     template: `
-    <cs-sidebar></cs-sidebar>
+    <hb-sidebar></hb-sidebar>
   `,
     directives: [SidebarComponent]
 })

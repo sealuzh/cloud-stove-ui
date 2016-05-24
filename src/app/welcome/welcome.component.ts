@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-welcome',
-  templateUrl: 'welcome.component.html',
-  styleUrls: ['welcome.component.css']
+    selector: 'hb-welcome',
+    template: require('./welcome.component.html'),
+    styles: [require('./welcome.component.scss')],
 })
+
 export class WelcomeComponent implements OnInit {
 
-  constructor() {}
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+
+    }
 
 }

@@ -1,21 +1,28 @@
-box: nodesource/trusty:4.4.4
+box: node:4.4.4
 # Build definition
 build:
   # The steps that will be executed on build
   steps:
+    # Installs global dependencies for build tools and such
+    - script:
+        name: Install Webpack & WebPack Dev Server & Karma & Protractor
+        code: |
+          sudo npm install -g webpack
+          sudo npm install -g webpack-dev-server
+          sudo npm install -g karma-cli
+          sudo npm install -g protractor
+          sudo npm install -g typings
+
     # Installs all Dependencies. We cannot use npm-install as it ignores dev-dependencies
     - script:
         name: Install Dependencies
         code: |
-          npm install -g angular-cli@v1.0.0-beta.2-mobile.4 bower karma
           npm install
-          bower install --allow-root
 
-    # Build!
     - script:
-        name: Build App
+        name: Build using Webpack
         code: |
-          ng build
+          webpack --progress --profile --bail
 
     # Runs Unit Tests
     - npm-test

@@ -1,10 +1,11 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router';
 import { enableProdMode } from '@angular/core';
-import { CloudstoveUiAppComponent, environment } from './app';
+import { environment } from './app/environment';
+import { AppComponent } from './app/index';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
-bootstrap(CloudstoveUiAppComponent, [ ROUTER_PROVIDERS ]);
+bootstrap(AppComponent, [ROUTER_PROVIDERS]);
