@@ -1,0 +1,17 @@
+{
+  "name": "cloud-stove-ui",
+  "description": "The Cloud Stove Frontend. Finely crafted cloud application deployments.",
+  "scripts": {
+    "postdeploy": "npm run build"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "success_url": "/",
+  "formation": [
+    {
+      "process": "web",
+      "quantity": 1
+    }
+  ]
+}

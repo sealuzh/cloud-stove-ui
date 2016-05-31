@@ -1,0 +1,36 @@
+box: node:4.4.4
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # Installs global dependencies for build tools and such
+    - script:
+        name: Install Webpack & WebPack Dev Server & Karma & Protractor
+        code: |
+          sudo npm install -g webpack
+          sudo npm install -g webpack-dev-server
+          sudo npm install -g karma-cli
+          sudo npm install -g protractor
+          sudo npm install -g typings
+
+    # Installs all Dependencies. We cannot use npm-install as it ignores dev-dependencies
+    - script:
+        name: Install Dependencies
+        code: |
+          npm install
+
+    - script:
+        name: Build using Webpack
+        code: |
+          webpack --progress --profile --bail
+
+    # Runs Unit Tests
+    - npm-test
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
