@@ -38,7 +38,7 @@ describe('Component: Welcome', () => {
 @Component({
     selector: 'test',
     template: `
-    <hb-welcome></hb-welcome>
+    <cs-welcome></cs-welcome>
   `,
     directives: [WelcomeComponent]
 })

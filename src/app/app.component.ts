@@ -1,13 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
-import {HTTP_PROVIDERS}    from '@angular/http';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 // Services
-import {CameraService} from './services/camera';
 import {ConfigService} from './services/configs';
+import {RequestService} from './services/request';
 
 import {SidebarComponent} from './sidebar/index';
 import {WelcomeComponent} from './welcome/index';
+
+// Ingredients
+import {IngredientComponent} from './ingredients/ingredient.component';
 
 import '../style/app.scss';
 
@@ -20,18 +23,23 @@ import '../style/app.scss';
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
     directives: [ROUTER_DIRECTIVES, SidebarComponent],
-    providers: [HTTP_PROVIDERS, CameraService, ConfigService]
+    providers: [HTTP_PROVIDERS, ConfigService, RequestService]
 })
 
 @Routes([
-    {path: '/welcome', component: WelcomeComponent},
+
+    // Ingredients
+    {path: 'ingredients', component: IngredientComponent},
+
+    // Welcome
+    {path: '*', component: WelcomeComponent},
+
 ])
 
-export class AppComponent implements OnInit {
-    constructor(private router:Router) {
+export class AppComponent {
+
+    constructor(private router: Router) {
+
     }
 
-    ngOnInit() {
-        this.router.navigate(['/welcome']);
-    }
 }
