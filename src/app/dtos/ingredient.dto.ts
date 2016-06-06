@@ -6,8 +6,8 @@ export interface Ingredient extends RestObject {
     body: string;
     created_at: Date;
     updated_at: Date;
-    parent_id: Number;
-    template_id: Number;
+    parent_id: number;
+    template_id: number;
     is_template: boolean;
     constraints: Constraint[];
 }

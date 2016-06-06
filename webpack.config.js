@@ -161,6 +161,11 @@ module.exports = function makeWebpackConfig() {
             'process.env': {
                 ENV: JSON.stringify(ENV)
             }
+        }),
+
+        // Inject d3.js into application
+        new webpack.ProvidePlugin({
+            d3: 'd3'
         })
     ];
 
