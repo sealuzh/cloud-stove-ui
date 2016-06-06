@@ -1,11 +1,11 @@
 import {Directive, Attribute, OnChanges, ElementRef} from '@angular/core';
 
 @Directive({
-    selector: 'cs-ingredient-map',
+    selector: 'cs-application-map',
     properties: ['data']
 })
 
-export class IngredientMap implements OnChanges {
+export class ApplicationMap implements OnChanges {
 
     data: {nodes: Array<any>, links: Array<any>};
 
@@ -13,13 +13,16 @@ export class IngredientMap implements OnChanges {
     force: any;
     color: any;
 
+    width: number = 100;
+    height: number = 50;
+
     constructor(elementRef: ElementRef, @Attribute('width') width: string, @Attribute('height') height: string) {
 
         let el: any = elementRef.nativeElement;
         let graph: any = d3.select(el);
 
         this.color = d3.scale.category20();
-        this.force = d3.layout.force().gravity(0.8).charge(0).linkDistance(125).size([width, height]);
+        this.force = d3.layout.force().gravity(0.8).charge(-1500).linkDistance(125).friction(0.5).size([width, height]);
         this.svg = graph
             .append('svg')
             .attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -28,7 +31,7 @@ export class IngredientMap implements OnChanges {
     }
 
     render(newValue) {
-        if (!newValue) {
+        if (!newValue || this.data.nodes.length < 1) {
             return;
         }
 
@@ -44,18 +47,20 @@ export class IngredientMap implements OnChanges {
         let node = this.svg.selectAll('.node')
             .data(this.data.nodes)
             .enter()
-            .append('rect')
-            .attr('class', 'node')
-            .attr('width', 50)
-            .attr('height', 25)
-            .attr("transform", "translate(" + -25 + "," + -12 + ")")
-            .style('fill', '#909090')
+            .append('g')
             .call(this.force.drag);
 
-        node.append('title')
-            .text(function (d) {
-                return d.name;
-            });
+        node.append('rect')
+          .attr('class', 'node')
+          .attr('width', 50)
+          .attr('height', 25)
+          .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
+          .style('fill', '#909090');
+
+        node.append('text')
+            .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
+            .attr('xlink:href0', function(d,i) { return '/ingredients/' + d.id;})
+            .text(function(d) { return d.name; });
 
         this.force.on('tick', () => {
 
@@ -69,14 +74,12 @@ export class IngredientMap implements OnChanges {
                 return d.target.y;
             });
 
-            node//.each(this.collide())
-                .attr('x', function (d) {
-                    return d.x;
-                })
-                .attr('y', function (d) {
-                    return d.y;
-                });
-
+            node
+              .attr('transform', function(d) {
+                  return 'translate(' + d.x + ',' + d.y + ')'
+              })
+              // .attr('cx', function(d) { return d.x = Math.max(Math.max(this.width, this.height), Math.min(width - radius, d.x)); })
+              // .attr('cy', function(d) { return d.y = Math.max(Math.max(this.width, this.height), Math.min(height - radius, d.y)); });
         });
 
 

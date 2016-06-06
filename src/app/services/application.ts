@@ -2,24 +2,20 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
-import {Ingredient} from '../dtos/ingredient.dto';
+import {Application} from '../dtos/application.dto';
 
 import {ConfigService} from './configs';
 import {RestObjectService} from './restobject';
 import {RequestService} from './request';
 
 @Injectable()
-export class IngredientService extends RestObjectService {
+export class ApplicationService extends RestObjectService {
 
     constructor(http: Http, configs: ConfigService, request: RequestService) {
-        super(http, configs, 'ingredients', request);
+        super(http, configs, 'applications', request);
     }
 
-    query(search: string): Observable<Ingredient[]> {
-        return super.query(search);
-    }
-
-    get(id: string, search: string): Observable<Ingredient> {
+    get(id: string, search: string): Observable<Application> {
         return super.get(id, search);
     }
 

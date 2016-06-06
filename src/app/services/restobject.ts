@@ -13,14 +13,14 @@ export class RestObjectService {
 
     }
 
-    query(): Observable<any[]> {
-        return this.http.get(this.configs.apiUrl + '/' + this.resourceName, this.request.getOptions())
+    query(search: string): Observable<any[]> {
+        return this.http.get(this.configs.apiUrl + '/' + this.resourceName, this.request.getOptions(null, search))
             .map(res => <this[]> res.json())
             .catch(this.handleError);
     }
 
-    get(id: String): Observable<any> {
-        return this.http.get(this.configs.apiUrl + '/' + this.resourceName + '/' + id)
+    get(id: string, search: string): Observable<any> {
+        return this.http.get(this.configs.apiUrl + '/' + this.resourceName + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(this.handleError);
     }
@@ -29,7 +29,6 @@ export class RestObjectService {
         let url = this.configs.apiUrl + '/' + this.resourceName;
 
         let requestOptions = this.request.getOptions();
-        requestOptions.headers.append('Content-Type', 'application/json');
 
         if (restObj.id) {
             url += '/' + restObj.id;

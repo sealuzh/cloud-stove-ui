@@ -9,7 +9,8 @@ import {RequestService} from './services/request';
 import {SidebarComponent} from './sidebar/index';
 import {WelcomeComponent} from './welcome/index';
 
-// Ingredients
+// Components
+import {ApplicationComponent} from './applications/application.component';
 import {IngredientComponent} from './ingredients/ingredient.component';
 
 import '../style/app.scss';
@@ -27,6 +28,9 @@ import '../style/app.scss';
 })
 
 @Routes([
+
+    // Application
+    {path: 'applications', component: ApplicationComponent},
 
     // Ingredients
     {path: 'ingredients', component: IngredientComponent},

@@ -22,7 +22,7 @@ export class IngredientListComponent implements OnActivate {
     }
 
     loadIngredients() {
-        this._ingredientService.query().subscribe(
+        this._ingredientService.query(null).subscribe(
             ingredients => this.ingredients = ingredients,
             error => console.log(error)
         );

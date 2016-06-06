@@ -1,6 +1,11 @@
 {
+  "applications": [{
+    "id": 1,
+    "name": "Sample Application 1"
+  }],
   "ingredients": [
     {
+      "applicationId": 1,
       "id": 1,
       "name": "Ingredient #1",
       "body": "##TestMarkdown",
@@ -20,6 +25,7 @@
       ]
     },
     {
+      "applicationId": 1,
       "id": 2,
       "name": "Ingredient #2",
       "body": "##TestMarkdown",
@@ -46,6 +52,7 @@
       ]
     },
     {
+      "applicationId": 1,
       "id": 3,
       "name": "Ingredient #3",
       "body": "##TestMarkdown",
@@ -56,6 +63,7 @@
       "is_template": false
     },
     {
+      "applicationId": 1,
       "id": 4,
       "name": "Ingredient #4",
       "body": "##TestMarkdown",

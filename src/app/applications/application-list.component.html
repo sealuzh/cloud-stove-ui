@@ -1,4 +1,4 @@
-<h1>Ingredients</h1>
+<h1>Applications</h1>
 <div class="col-lg-12">
     <div class="row">
         <table class="table table-hover">
@@ -8,8 +8,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let ingredient of ingredients">
-                <td><a [routerLink]="['/ingredients', ingredient.id]">{{ingredient.name}}</a></td>
+            <tr *ngFor="let application of applications">
+                <td><a [routerLink]="['/applications', application.id]">{{application.name}}</a></td>
             </tr>
             </tbody>
         </table>
