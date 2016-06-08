@@ -7,7 +7,10 @@
   "env": {
     "NODE_ENV": "production",
     "NPM_CONFIG_PRODUCTION": "false",
-    "API_URL": "http://staging.backend.thestove.io"
+    "API_URL": {
+      "description": "Endpoint of the CloudStove REST-API",
+      "value": "https://fathomless-escarpment-2251-eu.herokuapp.com"
+    }
   },
   "success_url": "/",
   "formation": [
