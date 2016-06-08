@@ -1,9 +1,7 @@
 import {OnInit, Component} from '@angular/core';
 import {OnActivate, RouteSegment, Router, ROUTER_DIRECTIVES} from '@angular/router';
 
-import {Application} from '../dtos/application.dto';
 import {Ingredient} from '../dtos/ingredient.dto';
-import {Constraint} from '../dtos/constraint.dto';
 
 import {ApplicationMapDirective} from './application-map.component';
 import {IngredientService} from '../services/ingredient';
@@ -26,16 +24,16 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
     constructor(private _ingredientService: IngredientService, private router: Router) {
 
         // TODO: construct dynamically
-        this.applicationData = {'nodes': [], 'links': []};
+        this.applicationData = { 'nodes': [], 'links': [] };
 
     }
 
     public ingredientClickedCallback(ingredientObj) {
-      this.router.navigate(['/ingredients', ingredientObj.id]);
+        this.router.navigate(['/ingredients', ingredientObj.id]);
     }
 
-    public ngOnInit(){
-      this.boundIngredientClickedCallback = this.ingredientClickedCallback.bind(this);
+    public ngOnInit() {
+        this.boundIngredientClickedCallback = this.ingredientClickedCallback.bind(this);
     }
 
     routerOnActivate(curr: RouteSegment): void {
@@ -46,18 +44,18 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
     loadIngredient(id: string) {
         this._ingredientService.get(id, null).subscribe(
             application => {
-              this.application = application;
+                this.application = application;
 
-              let nodeMap: Map<number, number> = new Map<number, number>();
+                let nodeMap: Map<number, number> = new Map<number, number>();
 
-              // add nodes
-              for (let ingredient of this.application.children) {
-                this.applicationData.nodes.push(ingredient);
-                nodeMap.set(ingredient.id, this.applicationData.nodes.indexOf(ingredient));
-              }
+                // add nodes
+                for (let ingredient of this.application.children) {
+                    this.applicationData.nodes.push(ingredient);
+                    nodeMap.set(ingredient.id, this.applicationData.nodes.indexOf(ingredient));
+                }
 
-              // add links/constraints
-              this.addConstraintsToMap(application, nodeMap);
+                // add links/constraints
+                this.addConstraintsToMap(application, nodeMap);
 
             },
             error => console.log(error)
@@ -65,16 +63,22 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
     }
 
     addConstraintsToMap(ingredient: any, nodeMap: Map<number, number>) {
-      if (ingredient.children) {
-        for (let child of ingredient.children) {
-          this.addConstraintsToMap(child, nodeMap);
-          for (let constraint of child.constraints) {
-            if (constraint.type === 'DependencyConstraint') {
-              this.applicationData.links.push({'source': nodeMap.get(constraint.source_id), 'target': nodeMap.get(constraint.target_id), 'value': 1});
+        if (ingredient.children) {
+            for (let child of ingredient.children) {
+                this.addConstraintsToMap(child, nodeMap);
+                for (let constraint of child.constraints) {
+                    if (constraint.type === 'DependencyConstraint') {
+                        this.applicationData.links.push(
+                            {
+                                'source': nodeMap.get(constraint.source_id),
+                                'target': nodeMap.get(constraint.target_id),
+                                'value': 1
+                            }
+                        );
+                    }
+                }
             }
-          }
         }
-      }
     }
 
 }

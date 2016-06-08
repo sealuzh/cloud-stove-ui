@@ -2,7 +2,7 @@ import { OnInit, Directive, ElementRef, Input } from '@angular/core';
 import * as Showdown from 'showdown';
 
 @Directive({
-  selector: 'csMarkdown'
+  selector: '[csMarkdown]'
 })
 
 export class MarkdownDirective implements OnInit {

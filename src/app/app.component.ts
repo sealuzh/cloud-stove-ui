@@ -13,6 +13,7 @@ import {WelcomeComponent} from './welcome/index';
 // Components
 import {ApplicationComponent} from './applications/application.component';
 import {IngredientComponent} from './ingredients/ingredient.component';
+import {RecommendationComponent} from './recommendations/recommendation.component';
 
 import '../style/app.scss';
 
@@ -35,6 +36,9 @@ import '../style/app.scss';
 
     // Ingredients
     {path: 'ingredients', component: IngredientComponent},
+
+    // Recommendations
+    {path: 'recommendations', component: RecommendationComponent},
 
     // Welcome
     {path: '*', component: WelcomeComponent},

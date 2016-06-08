@@ -9,7 +9,12 @@ import {RestObject} from '../dtos/restobject.dto';
 @Injectable()
 export class RestObjectService {
 
-    constructor(private http: Http, private configs: ConfigService, private resourceName: string, private request: RequestService, private ignoreAttributes: [string]) {
+    constructor(
+      private http: Http,
+      private configs: ConfigService,
+      private resourceName: string,
+      private request: RequestService,
+      private ignoreAttributes: [string]) {
 
     }
 
