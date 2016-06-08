@@ -5,7 +5,8 @@
     "postdeploy": "npm run build"
   },
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "NPM_CONFIG_PRODUCTION": "false"
   },
   "success_url": "/",
   "formation": [
