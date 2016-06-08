@@ -1,0 +1,26 @@
+.panel-default {
+  border: 1px lighten($brand-accent, 20%);
+  background-color: white;
+}
+
+.panel-default > .panel-heading {
+  background-color: lighten($brand-accent, 30%);
+
+  .panel-title {
+    font-size: 2em;
+    margin: 0;
+    font-size: 16px;
+    font-weight: lighter;
+    padding: 5px;
+  }
+}
+
+.panel-default > .panel-body {
+   padding: 20px;
+}
+
+.panel {
+  a:hover {
+    text-decoration: none;
+  }
+}

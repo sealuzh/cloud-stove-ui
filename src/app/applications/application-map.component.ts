@@ -1,4 +1,4 @@
-import {Directive, Attribute, OnChanges, ElementRef} from '@angular/core';
+import {Input, Directive, Attribute, OnChanges, ElementRef} from '@angular/core';
 
 @Directive({
     selector: 'cs-application-map',
@@ -11,18 +11,25 @@ export class ApplicationMap implements OnChanges {
 
     svg: any;
     force: any;
-    color: any;
 
     width: number = 100;
     height: number = 50;
+
+    @Input()
+    public ingredientClickedCallback: Function;
 
     constructor(elementRef: ElementRef, @Attribute('width') width: string, @Attribute('height') height: string) {
 
         let el: any = elementRef.nativeElement;
         let graph: any = d3.select(el);
 
-        this.color = d3.scale.category20();
-        this.force = d3.layout.force().gravity(0.8).charge(-1500).linkDistance(125).friction(0.5).size([width, height]);
+        this.force = d3.layout.force()
+          .gravity(0.8)
+          .charge(-2500)
+          .linkDistance(150)
+          .friction(0.5)
+          .size([width, height]);
+
         this.svg = graph
             .append('svg')
             .attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -42,24 +49,30 @@ export class ApplicationMap implements OnChanges {
             .enter().append('line')
             .attr('class', 'link')
             .style('stroke-width', '1')
-            .style('stroke', '#909090');
+            .style('stroke', '#DC3522');
 
         let node = this.svg.selectAll('.node')
             .data(this.data.nodes)
             .enter()
             .append('g')
+            .on("click", (e) => {
+                if (d3.event.defaultPrevented) return; // prevent click upon dragging
+                this.ingredientClickedCallback(e);
+            })
             .call(this.force.drag);
 
         node.append('rect')
           .attr('class', 'node')
-          .attr('width', 50)
-          .attr('height', 25)
+          .attr('width', this.width)
+          .attr('height', this.height)
           .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
-          .style('fill', '#909090');
+          .style('fill', '#2E1D1F');
 
         node.append('text')
-            .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
+            .attr('transform', 'translate(' + -5 + ',' + 15 + ')')
             .attr('xlink:href0', function(d,i) { return '/ingredients/' + d.id;})
+            .style('font-size', '0.7em')
+            .style('fill', '#ffffff')
             .text(function(d) { return d.name; });
 
         this.force.on('tick', () => {

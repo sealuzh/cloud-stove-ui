@@ -1,0 +1,5 @@
+@import "../../style/app";
+
+.panel-heading:hover {
+  background-color: lighten($brand-accent, 50%);
+}

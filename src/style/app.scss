@@ -1,0 +1,18 @@
+$brand-primary: #DC3522;
+$brand-dark: #3b322f;
+$brand-accent: lighten($brand-dark, 40%);
+
+body {
+  background-color: lighten($brand-accent, 35%);
+}
+
+h1 {
+  color: $brand-accent;
+}
+
+h2 {
+  color: lighten($brand-accent, 10%);
+}
+
+@import 'table';
+@import 'panel';

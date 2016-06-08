@@ -5,6 +5,7 @@ import {Application} from '../dtos/application.dto';
 
 @Component({
     template: require('./application-list.component.html'),
+    styles: [require('./application-list.component.scss')],
     directives: [ROUTER_DIRECTIVES]
 })
 

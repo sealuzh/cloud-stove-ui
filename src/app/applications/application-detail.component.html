@@ -1,4 +1,5 @@
 <div *ngIf="application">
-    <h2>Application Map</h2>
-    <cs-application-map bind-data="applicationData" width="500" height="250"></cs-application-map>
+    <h1>Application</h1>
+    <h2>{{application.name}}</h2>
+    <cs-application-map bind-data="applicationData" width="600" height="400" [ingredientClickedCallback]="boundIngredientClickedCallback"></cs-application-map>
 </div>

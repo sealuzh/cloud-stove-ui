@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {OnInit, Component} from '@angular/core';
+import {OnActivate, RouteSegment, Router, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Application} from '../dtos/application.dto';
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -13,16 +13,26 @@ import {ApplicationService} from '../services/application';
     directives: [ROUTER_DIRECTIVES, ApplicationMap]
 })
 
-export class ApplicationDetailComponent implements OnActivate {
+export class ApplicationDetailComponent implements OnActivate, OnInit {
 
     application: Application;
     applicationData;
 
-    constructor(private _applicationService: ApplicationService) {
+    public boundIngredientClickedCallback: Function;
+
+    constructor(private _applicationService: ApplicationService, private router: Router) {
 
         // TODO: construct dynamically
         this.applicationData = {'nodes': [], 'links': []};
 
+    }
+
+    public ingredientClickedCallback(ingredientObj) {
+      this.router.navigate(['/ingredients', ingredientObj.id]);
+    }
+
+    public ngOnInit(){
+      this.boundIngredientClickedCallback = this.ingredientClickedCallback.bind(this);
     }
 
     routerOnActivate(curr: RouteSegment): void {
@@ -31,10 +41,9 @@ export class ApplicationDetailComponent implements OnActivate {
     }
 
     loadIngredient(id: string) {
-        this._applicationService.get(id, "_embed=ingredients").subscribe(
+        this._applicationService.get(id, '_embed=ingredients').subscribe(
             application => {
               this.application = application;
-              console.log(this.applicationData);
 
               let nodeMap: Map<number, number> = new Map<number, number>();
 
@@ -55,8 +64,6 @@ export class ApplicationDetailComponent implements OnActivate {
                   }
                 }
               }
-
-              console.log(this.applicationData);
 
             },
             error => console.log(error)
