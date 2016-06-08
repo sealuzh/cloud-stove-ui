@@ -103,7 +103,11 @@ module.exports = function makeWebpackConfig() {
             },
 
             // copy those assets to output
-            {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
+            {test: /\.(png|jpe?g|gif|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
+
+            // support font-awesome
+            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
 
             // Support for *.json files.
             {test: /\.json$/, loader: 'json'},
@@ -125,10 +129,11 @@ module.exports = function makeWebpackConfig() {
             {
                 test: /\.scss$/,
                 exclude: root('src', 'app'),
-                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass')
+                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?includePaths[]=' + (path.resolve(__dirname, "./node_modules")))
             },
+
             // all css required in src/app files will be merged in js files
-            {test: /\.scss$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass'},
+            {test: /\.scss$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))},
 
             // support for .html as raw text
             // todo: change the loader to something that adds a hash to images
@@ -165,13 +170,9 @@ module.exports = function makeWebpackConfig() {
 
         // Inject d3.js into application
         new webpack.ProvidePlugin({
-            d3: 'd3'
+            d3: 'd3',
         })
     ];
-
-    config.externals = {
-        "Hls": "hls.js"
-    };
 
     if (!isTest) {
         config.plugins.push(

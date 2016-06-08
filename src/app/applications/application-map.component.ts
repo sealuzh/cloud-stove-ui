@@ -1,11 +1,11 @@
 import {Input, Directive, Attribute, OnChanges, ElementRef} from '@angular/core';
 
 @Directive({
-    selector: 'cs-application-map',
+    selector: 'csApplicationMap',
     properties: ['data']
 })
 
-export class ApplicationMap implements OnChanges {
+export class ApplicationMapDirective implements OnChanges {
 
     data: {nodes: Array<any>, links: Array<any>};
 
@@ -63,17 +63,20 @@ export class ApplicationMap implements OnChanges {
 
         node.append('rect')
           .attr('class', 'node')
-          .attr('width', this.width)
-          .attr('height', this.height)
           .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
           .style('fill', '#2E1D1F');
 
         node.append('text')
-            .attr('transform', 'translate(' + -5 + ',' + 15 + ')')
+            .attr('transform', 'translate(' + -15 + ',' + 6 + ')')
             .attr('xlink:href0', function(d,i) { return '/ingredients/' + d.id;})
+            .attr('text-anchor', 'start')
             .style('font-size', '0.7em')
             .style('fill', '#ffffff')
             .text(function(d) { return d.name; });
+
+        this.svg.selectAll('rect')
+          .attr('width', function(d) { return this.parentNode.getBBox().width + 20 })
+          .attr('height', function(d) { return this.parentNode.getBBox().height + 20 });
 
         this.force.on('tick', () => {
 

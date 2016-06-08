@@ -24,7 +24,9 @@ export class RequestService {
             search: this.urlSearchParams
         });
 
+        requestOptions.headers.append('Accept', 'application/json');
         requestOptions.headers.append('Content-Type', 'application/json');
+
         return requestOptions;
     }
 }

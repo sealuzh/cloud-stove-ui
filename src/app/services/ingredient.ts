@@ -12,7 +12,7 @@ import {RequestService} from './request';
 export class IngredientService extends RestObjectService {
 
     constructor(http: Http, configs: ConfigService, request: RequestService) {
-        super(http, configs, 'ingredients', request);
+        super(http, configs, 'ingredient', request, ['children', 'constraints']);
     }
 
     query(search: string): Observable<Ingredient[]> {

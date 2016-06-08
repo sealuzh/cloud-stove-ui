@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
 import {HTTP_PROVIDERS} from '@angular/http';
+import {FormlyProviders} from 'ng2-formly';
 
 // Services
 import {ConfigService} from './services/configs';
@@ -24,7 +25,7 @@ import '../style/app.scss';
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
     directives: [ROUTER_DIRECTIVES, SidebarComponent],
-    providers: [HTTP_PROVIDERS, ConfigService, RequestService]
+    providers: [HTTP_PROVIDERS, ConfigService, RequestService, FormlyProviders]
 })
 
 @Routes([

@@ -2,12 +2,17 @@ $brand-primary: #DC3522;
 $brand-dark: #3b322f;
 $brand-accent: lighten($brand-dark, 40%);
 
+// Importing Bootstrap SASS
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap";
+
 body {
   background-color: lighten($brand-accent, 35%);
 }
 
 h1 {
   color: $brand-accent;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -16,3 +21,5 @@ h2 {
 
 @import 'table';
 @import 'panel';
+@import 'form';
+@import 'buttons';

@@ -6,7 +6,9 @@
   padding: 10px;
   border: none;
   border-bottom: 1px solid $brand-accent;
-  color: $brand-dark;
+  font-weight: lighter;
+  color: $brand-accent;
+  font-size: 14px;
 }
 
 .table > tbody > tr > td {

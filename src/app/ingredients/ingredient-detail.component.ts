@@ -23,7 +23,7 @@ export class IngredientDetailComponent implements OnActivate {
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
         fm.addStringMessage('minlength', 'Should have atleast 2 Characters');
 
-        ['input', 'checkbox'].forEach((field) => {
+        ['input', 'checkbox', 'textarea'].forEach((field) => {
             fc.setType({
                 name: field,
                 component: TemplateDirectives[field]

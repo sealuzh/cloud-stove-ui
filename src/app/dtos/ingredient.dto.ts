@@ -10,4 +10,5 @@ export interface Ingredient extends RestObject {
     template_id: number;
     is_template: boolean;
     constraints: Constraint[];
+    children: Ingredient[];
 }

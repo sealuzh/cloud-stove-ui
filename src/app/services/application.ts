@@ -12,7 +12,7 @@ import {RequestService} from './request';
 export class ApplicationService extends RestObjectService {
 
     constructor(http: Http, configs: ConfigService, request: RequestService) {
-        super(http, configs, 'applications', request);
+        super(http, configs, 'application', request, null);
     }
 
     get(id: string, search: string): Observable<Application> {

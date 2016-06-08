@@ -1,0 +1,10 @@
+.form-control {
+  border-radius: 0;
+  border: 1px solid lighten($brand-accent, 20%);
+}
+
+.form-control-label {
+  font-weight: lighter;
+  color: $brand-accent;
+  font-size: 14px;
+}

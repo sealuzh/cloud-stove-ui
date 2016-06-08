@@ -3,7 +3,7 @@ import {Validators} from '@angular/common';
 export class IngredientForm {
     static ingredientFields() {
         return [{
-            className: 'col-xs-6',
+            className: 'row col-xs-12',
             key: 'name',
             type: 'input',
             templateOptions: {
@@ -13,10 +13,11 @@ export class IngredientForm {
             },
             validation: Validators.compose([Validators.required])
         }, {
-            className: 'col-xs-6',
+            className: 'row col-xs-12',
             key: 'body',
-            type: 'input',
+            type: 'textarea',
             templateOptions: {
+                rows: 15,
                 type: 'text',
                 label: 'Body',
                 placeholder: 'body',

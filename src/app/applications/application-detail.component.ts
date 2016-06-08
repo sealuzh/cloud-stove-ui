@@ -5,22 +5,24 @@ import {Application} from '../dtos/application.dto';
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
 
-import {ApplicationMap} from './application-map.component';
-import {ApplicationService} from '../services/application';
+import {ApplicationMapDirective} from './application-map.component';
+import {IngredientService} from '../services/ingredient';
+
+import {MarkdownDirective} from '../shared/markdown.component';
 
 @Component({
     template: require('./application-detail.component.html'),
-    directives: [ROUTER_DIRECTIVES, ApplicationMap]
+    directives: [ROUTER_DIRECTIVES, MarkdownDirective, ApplicationMapDirective]
 })
 
 export class ApplicationDetailComponent implements OnActivate, OnInit {
 
-    application: Application;
+    application: Ingredient;
     applicationData;
 
     public boundIngredientClickedCallback: Function;
 
-    constructor(private _applicationService: ApplicationService, private router: Router) {
+    constructor(private _ingredientService: IngredientService, private router: Router) {
 
         // TODO: construct dynamically
         this.applicationData = {'nodes': [], 'links': []};
@@ -41,33 +43,37 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
     }
 
     loadIngredient(id: string) {
-        this._applicationService.get(id, '_embed=ingredients').subscribe(
+        this._ingredientService.get(id, null).subscribe(
             application => {
               this.application = application;
 
               let nodeMap: Map<number, number> = new Map<number, number>();
 
               // add nodes
-              for (let ingredient of this.application.ingredients) {
+              for (let ingredient of this.application.children) {
                 this.applicationData.nodes.push(ingredient);
                 nodeMap.set(ingredient.id, this.applicationData.nodes.indexOf(ingredient));
               }
 
               // add links/constraints
-              for (let ingredient of this.application.ingredients) {
-                if (ingredient.constraints) {
-                  for (let constraint of ingredient.constraints) {
-                    // add dependency constraint to map
-                    if (constraint.type === 'dependency') {
-                      this.applicationData.links.push({'source': nodeMap.get(constraint.source_id), 'target': nodeMap.get(constraint.target_id), 'value': 1});
-                    }
-                  }
-                }
-              }
+              this.addConstraintsToMap(application, nodeMap);
 
             },
             error => console.log(error)
         );
+    }
+
+    addConstraintsToMap(ingredient: any, nodeMap: Map<number, number>) {
+      if (ingredient.children) {
+        for (let child of ingredient.children) {
+          this.addConstraintsToMap(child, nodeMap);
+          for (let constraint of child.constraints) {
+            if (constraint.type === 'DependencyConstraint') {
+              this.applicationData.links.push({'source': nodeMap.get(constraint.source_id), 'target': nodeMap.get(constraint.target_id), 'value': 1});
+            }
+          }
+        }
+      }
     }
 
 }
