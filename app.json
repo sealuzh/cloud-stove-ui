@@ -6,7 +6,8 @@
   },
   "env": {
     "NODE_ENV": "production",
-    "NPM_CONFIG_PRODUCTION": "false"
+    "NPM_CONFIG_PRODUCTION": "false",
+    "API_URL": "http://staging.backend.thestove.io"
   },
   "success_url": "/",
   "formation": [

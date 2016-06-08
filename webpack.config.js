@@ -164,14 +164,22 @@ module.exports = function makeWebpackConfig() {
         new webpack.DefinePlugin({
             // Environment helpers
             'process.env': {
-                ENV: JSON.stringify(ENV)
+              ENV: JSON.stringify(ENV)
             }
         }),
 
         // Inject d3.js into application
         new webpack.ProvidePlugin({
             d3: 'd3',
+        }),
+
+        // client-side config
+        new webpack.DefinePlugin({
+            'config': {
+              API_URL: JSON.stringify(process.env.API_URL)
+            }
         })
+
     ];
 
     if (!isTest) {
