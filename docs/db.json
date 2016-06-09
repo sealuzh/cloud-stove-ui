@@ -1,6 +1,12 @@
 {
+  "applications": [{
+    "id": 1,
+    "name": "Sample Application 1",
+    "body": "Usually, an n-tier application consists of a set of application servers backed by a database and fronted by load balancers, with a CDN serving static content close to users."
+  }],
   "ingredients": [
     {
+      "applicationId": 1,
       "id": 1,
       "name": "Ingredient #1",
       "body": "##TestMarkdown",
@@ -20,6 +26,7 @@
       ]
     },
     {
+      "applicationId": 1,
       "id": 2,
       "name": "Ingredient #2",
       "body": "##TestMarkdown",
@@ -46,6 +53,7 @@
       ]
     },
     {
+      "applicationId": 1,
       "id": 3,
       "name": "Ingredient #3",
       "body": "##TestMarkdown",
@@ -56,6 +64,7 @@
       "is_template": false
     },
     {
+      "applicationId": 1,
       "id": 4,
       "name": "Ingredient #4",
       "body": "##TestMarkdown",

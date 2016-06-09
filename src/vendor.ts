@@ -5,9 +5,10 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/http';
 import '@angular/router';
+import 'showdown';
 
 // RxJS
 import 'rxjs';
 
-// Bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
+// Font Awesome
+import 'font-awesome-sass-loader';

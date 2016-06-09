@@ -5,7 +5,12 @@
     "postdeploy": "npm run build"
   },
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "NPM_CONFIG_PRODUCTION": "false",
+    "API_URL": {
+      "description": "Endpoint of the CloudStove REST-API",
+      "value": "https://fathomless-escarpment-2251-eu.herokuapp.com"
+    }
   },
   "success_url": "/",
   "formation": [

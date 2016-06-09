@@ -9,35 +9,46 @@ import {RestObject} from '../dtos/restobject.dto';
 @Injectable()
 export class RestObjectService {
 
-    constructor(private http: Http, private configs: ConfigService, private resourceName: String, private request: RequestService) {
+    constructor(private http: Http, private configs: ConfigService, private resourceName: string, private request: RequestService, private ignoreAttributes: [string]) {
 
     }
 
-    query(): Observable<any[]> {
-        return this.http.get(this.configs.apiUrl + '/' + this.resourceName, this.request.getOptions())
+    query(search: string): Observable<any[]> {
+        return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName(), this.request.getOptions(null, search))
             .map(res => <this[]> res.json())
             .catch(this.handleError);
     }
 
-    get(id: String): Observable<any> {
-        return this.http.get(this.configs.apiUrl + '/' + this.resourceName + '/' + id)
+    get(id: string, search: string): Observable<any> {
+        return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(this.handleError);
     }
 
     save(restObj: RestObject) {
-        let url = this.configs.apiUrl + '/' + this.resourceName;
+
+        // bring in correct form for rails
+        let saveObject = {};
+        saveObject[this.resourceName] = restObj;
+
+        let url = this.configs.apiUrl + '/' + this.pluralizedResourceName();
 
         let requestOptions = this.request.getOptions();
-        requestOptions.headers.append('Content-Type', 'application/json');
+
+        // ignore certain attributes when POST/PUT
+        if (this.ignoreAttributes) {
+          for (let attribute of this.ignoreAttributes) {
+            delete restObj[attribute];
+          }
+        }
 
         if (restObj.id) {
             url += '/' + restObj.id;
-            return this.http.put(url, JSON.stringify(restObj), requestOptions)
+            return this.http.put(url, JSON.stringify(saveObject), requestOptions)
                 .map(res => <this> res.json())
                 .catch(err => this.handleError(err));
         } else {
-            return this.http.post(url, JSON.stringify(restObj), requestOptions)
+            return this.http.post(url, JSON.stringify(saveObject), requestOptions)
                 .map(res => <this> res.json())
                 .catch(err => this.handleError(err));
         }
@@ -46,6 +57,10 @@ export class RestObjectService {
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
+    }
+
+    private pluralizedResourceName(): string {
+        return this.resourceName + 's';
     }
 
 }

@@ -6,7 +6,7 @@ import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 
 @Component({
-    template: `<h1>Ingredients</h1><router-outlet></router-outlet>`,
+    template: `<router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES],
     providers: [IngredientService]
 })

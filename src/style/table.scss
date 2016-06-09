@@ -1,0 +1,30 @@
+.table > tr {
+  border: none;
+}
+
+.table > thead > tr > th {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid $brand-accent;
+  font-weight: lighter;
+  color: $brand-accent;
+  font-size: 14px;
+}
+
+.table > tbody > tr > td {
+  border: none;
+  padding: 10px;
+
+  a {
+    color: darken($brand-accent, 80%);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+}
+
+.table > tbody > tr:hover {
+  background-color: lighten($brand-accent, 20%);
+}
