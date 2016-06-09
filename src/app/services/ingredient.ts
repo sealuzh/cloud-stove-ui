@@ -37,7 +37,7 @@ export class IngredientService extends RestObjectService {
     }
 
     copy(id: number): Observable<Ingredient> {
-      return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/copy/' + id + '', this.request.getOptions(null, null))
+      return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/copy', this.request.getOptions(null, null))
           .map(res => <this> res.json())
           .catch(this.handleError);
     }
