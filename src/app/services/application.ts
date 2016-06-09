@@ -15,7 +15,7 @@ export class ApplicationService extends RestObjectService {
         super(http, configs, 'application', request, null);
     }
 
-    get(id: string, search: string): Observable<Application> {
+    get(id: number, search: string): Observable<Application> {
         return super.get(id, search);
     }
 

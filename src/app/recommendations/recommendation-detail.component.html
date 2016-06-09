@@ -1,0 +1,22 @@
+<div *ngIf="recommendation">
+    <h1>Deployment Recommendation</h1>
+    <h3>{{recommendation.application.name}}</h3>
+    <div class="col-lg-12">
+        <div class="row">
+          <table class="table table-striped">
+              <thead>
+              <tr>
+                  <th>Ingredient</th>
+                  <th>Recommended Cores</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let recommendation of recommendation.recommendation">
+                  <td>{{recommendation.ingredient.name}}</td>
+                  <td>{{recommendation.resource.cores}}</td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+</div>

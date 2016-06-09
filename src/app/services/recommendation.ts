@@ -19,7 +19,7 @@ export class RecommendationService extends RestObjectService {
         return super.query(search);
     }
 
-    get(id: string, search: string): Observable<Recommendation> {
+    get(id: number, search: string): Observable<Recommendation> {
         return super.get(id, search);
     }
 

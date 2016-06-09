@@ -9,8 +9,9 @@ $width: 240px;
   line-height: 30px;
 
   > img {
-    float: right;
+    float: left;
     height: 30px;
+    margin-right: 10px;
   }
 }
 
@@ -23,6 +24,10 @@ $width: 240px;
   position: fixed;
   border-radius: 0;
   height: 100%;
+}
+
+.container-navbar-top {
+  padding-top: 130px;
 }
 
 .navbar-fixed-left .navbar-nav > li {

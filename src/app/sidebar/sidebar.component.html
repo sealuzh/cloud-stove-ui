@@ -1,13 +1,15 @@
-<div class="navbar navbar-inverse navbar-fixed-left">
-    <a class="navbar-brand" [routerLink]="['welcome']">Cloudstove <img src="/img/flame.svg"></a>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['welcome']"><img src="/img/flame.svg"> Cloudstove</a>
     <ul class="nav navbar-nav">
         <li><a [routerLink]="['applications']">Applications</a></li>
         <li><a [routerLink]="['ingredients']">Ingredients</a></li>
         <li><a [routerLink]="['recommendations']">Recommendations</a></li>
         <li><a [routerLink]="['settings']">Settings</a></li>
     </ul>
+  </div>
 </div>
 
-<div class="container pull-left container-navbar">
-    <ng-content></ng-content>
+<div class="container container-navbar-top">
+  <ng-content></ng-content>
 </div>

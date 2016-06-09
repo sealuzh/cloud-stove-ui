@@ -28,3 +28,7 @@
 .table > tbody > tr:hover {
   background-color: lighten($brand-accent, 20%);
 }
+
+.table-hover > tbody {
+  cursor: pointer;
+}

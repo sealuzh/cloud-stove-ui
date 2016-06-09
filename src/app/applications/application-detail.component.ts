@@ -38,10 +38,10 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
 
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
-        this.loadIngredient(id);
+        this.loadIngredient(parseInt(id));
     }
 
-    loadIngredient(id: string) {
+    loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             application => {
                 this.application = application;
