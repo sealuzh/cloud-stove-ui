@@ -12,6 +12,7 @@ import {MarkdownDirective} from '../shared/markdown.component';
 
 @Component({
     template: require('./application-detail.component.html'),
+    styles: [require('./application-detail.component.scss')],
     directives: [ROUTER_DIRECTIVES, MarkdownDirective, ApplicationMapDirective]
 })
 
