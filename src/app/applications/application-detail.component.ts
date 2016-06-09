@@ -36,6 +36,13 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
         this.boundIngredientClickedCallback = this.ingredientClickedCallback.bind(this);
     }
 
+    public triggerRecommendation(id: number) {
+      this._ingredientService.triggerRecommendation(id).subscribe(
+        result => console.log(result),
+        error => console.log(error)
+      )
+    }
+
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
         this.loadIngredient(parseInt(id));
