@@ -7,16 +7,38 @@
               <thead>
               <tr>
                   <th>Ingredient</th>
-                  <th>Recommended Cores</th>
+                  <th>Recommendation</th>
+                  <th>Hourly Cost</th>
+                  <th>Monthly Cost</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let recommendation of recommendation.recommendation">
                   <td>{{recommendation.ingredient.name}}</td>
-                  <td>{{recommendation.resource.cores}}</td>
+                  <td>
+                    <strong>{{recommendation.resource.provider}}</strong><br>
+                    {{recommendation.resource.name}}, {{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM
+                  </td>
+                  <td>{{recommendation.resource.price_per_hour}}$</td>
+                  <td>{{recommendation.resource.price_per_month}}$</td>
               </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>{{ recommendation.recommendation | csSumHourly }}$</td>
+                  <td>{{ recommendation.recommendation | csSumMonthly }}$</td>
+                </tr>
+              </tfoot>
           </table>
         </div>
+    </div>
+</div>
+<div *ngIf="recommendationNotFound">
+  <div class="col-lg-12">
+      <div class="row">
+        <button class="btn btn-success">Generate Recommendation</button>
+      </div>
     </div>
 </div>

@@ -10,12 +10,11 @@ import {RestObject} from '../dtos/restobject.dto';
 export class RestObjectService {
 
     constructor(
-      private http: Http,
-      private configs: ConfigService,
-      private resourceName: string,
-      private request: RequestService,
+      protected http: Http,
+      protected configs: ConfigService,
+      protected resourceName: string,
+      protected request: RequestService,
       private ignoreAttributes: [string]) {
-
     }
 
     query(search: string): Observable<any[]> {
@@ -59,12 +58,12 @@ export class RestObjectService {
         }
     }
 
-    private handleError(error: Response) {
+    protected handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    private pluralizedResourceName(): string {
+    protected pluralizedResourceName(): string {
         return this.resourceName + 's';
     }
 

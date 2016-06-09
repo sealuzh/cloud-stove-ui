@@ -21,24 +21,7 @@ export class RecommendationListComponent implements OnActivate {
     }
 
     routerOnActivate(curr: RouteSegment): void {
-        //this.loadRecommendations();
-
-        // for now until API is up
-        let recommendation: Recommendation = {
-            id: 1,
-            application: { id: 2, name: 'Testlibestli' },
-            recommendation: [
-                {
-                    ingredient: { id: 1, name: 'Test' },
-                    resource: { id: 1, cores: 5, price_per_hour: 0.5, price_per_month: 30 }
-                }
-            ],
-            vm_cost: 10,
-            total_cost: 1000
-        };
-
-        this.recommendations = [recommendation];
-
+        this.loadRecommendations();
     }
 
     loadRecommendations() {
