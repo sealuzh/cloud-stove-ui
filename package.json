@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "clean": "rimraf node_modules doc dist && npm cache clean",
-    "build": "rimraf dist && webpack --progress --profile --bail --color",
+    "build": "rimraf dist && webpack --bail --color",
     "start": "webpack-dev-server --inline --progress --port 1232",
     "production": "node server/server.js",
     "test": "karma start",
