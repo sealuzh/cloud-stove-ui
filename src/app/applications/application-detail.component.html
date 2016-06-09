@@ -1,15 +1,17 @@
 <div *ngIf="application">
     <h1>{{application.name}}</h1>
 
+    <div class="btn-group btn-group-padded pull-right">
     <a [routerLink]="['/recommendations', application.id]">
-      <button class="btn btn-primary pull-right">
-        <i class="fa fa-server"></i> Deployment Recommendation
+      <button class="btn btn-primary">
+        <i class="fa fa-file-text"></i> Recommendation
       </button>
     </a>
 
-    <button class="btn btn-info pull-right" (click)="triggerRecommendation(application.id)">
+    <button class="btn btn-info" (click)="triggerRecommendation(application.id)">
       <i class="fa fa-server"></i> Schedule
     </button>
+    </div>
 
     <h2>Ingredients</h2>
 

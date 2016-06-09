@@ -17,7 +17,8 @@
                   <td>{{recommendation.ingredient.name}}</td>
                   <td>
                     <strong>{{recommendation.resource.provider}}</strong><br>
-                    {{recommendation.resource.name}}, {{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM
+                    {{recommendation.resource.name}}<br>
+                    <small>{{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM</small>
                   </td>
                   <td>{{recommendation.resource.price_per_hour}}$</td>
                   <td>{{recommendation.resource.price_per_month}}$</td>
@@ -27,8 +28,8 @@
                 <tr>
                   <td></td>
                   <td></td>
-                  <td>{{ recommendation.recommendation | csSumHourly }}$</td>
-                  <td>{{ recommendation.recommendation | csSumMonthly }}$</td>
+                  <td><strong>{{ recommendation.recommendation | csSumHourly }}$</strong></td>
+                  <td><strong>{{ recommendation.recommendation | csSumMonthly }}$</strong></td>
                 </tr>
               </tfoot>
           </table>

@@ -1,4 +1,14 @@
 .btn {
   border-radius: 0;
-  border: 1px solid lighten($brand-accent, 20%);
+  border: 1px solid $brand-accent;
+}
+
+.btn-group-padded {
+  .btn {
+    margin-right: 3px;
+  }
+
+  .btn:first-child { // first due to float
+    margin-right: 0;
+  }
 }
