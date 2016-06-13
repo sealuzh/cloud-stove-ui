@@ -3,6 +3,12 @@
   background-color: white;
 }
 
+.panel-title {
+  .btn {
+    margin-left: 3px;
+  }
+}
+
 .panel-default > .panel-heading {
   background-color: lighten($brand-accent, 30%);
 

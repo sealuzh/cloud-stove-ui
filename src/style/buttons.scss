@@ -1,6 +1,10 @@
 .btn {
   border-radius: 0;
-  border: 1px solid $brand-accent;
+  //border: 1px solid $brand-accent;
+}
+
+a.btn {
+  color: white;
 }
 
 .btn-group-padded {
