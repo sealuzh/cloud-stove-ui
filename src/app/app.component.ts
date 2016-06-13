@@ -14,6 +14,7 @@ import {WelcomeComponent} from './welcome/index';
 import {ApplicationComponent} from './applications/application.component';
 import {IngredientComponent} from './ingredients/ingredient.component';
 import {RecommendationComponent} from './recommendations/recommendation.component';
+import {TemplateComponent} from './templates/template.component';
 
 import '../style/app.scss';
 
@@ -39,6 +40,9 @@ import '../style/app.scss';
 
     // Recommendations
     {path: 'recommendations', component: RecommendationComponent},
+
+    // Templates
+    {path: 'templates', component: TemplateComponent},
 
     // Welcome
     {path: '*', component: WelcomeComponent},

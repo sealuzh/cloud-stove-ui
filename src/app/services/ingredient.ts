@@ -30,6 +30,12 @@ export class IngredientService extends RestObjectService {
           .catch(this.handleError);
     }
 
+    getTemplates(): Observable<Ingredient[]> {
+      return this.http.get(this.configs.apiUrl + '/templates', this.request.getOptions(null, null))
+          .map(res => <this[]> res.json())
+          .catch(this.handleError);
+    }
+
     recommendation(id: number): Observable<Recommendation> {
       return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendation', this.request.getOptions(null, null))
           .map(res => <this> res.json())
@@ -44,6 +50,12 @@ export class IngredientService extends RestObjectService {
 
     triggerRecommendation(id: number): Observable<{job_id: string}> {
       return this.http.put(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/trigger_recommendation', null, this.request.getOptions(null, null))
+          .map(res => <this> res.json())
+          .catch(this.handleError);
+    }
+
+    instantiate(id: number): Observable<Ingredient> {
+      return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/instance', this.request.getOptions(null, null))
           .map(res => <this> res.json())
           .catch(this.handleError);
     }

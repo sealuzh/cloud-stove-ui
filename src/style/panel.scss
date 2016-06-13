@@ -15,6 +15,11 @@
   }
 }
 
+.panel-footer {
+  border: 1px lighten($brand-accent, 40%);
+  background-color: white;
+}
+
 .panel-default > .panel-body {
    padding: 20px;
 
