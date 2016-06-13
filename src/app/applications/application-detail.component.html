@@ -1,4 +1,5 @@
-<div *ngIf="application">
+<csLoading *ngIf="!application"></csLoading>
+<div *ngIf="application" class="animated-list">
     <h1>{{application.name}}</h1>
 
     <div class="btn-group btn-group-padded pull-right">
@@ -7,10 +8,6 @@
         <i class="fa fa-file-text"></i> Recommendation
       </button>
     </a>
-
-    <button class="btn btn-info" (click)="triggerRecommendation(application.id)">
-      <i class="fa fa-server"></i> Schedule
-    </button>
     </div>
 
     <h2>Ingredients</h2>

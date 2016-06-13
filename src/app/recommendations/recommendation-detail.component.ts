@@ -9,12 +9,14 @@ import {SumHourlyPipe} from './sumHourly.pipe';
 
 @Component({
     template: require('./recommendation-detail.component.html'),
+    styles: [require('./recommendation-detail.component.scss')],
     directives: [ROUTER_DIRECTIVES],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
 export class RecommendationDetailComponent implements OnActivate {
 
+    private applicationId: number;
     public recommendation: Recommendation;
     public recommendationNotFound: boolean;
 
@@ -22,18 +24,33 @@ export class RecommendationDetailComponent implements OnActivate {
     }
 
     routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
-        this.loadRecommendation(parseInt(id));
+        let id = parseInt(curr.getParam('id'));
+        this.applicationId = id;
+        this.loadRecommendation(id);
     }
 
     loadRecommendation(id: number) {
         this._ingredientService.recommendation(id).subscribe(
-            recommendation => this.recommendation = recommendation,
+            recommendation => {
+              // no recommendation yet
+              if (recommendation == null) {
+                this.recommendationNotFound = true;
+              } else {
+                this.recommendation = recommendation;
+              }
+            },
             error => {
               this.recommendationNotFound = true;
               console.log(error);
             }
         );
+    }
+
+    triggerRecommendation() {
+      this._ingredientService.triggerRecommendation(this.applicationId).subscribe(
+        result => console.log(result),
+        error => console.log(error)
+      );
     }
 
 }

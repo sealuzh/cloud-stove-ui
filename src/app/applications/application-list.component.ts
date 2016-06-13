@@ -5,11 +5,12 @@ import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
 
 import {MarkdownDirective} from '../shared/markdown.component';
+import {LoadingComponent} from '../shared/loading.component.ts';
 
 @Component({
     template: require('./application-list.component.html'),
     styles: [require('./application-list.component.scss')],
-    directives: [ROUTER_DIRECTIVES, MarkdownDirective]
+    directives: [ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent]
 })
 
 export class ApplicationListComponent implements OnActivate {

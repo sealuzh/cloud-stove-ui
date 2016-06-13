@@ -1,3 +1,14 @@
+<csLoading *ngIf="!recommendation && !recommendationNotFound"></csLoading>
+<div *ngIf="recommendationNotFound">
+  <div class="col-lg-12">
+      <div class="row text-center">
+        <p class="recommendation-not-found-msg">
+          We have not analyzed this application yet. Would you like to generate a recommendation?
+        </p>
+        <button class="btn btn-success" (click)="triggerRecommendation()">Generate Recommendation</button>
+      </div>
+    </div>
+</div>
 <div *ngIf="recommendation">
     <h1>Deployment Recommendation</h1>
     <h3>{{recommendation.application.name}}</h3>
@@ -34,12 +45,5 @@
               </tfoot>
           </table>
         </div>
-    </div>
-</div>
-<div *ngIf="recommendationNotFound">
-  <div class="col-lg-12">
-      <div class="row">
-        <button class="btn btn-success">Generate Recommendation</button>
-      </div>
     </div>
 </div>
