@@ -1,13 +1,13 @@
 import {Input, Directive, Attribute, OnChanges, ElementRef} from '@angular/core';
 
 @Directive({
-    selector: 'csApplicationMap',
+    selector: '[csApplicationMap]',
     properties: ['data']
 })
 
 export class ApplicationMapDirective implements OnChanges {
 
-    data: {nodes: Array<any>, links: Array<any>};
+    data: { nodes: Array<any>, links: Array<any> };
 
     svg: any;
     force: any;
@@ -24,11 +24,11 @@ export class ApplicationMapDirective implements OnChanges {
         let graph: any = d3.select(el);
 
         this.force = d3.layout.force()
-          .gravity(0.8)
-          .charge(-2500)
-          .linkDistance(150)
-          .friction(0.5)
-          .size([width, height]);
+            .gravity(0.8)
+            .charge(-2500)
+            .linkDistance(150)
+            .friction(0.5)
+            .size([width, height]);
 
         this.svg = graph
             .append('svg')
@@ -55,47 +55,53 @@ export class ApplicationMapDirective implements OnChanges {
             .data(this.data.nodes)
             .enter()
             .append('g')
-            .on("click", (e) => {
-                if (d3.event.defaultPrevented) return; // prevent click upon dragging
+            .on('click', (e) => {
+                if (d3.event.defaultPrevented) {
+                    return; // prevent click upon dragging
+                }
                 this.ingredientClickedCallback(e);
             })
             .call(this.force.drag);
 
         node.append('rect')
-          .attr('class', 'node')
-          .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
-          .style('fill', '#2E1D1F');
+            .attr('class', 'node')
+            .attr('transform', 'translate(' + -25 + ',' + -12 + ')')
+            .style('fill', '#2E1D1F');
 
         node.append('text')
             .attr('transform', 'translate(' + -15 + ',' + 6 + ')')
-            .attr('xlink:href0', function(d,i) { return '/ingredients/' + d.id;})
+            .attr('xlink:href0', function(d, i) { return '/ingredients/' + d.id; })
             .attr('text-anchor', 'start')
             .style('font-size', '0.7em')
             .style('fill', '#ffffff')
             .text(function(d) { return d.name; });
 
         this.svg.selectAll('rect')
-          .attr('width', function(d) { return this.parentNode.getBBox().width + 20 })
-          .attr('height', function(d) { return this.parentNode.getBBox().height + 20 });
+            .attr('width', function(d) {
+              return this.parentNode.getBBox().width + 20;
+            })
+            .attr('height', function(d) {
+              return this.parentNode.getBBox().height + 20;
+            });
 
         this.force.on('tick', () => {
 
-            link.attr('x1', function (d) {
+            link.attr('x1', function(d) {
                 return d.source.x;
-            }).attr('y1', function (d) {
+            }).attr('y1', function(d) {
                 return d.source.y;
-            }).attr('x2', function (d) {
+            }).attr('x2', function(d) {
                 return d.target.x;
-            }).attr('y2', function (d) {
+            }).attr('y2', function(d) {
                 return d.target.y;
             });
 
             node
-              .attr('transform', function(d) {
-                  return 'translate(' + d.x + ',' + d.y + ')'
-              })
-              // .attr('cx', function(d) { return d.x = Math.max(Math.max(this.width, this.height), Math.min(width - radius, d.x)); })
-              // .attr('cy', function(d) { return d.y = Math.max(Math.max(this.width, this.height), Math.min(height - radius, d.y)); });
+                .attr('transform', function(d) {
+                    return 'translate(' + d.x + ',' + d.y + ')';
+                });
+            // .attr('cx', function(d) { return d.x = Math.max(Math.max(this.width, this.height), Math.min(width - radius, d.x)); })
+            // .attr('cy', function(d) { return d.y = Math.max(Math.max(this.width, this.height), Math.min(height - radius, d.y)); });
         });
 
 
@@ -105,8 +111,10 @@ export class ApplicationMapDirective implements OnChanges {
         let height = 100;
         let width = 100;
 
-        return (a.x < b.x < (a.x + width) && a.y < b.y < (a.y + height)) || (a.x < (b.x + width) < (a.x + width) && a.y < (b.y + height) < (a.y + height));
-        // return (a.x < b.x < (a.x + a.width) && a.y < b.y < (a.y + a.height)) || (a.x < (b.x + b.width) < (a.x + a.width) && a.y < (b.y + b.height) < (a.y + a.height));
+        return (a.x < b.x < (a.x + width) && a.y < b.y < (a.y + height))
+          || (a.x < (b.x + width)
+          < (a.x + width) && a.y
+          < (b.y + height) < (a.y + height));
     }
 
     // Resolves collisions between d and all other circles.

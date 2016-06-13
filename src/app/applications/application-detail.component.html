@@ -1,7 +1,14 @@
-<div *ngIf="application">
+<csLoading *ngIf="!application"></csLoading>
+<div *ngIf="application" class="animated-list">
     <h1>{{application.name}}</h1>
 
-    <button class="btn btn-primary pull-right"><i class="fa fa-server"></i> Recommend Deployment</button>
+    <div class="btn-group btn-group-padded pull-right">
+    <a [routerLink]="['/recommendations', application.id]">
+      <button class="btn btn-primary">
+        <i class="fa fa-file-text"></i> Recommendation
+      </button>
+    </a>
+    </div>
 
     <h2>Ingredients</h2>
 
@@ -14,7 +21,7 @@
             </h3>
           </div>
           <div class="panel-body">
-            <csMarkdown [data]="ingredient.body"></csMarkdown>
+            <div [data]="ingredient.body" csMarkdown></div>
           </div>
         </div>
       </div>
@@ -24,7 +31,7 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <csApplicationMap bind-data="applicationData" width="600" height="400" [ingredientClickedCallback]="boundIngredientClickedCallback"></csApplicationMap>
+        <div bind-data="applicationData" width="600" height="400" [ingredientClickedCallback]="boundIngredientClickedCallback" csApplicationMap></div>
       </div>
     </div>
 

@@ -43,10 +43,10 @@ export class IngredientDetailComponent implements OnActivate {
 
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
-        this.loadIngredient(id);
+        this.loadIngredient(parseInt(id));
     }
 
-    loadIngredient(id: string) {
+    loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             ingredient => this.ingredient = ingredient,
             error => console.log(error)

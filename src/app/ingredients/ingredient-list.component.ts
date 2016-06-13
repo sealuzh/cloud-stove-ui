@@ -2,11 +2,12 @@ import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
+import {LoadingComponent} from '../shared/loading.component';
 
 @Component({
     template: require('./ingredient-list.component.html'),
     styles: [require('./ingredient-list.component.scss')],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, LoadingComponent]
 })
 
 export class IngredientListComponent implements OnActivate {

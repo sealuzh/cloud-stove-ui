@@ -19,7 +19,13 @@ h2 {
   color: lighten($brand-accent, 10%);
 }
 
+h3 {
+  color: darken($brand-accent, 20%);
+}
+
 @import 'table';
 @import 'panel';
 @import 'form';
 @import 'buttons';
+@import 'animations';
+@import 'loading';

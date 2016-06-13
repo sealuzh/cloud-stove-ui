@@ -1,0 +1,50 @@
+<csLoading *ngIf="!recommendation && !recommendationNotFound"></csLoading>
+<csLoading *ngIf="generatingRecommendation" message="Crunching numbers..."></csLoading>
+<div *ngIf="recommendationNotFound && !generatingRecommendation">
+  <div class="col-lg-12">
+      <div class="row text-center">
+        <p class="recommendation-not-found-msg">
+          We have not analyzed this application yet. Would you like to generate a recommendation?
+        </p>
+        <button class="btn btn-success" (click)="triggerRecommendation()">Generate Recommendation</button>
+      </div>
+    </div>
+</div>
+<div *ngIf="recommendation">
+    <h1>Deployment Recommendation</h1>
+    <h3>{{recommendation.application.name}}</h3>
+    <div class="col-lg-12">
+        <div class="row">
+          <table class="table table-striped">
+              <thead>
+              <tr>
+                  <th>Ingredient</th>
+                  <th>Recommendation</th>
+                  <th>Hourly Cost</th>
+                  <th>Monthly Cost</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let recommendation of recommendation.recommendation">
+                  <td>{{recommendation.ingredient.name}}</td>
+                  <td>
+                    <strong>{{recommendation.resource.provider}}</strong><br>
+                    {{recommendation.resource.name}}<br>
+                    <small>{{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM</small>
+                  </td>
+                  <td>{{recommendation.resource.price_per_hour}}$</td>
+                  <td>{{recommendation.resource.price_per_month}}$</td>
+              </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td><strong>{{ recommendation.recommendation | csSumHourly }}$</strong></td>
+                  <td><strong>{{ recommendation.recommendation | csSumMonthly }}$</strong></td>
+                </tr>
+              </tfoot>
+          </table>
+        </div>
+    </div>
+</div>
