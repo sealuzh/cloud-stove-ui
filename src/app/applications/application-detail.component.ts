@@ -81,4 +81,11 @@ export class ApplicationDetailComponent implements OnActivate, OnInit {
         }
     }
 
+    copyIngredient(id: number) {
+      this._ingredientService.copy(id).subscribe(
+        copiedIngredient => this.application.children.push(copiedIngredient),
+        error => console.log(error)
+      );
+    }
+
 }

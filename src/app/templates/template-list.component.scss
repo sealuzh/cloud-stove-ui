@@ -1,0 +1,18 @@
+@import "../../style/app";
+
+.panel-cap-140 {
+  height: 140px;
+  overflow: hidden;
+}
+
+.panel-fade-content:before {
+  height: 50px;
+  width: auto;
+  content: ' ';
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+  display: block;
+  position: absolute;
+  background: linear-gradient(0, rgba(white, 1), rgba(white, 0));
+}

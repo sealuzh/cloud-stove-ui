@@ -1,0 +1,18 @@
+<csLoading *ngIf="!ingredients"></csLoading>
+<div class="row">
+  <div class="col-lg-4 animated-list" *ngFor="let ingredient of ingredients">
+    <div class="panel panel-default panel-application">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <a [routerLink]="['/applications', ingredient.id]">{{ingredient.name}}</a>
+        </h2>
+      </div>
+      <div class="panel-body panel-cap-140">
+        <div [data]="ingredient.body" csMarkdown></div>
+      </div>
+      <div class="panel-footer">
+        <button class="btn btn-block btn-success" (click)="instantiate(ingredient.id)"><i class="fa fa-copy"></i> Instantiate</button>
+      </div>
+    </div>
+  </div>
+</div>
