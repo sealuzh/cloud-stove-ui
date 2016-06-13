@@ -10,10 +10,12 @@ import {TimerWrapper} from '@angular/core/src/facade/async';
 import {SumMonthlyPipe} from './sumMonthly.pipe';
 import {SumHourlyPipe} from './sumHourly.pipe';
 
+import {LoadingComponent} from '../shared/loading.component';
+
 @Component({
     template: require('./recommendation-detail.component.html'),
     styles: [require('./recommendation-detail.component.scss')],
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, LoadingComponent],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
@@ -73,7 +75,9 @@ export class RecommendationDetailComponent implements OnActivate {
             this.fetchJobStatus(uuid);
           }, 5000);
         }
-      }, error => console.log(error));
+      }, error => {
+        this.loadRecommendation(this.applicationId);
+      });
     }
 
 }
