@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'csLoading',
-    template:`
+    template: `
         <div class="loading text-center">
             <p>
                 <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
@@ -16,7 +16,6 @@ import { Component, Input } from '@angular/core';
 
 export class LoadingComponent {
 
-    @Input()
-    public message: string;
+    @Input() message: string;
 
 }

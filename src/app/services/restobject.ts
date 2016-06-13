@@ -23,7 +23,7 @@ export class RestObjectService {
             .catch(this.handleError);
     }
 
-    get(id: number, search: string): Observable<any> {
+    get(id: number | string, search: string): Observable<any> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(this.handleError);

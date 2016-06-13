@@ -2,7 +2,10 @@ import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
+import {JobService} from '../services/job';
+
 import {Recommendation} from '../dtos/recommendation.dto';
+import {TimerWrapper} from '@angular/core/src/facade/async';
 
 import {SumMonthlyPipe} from './sumMonthly.pipe';
 import {SumHourlyPipe} from './sumHourly.pipe';
@@ -18,13 +21,15 @@ export class RecommendationDetailComponent implements OnActivate {
 
     private applicationId: number;
     public recommendation: Recommendation;
-    public recommendationNotFound: boolean;
 
-    constructor(private _ingredientService: IngredientService) {
+    public recommendationNotFound: boolean;
+    public generatingRecommendation: boolean;
+
+    constructor(private _ingredientService: IngredientService, private _jobService: JobService) {
     }
 
     routerOnActivate(curr: RouteSegment): void {
-        let id = parseInt(curr.getParam('id'));
+        let id = parseInt(curr.getParam('id'), null);
         this.applicationId = id;
         this.loadRecommendation(id);
     }
@@ -36,6 +41,8 @@ export class RecommendationDetailComponent implements OnActivate {
               if (recommendation == null) {
                 this.recommendationNotFound = true;
               } else {
+                this.generatingRecommendation = false;
+                this.recommendationNotFound = false;
                 this.recommendation = recommendation;
               }
             },
@@ -47,10 +54,26 @@ export class RecommendationDetailComponent implements OnActivate {
     }
 
     triggerRecommendation() {
+      this.generatingRecommendation = true;
       this._ingredientService.triggerRecommendation(this.applicationId).subscribe(
-        result => console.log(result),
+        result => {
+          let jobUUID = result.job_id;
+          this.fetchJobStatus(jobUUID);
+        },
         error => console.log(error)
       );
+    }
+
+    fetchJobStatus(uuid: string) {
+      this._jobService.get(uuid, null).subscribe(jobResult => {
+        if (jobResult.delayed_job.attempts === 1) {
+          this.loadRecommendation(this.applicationId);
+        } else {
+          TimerWrapper.setTimeout(() => {
+            this.fetchJobStatus(uuid);
+          }, 5000);
+        }
+      }, error => console.log(error));
     }
 
 }
