@@ -14,6 +14,7 @@ export class IngredientService extends RestObjectService {
 
     constructor(http: Http, configs: ConfigService, request: RequestService) {
         super(http, configs, 'ingredient', request, ['children', 'constraints']);
+        this.nestedUpdate = false;
     }
 
     query(search: string): Observable<Ingredient[]> {

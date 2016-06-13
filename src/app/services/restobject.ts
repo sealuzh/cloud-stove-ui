@@ -9,6 +9,8 @@ import {RestObject} from '../dtos/restobject.dto';
 @Injectable()
 export class RestObjectService {
 
+    protected nestedUpdate: boolean = true;
+
     constructor(
       protected http: Http,
       protected configs: ConfigService,
@@ -33,7 +35,12 @@ export class RestObjectService {
 
         // bring in correct form for rails
         let saveObject = {};
-        saveObject[this.resourceName] = restObj;
+
+        if (this.nestedUpdate) {
+          saveObject[this.resourceName] = restObj;
+        } else {
+          saveObject = restObj;
+        }
 
         let url = this.configs.apiUrl + '/' + this.pluralizedResourceName();
 

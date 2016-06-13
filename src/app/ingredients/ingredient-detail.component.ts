@@ -26,7 +26,6 @@ export class IngredientDetailComponent implements OnActivate {
 
     ingredient: Ingredient;
     ingredientFields;
-    cpuConstraintFields;
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
@@ -44,7 +43,6 @@ export class IngredientDetailComponent implements OnActivate {
         });
 
         this.ingredientFields = IngredientForm.ingredientFields();
-        this.cpuConstraintFields = CPUConstraintForm.constraintFields();
 
     }
 
@@ -53,7 +51,7 @@ export class IngredientDetailComponent implements OnActivate {
 
         for (let constraint of ingredientObj.constraints) {
           delete constraint.fields;
-          constraintUpdates.push(this._constraintService.save(constraint))
+          constraintUpdates.push(this._constraintService.save(constraint));
         }
 
         Observable.forkJoin(constraintUpdates).subscribe(result => {
@@ -70,7 +68,7 @@ export class IngredientDetailComponent implements OnActivate {
 
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id));
+        this.loadIngredient(parseInt(id, null));
     }
 
     loadIngredient(id: number) {
