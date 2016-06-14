@@ -24,7 +24,9 @@
             <h3 class="panel-title">
               <a [routerLink]="['/ingredients', ingredient.id]">{{ingredient.name}}</a>
               <a class="btn btn-xs btn-info pull-right" [routerLink]="['/ingredients', ingredient.id]"><i class="fa fa-edit"></i> Edit</a>
-              <button class="btn btn-xs btn-warning pull-right" (click)="copyIngredient(ingredient.id)"><i class="fa fa-copy"></i> Copy</button>
+              <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-xs btn-default pull-right" (click)="copyIngredient(ingredient)">
+                <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
+              </button>
             </h3>
           </div>
           <div class="panel-body panel-ingredient">
