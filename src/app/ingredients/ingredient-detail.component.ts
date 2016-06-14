@@ -14,6 +14,8 @@ import {IngredientForm} from '../forms/ingredient.form';
 import {CPUConstraintForm} from '../forms/cpu-constraint.form';
 import {RamConstraintForm} from '../forms/ram-constraint.form';
 
+import {PropertyPipe} from '../shared/property.pipe';
+
 import {Observable} from 'rxjs/Rx';
 
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
@@ -22,12 +24,15 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
     template: require('./ingredient-detail.component.html'),
     styles: [require('./ingredient-detail.component.scss')],
     directives: [ROUTER_DIRECTIVES, FormlyForm, DROPDOWN_DIRECTIVES],
-    providers: [FormlyConfig, FormlyMessages, FormlyBootstrap]
+    providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
+    pipes: [PropertyPipe]
 })
 
 export class IngredientDetailComponent implements OnActivate {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
+    public constraintFilter: any[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
+
     public ingredient: Ingredient;
     public ingredientFields;
 

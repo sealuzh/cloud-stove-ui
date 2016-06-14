@@ -18,7 +18,7 @@
 
         <formly-form [model]="ingredient" [fields]="ingredientFields"></formly-form>
 
-        <div *ngFor="let constraint of ingredient.constraints">
+        <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
           <button class="btn btn-xs btn-warning btn-remove-constraint" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
           <formly-form [model]="constraint" [fields]="constraint.fields"></formly-form>
         </div>
