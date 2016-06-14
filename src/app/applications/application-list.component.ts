@@ -32,11 +32,49 @@ export class ApplicationListComponent implements OnActivate {
         );
     }
 
-    copyIngredient(id: number) {
-      this._ingredientService.copy(id).subscribe(
-        copiedIngredient => this.ingredients.push(copiedIngredient),
-        error => console.log(error)
+    copyIngredient(ingredient: any) {
+      ingredient.isCopying = true;
+      this._ingredientService.copy(ingredient.id).subscribe(
+        copiedIngredient => {
+          ingredient.isCopying = false;
+          this.ingredients.push(copiedIngredient);
+        },
+        error => { 
+          ingredient.isCopying = false;
+          console.log(error);
+        }
       );
+    }
+
+    countConstraints(ingredient: Ingredient, count?: number): number {
+      if (!count) {
+        count = ingredient.constraints.length;
+      }
+
+      if (ingredient.children.length === 0) {
+        return ingredient.constraints.length;
+      }
+
+      for(ingredient of ingredient.children) {
+        count += this.countConstraints(ingredient, count);
+      }
+
+      return count;
+    }
+
+    countIngredients(ingredient: Ingredient, count?: number): number {
+      if (!count) {
+        count = 0;
+      }
+
+      if (ingredient.children.length === 0) {
+        return 1;
+      }
+
+      for(ingredient of ingredient.children) {
+        count += this.countIngredients(ingredient, count);
+      }
+      return count;
     }
 
 }

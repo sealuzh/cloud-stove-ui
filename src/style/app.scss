@@ -8,6 +8,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 body {
   background-color: lighten($brand-accent, 35%);
+  overflow-y: scroll;
 }
 
 h1 {
