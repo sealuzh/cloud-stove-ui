@@ -1,3 +1,3 @@
 export interface RestObject {
-    id: number;
+    id?: number;
 }

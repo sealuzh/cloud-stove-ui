@@ -22,13 +22,13 @@ export class RestObjectService {
     query(search: string): Observable<any[]> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName(), this.request.getOptions(null, search))
             .map(res => <this[]> res.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     get(id: number | string, search: string): Observable<any> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     save(restObj: RestObject) {
@@ -63,6 +63,12 @@ export class RestObjectService {
                 .map(res => <this> res.json())
                 .catch(err => this.handleError(err));
         }
+    }
+
+    delete(restObj: RestObject) {
+      return this.http.delete(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + restObj.id, this.request.getOptions(null, null))
+          .map(res => res)
+          .catch(err => this.handleError(err));
     }
 
     protected handleError(error: Response) {

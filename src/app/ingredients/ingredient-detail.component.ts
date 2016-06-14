@@ -16,17 +16,20 @@ import {RamConstraintForm} from '../forms/ram-constraint.form';
 
 import {Observable} from 'rxjs/Rx';
 
+import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+
 @Component({
     template: require('./ingredient-detail.component.html'),
     styles: [require('./ingredient-detail.component.scss')],
-    directives: [ROUTER_DIRECTIVES, FormlyForm],
+    directives: [ROUTER_DIRECTIVES, FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap]
 })
 
 export class IngredientDetailComponent implements OnActivate {
 
-    ingredient: Ingredient;
-    ingredientFields;
+    public constraintDropdown: { isOpen: boolean } = { isOpen: false };
+    public ingredient: Ingredient;
+    public ingredientFields;
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
@@ -93,6 +96,30 @@ export class IngredientDetailComponent implements OnActivate {
             },
             error => console.log(error)
         );
+    }
+
+    addConstraint(constraintType: string) {
+      let constraint: Constraint = {
+        ingredient_id: this.ingredient.id,
+        type: constraintType
+      };
+
+      this._constraintService.save(constraint).subscribe(
+        constraint => {
+          this.ingredient.constraints.push(constraint);
+          this.populateConstraintFields(this.ingredient.constraints);
+        },
+        error => console.log(error)
+      );
+    }
+
+    removeConstraint(constraint: Constraint) {
+      this._constraintService.delete(constraint).subscribe(
+        success => {
+          this.ingredient.constraints.splice(this.ingredient.constraints.indexOf(constraint), 1);
+        },
+        error => console.log(error)
+      );
     }
 
     // todo: refactor this

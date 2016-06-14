@@ -7,5 +7,5 @@ export interface Constraint extends RestObject {
     target_id?: number;
     min_cpus?: number;
     min_ram?: number;
-    fields: any;
+    fields?: any;
 }

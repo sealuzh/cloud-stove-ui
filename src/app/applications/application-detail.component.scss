@@ -1,4 +1,8 @@
 .panel-ingredient {
-  height: 200px;
+  height: 100px;
   overflow: hidden;
+}
+
+.panel-ingredient > .panel-footer {
+  padding-bottom: 20px;
 }
