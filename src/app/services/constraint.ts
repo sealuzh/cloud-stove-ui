@@ -13,6 +13,7 @@ export class ConstraintService extends RestObjectService {
 
     constructor(http: Http, configs: ConfigService, request: RequestService) {
         super(http, configs, 'constraint', request, null);
+        this.nestedUpdate = false;
     }
 
     query(search: string): Observable<Constraint[]> {
