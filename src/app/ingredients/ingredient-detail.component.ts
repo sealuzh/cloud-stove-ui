@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Location} from '@angular/common';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -29,7 +30,8 @@ export class IngredientDetailComponent implements OnActivate {
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
-      private _constraintService: ConstraintService) {
+      private _constraintService: ConstraintService,
+      private _location: Location) {
 
         fm.addStringMessage('required', 'This field is required.');
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
@@ -46,7 +48,7 @@ export class IngredientDetailComponent implements OnActivate {
 
     }
 
-    submit(ingredientObj) {
+    submit(ingredientObj: Ingredient) {
         let constraintUpdates = [];
 
         for (let constraint of ingredientObj.constraints) {
@@ -54,16 +56,28 @@ export class IngredientDetailComponent implements OnActivate {
           constraintUpdates.push(this._constraintService.save(constraint));
         }
 
-        Observable.forkJoin(constraintUpdates).subscribe(result => {
-          this._ingredientService.save(ingredientObj).subscribe(
-              ingredient => {
-                this.populateConstraintFields(ingredient.constraints);
-                this.ingredient = ingredient;
-              },
-              error => console.log(error)
-          );
-        });
+        if (constraintUpdates.length > 0) {
+          Observable.forkJoin(constraintUpdates).subscribe(result => {
+            this.updateIngredient(ingredientObj);
+          });
+        } else {
+          this.updateIngredient(ingredientObj);
+        }
 
+    }
+
+    goBack() {
+      this._location.back();
+    }
+
+    updateIngredient(ingredientObj: Ingredient) {
+      this._ingredientService.save(ingredientObj).subscribe(
+          ingredient => {
+            this.populateConstraintFields(ingredient.constraints);
+            this.ingredient = ingredient;
+          },
+          error => console.log(error)
+      );
     }
 
     routerOnActivate(curr: RouteSegment): void {
