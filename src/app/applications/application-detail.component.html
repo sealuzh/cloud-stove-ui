@@ -3,18 +3,23 @@
     <h1>{{application.name}}</h1>
 
     <div class="btn-group btn-group-padded pull-right">
-    <a [routerLink]="['/recommendations', application.id]">
-      <button class="btn btn-primary">
-        <i class="fa fa-file-text"></i> Recommendation
-      </button>
-    </a>
+      <a [routerLink]="['/recommendations', application.id]">
+        <button class="btn btn-primary">
+          <i class="fa fa-file-text"></i> Recommendation
+        </button>
+      </a>
+      <a [routerLink]="['/ingredients', application.id]">
+        <button class="btn btn-info">
+          <i class="fa fa-edit"></i> Edit
+        </button>
+      </a>
     </div>
 
     <h2>Ingredients</h2>
 
     <div class="row">
       <div class="col-lg-4" *ngFor="let ingredient of application.children">
-        <div class="panel panel-default panel-ingredient">
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
               <a [routerLink]="['/ingredients', ingredient.id]">{{ingredient.name}}</a>
@@ -22,15 +27,8 @@
               <button class="btn btn-xs btn-warning pull-right" (click)="copyIngredient(ingredient.id)"><i class="fa fa-copy"></i> Copy</button>
             </h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body panel-ingredient">
             <div [data]="ingredient.body" csMarkdown></div>
-          </div>
-          <div class="panel-footer">
-            <ul>
-              <li *ngFor="let constraint of ingredient.constraints">
-                {{constraint.type}}
-              </li>
-            </ul>
           </div>
         </div>
       </div>

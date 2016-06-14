@@ -1,1 +1,5 @@
 @import "../../style/app";
+
+.panel-heading:hover {
+  background: $brand-accent;
+}
