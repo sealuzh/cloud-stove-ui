@@ -5,8 +5,11 @@
     <div class="panel panel-default panel-application">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a [routerLink]="['/applications', ingredient.id]">{{ingredient.name}}</a>
-          <button class="btn btn-xs btn-info pull-right" (click)="copyIngredient(ingredient.id)"><i class="fa fa-copy"></i> Copy</button>
+          <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-xs btn-default pull-right" (click)="copyIngredient(ingredient)">
+            <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
+          </button>
+          <a [routerLink]="['/applications', ingredient.id]">{{ingredient.name}}</a><br>
+          <small>{{countIngredients(ingredient)}} ingredients, {{countConstraints(ingredient)}} constraints</small>
         </h3>
       </div>
     </div>
