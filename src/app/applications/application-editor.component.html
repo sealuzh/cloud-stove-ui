@@ -1,0 +1,16 @@
+<csLoading *ngIf="!application"></csLoading>
+<div *ngIf="application">
+  <div class="btn-group btn-group-padded pull-right">
+    <a [routerLink]="['/recommendations', application.id]">
+      <button class="btn btn-primary">
+        <i class="fa fa-file-text"></i> Recommendation
+      </button>
+    </a>
+  </div>
+
+  <div class="application-editor">
+    <div id="ingredient-{{ingredient._id}}" class="ingredient noselect" *ngFor="let ingredient of application.children" csDraggable>
+      {{ingredient.name}}
+    </div>
+  </div>
+</div>

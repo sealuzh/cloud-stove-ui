@@ -1,0 +1,31 @@
+@import "../../style/app";
+
+[csdraggable] {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.application-editor {
+  position: relative;
+}
+
+.ingredient {
+  display: inline-block;
+  width: 200px;
+  height: 125px;
+  padding: 5px;
+  background-color: $brand-accent;
+  color: $brand-dark;
+  border: 1px solid darken($brand-accent, 5%);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
