@@ -1,0 +1,50 @@
+@import "../../style/app";
+
+.ingredient {
+  display: inline-block;
+  width: 300px;
+  height: 200px;
+  background-color: $brand-accent;
+  color: $brand-dark;
+  border: 1px solid darken($brand-accent, 5%);
+}
+
+a {
+  color: lighten($brand-accent, 35%);
+}
+
+a:hover {
+  color: $brand-primary;
+}
+
+.details {
+  color: lighten($brand-accent, 35%);
+}
+
+.content {
+  padding: 5px;
+}
+
+.edit {
+  float: right;
+}
+
+.recommendation {
+  background-color: lighten($brand-accent, 10%);
+  font-weight: bold;
+  color: lighten($brand-accent, 35%);
+  bottom: 0;
+  position: absolute;
+  padding: 5px;
+  width: 100%;
+}
+
+.Rackspace {
+  border-left: 5px solid #c40022;
+  padding-left: 7px;
+}
+
+.no-recommendation {
+  background-color: lighten($brand-primary, 10%);
+  color: white;
+}

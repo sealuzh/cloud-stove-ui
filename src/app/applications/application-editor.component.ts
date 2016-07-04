@@ -7,6 +7,8 @@ import {Ingredient} from '../dtos/ingredient.dto';
 import {LoadingComponent} from '../shared/loading.component';
 
 import {IngredientDetailComponent} from '../ingredients/ingredient-detail.component';
+import {StoveEditorIngredientComponent} from './application-editor-ingredient.component';
+import {StoveEditorDependencyConstraintComponent} from './application-editor-constraint.component';
 
 import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
@@ -17,7 +19,17 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
 @Component({
     template: require('./application-editor.component.html'),
     styles: [require('./application-editor.component.scss')],
-    directives: [ROUTER_DIRECTIVES, MODAL_DIRECTVES, PositionDirective, DraggableDirective, LoadingComponent, ConnectionDirective, IngredientDetailComponent],
+    directives: [
+      ROUTER_DIRECTIVES,
+      MODAL_DIRECTVES,
+      StoveEditorIngredientComponent,
+      StoveEditorDependencyConstraintComponent,
+      PositionDirective,
+      DraggableDirective,
+      LoadingComponent,
+      ConnectionDirective,
+      IngredientDetailComponent
+    ],
     viewProviders: [BS_VIEW_PROVIDERS]
 })
 
@@ -27,6 +39,7 @@ export class ApplicationEditorComponent implements OnActivate {
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
     constructor(private _ingredientService: IngredientService) {
+
     }
 
     routerOnActivate(curr: RouteSegment): void {

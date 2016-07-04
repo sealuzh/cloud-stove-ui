@@ -9,54 +9,7 @@
 .application-editor {
   top: 60px;
   position: relative;
-
-  a {
-    color: lighten($brand-accent, 35%);
-  }
-
-  a:hover {
-    color: $brand-primary;
-  }
-
-  .details {
-    color: lighten($brand-accent, 35%);
-  }
-
-  .content {
-    padding: 5px;
-  }
-
-  .edit {
-    float: right;
-  }
-
-  .ingredient {
-    display: inline-block;
-    width: 300px;
-    height: 200px;
-    background-color: $brand-accent;
-    color: $brand-dark;
-    border: 1px solid darken($brand-accent, 5%);
-  }
-
-  .recommendation {
-    background-color: lighten($brand-accent, 10%);
-    border-top: 1px solid lighten($brand-accent, 30%);
-    font-weight: bold;
-    color: lighten($brand-accent, 35%);
-    bottom: 0;
-    position: absolute;
-    padding: 5px;
-    width: 100%;
-  }
-
-  .no-recommendation {
-    background-color: lighten($brand-primary, 10%);
-    color: white;
-  }
-
 }
-
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

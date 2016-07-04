@@ -14,29 +14,18 @@
     </a>
   </div>
 
-  <div class="application-editor">
-    <div id="ingredient-{{ingredient._id}}" class="ingredient noselect" *ngFor="let ingredient of application.children; let i = index" [csPosition]="i" csDraggable>
-      <div class="content">
-
-        <div class="edit">
-          <a [routerLink]="['/ingredients/', ingredient.id]"><i class="fa fa-edit"></i></a>
-        </div>
-
-        <div class="details">
-          {{ingredient.name}}
-          <br>
-          {{ingredient.constraints.length}} Constraints
-        </div>
-
-      </div>
-      <div class="recommendation" [ngClass]="{'no-recommendation': !ingredient.recommendation}">
-        <div *ngIf="ingredient.recommendation">
-          {{ingredient.recommendation.provider}} {{ingredient.recommendation.name}}<br>
-          {{ingredient.recommendation.cores}} Cores / {{ingredient.recommendation.mem_gb}}GB RAM
-        </div>
-        <div [hidden]="ingredient.recommendation">No recommendation yet.</div>
-      </div>
-    </div>
+  <div class="application-editor" [csConnection]="application">
+    <cs-stove-editor-ingredient
+      *ngFor="let ingredient of application.children; let i = index"
+      [ingredient]="ingredient"
+      [csPosition]="i"
+      csDraggable>
+    </cs-stove-editor-ingredient>
+    <cs-stove-editor-dependency-constraint
+      *ngFor="let constraint of applicationData.links; let i = index"
+      [constraint]="constraint"
+      >
+    </cs-stove-editor-dependency-constraint>
   </div>
 
 </div>
