@@ -22,7 +22,6 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     template: require('./ingredient-detail.component.html'),
-    styles: [require('./ingredient-detail.component.scss')],
     directives: [ROUTER_DIRECTIVES, FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
     pipes: [PropertyPipe]

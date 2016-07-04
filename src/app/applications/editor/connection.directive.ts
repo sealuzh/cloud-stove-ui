@@ -1,10 +1,7 @@
-import {Input, OnInit, ElementRef, Directive, EventEmitter, HostListener} from '@angular/core';
+import {Input, OnInit, ElementRef, Directive} from '@angular/core';
 
 @Directive({
   selector: '[csConnection]',
-  templates: `
-    hello!
-  `
 })
 
 export class ConnectionDirective implements OnInit {

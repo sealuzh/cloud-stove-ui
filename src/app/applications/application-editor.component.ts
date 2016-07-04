@@ -6,13 +6,19 @@ import {Ingredient} from '../dtos/ingredient.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
+import {IngredientDetailComponent} from '../ingredients/ingredient-detail.component';
+
 import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
+import {PositionDirective} from './editor/position.directive';
+
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
 
 @Component({
     template: require('./application-editor.component.html'),
     styles: [require('./application-editor.component.scss')],
-    directives: [ROUTER_DIRECTIVES, DraggableDirective, LoadingComponent, ConnectionDirective]
+    directives: [ROUTER_DIRECTIVES, MODAL_DIRECTVES, PositionDirective, DraggableDirective, LoadingComponent, ConnectionDirective, IngredientDetailComponent],
+    viewProviders: [BS_VIEW_PROVIDERS]
 })
 
 export class ApplicationEditorComponent implements OnActivate {
@@ -25,7 +31,7 @@ export class ApplicationEditorComponent implements OnActivate {
 
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id));
+        this.loadIngredient(parseInt(id, null));
     }
 
     loadIngredient(id: number) {
@@ -65,6 +71,34 @@ export class ApplicationEditorComponent implements OnActivate {
                 }
             }
         }
+    }
+
+    triggerRecommendation(application: Ingredient) {
+      this._ingredientService.triggerRecommendation(application.id).subscribe(
+        result => {
+          console.log(result);
+        },
+        error => console.log(error)
+      );
+    }
+
+    retrieveRecommendation(application: Ingredient) {
+      this._ingredientService.recommendation(application.id).subscribe(
+        result => {
+          for (let child of this.application.children) {
+            for (let recommendation of result.recommendation) {
+              if (recommendation.ingredient.id === child.id) {
+                child.recommendation = recommendation.resource;
+              }
+            }
+          }
+        },
+        error => console.log(error)
+      );
+    }
+
+    editIngredient(ingredient: Ingredient) {
+
     }
 
 

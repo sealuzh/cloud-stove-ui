@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
+import {ConstraintService} from '../services/constraint';
 
 import {ApplicationListComponent} from './application-list.component';
 import {ApplicationDetailComponent} from './application-detail.component';
@@ -9,7 +10,7 @@ import {ApplicationEditorComponent} from './application-editor.component';
 @Component({
     template: `<router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES],
-    providers: [IngredientService]
+    providers: [IngredientService, ConstraintService]
 })
 
 @Routes([
@@ -21,7 +22,7 @@ import {ApplicationEditorComponent} from './application-editor.component';
 export class ApplicationComponent {
 
     constructor(private router: Router) {
-      
+
     }
 
 }

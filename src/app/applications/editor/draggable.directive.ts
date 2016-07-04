@@ -36,7 +36,7 @@ export class DraggableDirective implements OnInit {
       return {
         top:  event.clientY - imageOffset.top,
         left: event.clientX - imageOffset.left
-      }
+      };
     }).takeUntil(this.mouseup));
 
   }
