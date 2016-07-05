@@ -25,10 +25,12 @@ export class RecommendationListComponent implements OnActivate {
     }
 
     loadRecommendations() {
+      /*
         this._recommendationService.query(null).subscribe(
             recommendations => this.recommendations = recommendations,
             error => console.log(error)
         );
+      */
     }
 
     goToRecommendation(id: number) {

@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
@@ -21,18 +20,21 @@ import {Observable} from 'rxjs/Rx';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
+    selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
-    directives: [ROUTER_DIRECTIVES, FormlyForm, DROPDOWN_DIRECTIVES],
+    directives: [FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
+    properties: ['ingredient'],
     pipes: [PropertyPipe]
 })
 
-export class IngredientDetailComponent implements OnActivate {
+export class IngredientDetailComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
     public constraintFilter: any[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
 
     public ingredient: Ingredient;
+
     public ingredientFields;
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
@@ -73,10 +75,6 @@ export class IngredientDetailComponent implements OnActivate {
 
     }
 
-    goBack() {
-      this._location.back();
-    }
-
     updateIngredient(ingredientObj: Ingredient) {
       this._ingredientService.save(ingredientObj).subscribe(
           ingredient => {
@@ -85,21 +83,6 @@ export class IngredientDetailComponent implements OnActivate {
           },
           error => console.log(error)
       );
-    }
-
-    routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id, null));
-    }
-
-    loadIngredient(id: number) {
-        this._ingredientService.get(id, null).subscribe(
-            ingredient => {
-              this.populateConstraintFields(ingredient.constraints);
-              this.ingredient = ingredient;
-            },
-            error => console.log(error)
-        );
     }
 
     addConstraint(constraintType: string) {

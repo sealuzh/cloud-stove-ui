@@ -1,9 +1,15 @@
 @import "../../style/app";
 
+.modal-body {
+  .row {
+    margin: 0;
+  }
+}
+
 .ingredient {
   display: inline-block;
-  width: 300px;
-  height: 200px;
+  width: 200px;
+  height: 100px;
   background-color: $brand-accent;
   color: $brand-dark;
   border: 1px solid darken($brand-accent, 5%);
@@ -19,6 +25,14 @@ a:hover {
 
 .details {
   color: lighten($brand-accent, 35%);
+
+  .details-title {
+    font-weight: bolder;
+  }
+
+  .details-body {
+    color: lighten($brand-accent, 45%);
+  }
 }
 
 .content {
@@ -31,9 +45,10 @@ a:hover {
 
 .recommendation {
   background-color: lighten($brand-accent, 10%);
-  font-weight: bold;
   color: lighten($brand-accent, 35%);
+  font-size: 0.8em;
   bottom: 0;
+  left: 0;
   position: absolute;
   padding: 5px;
   width: 100%;

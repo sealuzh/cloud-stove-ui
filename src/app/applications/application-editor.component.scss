@@ -7,9 +7,11 @@
 }
 
 .application-editor {
-  top: 60px;
+  margin-top: 60px;
   position: relative;
-  height: 800px;
+  height: 600px;
+  background: lighten($brand-accent, 30%);
+  border-radius: 5px;
 }
 
 .svg {

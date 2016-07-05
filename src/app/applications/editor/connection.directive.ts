@@ -1,4 +1,4 @@
-import {Input, ContentChildren, AfterContentInit, ElementRef, Directive, QueryList, HostListener} from '@angular/core';
+import {Input, ContentChildren, AfterContentInit, ElementRef, Directive, QueryList, HostListener, EventEmitter, OnInit} from '@angular/core';
 
 import {Ingredient} from '../../dtos/ingredient.dto';
 import {Constraint} from '../../dtos/constraint.dto';
@@ -10,18 +10,35 @@ import {StoveEditorDependencyConstraintComponent} from '../application-editor-co
   selector: '[csConnection]',
 })
 
-export class ConnectionDirective implements AfterContentInit {
+export class ConnectionDirective implements AfterContentInit, OnInit {
 
   @Input('csConnection') application: Ingredient;
 
   @ContentChildren(StoveEditorIngredientComponent) ingredients: QueryList<StoveEditorIngredientComponent>;
   @ContentChildren(StoveEditorDependencyConstraintComponent) constraints: QueryList<StoveEditorDependencyConstraintComponent>;
 
+  mousedrag;
+
+  mouseup   = new EventEmitter();
+  mousedown = new EventEmitter();
+  mousemove = new EventEmitter();
+
+  @HostListener('mousedown', ['$event'])
+  onMousedown(event) { this.mousedown.emit(event); }
+
   @HostListener('document:mousemove', ['$event'])
-  onMousemove(event) { this.drawConstraints(); }
+  onMousemove(event) { this.mousemove.emit(event); }
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseup(event) { this.mouseup.emit(event); }
 
   constructor(public element: ElementRef) {
-
+    this.mousedrag = this.mousedown.map((event: MouseEvent) => {
+      event.preventDefault();
+      return;
+    }).flatMap(() => this.mousemove.map((event: MouseEvent) => {
+      return;
+    }).takeUntil(this.mouseup));
   }
 
   ngAfterContentInit() {
@@ -46,9 +63,13 @@ export class ConnectionDirective implements AfterContentInit {
           targetIngredient.offsetTop + sourceIngredient.clientHeight / 2
         );
       }
-
-
     }
+  }
+
+  ngOnInit() {
+    this.mousedrag.subscribe(() => {
+        this.drawConstraints();
+    });
   }
 
 }

@@ -2,13 +2,13 @@
   <div class="content">
 
     <div class="edit">
-      <a [routerLink]="['/ingredients/', ingredient.id]"><i class="fa fa-edit"></i></a>
+      <a (click)="lgModal.show()"><i class="fa fa-edit"></i></a>
+      <!-- <a [routerLink]="['/ingredients/', ingredient.id]"><i class="fa fa-edit"></i></a> -->
     </div>
 
     <div class="details">
-      {{ingredient.name}}
-      <br>
-      <!-- {{ingredient.constraints.length}} Constraints -->
+      <div class="details-title">{{ingredient.name}}</div>
+      <div class="details-body">{{ingredient.constraints.length}} Constraints</div>
     </div>
 
   </div>
@@ -17,4 +17,22 @@
     {{ingredient.recommendation.cores}} Cores / {{ingredient.recommendation.mem_gb}}GB RAM
   </div>
   <div class="recommendation no-recommendation" [hidden]="ingredient.recommendation">No recommendation yet.</div>
+</div>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{ingredient.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <cs-ingredient-detail [ingredient]="ingredient"></cs-ingredient-detail>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

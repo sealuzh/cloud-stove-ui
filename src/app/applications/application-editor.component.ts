@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
+import {RecommendationService} from '../services/recommendation';
+
 import {Ingredient} from '../dtos/ingredient.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
@@ -40,10 +42,11 @@ export class ApplicationEditorComponent implements OnActivate {
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
     status: { isOpen: boolean } = { isOpen: false };
+    recommendation: { isGenerating: boolean } = { isGenerating: false };
 
-    recommendationOptions: { region: string } = { region: 'Europe' };
+    recommendationOptions: { region: string } = { region: 'EU' };
 
-    constructor(private _ingredientService: IngredientService) {
+    constructor(private _ingredientService: IngredientService, private _recommendationService: RecommendationService) {
 
     }
 
@@ -96,32 +99,27 @@ export class ApplicationEditorComponent implements OnActivate {
     }
 
     triggerRecommendation(application: Ingredient) {
-      this._ingredientService.triggerRecommendation(application.id).subscribe(
+      this.recommendation.isGenerating = true;
+      this._recommendationService.loadRecommendation(application).subscribe(
         result => {
-          console.log(result);
+          this.applyRecommendation(result);
+          this.recommendation.isGenerating = false;
         },
-        error => console.log(error)
+        error => {
+          console.log(error);
+          this.recommendation.isGenerating = false;
+        }
       );
     }
 
-    retrieveRecommendation(application: Ingredient) {
-      this._ingredientService.recommendation(application.id).subscribe(
-        result => {
-          for (let child of this.application.children) {
-            for (let recommendation of result.recommendation) {
-              if (recommendation.ingredient.id === child.id) {
-                child.recommendation = recommendation.resource;
-              }
-            }
+    applyRecommendation(result: any) {
+      for (let child of this.application.children) {
+        for (let recommendation of result.recommendation) {
+          if (recommendation.ingredient.id === child.id) {
+            child.recommendation = recommendation.resource;
           }
-        },
-        error => console.log(error)
-      );
+        }
+      }
     }
-
-    editIngredient(ingredient: Ingredient) {
-
-    }
-
 
 }
