@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {OnActivate, RouteSegment, Router, ROUTER_DIRECTIVES} from '@angular/router';
+import {RouteSegment, Router, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';

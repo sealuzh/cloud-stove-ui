@@ -47,7 +47,7 @@ export class ConnectionDirective implements AfterContentInit, OnInit {
 
   drawConstraints() {
     for (let comp of this.constraints.toArray()) {
-      let constraint: any = comp.constraint;
+      let constraint: Constraint = comp.constraint;
 
       let sources = this.ingredients.filter(comp => comp.ingredient.id === constraint.source_id);
       let targets = this.ingredients.filter(comp => comp.ingredient.id === constraint.target_id);

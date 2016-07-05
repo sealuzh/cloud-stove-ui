@@ -22,6 +22,7 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 @Component({
     selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
+    styles: [require('./ingredient-detail.component.scss')],
     directives: [FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
     properties: ['ingredient'],
@@ -31,11 +32,12 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 export class IngredientDetailComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
-    public constraintFilter: any[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
+    public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
 
     public ingredient: Ingredient;
 
     public ingredientFields;
+    public constraintFields;
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
@@ -54,6 +56,10 @@ export class IngredientDetailComponent {
         });
 
         this.ingredientFields = IngredientForm.ingredientFields();
+        this.constraintFields = {
+          'CpuConstraint': CPUConstraintForm.constraintFields(),
+          'RamConstraint': RamConstraintForm.constraintFields()
+        };
 
     }
 
@@ -61,7 +67,6 @@ export class IngredientDetailComponent {
         let constraintUpdates = [];
 
         for (let constraint of ingredientObj.constraints) {
-          delete constraint.fields;
           constraintUpdates.push(this._constraintService.save(constraint));
         }
 
@@ -78,7 +83,6 @@ export class IngredientDetailComponent {
     updateIngredient(ingredientObj: Ingredient) {
       this._ingredientService.save(ingredientObj).subscribe(
           ingredient => {
-            this.populateConstraintFields(ingredient.constraints);
             this.ingredient = ingredient;
           },
           error => console.log(error)
@@ -94,7 +98,6 @@ export class IngredientDetailComponent {
       this._constraintService.save(constraint).subscribe(
         constraint => {
           this.ingredient.constraints.push(constraint);
-          this.populateConstraintFields(this.ingredient.constraints);
         },
         error => console.log(error)
       );
@@ -107,20 +110,6 @@ export class IngredientDetailComponent {
         },
         error => console.log(error)
       );
-    }
-
-    // todo: refactor this
-    private populateConstraintFields(constraints: Constraint[]) {
-      for (let constraint of constraints) {
-        switch (constraint.type) {
-          case 'CpuConstraint':
-            constraint.fields = CPUConstraintForm.constraintFields();
-            break;
-          case 'RamConstraint':
-            constraint.fields = RamConstraintForm.constraintFields();
-            break;
-        }
-      }
     }
 
 }

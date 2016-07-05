@@ -1,11 +1,9 @@
 import {Component, ElementRef} from '@angular/core';
-import {RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
-import {DraggableDirective} from './editor/draggable.directive';
 
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
 
@@ -16,8 +14,8 @@ import {IngredientDetailComponent} from '../ingredients/ingredient-detail.compon
     template: require('./application-editor-ingredient.component.html'),
     styles: [require('./application-editor-ingredient.component.scss')],
     properties: ['ingredient'],
-    directives: [LoadingComponent, ROUTER_DIRECTIVES, MODAL_DIRECTVES, IngredientDetailComponent],
-    viewProviders:[BS_VIEW_PROVIDERS],
+    directives: [LoadingComponent, MODAL_DIRECTVES, IngredientDetailComponent],
+    viewProviders: [BS_VIEW_PROVIDERS],
 })
 
 export class StoveEditorIngredientComponent {

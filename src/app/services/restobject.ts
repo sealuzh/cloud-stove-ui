@@ -31,7 +31,7 @@ export class RestObjectService {
             .catch(err => this.handleError(err));
     }
 
-    save(restObj: RestObject) {
+    save(restObj: RestObject): Observable<any> {
 
         // bring in correct form for rails
         let saveObject = {};
