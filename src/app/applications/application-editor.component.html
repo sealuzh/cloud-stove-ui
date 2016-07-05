@@ -1,6 +1,23 @@
 <csLoading *ngIf="!application"></csLoading>
 <div *ngIf="application">
+
+  <div class="btn-group btn-group-padded pull-left">
+
+    <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
+      <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+        {{recommendationOptions.region}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('Europe')">Europe</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('US')">US</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('Asia-Pacific')">Asia Pacific</a></li>
+      </ul>
+    </div>
+
+  </div>
+
   <div class="btn-group btn-group-padded pull-right">
+
     <a (click)="retrieveRecommendation(application)">
       <button class="btn btn-primary">
         <i class="fa fa-file-text"></i> Recommendation

@@ -14,7 +14,7 @@ import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
 import {PositionDirective} from './editor/position.directive';
 
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     template: require('./application-editor.component.html'),
@@ -22,6 +22,7 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap';
     directives: [
       ROUTER_DIRECTIVES,
       MODAL_DIRECTVES,
+      DROPDOWN_DIRECTIVES,
       StoveEditorIngredientComponent,
       StoveEditorDependencyConstraintComponent,
       PositionDirective,
@@ -38,6 +39,10 @@ export class ApplicationEditorComponent implements OnActivate {
     application: Ingredient;
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
+    status: { isOpen: boolean } = { isOpen: false };
+
+    recommendationOptions: { region: string } = { region: 'Europe' };
+
     constructor(private _ingredientService: IngredientService) {
 
     }
@@ -45,6 +50,10 @@ export class ApplicationEditorComponent implements OnActivate {
     routerOnActivate(curr: RouteSegment): void {
         let id = curr.getParam('id');
         this.loadIngredient(parseInt(id, null));
+    }
+
+    changeRegion(region: string) {
+      this.recommendationOptions.region = region;
     }
 
     loadIngredient(id: number) {
