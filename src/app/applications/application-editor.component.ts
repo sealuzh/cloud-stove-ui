@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
@@ -46,7 +46,10 @@ export class ApplicationEditorComponent implements OnActivate {
 
     recommendationOptions: { region: string } = { region: 'EU' };
 
-    constructor(private _ingredientService: IngredientService, private _recommendationService: RecommendationService) {
+    constructor(
+      private _ingredientService: IngredientService,
+      private _recommendationService: RecommendationService,
+      private _ref: ChangeDetectorRef) {
 
     }
 
@@ -74,6 +77,8 @@ export class ApplicationEditorComponent implements OnActivate {
 
                 // add links/constraints
                 this.addConstraintsToMap(application, nodeMap);
+
+                this._ref.detectChanges();
 
             },
             error => console.log(error)

@@ -1,6 +1,5 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy} from '@angular/core';
 
-import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
@@ -16,13 +15,14 @@ import {IngredientDetailComponent} from '../ingredients/ingredient-detail.compon
     properties: ['ingredient'],
     directives: [LoadingComponent, MODAL_DIRECTVES, IngredientDetailComponent],
     viewProviders: [BS_VIEW_PROVIDERS],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class StoveEditorIngredientComponent {
 
     ingredient: Ingredient;
 
-    constructor(private _ingredientService: IngredientService, public element: ElementRef) {
+    constructor(private ref: ChangeDetectorRef, public element: ElementRef) {
 
     }
 

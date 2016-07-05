@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core';
 import {Location} from '@angular/common';
 
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -42,7 +42,8 @@ export class IngredientDetailComponent {
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
-      private _location: Location) {
+      private _location: Location,
+      private _ref: ChangeDetectorRef) {
 
         fm.addStringMessage('required', 'This field is required.');
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
@@ -60,6 +61,8 @@ export class IngredientDetailComponent {
           'CpuConstraint': CPUConstraintForm.constraintFields(),
           'RamConstraint': RamConstraintForm.constraintFields()
         };
+
+        // this._ref.detectChanges();
 
     }
 
