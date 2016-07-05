@@ -9,6 +9,16 @@
 .application-editor {
   top: 60px;
   position: relative;
+  height: 800px;
+}
+
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
 }
 
 .noselect {

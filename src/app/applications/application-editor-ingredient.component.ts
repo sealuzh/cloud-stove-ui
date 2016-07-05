@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
@@ -19,7 +19,7 @@ export class StoveEditorIngredientComponent {
 
     ingredient: Ingredient;
 
-    constructor(private _ingredientService: IngredientService) {
+    constructor(private _ingredientService: IngredientService, public element: ElementRef) {
 
     }
 

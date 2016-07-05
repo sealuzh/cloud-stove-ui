@@ -15,17 +15,18 @@
   </div>
 
   <div class="application-editor" [csConnection]="application">
+    <cs-stove-editor-dependency-constraint
+      *ngFor="let constraint of applicationData.links; let i = index"
+      [constraint]="constraint"
+      class="svg"
+      >
+    </cs-stove-editor-dependency-constraint>
     <cs-stove-editor-ingredient
       *ngFor="let ingredient of application.children; let i = index"
       [ingredient]="ingredient"
       [csPosition]="i"
       csDraggable>
     </cs-stove-editor-ingredient>
-    <cs-stove-editor-dependency-constraint
-      *ngFor="let constraint of applicationData.links; let i = index"
-      [constraint]="constraint"
-      >
-    </cs-stove-editor-dependency-constraint>
   </div>
 
 </div>
