@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Location} from '@angular/common';
 
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -25,7 +25,6 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
     styles: [require('./ingredient-detail.component.scss')],
     directives: [FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
-    properties: ['ingredient'],
     pipes: [PropertyPipe]
 })
 
@@ -34,16 +33,22 @@ export class IngredientDetailComponent {
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
     public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
 
-    public ingredient: Ingredient;
-
     public ingredientFields;
     public constraintFields;
+
+    @Input()
+    ingredient: Ingredient;
+
+    @Output() ingredientChange: any = new EventEmitter(); updateData(event) {
+     this.ingredient = event;
+     this.ingredientChange.emit(event);
+    }
+
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
-      private _location: Location,
-      private _ref: ChangeDetectorRef) {
+      private _location: Location) {
 
         fm.addStringMessage('required', 'This field is required.');
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
@@ -62,8 +67,6 @@ export class IngredientDetailComponent {
           'RamConstraint': RamConstraintForm.constraintFields()
         };
 
-        // this._ref.detectChanges();
-
     }
 
     submit(ingredientObj: Ingredient) {
@@ -75,21 +78,12 @@ export class IngredientDetailComponent {
 
         if (constraintUpdates.length > 0) {
           Observable.forkJoin(constraintUpdates).subscribe(result => {
-            this.updateIngredient(ingredientObj);
+            this.updateData(ingredientObj);
           });
         } else {
-          this.updateIngredient(ingredientObj);
+          this.updateData(ingredientObj);
         }
 
-    }
-
-    updateIngredient(ingredientObj: Ingredient) {
-      this._ingredientService.save(ingredientObj).subscribe(
-          ingredient => {
-            this.ingredient = ingredient;
-          },
-          error => console.log(error)
-      );
     }
 
     addConstraint(constraintType: string) {

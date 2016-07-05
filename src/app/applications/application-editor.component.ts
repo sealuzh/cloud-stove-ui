@@ -3,8 +3,10 @@ import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {RecommendationService} from '../services/recommendation';
+import {ConstraintService} from '../services/constraint';
 
 import {Ingredient} from '../dtos/ingredient.dto';
+import {Constraint} from '../dtos/constraint.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
@@ -46,9 +48,12 @@ export class ApplicationEditorComponent implements OnActivate {
 
     recommendationOptions: { region: string } = { region: 'EU' };
 
+    regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: 'EU' };
+
     constructor(
       private _ingredientService: IngredientService,
       private _recommendationService: RecommendationService,
+      private _constraintService: ConstraintService,
       private _ref: ChangeDetectorRef) {
 
     }
@@ -59,13 +64,26 @@ export class ApplicationEditorComponent implements OnActivate {
     }
 
     changeRegion(region: string) {
-      this.recommendationOptions.region = region;
+        this.regionConstraint.ingredient_id = this.application.id;
+        this._constraintService.save(this.regionConstraint).subscribe(
+          result => this.regionConstraint = result,
+          error => console.log(error)
+        );
     }
 
     loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             application => {
                 this.application = application;
+
+                // get application constraints
+                for (let constraint of this.application.constraints) {
+                  if (constraint.type === 'PreferredRegionAreaConstraint') {
+                    this.regionConstraint = constraint;
+                  }
+                }
+
+                if (this.regionConstraint)
 
                 let nodeMap: Map<number, number> = new Map<number, number>();
 
@@ -78,7 +96,7 @@ export class ApplicationEditorComponent implements OnActivate {
                 // add links/constraints
                 this.addConstraintsToMap(application, nodeMap);
 
-                this._ref.detectChanges();
+                this._ref.markForCheck();
 
             },
             error => console.log(error)
@@ -109,6 +127,7 @@ export class ApplicationEditorComponent implements OnActivate {
         result => {
           this.applyRecommendation(result);
           this.recommendation.isGenerating = false;
+          this._ref.markForCheck();
         },
         error => {
           console.log(error);

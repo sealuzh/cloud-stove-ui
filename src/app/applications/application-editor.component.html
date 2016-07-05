@@ -6,7 +6,7 @@
 
     <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
       <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
-        Currently: {{recommendationOptions.region}} <span class="caret"></span>
+        Currently: {{regionConstraint.preferred_region_area}} <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
         <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('US')">United States</a></li>
@@ -24,7 +24,7 @@
       <i [ngClass]="{ 'fa-copy': !recommendation.isGenerating,
                       'fa-spin': recommendation.isGenerating,
                       'fa-circle-o-notch': recommendation.isGenerating}"
-      class="fa"></i> 
+      class="fa"></i>
       Generate Recommendation
     </button>
 
@@ -41,7 +41,7 @@
       </cs-stove-editor-dependency-constraint>
 
       <cs-stove-editor-ingredient
-        *ngFor="let ingredient of application.children; let i = index"
+        *ngFor="let ingredient of application.children; trackBy: ingredient?.id; let i = index"
         [ingredient]="ingredient"
         [csPosition]="i"
         csDraggable>

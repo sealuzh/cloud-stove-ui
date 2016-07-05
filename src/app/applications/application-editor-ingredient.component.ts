@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 
@@ -20,7 +20,13 @@ import {IngredientDetailComponent} from '../ingredients/ingredient-detail.compon
 
 export class StoveEditorIngredientComponent {
 
+    @Input()
     ingredient: Ingredient;
+
+    @Output() ingredientChange: any = new EventEmitter(); updateData(event) {
+     this.ingredient = event;
+     this.ingredientChange.emit(event);
+    }
 
     constructor(private ref: ChangeDetectorRef, public element: ElementRef) {
 

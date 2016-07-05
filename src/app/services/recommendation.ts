@@ -39,7 +39,7 @@ export class RecommendationService {
         } else {
           TimerWrapper.setTimeout(() => {
             this.fetchJobStatus(uuid, ingredient, subscription);
-          }, 5000);
+          }, 2500);
         }
       }, error => {
         this.fetchRecommendation(ingredient, subscription);
