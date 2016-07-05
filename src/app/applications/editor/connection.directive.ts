@@ -26,15 +26,14 @@ export class ConnectionDirective implements AfterContentInit, OnInit {
   @HostListener('mousedown', ['$event'])
   onMousedown(event) { this.mousedown.emit(event); }
 
-  @HostListener('document:mousemove', ['$event'])
+  @HostListener('mousemove', ['$event'])
   onMousemove(event) { this.mousemove.emit(event); }
 
-  @HostListener('document:mouseup', ['$event'])
+  @HostListener('mouseup', ['$event'])
   onMouseup(event) { this.mouseup.emit(event); }
 
   constructor(public element: ElementRef) {
     this.mousedrag = this.mousedown.map((event: MouseEvent) => {
-      event.preventDefault();
       return;
     }).flatMap(() => this.mousemove.map((event: MouseEvent) => {
       return;

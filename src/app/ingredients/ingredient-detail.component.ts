@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Location} from '@angular/common';
 
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -96,9 +96,7 @@ export class IngredientDetailComponent {
       };
 
       this._constraintService.save(constraint).subscribe(
-        constraint => {
-          this.ingredient.constraints.push(constraint);
-        },
+        con => this.ingredient.constraints.push(con),
         error => console.log(error)
       );
     }

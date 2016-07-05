@@ -18,8 +18,6 @@ export class DraggableDirective implements OnInit {
   @HostListener('mousedown', ['$event'])
   onMousedown(event) { this.mousedown.emit(event); }
 
-  // we have to track global mousemove and mouseup, as the cursor can move
-  // outside the draggable element
   @HostListener('document:mousemove', ['$event'])
   onMousemove(event) { this.mousemove.emit(event); }
 
@@ -30,13 +28,13 @@ export class DraggableDirective implements OnInit {
     this.element.nativeElement.style.cursor = 'pointer';
 
     this.mousedrag = this.mousedown.map((event: MouseEvent) => {
-      event.preventDefault();
       return {
         top: this.element.nativeElement.parentElement.getBoundingClientRect().top,
         left: this.element.nativeElement.parentElement.getBoundingClientRect().left
       };
     }).flatMap(imageOffset => this.mousemove.map((event: MouseEvent) => {
       return {
+        event: event,
         top:  event.clientY - imageOffset.top - (this.height / 2),
         left: event.clientX - imageOffset.left - (this.width / 2),
       };
@@ -50,6 +48,9 @@ export class DraggableDirective implements OnInit {
     this.width = this.element.nativeElement.offsetWidth;
 
     this.mousedrag.subscribe(pos => {
+        if (pos.event.movementX === 0 && pos.event.movementY === 0) {
+          return;
+        }
         this.element.nativeElement.style.top  = pos.top  + 'px';
         this.element.nativeElement.style.left = pos.left + 'px';
     });
