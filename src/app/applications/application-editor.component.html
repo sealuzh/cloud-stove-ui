@@ -5,19 +5,18 @@
     <div class="col-lg-12">
       <div class="btn-group btn-group-padded pull-left">
 
-        <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
+        <div class="btn-group" dropdown [(isOpen)]="status.regionIsOpen">
           <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
-            {{regionConstraint.preferred_region_area == null ? 'Region' : regionConstraint.preferred_region_area}} <span class="caret"></span>
+            {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-            <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('US')">United States</a></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('EU')">Europe</a></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('ASIA')">Asia-Pacific</a></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('SA')">South America</a></li>
+            <li role="menuitem"  *ngFor='let region of selectableRegions'>
+              <a class="dropdown-item" (click)="changeRegion(region.id)">{{region.name}}</a>
+            </li>
           </ul>
         </div>
 
-        <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
+        <div class="btn-group" dropdown [(isOpen)]="status.providerIsOpen">
           <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
             {{providerConstraint.providers.length == 0 ? 'Provider' : providerConstraint.providers.join(', ') }} <span class="caret"></span>
           </button>

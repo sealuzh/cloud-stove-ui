@@ -48,7 +48,7 @@ export class ApplicationEditorComponent implements OnActivate {
 
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
-    status: { isOpen: boolean } = { isOpen: false };
+    status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
     recommendation: { isGenerating: boolean } = { isGenerating: false };
 
     recommendationOptions: { region: string } = { region: 'EU' };
@@ -56,7 +56,14 @@ export class ApplicationEditorComponent implements OnActivate {
     regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
     providerConstraint: Constraint = { type: 'ProviderConstraint', providers: [] };
 
-    selectableProviders: string[] = ['Google', 'Microsoft Azure', 'DigitalOcean', 'Joyent', 'Atlantic.NET', 'Amazon'];
+    selectableRegions: {id: string, name: string}[] = [
+      {id: 'US', name: 'United States'},
+      {id: 'EU', name: 'Europe'},
+      {id: 'ASIA', name: 'Asia-Pacific'},
+      {id: 'SA', name: 'South America'}
+    ]
+    
+    selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Joyent', 'Atlantic.net', 'Amazon'];
 
     @ViewChild('lgModal') myModal: any;
 
