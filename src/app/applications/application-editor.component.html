@@ -47,6 +47,7 @@
           <cs-stove-editor-ingredient
             *ngFor="let ingredient of application.children; trackBy: ingredient?.id; let i = index"
             [ingredient]="ingredient"
+            (ingredientClicked)="openModal($event)"
             [csPosition]="i"
             csDraggable>
           </cs-stove-editor-ingredient>
@@ -66,4 +67,23 @@
         </div>
     </div>
   </div>
+
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" *ngIf="activeIngredient">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{activeIngredient.name}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <cs-ingredient-detail [(ingredient)]="activeIngredient"></cs-ingredient-detail>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

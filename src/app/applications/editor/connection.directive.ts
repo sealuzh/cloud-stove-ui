@@ -1,6 +1,5 @@
-import {Input, ContentChildren, AfterContentInit, ElementRef, Directive, QueryList, HostListener, EventEmitter, OnInit} from '@angular/core';
+import {ContentChildren, AfterContentInit, ElementRef, Directive, QueryList, HostListener, EventEmitter, OnInit} from '@angular/core';
 
-import {Ingredient} from '../../dtos/ingredient.dto';
 import {Constraint} from '../../dtos/constraint.dto';
 
 import {StoveEditorIngredientComponent} from '../application-editor-ingredient.component';
@@ -11,8 +10,6 @@ import {StoveEditorDependencyConstraintComponent} from '../application-editor-co
 })
 
 export class ConnectionDirective implements AfterContentInit, OnInit {
-
-  @Input('csConnection') application: Ingredient;
 
   @ContentChildren(StoveEditorIngredientComponent) ingredients: QueryList<StoveEditorIngredientComponent>;
   @ContentChildren(StoveEditorDependencyConstraintComponent) constraints: QueryList<StoveEditorDependencyConstraintComponent>;

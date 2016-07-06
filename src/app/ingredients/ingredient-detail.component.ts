@@ -40,10 +40,9 @@ export class IngredientDetailComponent {
     ingredient: Ingredient;
 
     @Output() ingredientChange: any = new EventEmitter(); updateData(event) {
-     this.ingredient = event;
-     this.ingredientChange.emit(event);
+      this.ingredient = event;
+      this.ingredientChange.emit(event);
     }
-
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,

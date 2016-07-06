@@ -1,7 +1,7 @@
 import {OnInit, ElementRef, Directive, EventEmitter, HostListener} from '@angular/core';
 
 @Directive({
-  selector: '[csDraggable]'
+  selector: '[csDraggable]',
 })
 
 export class DraggableDirective implements OnInit {

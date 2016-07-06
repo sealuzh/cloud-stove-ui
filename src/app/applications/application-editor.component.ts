@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
+import {Component, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
@@ -42,6 +42,8 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
 export class ApplicationEditorComponent implements OnActivate {
 
     application: Ingredient;
+    activeIngredient: Ingredient;
+
     recommendations: Recommendation[] = [];
 
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
@@ -53,12 +55,19 @@ export class ApplicationEditorComponent implements OnActivate {
 
     regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
 
+    @ViewChild('lgModal') myModal: any;
+
     constructor(
       private _ingredientService: IngredientService,
       private _recommendationService: RecommendationService,
       private _constraintService: ConstraintService,
       private _ref: ChangeDetectorRef) {
 
+    }
+
+    openModal(event) {
+      this.activeIngredient = event;
+      this.myModal.show();
     }
 
     routerOnActivate(curr: RouteSegment): void {
