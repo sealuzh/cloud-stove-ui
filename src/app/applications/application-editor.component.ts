@@ -7,6 +7,7 @@ import {ConstraintService} from '../services/constraint';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
+import {Recommendation} from '../dtos/recommendation.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
@@ -41,6 +42,8 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
 export class ApplicationEditorComponent implements OnActivate {
 
     application: Ingredient;
+    recommendations: Recommendation[] = [];
+
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
     status: { isOpen: boolean } = { isOpen: false };
@@ -48,7 +51,7 @@ export class ApplicationEditorComponent implements OnActivate {
 
     recommendationOptions: { region: string } = { region: 'EU' };
 
-    regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: 'EU' };
+    regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
 
     constructor(
       private _ingredientService: IngredientService,
@@ -82,8 +85,6 @@ export class ApplicationEditorComponent implements OnActivate {
                     this.regionConstraint = constraint;
                   }
                 }
-
-                if (this.regionConstraint)
 
                 let nodeMap: Map<number, number> = new Map<number, number>();
 
@@ -125,9 +126,8 @@ export class ApplicationEditorComponent implements OnActivate {
       this.recommendation.isGenerating = true;
       this._recommendationService.loadRecommendation(application).subscribe(
         result => {
-          this.applyRecommendation(result);
+          this.recommendations.push(result);
           this.recommendation.isGenerating = false;
-          this._ref.markForCheck();
         },
         error => {
           console.log(error);
@@ -136,14 +136,15 @@ export class ApplicationEditorComponent implements OnActivate {
       );
     }
 
-    applyRecommendation(result: any) {
+    applyRecommendation(recommendation: Recommendation) {
       for (let child of this.application.children) {
-        for (let recommendation of result.recommendation) {
-          if (recommendation.ingredient.id === child.id) {
-            child.recommendation = recommendation.resource;
+        for (let rec of recommendation.recommendation) {
+          if (rec.ingredient.id === child.id) {
+            child.recommendation = rec.resource;
           }
         }
       }
     }
+
 
 }
