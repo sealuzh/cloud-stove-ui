@@ -94,6 +94,8 @@ export class ApplicationEditorComponent implements OnActivate {
     }
 
     selectProvider(provider: string) {
+      this.providerConstraint.ingredient_id = this.application.id;
+
       if (this.providerConstraint.preferred_providers.indexOf(provider) > -1) {
         this.providerConstraint.preferred_providers.splice(this.providerConstraint.preferred_providers.indexOf(provider), 1);
       } else {

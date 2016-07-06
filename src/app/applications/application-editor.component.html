@@ -23,7 +23,7 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
             <li role="menuitem" *ngFor='let provider of selectableProviders'>
               <a class="dropdown-item" (click)="selectProvider(provider)">
-                {{providerConstraint.providers.indexOf(provider) > -1 ? '✓' : '' }} {{provider}}
+                {{providerConstraint.preferred_providers.indexOf(provider) > -1 ? '✓' : '' }} {{provider}}
               </a>
             </li>
           </ul>
