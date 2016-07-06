@@ -42,7 +42,7 @@ export class IngredientService extends RestObjectService {
           .catch(this.handleError);
     }
 
-    recommendations(id: number): Observable<Recommendation> {
+    recommendations(id: number): Observable<Recommendation[]> {
       return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendations', this.request.getOptions(null, null))
           .map(res => <this> res.json())
           .catch(this.handleError);

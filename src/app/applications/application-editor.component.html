@@ -55,14 +55,17 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 animated-list" *ngFor="let recommendation of recommendations">
+    <div class="col-lg-3 animated-list" *ngFor="let recommendation of recommendations; let i = index">
         <div class="panel panel-default panel-application">
           <div class="panel-heading">
             <h3 class="panel-title">
-              Recommendation<br>
-              Cost: {{recommendation.vm_cost}}<br>
+              Recommendation #{{i}}
+              <a class="btn btn-primary btn-xs pull-right" (click)="applyRecommendation(recommendation)">Apply</a>
             </h3>
-            <a class="btn btn-primary btn-xs" (click)="applyRecommendation(recommendation)">Apply</a>
+          </div>
+          <div class="panel-body">
+            Monthly VM-Cost: {{recommendation.vm_cost}}<br>
+            Created: {{ stringAsDate(recommendation.created_at) | date: 'H:m dd/MM/yyyy' }}
           </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
     </div>
 
   </div>
-  <div class="recommendation" *ngIf="ingredient.recommendation" [ngClass]="[ingredient.recommendation.provider]">
+  <div class="recommendation" *ngIf="ingredient.recommendation" [ngClass]="[ingredient.recommendation.provider.replace(' ','')]">
     {{ingredient.recommendation.provider}} {{ingredient.recommendation.name}}<br>
     {{ingredient.recommendation.cores}} Cores / {{ingredient.recommendation.mem_gb}}GB RAM
   </div>

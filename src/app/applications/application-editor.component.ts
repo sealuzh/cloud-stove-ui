@@ -77,16 +77,31 @@ export class ApplicationEditorComponent implements OnActivate {
 
     changeRegion(region: string) {
         this.regionConstraint.ingredient_id = this.application.id;
+        this.regionConstraint.preferred_region_area = region;
         this._constraintService.save(this.regionConstraint).subscribe(
           result => this.regionConstraint = result,
           error => console.log(error)
         );
     }
 
+    stringAsDate(date: string) {
+      return new Date(date);
+    }
+
     loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             application => {
                 this.application = application;
+
+                // fetch recommendations
+                this._ingredientService.recommendations(this.application.id).subscribe(
+                  result => {
+                    this.recommendations = result;
+                  },
+                  error => {
+                    console.log(error)
+                  }
+                );
 
                 // get application constraints
                 for (let constraint of this.application.constraints) {
@@ -135,7 +150,7 @@ export class ApplicationEditorComponent implements OnActivate {
       this.recommendation.isGenerating = true;
       this._recommendationService.loadRecommendation(application).subscribe(
         result => {
-          this.recommendations.push(result);
+          this.recommendations = result;
           this.recommendation.isGenerating = false;
         },
         error => {

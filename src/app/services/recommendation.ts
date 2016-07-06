@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {Observable, Subscriber} from 'rxjs/Rx';
 import {TimerWrapper} from '@angular/core/src/facade/async';
 
@@ -16,9 +15,8 @@ export class RecommendationService {
 
     }
 
-    loadRecommendation(ingredient: Ingredient): Observable<Recommendation> {
+    loadRecommendation(ingredient: Ingredient): Observable<Recommendation[]> {
         return Observable.create(subscriber => {
-
           // first, trigger the job to generate the recommendation
           this._ingredientService.triggerRecommendation(ingredient.id).subscribe(
             result => {
@@ -32,7 +30,7 @@ export class RecommendationService {
         });
     }
 
-    private fetchJobStatus(uuid: string, ingredient: Ingredient, subscription: Subscriber<Recommendation>) {
+    private fetchJobStatus(uuid: string, ingredient: Ingredient, subscription: Subscriber<Recommendation[]>) {
       this._jobService.get(uuid, null).subscribe(jobResult => {
         if (jobResult.delayed_job.attempts === 1) {
           this.fetchRecommendation(ingredient, subscription);
@@ -46,10 +44,10 @@ export class RecommendationService {
       });
     }
 
-    private fetchRecommendation(ingredient: Ingredient, subscription: Subscriber<Recommendation>) {
-      this._ingredientService.recommendation(ingredient.id).subscribe(
-          recommendation => {
-            subscription.next(recommendation);
+    private fetchRecommendation(ingredient: Ingredient, subscription: Subscriber<Recommendation[]>) {
+      this._ingredientService.recommendations(ingredient.id).subscribe(
+          recommendations => {
+            subscription.next(recommendations);
             subscription.complete();
           }, error => {
             console.log(error);
