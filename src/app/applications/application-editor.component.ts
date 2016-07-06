@@ -62,7 +62,7 @@ export class ApplicationEditorComponent implements OnActivate {
       {id: 'ASIA', name: 'Asia-Pacific'},
       {id: 'SA', name: 'South America'}
     ]
-    selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Joyent', 'Atlantic.net', 'Amazon', 'Rackspace'];
+    selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace'];
 
     @ViewChild('lgModal') myModal: any;
 
