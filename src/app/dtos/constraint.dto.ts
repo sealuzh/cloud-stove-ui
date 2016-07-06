@@ -8,5 +8,5 @@ export interface Constraint extends RestObject {
     min_cpus?: number;
     min_ram?: number;
     preferred_region_area?: string;
-    providers?: string[];
+    preferred_providers?: string[];
 }

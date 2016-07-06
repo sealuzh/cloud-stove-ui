@@ -54,7 +54,7 @@ export class ApplicationEditorComponent implements OnActivate {
     recommendationOptions: { region: string } = { region: 'EU' };
 
     regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
-    providerConstraint: Constraint = { type: 'ProviderConstraint', providers: [] };
+    providerConstraint: Constraint = { type: 'ProviderConstraint', preferred_providers: [] };
 
     selectableRegions: {id: string, name: string}[] = [
       {id: 'US', name: 'United States'},
@@ -62,7 +62,6 @@ export class ApplicationEditorComponent implements OnActivate {
       {id: 'ASIA', name: 'Asia-Pacific'},
       {id: 'SA', name: 'South America'}
     ]
-    
     selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Joyent', 'Atlantic.net', 'Amazon'];
 
     @ViewChild('lgModal') myModal: any;
@@ -95,10 +94,10 @@ export class ApplicationEditorComponent implements OnActivate {
     }
 
     selectProvider(provider: string) {
-      if (this.providerConstraint.providers.indexOf(provider) > -1) {
-        this.providerConstraint.providers.splice(this.providerConstraint.providers.indexOf(provider), 1);
+      if (this.providerConstraint.preferred_providers.indexOf(provider) > -1) {
+        this.providerConstraint.preferred_providers.splice(this.providerConstraint.preferred_providers.indexOf(provider), 1);
       } else {
-        this.providerConstraint.providers.push(provider);
+        this.providerConstraint.preferred_providers.push(provider);
       }
 
       this._constraintService.save(this.providerConstraint).subscribe(
