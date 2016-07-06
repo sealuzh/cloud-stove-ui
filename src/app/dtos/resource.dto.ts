@@ -5,6 +5,8 @@ export interface Resource extends RestObject {
     provider: string,
     cores: string,
     mem_gb?: string
+    region: string,
+    region_area: string,
     price_per_hour: string,
     price_per_month: string,
     resource_type: string,

@@ -7,13 +7,26 @@
 
         <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
           <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
-            {{regionConstraint.preferred_region_area == null ? 'Select region' : regionConstraint.preferred_region_area}} <span class="caret"></span>
+            {{regionConstraint.preferred_region_area == null ? 'Region' : regionConstraint.preferred_region_area}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
             <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('US')">United States</a></li>
             <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('EU')">Europe</a></li>
             <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('ASIA')">Asia-Pacific</a></li>
             <li role="menuitem"><a class="dropdown-item" (click)="changeRegion('SA')">South America</a></li>
+          </ul>
+        </div>
+
+        <div class="btn-group" dropdown [(isOpen)]="status.isOpen">
+          <button id="single-button" type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+            {{providerConstraint.providers.length == 0 ? 'Provider' : providerConstraint.providers.join(', ') }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+            <li role="menuitem" *ngFor='let provider of selectableProviders'>
+              <a class="dropdown-item" (click)="selectProvider(provider)">
+                {{providerConstraint.providers.indexOf(provider) > -1 ? '✓' : '' }} {{provider}}
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -55,11 +68,12 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 animated-list" *ngFor="let recommendation of recommendations; let i = index">
+    <div class="col-lg-3">
+      <div class="animated-list" *ngFor="let recommendation of recommendations">
         <div class="panel panel-default panel-application">
           <div class="panel-heading">
             <h3 class="panel-title">
-              Recommendation #{{i}}
+              Recommendation
               <a class="btn btn-primary btn-xs pull-right" (click)="applyRecommendation(recommendation)">Apply</a>
             </h3>
           </div>
@@ -68,6 +82,7 @@
             Created: {{ stringAsDate(recommendation.created_at) | date: 'H:m dd/MM/yyyy' }}
           </div>
         </div>
+      </div>
     </div>
   </div>
 

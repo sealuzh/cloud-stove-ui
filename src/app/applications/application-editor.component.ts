@@ -54,6 +54,9 @@ export class ApplicationEditorComponent implements OnActivate {
     recommendationOptions: { region: string } = { region: 'EU' };
 
     regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
+    providerConstraint: Constraint = { type: 'ProviderConstraint', providers: [] };
+
+    selectableProviders: string[] = ['Google', 'Microsoft Azure', 'DigitalOcean', 'Joyent', 'Atlantic.NET', 'Amazon'];
 
     @ViewChild('lgModal') myModal: any;
 
@@ -84,6 +87,19 @@ export class ApplicationEditorComponent implements OnActivate {
         );
     }
 
+    selectProvider(provider: string) {
+      if (this.providerConstraint.providers.indexOf(provider) > -1) {
+        this.providerConstraint.providers.splice(this.providerConstraint.providers.indexOf(provider), 1);
+      } else {
+        this.providerConstraint.providers.push(provider);
+      }
+
+      this._constraintService.save(this.providerConstraint).subscribe(
+        result => this.providerConstraint = result,
+        error => console.log(error)
+      );
+    }
+
     stringAsDate(date: string) {
       return new Date(date);
     }
@@ -107,6 +123,10 @@ export class ApplicationEditorComponent implements OnActivate {
                 for (let constraint of this.application.constraints) {
                   if (constraint.type === 'PreferredRegionAreaConstraint') {
                     this.regionConstraint = constraint;
+                  }
+
+                  if (constraint.type === 'ProviderConstraint') {
+                    this.providerConstraint = constraint;
                   }
                 }
 
@@ -150,7 +170,7 @@ export class ApplicationEditorComponent implements OnActivate {
       this.recommendation.isGenerating = true;
       this._recommendationService.loadRecommendation(application).subscribe(
         result => {
-          this.recommendations = result;
+          this.recommendations = result.reverse();
           this.recommendation.isGenerating = false;
         },
         error => {

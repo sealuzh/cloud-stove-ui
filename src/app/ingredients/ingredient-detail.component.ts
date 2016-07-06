@@ -12,6 +12,7 @@ import {IngredientForm} from '../forms/ingredient.form';
 
 import {CPUConstraintForm} from '../forms/cpu-constraint.form';
 import {RamConstraintForm} from '../forms/ram-constraint.form';
+import {RegionConstraintForm} from '../forms/region-constraint.form';
 
 import {PropertyPipe} from '../shared/property.pipe';
 
@@ -31,7 +32,7 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 export class IngredientDetailComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
-    public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
+    public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}, {type: 'PreferredRegionAreaConstraint'}];
 
     public ingredientFields;
     public constraintFields;
@@ -53,7 +54,7 @@ export class IngredientDetailComponent {
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
         fm.addStringMessage('minlength', 'Should have atleast 2 Characters');
 
-        ['input', 'checkbox', 'textarea'].forEach((field) => {
+        ['input', 'checkbox', 'textarea', 'select'].forEach((field) => {
             fc.setType({
                 name: field,
                 component: TemplateDirectives[field]
@@ -63,7 +64,8 @@ export class IngredientDetailComponent {
         this.ingredientFields = IngredientForm.ingredientFields();
         this.constraintFields = {
           'CpuConstraint': CPUConstraintForm.constraintFields(),
-          'RamConstraint': RamConstraintForm.constraintFields()
+          'RamConstraint': RamConstraintForm.constraintFields(),
+          'PreferredRegionAreaConstraint': RegionConstraintForm.constraintFields()
         };
 
     }
