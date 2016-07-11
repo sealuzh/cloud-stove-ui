@@ -6,11 +6,24 @@ h1 {
 
 .ingredient {
   display: inline-block;
-  width: 225px;
-  height: 125px;
+  width: 250px;
+  height: 150px;
   background-color: $brand-accent;
   color: $brand-dark;
   border: 1px solid darken($brand-accent, 5%);
+  position: relative;
+}
+
+.ingredient.low {
+  border: 3px solid $brand-success;
+}
+
+.ingredient.normal {
+  border: 3px solid $brand-warning;
+}
+
+.ingredient.high {
+  border: 3px solid $brand-alert;
 }
 
 a {
@@ -46,7 +59,6 @@ a:hover {
   color: lighten($brand-accent, 35%);
   font-size: 1em;
   bottom: 0;
-  left: 0;
   position: absolute;
   padding: 5px;
   width: 100%;
@@ -55,37 +67,6 @@ a:hover {
 .no-recommendation {
   background-color: lighten($brand-primary, 10%);
   color: white;
-}
-
-/** Providers **/
-.Rackspace {
-  border-left: 5px solid #c40022;
-  padding-left: 7px;
-}
-
-.Amazon {
-  border-left: 5px solid #ff9900;
-  padding-left: 7px;
-}
-
-.Google {
-  border-left: 5px solid #4285f4;
-  padding-left: 7px;
-}
-
-.MicrosoftAzure {
-  border-left: 5px solid #45ace8;
-  padding-left: 7px;
-}
-
-.Joyent {
-  border-left: 5px solid #868780;
-  padding-left: 7px;
-}
-
-.DigitalOcean {
-  border-left: 5px solid #00fcff;
-  padding-left: 7px;
 }
 
 .label-Rackspace {

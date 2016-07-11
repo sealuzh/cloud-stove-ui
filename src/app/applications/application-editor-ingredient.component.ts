@@ -25,4 +25,20 @@ export class StoveEditorIngredientComponent {
         this.ingredientClicked.emit(this.ingredient);
     }
 
+    isHigh() {
+      return this.ingredient.recommendation
+      && this.ingredient.recommendation.price_per_month > this.ingredient.recommendation.avg_vm_cost * 1.5;
+    }
+
+    isNormal() {
+      return this.ingredient.recommendation
+      && this.ingredient.recommendation.price_per_month < this.ingredient.recommendation.avg_vm_cost
+      && this.ingredient.recommendation.price_per_month > (this.ingredient.recommendation.avg_vm_cost * 0.75);
+    }
+
+    isLow() {
+      return this.ingredient.recommendation
+      && this.ingredient.recommendation.price_per_month <= (this.ingredient.recommendation.avg_vm_cost * 0.75);
+    }
+
 }

@@ -1,4 +1,9 @@
-<div id="ingredient-{{ingredient._id}}" class="ingredient noselect">
+<div id="ingredient-{{ingredient.id}}" class="ingredient noselect"
+  [ngClass]="{
+    'high': isHigh(),
+    'normal': isNormal(),
+    'low': isLow()
+  }">
   <div class="content">
 
     <div class="edit">
@@ -12,8 +17,8 @@
 
   </div>
   <div class="recommendation" *ngIf="ingredient.recommendation" [ngClass]="[ingredient.recommendation.provider.replace(' ','')]">
-    <span class="label label-default">{{ingredient.recommendation.region_area}}/{{ingredient.recommendation.region}}</span>
-    <span class="label label-default" [ngClass]="['label-' + ingredient.recommendation.provider.replace(' ','')]">{{ingredient.recommendation.provider}}</span>
+    <span class="label label-default" [ngClass]="['label-' + ingredient.recommendation.provider.replace(' ','')]">{{ingredient.recommendation.provider}}</span><br>
+    <span class="label label-default">{{ingredient.recommendation.price_per_month}}$ / month</span>
     <br />
     {{ingredient.recommendation.name}}<br>
     {{ingredient.recommendation.cores}} Cores / {{ingredient.recommendation.mem_gb}}GB RAM

@@ -49,7 +49,7 @@ export class ApplicationEditorComponent implements OnActivate {
     applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
     status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
-    recommendation: { isGenerating: boolean } = { isGenerating: false };
+    recommendation: { isGenerating: boolean, activeRecommendation: Recommendation } = { isGenerating: false, activeRecommendation: null };
 
     recommendationOptions: { region: string } = { region: 'EU' };
 
@@ -61,7 +61,8 @@ export class ApplicationEditorComponent implements OnActivate {
       {id: 'EU', name: 'Europe'},
       {id: 'ASIA', name: 'Asia-Pacific'},
       {id: 'SA', name: 'South America'}
-    ]
+    ];
+
     selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace'];
 
     @ViewChild('lgModal') myModal: any;
@@ -123,7 +124,7 @@ export class ApplicationEditorComponent implements OnActivate {
                     this.recommendations = result;
                   },
                   error => {
-                    console.log(error)
+                    console.log(error);
                   }
                 );
 
@@ -189,10 +190,13 @@ export class ApplicationEditorComponent implements OnActivate {
     }
 
     applyRecommendation(recommendation: Recommendation) {
+      this.recommendation.activeRecommendation = recommendation;
+
       for (let child of this.application.children) {
         for (let rec of recommendation.recommendation) {
           if (rec.ingredient.id === child.id) {
             child.recommendation = rec.resource;
+            child.recommendation.avg_vm_cost = recommendation.vm_cost / this.application.children.length;
           }
         }
       }

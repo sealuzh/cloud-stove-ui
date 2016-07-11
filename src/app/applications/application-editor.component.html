@@ -68,17 +68,13 @@
       </div>
     </div>
     <div class="col-lg-3">
-      <div class="animated-list" *ngFor="let recommendation of recommendations">
-        <div class="panel panel-default panel-application">
+      <div class="animated-list" *ngFor="let rec of recommendations">
+        <div class="panel panel-default panel-application"  [ngClass]="{'recommendation-active': recommendation.activeRecommendation && recommendation.activeRecommendation === rec }" (click)="applyRecommendation(rec)">
           <div class="panel-heading">
             <h3 class="panel-title">
-              Recommendation
-              <a class="btn btn-primary btn-xs pull-right" (click)="applyRecommendation(recommendation)">Apply</a>
+              Monthly VM-Cost: {{rec.vm_cost}}<br>
+              <small>generated on {{ stringAsDate(rec.created_at) | date: 'H:m dd/MM/yyyy' }}</small>
             </h3>
-          </div>
-          <div class="panel-body">
-            Monthly VM-Cost: {{recommendation.vm_cost}}<br>
-            Created: {{ stringAsDate(recommendation.created_at) | date: 'H:m dd/MM/yyyy' }}
           </div>
         </div>
       </div>

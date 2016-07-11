@@ -10,6 +10,19 @@
   color: white;
 }
 
+.panel-application {
+  border: 2px lighten($brand-accent, 30%) solid;
+}
+
+.recommendation-active {
+  border: 2px $brand-accent dotted;
+
+  .panel-heading {
+    background-color: white;
+  }
+
+}
+
 [csdraggable] {
   top: 0;
   left: 0;
@@ -18,7 +31,7 @@
 
 .application-editor {
   position: relative;
-  height: 600px;
+  height: 900px;
   background: lighten($brand-accent, 30%);
   border-radius: 5px;
 }

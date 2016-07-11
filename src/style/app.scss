@@ -2,6 +2,10 @@ $brand-primary: #DC3522;
 $brand-dark: #3b322f;
 $brand-accent: lighten($brand-dark, 40%);
 
+$brand-success: #3cdc22;
+$brand-warning: #dcc022;
+$brand-alert: #DC3522;
+
 // Importing Bootstrap SASS
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap-sass/assets/stylesheets/_bootstrap";
