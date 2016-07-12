@@ -15,11 +15,11 @@ export class ResourceService extends RestObjectService {
         super(http, configs, 'resource', request, null);
     }
 
-    query(search: string): Observable<Resource[]> {
+    query(search?: string): Observable<Resource[]> {
         return super.query(search);
     }
 
-    get(id: number, search: string): Observable<Resource> {
+    get(id: number, search?: string): Observable<Resource> {
         return super.get(id, search);
     }
 

@@ -15,14 +15,14 @@ export class RecommendationService {
 
     }
 
-    loadRecommendation(ingredient: Ingredient): Observable<Recommendation[]> {
+    get(ingredientId: number): Observable<Recommendation[]> {
         return Observable.create(subscriber => {
           // first, trigger the job to generate the recommendation
-          this._ingredientService.triggerRecommendation(ingredient.id).subscribe(
+          this._ingredientService.triggerRecommendation(ingredientId).subscribe(
             result => {
               let jobUUID = result.job_id;
               // job has been accepted, fetch its result
-              this.fetchJobStatus(jobUUID, ingredient, subscriber);
+              this.fetchJobStatus(jobUUID, ingredientId, subscriber);
             },
             error => console.log(error)
           );
@@ -30,22 +30,22 @@ export class RecommendationService {
         });
     }
 
-    private fetchJobStatus(uuid: string, ingredient: Ingredient, subscription: Subscriber<Recommendation[]>) {
-      this._jobService.get(uuid, null).subscribe(jobResult => {
+    private fetchJobStatus(uuid: string, ingredientId: number, subscription: Subscriber<Recommendation[]>) {
+      this._jobService.get(uuid).subscribe(jobResult => {
         if (jobResult.delayed_job.attempts === 1) {
-          this.fetchRecommendation(ingredient, subscription);
+          this.fetchRecommendation(ingredientId, subscription);
         } else {
           TimerWrapper.setTimeout(() => {
-            this.fetchJobStatus(uuid, ingredient, subscription);
+            this.fetchJobStatus(uuid, ingredientId, subscription);
           }, 2500);
         }
       }, error => {
-        this.fetchRecommendation(ingredient, subscription);
+        this.fetchRecommendation(ingredientId, subscription);
       });
     }
 
-    private fetchRecommendation(ingredient: Ingredient, subscription: Subscriber<Recommendation[]>) {
-      this._ingredientService.recommendations(ingredient.id).subscribe(
+    private fetchRecommendation(ingredientId: number, subscription: Subscriber<Recommendation[]>) {
+      this._ingredientService.recommendations(ingredientId).subscribe(
           recommendations => {
             subscription.next(recommendations);
             subscription.complete();

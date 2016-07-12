@@ -16,11 +16,11 @@ export class ConstraintService extends RestObjectService {
         this.nestedUpdate = false;
     }
 
-    query(search: string): Observable<Constraint[]> {
+    query(search?: string): Observable<Constraint[]> {
         return super.query(search);
     }
 
-    get(id: number, search: string): Observable<Constraint> {
+    get(id: number, search?: string): Observable<Constraint> {
         return super.get(id, search);
     }
 

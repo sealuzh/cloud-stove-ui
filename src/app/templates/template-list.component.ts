@@ -28,7 +28,7 @@ export class TemplateListComponent {
     }
 
     loadTemplates() {
-        this._ingredientService.getTemplates().subscribe(
+        return this._ingredientService.templates().subscribe(
             ingredients => this.ingredients = ingredients,
             error => console.log(error)
         );

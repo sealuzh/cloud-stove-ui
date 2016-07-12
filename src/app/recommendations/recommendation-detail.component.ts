@@ -37,22 +37,7 @@ export class RecommendationDetailComponent implements OnActivate {
     }
 
     loadRecommendation(id: number) {
-        this._ingredientService.recommendation(id).subscribe(
-            recommendation => {
-              // no recommendation yet
-              if (recommendation == null) {
-                this.recommendationNotFound = true;
-              } else {
-                this.generatingRecommendation = false;
-                this.recommendationNotFound = false;
-                this.recommendation = recommendation;
-              }
-            },
-            error => {
-              this.recommendationNotFound = true;
-              console.log(error);
-            }
-        );
+
     }
 
     triggerRecommendation() {

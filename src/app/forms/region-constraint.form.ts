@@ -20,7 +20,7 @@ export class RegionConstraintForm {
                 value: 'South America'
               }],
               label: 'Region Constraint',
-              placeholder: "Select a region"
+              placeholder: 'Select a region'
             },
             validation: Validators.compose([Validators.required])
         }];

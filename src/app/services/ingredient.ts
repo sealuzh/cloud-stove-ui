@@ -16,29 +16,23 @@ export class IngredientService extends RestObjectService {
         super(http, configs, 'ingredient', request, ['children', 'constraints']);
     }
 
-    query(search: string): Observable<Ingredient[]> {
+    query(search?: string): Observable<Ingredient[]> {
         return super.query(search);
     }
 
-    get(id: number, search: string): Observable<Ingredient> {
+    get(id: number, search?: string): Observable<Ingredient> {
         return super.get(id, search);
     }
 
-    getApplications(): Observable<Ingredient[]> {
+    applications(): Observable<Ingredient[]> {
       return this.http.get(this.configs.apiUrl + '/applications', this.request.getOptions(null, null))
           .map(res => <this[]> res.json())
           .catch(this.handleError);
     }
 
-    getTemplates(): Observable<Ingredient[]> {
+    templates(): Observable<Ingredient[]> {
       return this.http.get(this.configs.apiUrl + '/templates', this.request.getOptions(null, null))
           .map(res => <this[]> res.json())
-          .catch(this.handleError);
-    }
-
-    recommendation(id: number): Observable<Recommendation> {
-      return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendation', this.request.getOptions(null, null))
-          .map(res => <this> res.json())
           .catch(this.handleError);
     }
 
