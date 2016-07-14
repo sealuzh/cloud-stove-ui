@@ -177,7 +177,7 @@ export class ApplicationEditorComponent implements OnActivate {
 
     triggerRecommendation(application: Ingredient) {
       this.recommendation.isGenerating = true;
-      this._recommendationService.loadRecommendation(application).subscribe(
+      this._recommendationService.get(application.id).subscribe(
         result => {
           this.recommendations = result.reverse();
           this.recommendation.isGenerating = false;

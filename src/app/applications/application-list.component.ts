@@ -26,7 +26,7 @@ export class ApplicationListComponent implements OnActivate {
     }
 
     loadApplications() {
-        this._ingredientService.getApplications().subscribe(
+        this._ingredientService.applications().subscribe(
             ingredients => this.ingredients = ingredients,
             error => console.log(error)
         );
@@ -39,7 +39,7 @@ export class ApplicationListComponent implements OnActivate {
           ingredient.isCopying = false;
           this.ingredients.push(copiedIngredient);
         },
-        error => { 
+        error => {
           ingredient.isCopying = false;
           console.log(error);
         }
@@ -55,7 +55,7 @@ export class ApplicationListComponent implements OnActivate {
         return ingredient.constraints.length;
       }
 
-      for(ingredient of ingredient.children) {
+      for (ingredient of ingredient.children) {
         count += this.countConstraints(ingredient, count);
       }
 
@@ -71,9 +71,10 @@ export class ApplicationListComponent implements OnActivate {
         return 1;
       }
 
-      for(ingredient of ingredient.children) {
+      for (ingredient of ingredient.children) {
         count += this.countIngredients(ingredient, count);
       }
+
       return count;
     }
 

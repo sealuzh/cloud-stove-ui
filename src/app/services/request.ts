@@ -6,7 +6,7 @@ import {RequestOptions, URLSearchParams} from '@angular/http';
 @Injectable()
 export class RequestService {
 
-    urlSearchParams: URLSearchParams;
+    private urlSearchParams: URLSearchParams;
 
     getOptions(headers?: Headers, search?: string): RequestOptions {
         if (!headers) {

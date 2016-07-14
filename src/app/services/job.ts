@@ -15,11 +15,11 @@ export class JobService extends RestObjectService {
         super(http, configs, 'job', request, null);
     }
 
-    query(search: string): Observable<Job[]> {
+    query(search?: string): Observable<Job[]> {
         return super.query(search);
     }
 
-    get(id: string, search: string): Observable<Job> {
+    get(id: string, search?: string): Observable<Job> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(this.handleError);
