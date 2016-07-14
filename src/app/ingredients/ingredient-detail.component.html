@@ -1,26 +1,22 @@
 <div *ngIf="ingredient" class="animated-list">
   <div class="col-lg-12">
       <div class="row">
-
-        <h1>
-          {{ingredient.name}}
-          <div class="btn-group pull-right" dropdown [(isOpen)]="constraintDropdown.isOpen">
-            <button type="button" class="btn btn-xs btn-primary" dropdownToggle>
-              Add Constraint <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-              <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('CpuConstraint')">CPU Constraint</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('RamConstraint')">RAM Constraint</a></li>
-              <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('DependencyConstraint')">Dependency</a></li>
-            </ul>
-          </div>
-        </h1>
+        <div class="btn-group pull-right" dropdown [(isOpen)]="constraintDropdown.isOpen">
+          <button type="button" class="btn btn-xs btn-primary" dropdownToggle>
+            Add Constraint <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+            <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('CpuConstraint')">CPU Constraint</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('RamConstraint')">RAM Constraint</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('PreferredRegionAreaConstraint')">Region Constraint</a></li>
+          </ul>
+        </div>
 
         <formly-form [model]="ingredient" [fields]="ingredientFields"></formly-form>
 
         <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
           <button class="btn btn-xs btn-warning btn-remove-constraint" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
-          <formly-form [model]="constraint" [fields]="constraint.fields"></formly-form>
+          <formly-form [model]="constraint" [fields]="constraintFields[constraint.type]"></formly-form>
         </div>
 
         <button type="submit" class="btn btn-success" (click)="submit(ingredient)">Save</button>

@@ -2,10 +2,7 @@ import {Component} from '@angular/core';
 import {Router, OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {RecommendationService} from '../services/recommendation';
-import {ResourceService} from '../services/resource';
-
 import {Recommendation} from '../dtos/recommendation.dto';
-import {Resource} from '../dtos/resource.dto';
 
 @Component({
     template: require('./recommendation-list.component.html'),
@@ -15,6 +12,7 @@ import {Resource} from '../dtos/resource.dto';
 export class RecommendationListComponent implements OnActivate {
 
     public recommendations: Recommendation[];
+    public status: { isGenerating: boolean } = { isGenerating: false };
 
     constructor(private _router: Router, private _recommendationService: RecommendationService) {
 
@@ -25,10 +23,19 @@ export class RecommendationListComponent implements OnActivate {
     }
 
     loadRecommendations() {
-        this._recommendationService.query(null).subscribe(
-            recommendations => this.recommendations = recommendations,
-            error => console.log(error)
-        );
+      /*
+      this.status.isGenerating = true;
+      this._recommendationService.loadRecommendation(application).subscribe(
+        result => {
+          this.recommendations.push(result);
+          this.status.isGenerating = false;
+        },
+        error => {
+          console.log(error);
+          this.status.isGenerating = false;
+        }
+      );
+      */
     }
 
     goToRecommendation(id: number) {

@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Location} from '@angular/common';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
@@ -13,6 +12,7 @@ import {IngredientForm} from '../forms/ingredient.form';
 
 import {CPUConstraintForm} from '../forms/cpu-constraint.form';
 import {RamConstraintForm} from '../forms/ram-constraint.form';
+import {RegionConstraintForm} from '../forms/region-constraint.form';
 
 import {PropertyPipe} from '../shared/property.pipe';
 
@@ -21,20 +21,29 @@ import {Observable} from 'rxjs/Rx';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
+    selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
     styles: [require('./ingredient-detail.component.scss')],
-    directives: [ROUTER_DIRECTIVES, FormlyForm, DROPDOWN_DIRECTIVES],
+    directives: [FormlyForm, DROPDOWN_DIRECTIVES],
     providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
     pipes: [PropertyPipe]
 })
 
-export class IngredientDetailComponent implements OnActivate {
+export class IngredientDetailComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
-    public constraintFilter: any[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}];
+    public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}, {type: 'PreferredRegionAreaConstraint'}];
 
-    public ingredient: Ingredient;
     public ingredientFields;
+    public constraintFields;
+
+    @Input()
+    ingredient: Ingredient;
+
+    @Output() ingredientChange: any = new EventEmitter(); updateData(event) {
+      this.ingredient = event;
+      this.ingredientChange.emit(event);
+    }
 
     constructor(fm: FormlyMessages, fc: FormlyConfig,
       private _ingredientService: IngredientService,
@@ -45,7 +54,7 @@ export class IngredientDetailComponent implements OnActivate {
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
         fm.addStringMessage('minlength', 'Should have atleast 2 Characters');
 
-        ['input', 'checkbox', 'textarea'].forEach((field) => {
+        ['input', 'checkbox', 'textarea', 'select'].forEach((field) => {
             fc.setType({
                 name: field,
                 component: TemplateDirectives[field]
@@ -53,6 +62,11 @@ export class IngredientDetailComponent implements OnActivate {
         });
 
         this.ingredientFields = IngredientForm.ingredientFields();
+        this.constraintFields = {
+          'CpuConstraint': CPUConstraintForm.constraintFields(),
+          'RamConstraint': RamConstraintForm.constraintFields(),
+          'PreferredRegionAreaConstraint': RegionConstraintForm.constraintFields()
+        };
 
     }
 
@@ -60,47 +74,17 @@ export class IngredientDetailComponent implements OnActivate {
         let constraintUpdates = [];
 
         for (let constraint of ingredientObj.constraints) {
-          delete constraint.fields;
           constraintUpdates.push(this._constraintService.save(constraint));
         }
 
         if (constraintUpdates.length > 0) {
           Observable.forkJoin(constraintUpdates).subscribe(result => {
-            this.updateIngredient(ingredientObj);
+            this.updateData(ingredientObj);
           });
         } else {
-          this.updateIngredient(ingredientObj);
+          this.updateData(ingredientObj);
         }
 
-    }
-
-    goBack() {
-      this._location.back();
-    }
-
-    updateIngredient(ingredientObj: Ingredient) {
-      this._ingredientService.save(ingredientObj).subscribe(
-          ingredient => {
-            this.populateConstraintFields(ingredient.constraints);
-            this.ingredient = ingredient;
-          },
-          error => console.log(error)
-      );
-    }
-
-    routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id, null));
-    }
-
-    loadIngredient(id: number) {
-        this._ingredientService.get(id, null).subscribe(
-            ingredient => {
-              this.populateConstraintFields(ingredient.constraints);
-              this.ingredient = ingredient;
-            },
-            error => console.log(error)
-        );
     }
 
     addConstraint(constraintType: string) {
@@ -110,10 +94,7 @@ export class IngredientDetailComponent implements OnActivate {
       };
 
       this._constraintService.save(constraint).subscribe(
-        constraint => {
-          this.ingredient.constraints.push(constraint);
-          this.populateConstraintFields(this.ingredient.constraints);
-        },
+        con => this.ingredient.constraints.push(con),
         error => console.log(error)
       );
     }
@@ -125,20 +106,6 @@ export class IngredientDetailComponent implements OnActivate {
         },
         error => console.log(error)
       );
-    }
-
-    // todo: refactor this
-    private populateConstraintFields(constraints: Constraint[]) {
-      for (let constraint of constraints) {
-        switch (constraint.type) {
-          case 'CpuConstraint':
-            constraint.fields = CPUConstraintForm.constraintFields();
-            break;
-          case 'RamConstraint':
-            constraint.fields = RamConstraintForm.constraintFields();
-            break;
-        }
-      }
     }
 
 }

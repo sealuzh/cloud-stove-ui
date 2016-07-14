@@ -1,0 +1,56 @@
+@import "../../style/app";
+
+.modal-body {
+  .row {
+    margin: 0;
+  }
+}
+
+.panel-title > a {
+  color: white;
+}
+
+.panel-application {
+  border: 2px lighten($brand-accent, 30%) solid;
+}
+
+.recommendation-active {
+  border: 2px $brand-accent dotted;
+
+  .panel-heading {
+    background-color: white;
+  }
+
+}
+
+[csdraggable] {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.application-editor {
+  position: relative;
+  height: 900px;
+  background: lighten($brand-accent, 30%);
+  border-radius: 5px;
+}
+
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}

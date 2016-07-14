@@ -15,4 +15,8 @@ a.btn {
   .btn:first-child { // first due to float
     margin-right: 0;
   }
+
+  .btn-group {
+    margin-right: 3px;
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'csLoading',
+    selector: 'cs-loading',
     template: `
         <div class="loading text-center">
             <p>

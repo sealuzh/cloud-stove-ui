@@ -1,0 +1,27 @@
+<div id="ingredient-{{ingredient.id}}" class="ingredient noselect"
+  [ngClass]="{
+    'high': isHigh(),
+    'normal': isNormal(),
+    'low': isLow()
+  }">
+  <div class="content">
+
+    <div class="edit">
+      <a (click)="open()"><i class="fa fa-edit"></i></a>
+    </div>
+
+    <div class="details">
+      <div class="details-title">{{ingredient.name}}</div>
+      <div class="details-body">{{ingredient.constraints.length}} Constraints</div>
+    </div>
+
+  </div>
+  <div class="recommendation" *ngIf="ingredient.recommendation" [ngClass]="[ingredient.recommendation.provider.replace(' ','')]">
+    <span class="label label-default" [ngClass]="['label-' + ingredient.recommendation.provider.replace(' ','')]">{{ingredient.recommendation.provider}}</span><br>
+    <span class="label label-default">{{ingredient.recommendation.price_per_month}}$ / month</span>
+    <br />
+    {{ingredient.recommendation.name}}<br>
+    {{ingredient.recommendation.cores}} Cores / {{ingredient.recommendation.mem_gb}}GB RAM
+  </div>
+  <div class="recommendation no-recommendation" [hidden]="ingredient.recommendation">No recommendation yet.</div>
+</div>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {FormlyProviders} from 'ng2-formly';
@@ -51,8 +51,10 @@ import '../style/app.scss';
 
 export class AppComponent {
 
-    constructor(private router: Router) {
+    viewContainerRef: any;
 
+    constructor(private router: Router, viewContainerRef: ViewContainerRef) {
+      this.viewContainerRef = viewContainerRef;
     }
 
 }
