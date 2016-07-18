@@ -15,14 +15,21 @@ export class StoveEditorIngredientComponent {
     ingredient: Ingredient;
 
     @Output()
-    ingredientClicked: any = new EventEmitter();
+    edit: any = new EventEmitter();
+
+    @Output()
+    select: any = new EventEmitter();
 
     constructor(public element: ElementRef, private _ref: ChangeDetectorRef) {
 
     }
 
-    open() {
-        this.ingredientClicked.emit(this.ingredient);
+    editIngredient() {
+        this.edit.emit(this.ingredient);
+    }
+
+    selectIngredient() {
+        this.select.emit(this.ingredient);
     }
 
     isHigh() {

@@ -3,23 +3,23 @@ import {Validators} from '@angular/common';
 export class RegionConstraintForm {
     static constraintFields() {
         return [{
-            key: 'region_area',
+            key: 'preferred_region_area',
             type: 'select',
             templateOptions: {
               options: [{
-                label: 'EU',
-                value: 'Europe'
+                label: 'Europe',
+                value: 'EU'
               }, {
-                label: 'US',
-                value: 'United States'
+                label: 'United States',
+                value: 'US'
               }, {
-                label: 'ASIA',
-                value: 'Asia-Pacific'
+                label: 'Asia-Pacific',
+                value: 'ASIA'
               }, {
-                label: 'SA',
-                value: 'South America'
+                label: 'South America',
+                value: 'SA'
               }],
-              label: 'Region Constraint',
+              label: 'Region',
               placeholder: 'Select a region'
             },
             validation: Validators.compose([Validators.required])

@@ -32,7 +32,11 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 export class IngredientDetailComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
-    public constraintFilter: { type: string }[] = [{type: 'CpuConstraint'}, {type: 'RamConstraint'}, {type: 'PreferredRegionAreaConstraint'}];
+    public constraintFilter: { type: string }[] = [
+      {type: 'CpuConstraint'},
+      {type: 'RamConstraint'},
+      {type: 'PreferredRegionAreaConstraint'}
+    ];
 
     public ingredientFields;
     public constraintFields;
@@ -54,7 +58,7 @@ export class IngredientDetailComponent {
         fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
         fm.addStringMessage('minlength', 'Should have atleast 2 Characters');
 
-        ['input', 'checkbox', 'textarea', 'select'].forEach((field) => {
+        ['input', 'checkbox', 'textarea', 'select', 'multicheckbox'].forEach((field) => {
             fc.setType({
                 name: field,
                 component: TemplateDirectives[field]
