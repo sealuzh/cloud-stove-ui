@@ -1,12 +1,9 @@
 import {Component} from '@angular/core';
-import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 import {RecommendationService} from '../services/recommendation';
 import {ResourceService} from '../services/resource';
 import {JobService} from '../services/job';
-
-import {RecommendationListComponent} from './recommendation-list.component';
-import {RecommendationDetailComponent} from './recommendation-detail.component';
 
 @Component({
     template: `<router-outlet></router-outlet>`,
@@ -14,14 +11,9 @@ import {RecommendationDetailComponent} from './recommendation-detail.component';
     providers: [IngredientService, RecommendationService, ResourceService, JobService]
 })
 
-@Routes([
-    { path: '/:id', component: RecommendationDetailComponent },
-    { path: '/', component: RecommendationListComponent }
-])
-
 export class RecommendationComponent {
 
-    constructor(private router: Router) {
+    constructor() {
 
     }
 

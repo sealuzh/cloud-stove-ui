@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Router, OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {RecommendationService} from '../services/recommendation';
 import {Recommendation} from '../dtos/recommendation.dto';
@@ -9,16 +9,19 @@ import {Recommendation} from '../dtos/recommendation.dto';
     directives: [ROUTER_DIRECTIVES]
 })
 
-export class RecommendationListComponent implements OnActivate {
+export class RecommendationListComponent implements OnInit {
 
     public recommendations: Recommendation[];
     public status: { isGenerating: boolean } = { isGenerating: false };
 
-    constructor(private _router: Router, private _recommendationService: RecommendationService) {
+    constructor(
+      private _router: Router,
+      private _recommendationService: RecommendationService,
+      private _route: ActivatedRoute) {
 
     }
 
-    routerOnActivate(curr: RouteSegment): void {
+    ngOnInit(): void {
         this.loadRecommendations();
     }
 
@@ -39,7 +42,7 @@ export class RecommendationListComponent implements OnActivate {
     }
 
     goToRecommendation(id: number) {
-        this._router.navigate(['/recommendations', id]);
+        this._router.navigate(['recommendations', id]);
     }
 
 }

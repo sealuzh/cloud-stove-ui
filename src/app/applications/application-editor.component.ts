@@ -1,6 +1,5 @@
-import {Component, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
-import {NgSwitch, NgSwitchWhen} from '@angular/common';
+import {Component, ViewChild, ChangeDetectorRef, OnInit} from '@angular/core';
+import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {RecommendationService} from '../services/recommendation';
@@ -39,15 +38,13 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
       DraggableDirective,
       LoadingComponent,
       ConnectionDirective,
-      NgSwitch,
-      NgSwitchWhen,
       IngredientDetailComponent
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
     pipes: [PropertyPipe]
 })
 
-export class ApplicationEditorComponent implements OnActivate {
+export class ApplicationEditorComponent implements OnInit {
 
     application: Ingredient;
     activeIngredient: Ingredient;
@@ -79,7 +76,8 @@ export class ApplicationEditorComponent implements OnActivate {
       private _ingredientService: IngredientService,
       private _recommendationService: RecommendationService,
       private _constraintService: ConstraintService,
-      private _ref: ChangeDetectorRef) {
+      private _ref: ChangeDetectorRef,
+      private _route: ActivatedRoute) {
 
     }
 
@@ -92,9 +90,11 @@ export class ApplicationEditorComponent implements OnActivate {
       this.activeIngredient = event;
     }
 
-    routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id, null));
+    ngOnInit(): void {
+        this._route.params.subscribe(params => {
+          let id = params['id'];
+          this.loadIngredient(parseInt(id, null));
+        });
     }
 
     changeEditorMode(type: string) {

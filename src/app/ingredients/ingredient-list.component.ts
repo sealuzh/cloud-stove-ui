@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
 import {LoadingComponent} from '../shared/loading.component';
@@ -10,7 +10,7 @@ import {LoadingComponent} from '../shared/loading.component';
     directives: [ROUTER_DIRECTIVES, LoadingComponent]
 })
 
-export class IngredientListComponent implements OnActivate {
+export class IngredientListComponent implements OnInit {
 
     public ingredients: Ingredient[];
 
@@ -18,7 +18,7 @@ export class IngredientListComponent implements OnActivate {
 
     }
 
-    routerOnActivate(curr: RouteSegment): void {
+    ngOnInit(): void {
         this.loadIngredients();
     }
 

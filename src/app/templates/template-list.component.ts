@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {RouteSegment, Router, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -15,15 +15,15 @@ import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
     directives: [CAROUSEL_DIRECTIVES, ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent]
 })
 
-export class TemplateListComponent {
+export class TemplateListComponent implements OnInit {
 
     public ingredients: Ingredient[];
 
-    constructor(private _router: Router, private _ingredientService: IngredientService) {
+    constructor(private _ingredientService: IngredientService, private _router: Router) {
 
     }
 
-    routerOnActivate(curr: RouteSegment): void {
+    ngOnInit(): void {
         this.loadTemplates();
     }
 
@@ -37,7 +37,7 @@ export class TemplateListComponent {
     instantiate(id: number) {
       this._ingredientService.instantiate(id).subscribe(
         instanciatedIngredient => {
-          this._router.navigate(['/ingredients', instanciatedIngredient.id]);
+          this._router.navigate(['ingredients', instanciatedIngredient.id]);
         },
         error => console.log(error)
       );

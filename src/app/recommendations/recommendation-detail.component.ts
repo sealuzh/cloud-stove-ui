@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {JobService} from '../services/job';
@@ -19,7 +19,7 @@ import {LoadingComponent} from '../shared/loading.component';
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
-export class RecommendationDetailComponent implements OnActivate {
+export class RecommendationDetailComponent implements OnInit {
 
     private applicationId: number;
     public recommendation: Recommendation;
@@ -27,13 +27,14 @@ export class RecommendationDetailComponent implements OnActivate {
     public recommendationNotFound: boolean;
     public generatingRecommendation: boolean;
 
-    constructor(private _ingredientService: IngredientService, private _jobService: JobService) {
+    constructor(private _ingredientService: IngredientService, private _jobService: JobService, private _route: ActivatedRoute) {
     }
 
-    routerOnActivate(curr: RouteSegment): void {
-        let id = parseInt(curr.getParam('id'), null);
-        this.applicationId = id;
-        this.loadRecommendation(id);
+    ngOnInit(): void {
+        this._route.params.subscribe(params => {
+          this.applicationId = +params['id'];
+          this.loadRecommendation(this.applicationId);
+        });
     }
 
     loadRecommendation(id: number) {

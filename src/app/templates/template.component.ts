@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 
 import {TemplateListComponent} from './template-list.component';
@@ -10,13 +10,9 @@ import {TemplateListComponent} from './template-list.component';
     providers: [IngredientService]
 })
 
-@Routes([
-    {path: '/', component: TemplateListComponent}
-])
-
 export class TemplateComponent {
 
-    constructor(private router: Router) {
+    constructor() {
 
     }
 
