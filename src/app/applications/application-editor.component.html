@@ -4,6 +4,23 @@
     <!-- editor menu -->
     <div [hidden]="editorMode.type != 'editor'" class="pull-left">
 
+      <div class="navbar-btn-group btn-group" *ngIf="activeIngredient" [hidden]="!activeIngredient">
+        <button type="button" class="btn btn-info" (click)="openModal(activeIngredient)">
+          Add Dependency <span class="caret"></span>
+        </button>
+      </div>
+
+      <div class="navbar-btn-group btn-group" [hidden]="activeIngredient">
+        <button type="button" class="btn btn-info">
+          select Ingredient to edit
+        </button>
+      </div>
+
+    </div>
+
+    <!-- recommender menu -->
+    <div [hidden]="editorMode.type != 'recommender'" class="pull-left">
+
       <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
         <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
           {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
@@ -29,22 +46,13 @@
         </ul>
       </div>
 
-      <div class="navbar-btn-group btn-group" *ngIf="activeIngredient" [hidden]="!activeIngredient">
-        <button type="button" class="btn btn-info" (click)="openModal(activeIngredient)">
-          Add Dependency <span class="caret"></span>
-        </button>
-      </div>
-
-    </div>
-
-    <!-- recommender menu -->
-    <div [hidden]="editorMode.type != 'recommender'" class="pull-left">
       <div class="navbar-btn-group btn-group">
         <button [ngClass]="{'disabled': recommendation.isGenerating}" class="btn btn-primary" (click)="triggerRecommendation(application)">
           <i [ngClass]="{ 'fa-copy': !recommendation.isGenerating, 'fa-spin': recommendation.isGenerating, 'fa-circle-o-notch': recommendation.isGenerating}" class="fa"></i>
           Generate Recommendation
         </button>
       </div>
+
     </div>
 
     <ul class="nav navbar-nav pull-right">
@@ -55,60 +63,63 @@
   </div>
 </div>
 
-<cs-loading *ngIf="!application"></cs-loading>
+<div class="navbar-editor-content">
 
-<div *ngIf="application">
-  <div class="row">
-    <div class="col-lg-9">
-      <div class="overflow-hidden">
-        <div class="application-editor" csConnection>
+  <cs-loading *ngIf="!application"></cs-loading>
 
-          <cs-stove-editor-dependency-constraint
-            *ngFor="let constraint of extractConstraints(application)"
-            [constraint]="constraint"
-            class="svg"
-            >
-          </cs-stove-editor-dependency-constraint>
+  <div *ngIf="application">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="overflow-hidden">
+          <div class="application-editor" csConnection>
 
-          <cs-stove-editor-ingredient
-            *ngFor="let ingredient of application.children; trackBy: ingredient?.id; let i = index"
-            [ngClass]="{ 'active': activeIngredient == ingredient }"
-            [ingredient]="ingredient"
-            (edit)="openModal($event)"
-            (select)="selectIngredient($event)"
-            [csPosition]="i"
-            csDraggable>
-          </cs-stove-editor-ingredient>
+            <cs-stove-editor-dependency-constraint
+              *ngFor="let constraint of extractConstraints(application)"
+              [constraint]="constraint"
+              class="svg"
+              >
+            </cs-stove-editor-dependency-constraint>
 
-        </div>
-      </div>
-    </div>
+            <cs-stove-editor-ingredient
+              *ngFor="let ingredient of application.children; trackBy: ingredient?.id; let i = index"
+              [ngClass]="{ 'active': activeIngredient == ingredient }"
+              [ingredient]="ingredient"
+              (edit)="openModal($event)"
+              (select)="selectIngredient($event)"
+              [csPosition]="i"
+              csDraggable>
+            </cs-stove-editor-ingredient>
 
-    <!-- right-hand side display -->
-    <div class="col-lg-3">
-
-      <!-- display detail of ingredients in editor mode -->
-      <cs-ingredient-detail [hidden]="editorMode.type != 'editor'" [(ingredient)]="activeIngredient"></cs-ingredient-detail>
-
-      <!-- display list of recommendations in recommender mode -->
-      <div [hidden]="editorMode.type != 'recommender'" class="animated-list" *ngFor="let rec of recommendations">
-        <div class="panel panel-default panel-application"  [ngClass]="{'recommendation-active': recommendation.activeRecommendation && recommendation.activeRecommendation === rec }" (click)="applyRecommendation(rec)">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Monthly VM-Cost: {{rec.vm_cost}}<br>
-              <small>generated on {{ stringAsDate(rec.created_at) | date: 'H:m dd/MM/yyyy' }}</small>
-            </h3>
           </div>
         </div>
       </div>
 
+      <!-- right-hand side display -->
+      <div class="col-lg-3">
+
+        <!-- display detail of ingredients in editor mode -->
+        <cs-ingredient-detail [hidden]="editorMode.type != 'editor'" [(ingredient)]="activeIngredient"></cs-ingredient-detail>
+
+        <!-- display list of recommendations in recommender mode -->
+        <div [hidden]="editorMode.type != 'recommender'" class="animated-list" *ngFor="let rec of recommendations">
+          <div class="panel panel-default panel-application"  [ngClass]="{'recommendation-active': recommendation.activeRecommendation && recommendation.activeRecommendation === rec }" (click)="applyRecommendation(rec)">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Monthly VM-Cost: {{rec.vm_cost}}<br>
+                <small>generated on {{ stringAsDate(rec.created_at) | date: 'H:m dd/MM/yyyy' }}</small>
+              </h3>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <cs-stove-editor-dependency-modal
+      *ngIf="activeIngredient"
+      [source]="activeIngredient"
+      [targets]="application.children">
+     </cs-stove-editor-dependency-modal>
+
   </div>
-
-  <cs-stove-editor-dependency-modal
-    *ngIf="activeIngredient"
-    [source]="activeIngredient"
-    [targets]="application.children">
-   </cs-stove-editor-dependency-modal>
-
 </div>

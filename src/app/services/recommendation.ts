@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable, Subscriber} from 'rxjs/Rx';
 import {TimerWrapper} from '@angular/core/src/facade/async';
 
-import {Ingredient} from '../dtos/ingredient.dto';
 import {Recommendation} from '../dtos/recommendation.dto';
 
 import {JobService} from './job';

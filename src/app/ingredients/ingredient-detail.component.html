@@ -23,7 +23,7 @@
           <label class="form-control-label">Depends on</label>
           <ul>
             <li *ngFor="let constraint of ingredient.constraints | csProperty : [[{type: 'DependencyConstraint'}], 'type']">
-              Target: {{constraint.target_id}}
+              Target: {{constraint.target_id}} <button class="btn btn-xs btn-warning" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
             </li>
            </ul>
         </div>

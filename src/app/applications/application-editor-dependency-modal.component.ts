@@ -42,8 +42,6 @@ export class StoveEditorDependencyModalComponent {
 
     show() {
       this.modal.show();
-      console.log(this.source);
-      console.log(this.targets);
     }
 
     addConstraint() {
@@ -66,7 +64,7 @@ export class StoveEditorDependencyModalComponent {
         this._ref.markForCheck();
     }
 
-    selectDependency(ingredient: Ingredient) {
+    private selectDependency(ingredient: Ingredient) {
         this.targetIngredient = ingredient;
     }
 
