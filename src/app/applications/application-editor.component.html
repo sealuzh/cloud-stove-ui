@@ -74,7 +74,7 @@
           <div class="application-editor" csConnection>
 
             <cs-stove-editor-dependency-constraint
-              *ngFor="let constraint of extractConstraints(application)"
+              *ngFor="let constraint of dependencies"
               [constraint]="constraint"
               class="svg"
               >
@@ -106,7 +106,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 Monthly VM-Cost: {{rec.vm_cost}}<br>
-                <small>generated on {{ stringAsDate(rec.created_at) | date: 'H:m dd/MM/yyyy' }}</small>
+                <small>generated on {{ rec.created_at | date: 'H:m dd/MM/yyyy' }}</small>
               </h3>
             </div>
           </div>

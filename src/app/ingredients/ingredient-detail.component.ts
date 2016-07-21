@@ -7,12 +7,11 @@ import {Constraint} from '../dtos/constraint.dto';
 import {IngredientService} from '../services/ingredient';
 import {ConstraintService} from '../services/constraint';
 
-import {FormlyConfig, FormlyForm, FormlyMessages, FormlyBootstrap, TemplateDirectives} from 'ng2-formly';
-import {IngredientForm} from '../forms/ingredient.form';
+import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
 
-import {CPUConstraintForm} from '../forms/cpu-constraint.form';
-import {RamConstraintForm} from '../forms/ram-constraint.form';
-import {RegionConstraintForm} from '../forms/region-constraint.form';
+import {CpuConstraintFormComponent} from '../forms/cpu-constraint.component';
+import {RamConstraintFormComponent} from '../forms/ram-constraint.component';
+import {RegionConstraintFormComponent} from '../forms/region-constraint.component';
 
 import {PropertyPipe} from '../shared/property.pipe';
 
@@ -24,8 +23,8 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
     selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
     styles: [require('./ingredient-detail.component.scss')],
-    directives: [FormlyForm, DROPDOWN_DIRECTIVES],
-    providers: [FormlyConfig, FormlyMessages, FormlyBootstrap],
+    directives: [REACTIVE_FORM_DIRECTIVES, DROPDOWN_DIRECTIVES, CpuConstraintFormComponent, RamConstraintFormComponent, RegionConstraintFormComponent],
+    providers: [IngredientService, ConstraintService],
     pipes: [PropertyPipe]
 })
 
@@ -38,8 +37,7 @@ export class IngredientDetailComponent {
       {type: 'PreferredRegionAreaConstraint'}
     ];
 
-    public ingredientFields;
-    public constraintFields;
+    public ingredientForm;
 
     @Input()
     ingredient: Ingredient;
@@ -49,40 +47,36 @@ export class IngredientDetailComponent {
       this.ingredientChange.emit(event);
     }
 
-    constructor(fm: FormlyMessages, fc: FormlyConfig,
+    constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
-      private _location: Location) {
+      private _location: Location,
+      private _fb: FormBuilder) {
 
-        fm.addStringMessage('required', 'This field is required.');
-        fm.addStringMessage('maxlength', 'Maximum Length Exceeded.');
-        fm.addStringMessage('minlength', 'Should have atleast 2 Characters');
-
-        ['input', 'select', 'textarea'].forEach((field) => {
-            fc.setType({
-                name: field,
-                component: TemplateDirectives[field]
-            });
+        this.ingredientForm = this._fb.group({
+            'name': ['', Validators.required],
+            'body': ['']
         });
 
-        this.ingredientFields = IngredientForm.ingredientFields();
-        this.constraintFields = {
-          'CpuConstraint': CPUConstraintForm.constraintFields(),
-          'RamConstraint': RamConstraintForm.constraintFields(),
-          'PreferredRegionAreaConstraint': RegionConstraintForm.constraintFields()
-        };
+        this.ingredientForm.valueChanges
+          .filter((value) => this.ingredientForm.valid)
+          .subscribe((value) => {
+             Object.assign(this.ingredient, value);
+          });
 
     }
 
     submit(ingredientObj: Ingredient) {
-        let constraintUpdates = [];
+        let updates = [];
 
         for (let constraint of ingredientObj.constraints) {
-          constraintUpdates.push(this._constraintService.save(constraint));
+          updates.push(this._constraintService.save(constraint));
         }
 
-        if (constraintUpdates.length > 0) {
-          Observable.forkJoin(constraintUpdates).subscribe(result => {
+        updates.push(this._ingredientService.save(ingredientObj));
+
+        if (updates.length > 0) {
+          Observable.forkJoin(updates).subscribe(result => {
             this.updateData(ingredientObj);
           });
         } else {
@@ -105,9 +99,7 @@ export class IngredientDetailComponent {
 
     removeConstraint(constraint: Constraint) {
       this._constraintService.delete(constraint).subscribe(
-        success => {
-          this.ingredient.constraints.splice(this.ingredient.constraints.indexOf(constraint), 1);
-        },
+        success => this.ingredient.constraints.splice(this.ingredient.constraints.indexOf(constraint), 1),
         error => console.log(error)
       );
     }

@@ -1,10 +1,6 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
 // Components
-import {ApplicationComponent} from './applications/application.component';
-import {IngredientComponent} from './ingredients/ingredient.component';
-import {RecommendationComponent} from './recommendations/recommendation.component';
-import {TemplateComponent} from './templates/template.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 
 import {applicationRoutes} from './applications/application.routes';
@@ -19,20 +15,8 @@ const routes: RouterConfig = [
   ...recommendationRoutes,
   ...templateRoutes,
 
-  // Application
-  {path: 'applications', component: ApplicationComponent},
-
-  // Ingredients
-  {path: 'ingredients', component: IngredientComponent},
-
-  // Recommendations
-  {path: 'recommendations', component: RecommendationComponent},
-
-  // Templates
-  {path: 'templates', component: TemplateComponent},
-
   // Welcome
-  {path: '*', component: WelcomeComponent},
+  {path: '**', component: WelcomeComponent},
 
 ];
 

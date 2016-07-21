@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { environment } from './app/environment';
 
 // Polyfill the ECMA-402 Intl API
-import 'intl'
+import 'intl';
 
 require('zone.js/dist/zone');
 

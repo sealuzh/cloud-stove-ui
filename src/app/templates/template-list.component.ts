@@ -12,7 +12,8 @@ import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 @Component({
     template: require('./template-list.component.html'),
     styles: [require('./template-list.component.scss')],
-    directives: [CAROUSEL_DIRECTIVES, ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent]
+    directives: [CAROUSEL_DIRECTIVES, ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent],
+    providers: [IngredientService]
 })
 
 export class TemplateListComponent implements OnInit {

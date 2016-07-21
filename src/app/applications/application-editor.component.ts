@@ -4,6 +4,7 @@ import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 import {IngredientService} from '../services/ingredient';
 import {RecommendationService} from '../services/recommendation';
 import {ConstraintService} from '../services/constraint';
+import {JobService} from '../services/job';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
@@ -41,14 +42,15 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
       IngredientDetailComponent
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
-    pipes: [PropertyPipe]
+    pipes: [PropertyPipe],
+    providers: [IngredientService, RecommendationService, ConstraintService, JobService]
 })
 
 export class ApplicationEditorComponent implements OnInit {
 
     application: Ingredient;
+    dependencies: Constraint[];
     activeIngredient: Ingredient;
-
     recommendations: Recommendation[] = [];
 
     status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
@@ -125,10 +127,6 @@ export class ApplicationEditorComponent implements OnInit {
       );
     }
 
-    stringAsDate(date: string) {
-      return new Date(date);
-    }
-
     loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             application => {
@@ -155,6 +153,7 @@ export class ApplicationEditorComponent implements OnInit {
                   }
                 }
 
+                this.dependencies = this.extractConstraints(application);
                 this._ref.markForCheck();
 
             },

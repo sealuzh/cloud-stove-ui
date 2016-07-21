@@ -10,7 +10,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let ingredient of ingredients">
-                <td><a [routerLink]="['ingredients', ingredient.id]">{{ingredient.name}}</a></td>
+                <td><a [routerLink]="['/ingredients', ingredient.id]">{{ingredient.name}}</a></td>
             </tr>
             </tbody>
         </table>

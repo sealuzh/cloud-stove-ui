@@ -7,7 +7,8 @@ import {LoadingComponent} from '../shared/loading.component';
 @Component({
     template: require('./ingredient-list.component.html'),
     styles: [require('./ingredient-list.component.scss')],
-    directives: [ROUTER_DIRECTIVES, LoadingComponent]
+    directives: [ROUTER_DIRECTIVES, LoadingComponent],
+    providers: [IngredientService]
 })
 
 export class IngredientListComponent implements OnInit {
