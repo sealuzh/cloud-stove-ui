@@ -51,8 +51,8 @@ export class DraggableDirective implements OnInit {
         if (pos.event.movementX === 0 && pos.event.movementY === 0) {
           return;
         }
-        this.element.nativeElement.style.top  = pos.top  + 'px';
-        this.element.nativeElement.style.left = pos.left + 'px';
+        this.element.nativeElement.style.transform = 'translate3d(' + pos.left + 'px,' + pos.top + 'px, 0)';
+        this.element.nativeElement.editorPosition = { left: pos.left, top: pos.top };
     });
   }
 
