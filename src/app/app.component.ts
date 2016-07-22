@@ -1,6 +1,5 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
-import {FormlyProviders} from 'ng2-formly';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 
 // Services
@@ -21,7 +20,7 @@ import '../style/app.scss';
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
     directives: [ROUTER_DIRECTIVES, SidebarComponent],
-    providers: [HTTP_PROVIDERS, ConfigService, RequestService, FormlyProviders]
+    providers: [HTTP_PROVIDERS, ConfigService, RequestService]
 })
 
 export class AppComponent {
