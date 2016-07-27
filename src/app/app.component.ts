@@ -5,9 +5,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 // Services
 import {ConfigService} from './services/configs';
 import {RequestService} from './services/request';
-
 import {SidebarComponent} from './sidebar/index';
-import {WelcomeComponent} from './welcome/index';
 
 import '../style/app.scss';
 
