@@ -5,8 +5,8 @@ $width: 240px;
 
 .navbar-brand {
   height: auto;
-  width: 100%;
   line-height: 30px;
+  padding: 10px;
 
   > img {
     float: left;
@@ -27,7 +27,7 @@ $width: 240px;
 }
 
 .container-navbar-top {
-  padding-top: 130px;
+  padding-top: 70px;
 }
 
 .navbar-fixed-left .navbar-nav > li {

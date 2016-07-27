@@ -52,12 +52,14 @@ export class ConnectionDirective implements AfterContentInit, OnInit {
         let sourceIngredient = sources[0].element.nativeElement;
         let targetIngredient = targets[0].element.nativeElement;
 
-        comp.updateConstraint(
-          sourceIngredient.offsetLeft + sourceIngredient.clientWidth / 2,
-          sourceIngredient.offsetTop + sourceIngredient.clientHeight / 2,
-          targetIngredient.offsetLeft + targetIngredient.clientWidth / 2,
-          targetIngredient.offsetTop + sourceIngredient.clientHeight / 2
-        );
+        if (targetIngredient.editorPosition && sourceIngredient.editorPosition) {
+          comp.updateConstraint(
+            sourceIngredient.editorPosition.left + sourceIngredient.clientWidth / 2,
+            sourceIngredient.editorPosition.top + sourceIngredient.clientHeight / 2,
+            targetIngredient.editorPosition.left + targetIngredient.clientWidth / 2,
+            targetIngredient.editorPosition.top + sourceIngredient.clientHeight / 2
+          );
+        }
       }
     }
   }

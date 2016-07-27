@@ -1,9 +1,10 @@
-import {Component, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, ViewChild, ChangeDetectorRef, OnInit} from '@angular/core';
+import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {IngredientService} from '../services/ingredient';
 import {RecommendationService} from '../services/recommendation';
 import {ConstraintService} from '../services/constraint';
+import {JobService} from '../services/job';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
@@ -14,10 +15,13 @@ import {LoadingComponent} from '../shared/loading.component';
 import {IngredientDetailComponent} from '../ingredients/ingredient-detail.component';
 import {StoveEditorIngredientComponent} from './application-editor-ingredient.component';
 import {StoveEditorDependencyConstraintComponent} from './application-editor-constraint.component';
+import {StoveEditorDependencyModalComponent} from './application-editor-dependency-modal.component';
 
 import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
 import {PositionDirective} from './editor/position.directive';
+
+import {PropertyPipe} from '../shared/property.pipe';
 
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
@@ -30,23 +34,24 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
       DROPDOWN_DIRECTIVES,
       StoveEditorIngredientComponent,
       StoveEditorDependencyConstraintComponent,
+      StoveEditorDependencyModalComponent,
       PositionDirective,
       DraggableDirective,
       LoadingComponent,
       ConnectionDirective,
       IngredientDetailComponent
     ],
-    viewProviders: [BS_VIEW_PROVIDERS]
+    viewProviders: [BS_VIEW_PROVIDERS],
+    pipes: [PropertyPipe],
+    providers: [IngredientService, RecommendationService, ConstraintService, JobService]
 })
 
-export class ApplicationEditorComponent implements OnActivate {
+export class ApplicationEditorComponent implements OnInit {
 
     application: Ingredient;
+    dependencies: Constraint[];
     activeIngredient: Ingredient;
-
     recommendations: Recommendation[] = [];
-
-    applicationData: { 'nodes': any[], 'links': any[] } = { 'nodes': [], 'links': [] };
 
     status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
     recommendation: { isGenerating: boolean, activeRecommendation: Recommendation } = { isGenerating: false, activeRecommendation: null };
@@ -55,6 +60,8 @@ export class ApplicationEditorComponent implements OnActivate {
 
     regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
     providerConstraint: Constraint = { type: 'ProviderConstraint', preferred_providers: [] };
+
+    editorMode: { type: String } = { type: 'editor' };
 
     selectableRegions: {id: string, name: string}[] = [
       {id: 'US', name: 'United States'},
@@ -65,24 +72,35 @@ export class ApplicationEditorComponent implements OnActivate {
 
     selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace'];
 
-    @ViewChild('lgModal') myModal: any;
+    @ViewChild(StoveEditorDependencyModalComponent) stoveEditorDependencyModalComponent: StoveEditorDependencyModalComponent;
 
     constructor(
       private _ingredientService: IngredientService,
       private _recommendationService: RecommendationService,
       private _constraintService: ConstraintService,
-      private _ref: ChangeDetectorRef) {
+      private _ref: ChangeDetectorRef,
+      private _route: ActivatedRoute) {
 
     }
 
     openModal(event) {
-      this.activeIngredient = event;
-      this.myModal.show();
+      this.selectIngredient(event);
+      this.stoveEditorDependencyModalComponent.show();
     }
 
-    routerOnActivate(curr: RouteSegment): void {
-        let id = curr.getParam('id');
-        this.loadIngredient(parseInt(id, null));
+    selectIngredient(event) {
+      this.activeIngredient = event;
+    }
+
+    ngOnInit(): void {
+        this._route.params.subscribe(params => {
+          let id = params['id'];
+          this.loadIngredient(parseInt(id, null));
+        });
+    }
+
+    changeEditorMode(type: string) {
+      this.editorMode.type = type;
     }
 
     changeRegion(region: string) {
@@ -107,10 +125,6 @@ export class ApplicationEditorComponent implements OnActivate {
         result => this.providerConstraint = result,
         error => console.log(error)
       );
-    }
-
-    stringAsDate(date: string) {
-      return new Date(date);
     }
 
     loadIngredient(id: number) {
@@ -139,17 +153,7 @@ export class ApplicationEditorComponent implements OnActivate {
                   }
                 }
 
-                let nodeMap: Map<number, number> = new Map<number, number>();
-
-                // add nodes
-                for (let ingredient of this.application.children) {
-                    this.applicationData.nodes.push(ingredient);
-                    nodeMap.set(ingredient.id, this.applicationData.nodes.indexOf(ingredient));
-                }
-
-                // add links/constraints
-                this.addConstraintsToMap(application, nodeMap);
-
+                this.dependencies = this.extractConstraints(application);
                 this._ref.markForCheck();
 
             },
@@ -157,22 +161,21 @@ export class ApplicationEditorComponent implements OnActivate {
         );
     }
 
-    addConstraintsToMap(ingredient: any, nodeMap: Map<number, number>) {
-        if (ingredient.children) {
-            for (let child of ingredient.children) {
-                this.addConstraintsToMap(child, nodeMap);
-                for (let constraint of child.constraints) {
-                    if (constraint.type === 'DependencyConstraint') {
-                        this.applicationData.links.push(
-                            {
-                                'source_id': constraint.source_id,
-                                'target_id': constraint.target_id
-                            }
-                        );
-                    }
-                }
-            }
-        }
+    extractConstraints(ingredient: Ingredient): any[] {
+      let links = [];
+
+      if (ingredient.children) {
+          for (let child of ingredient.children) {
+              links.push(this.extractConstraints(child));
+              for (let constraint of child.constraints) {
+                  if (constraint.type === 'DependencyConstraint') {
+                      links.push(constraint);
+                  }
+              }
+          }
+      }
+
+      return links;
     }
 
     triggerRecommendation(application: Ingredient) {

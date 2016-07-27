@@ -3,12 +3,9 @@
     'high': isHigh(),
     'normal': isNormal(),
     'low': isLow()
-  }">
+  }"
+  (click)="selectIngredient()">
   <div class="content">
-
-    <div class="edit">
-      <a (click)="open()"><i class="fa fa-edit"></i></a>
-    </div>
 
     <div class="details">
       <div class="details-title">{{ingredient.name}}</div>

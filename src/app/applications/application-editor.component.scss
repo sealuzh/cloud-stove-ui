@@ -1,5 +1,52 @@
 @import "../../style/app";
 
+.navbar-editor-content {
+  padding-top: 50px;
+}
+
+.navbar-editor {
+  top: 50px;
+  background-color: $brand-accent;
+  border-bottom: none;
+  color: white;
+
+  .navbar-nav > .active > a {
+    background-color: $brand-primary;
+  }
+
+  .navbar-nav > .active > a:hover {
+    background-color: darken($brand-primary, 20%);
+  }
+
+  .navbar-nav > li > a {
+      color: white;
+  }
+
+  .navbar-nav > li > a:hover {
+      color: lighten($brand-accent, 20%);
+  }
+
+  .navbar-btn-group > .btn {
+    background-color: transparent;
+    border: none;
+    margin: 10px;
+  }
+
+  .navbar-btn-group > .btn-primary {
+    background-color: $brand-primary;
+  }
+
+  .btn-group.open .dropdown-toggle, .btn-group:active .dropdown-toggle {
+    box-shadow: none;
+    color: $brand-dark;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+}
+
 .modal-body {
   .row {
     margin: 0;
@@ -27,6 +74,14 @@
   top: 0;
   left: 0;
   position: absolute;
+}
+
+cs-stove-editor-ingredient {
+  background-color: $brand-accent;
+}
+
+cs-stove-editor-ingredient.active {
+  background-color: darken($brand-accent, 20%);
 }
 
 .application-editor {

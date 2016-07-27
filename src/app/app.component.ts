@@ -1,20 +1,11 @@
 import {Component, ViewContainerRef} from '@angular/core';
-import {ROUTER_DIRECTIVES, Routes, Router} from '@angular/router';
 import {HTTP_PROVIDERS} from '@angular/http';
-import {FormlyProviders} from 'ng2-formly';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 // Services
 import {ConfigService} from './services/configs';
 import {RequestService} from './services/request';
-
 import {SidebarComponent} from './sidebar/index';
-import {WelcomeComponent} from './welcome/index';
-
-// Components
-import {ApplicationComponent} from './applications/application.component';
-import {IngredientComponent} from './ingredients/ingredient.component';
-import {RecommendationComponent} from './recommendations/recommendation.component';
-import {TemplateComponent} from './templates/template.component';
 
 import '../style/app.scss';
 
@@ -27,33 +18,14 @@ import '../style/app.scss';
     template: require('./app.component.html'),
     styles: [require('./app.component.scss')],
     directives: [ROUTER_DIRECTIVES, SidebarComponent],
-    providers: [HTTP_PROVIDERS, ConfigService, RequestService, FormlyProviders]
+    providers: [HTTP_PROVIDERS, ConfigService, RequestService]
 })
-
-@Routes([
-
-    // Application
-    {path: 'applications', component: ApplicationComponent},
-
-    // Ingredients
-    {path: 'ingredients', component: IngredientComponent},
-
-    // Recommendations
-    {path: 'recommendations', component: RecommendationComponent},
-
-    // Templates
-    {path: 'templates', component: TemplateComponent},
-
-    // Welcome
-    {path: '*', component: WelcomeComponent},
-
-])
 
 export class AppComponent {
 
     viewContainerRef: any;
 
-    constructor(private router: Router, viewContainerRef: ViewContainerRef) {
+    constructor(viewContainerRef: ViewContainerRef) {
       this.viewContainerRef = viewContainerRef;
     }
 

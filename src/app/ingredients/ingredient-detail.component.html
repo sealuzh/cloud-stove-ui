@@ -12,14 +12,37 @@
           </ul>
         </div>
 
-        <formly-form [model]="ingredient" [fields]="ingredientFields"></formly-form>
+        <!-- Form -->
 
-        <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
-          <button class="btn btn-xs btn-warning btn-remove-constraint" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
-          <formly-form [model]="constraint" [fields]="constraintFields[constraint.type]"></formly-form>
-        </div>
+        <form [formGroup]="ingredientForm">
+          <div class="form-group">
+              <label class="form-control-label">Name:</label>
+              <input class="form-control" type="text" formControlName="name" [ngModel]="ingredient.name">
+          </div>
+          <div class="form-group">
+              <label class="form-control-label">Description:</label>
+              <textarea class="form-control" formControlName="body" [ngModel]="ingredient.body"></textarea>
+          </div>
 
-        <button type="submit" class="btn btn-success" (click)="submit(ingredient)">Save</button>
+          <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
+            <cs-cpu-constraint-form *ngIf="constraint.type == 'CpuConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-cpu-constraint-form>
+            <cs-ram-constraint-form *ngIf="constraint.type == 'RamConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-ram-constraint-form>
+            <cs-region-constraint-form *ngIf="constraint.type == 'PreferredRegionAreaConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-region-constraint-form>
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label">Depends on</label>
+            <ul>
+              <li *ngFor="let constraint of ingredient.constraints | csProperty : [[{type: 'DependencyConstraint'}], 'type']">
+                Target: {{constraint.target_id}} <button class="btn btn-xs btn-warning" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
+              </li>
+             </ul>
+          </div>
+
+          <div class="form-group">
+              <button (click)="submit(ingredient)" class="btn btn-success" [disabled]="!ingredientForm.valid">Save</button>
+          </div>
+      </form>
 
       </div>
   </div>
