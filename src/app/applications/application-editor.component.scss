@@ -89,6 +89,13 @@ cs-stove-editor-ingredient.active {
   height: 900px;
   background: lighten($brand-accent, 30%);
   border-radius: 5px;
+
+  .zoom-controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
 }
 
 .svg {

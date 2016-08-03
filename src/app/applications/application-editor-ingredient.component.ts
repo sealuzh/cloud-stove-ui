@@ -32,6 +32,10 @@ export class StoveEditorIngredientComponent {
         this.select.emit(this.ingredient);
     }
 
+    hasChildren() {
+      return this.ingredient.children.length > 0;
+    }
+
     isHigh() {
       return this.ingredient.recommendation
       && this.ingredient.recommendation.price_per_month > this.ingredient.recommendation.avg_vm_cost * 1.5;

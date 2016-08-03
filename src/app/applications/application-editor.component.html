@@ -4,15 +4,9 @@
     <!-- editor menu -->
     <div [hidden]="editorMode.type != 'editor'" class="pull-left">
 
-      <div class="navbar-btn-group btn-group" *ngIf="activeIngredient" [hidden]="!activeIngredient">
-        <button type="button" class="btn btn-info" (click)="openModal(activeIngredient)">
+      <div class="navbar-btn-group btn-group" *ngIf="editor.ingredient">
+        <button type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">
           Add Dependency <span class="caret"></span>
-        </button>
-      </div>
-
-      <div class="navbar-btn-group btn-group" [hidden]="activeIngredient">
-        <button type="button" class="btn btn-info">
-          select Ingredient to edit
         </button>
       </div>
 
@@ -47,7 +41,7 @@
       </div>
 
       <div class="navbar-btn-group btn-group">
-        <button [ngClass]="{'disabled': recommendation.isGenerating}" class="btn btn-primary" (click)="triggerRecommendation(application)">
+        <button [ngClass]="{'disabled': recommendation.isGenerating}" class="btn btn-primary" (click)="triggerRecommendation(editor.application)">
           <i [ngClass]="{ 'fa-copy': !recommendation.isGenerating, 'fa-spin': recommendation.isGenerating, 'fa-circle-o-notch': recommendation.isGenerating}" class="fa"></i>
           Generate Recommendation
         </button>
@@ -65,24 +59,34 @@
 
 <div class="navbar-editor-content">
 
-  <cs-loading *ngIf="!application"></cs-loading>
+  <cs-loading *ngIf="!editor.application"></cs-loading>
 
-  <div *ngIf="application">
+  <div *ngIf="editor.application">
     <div class="row">
       <div class="col-lg-9">
         <div class="overflow-hidden">
           <div class="application-editor" csConnection>
 
+            <div class="zoom-controls" *ngIf="editor.ingredient">
+              <button class="btn btn-primary" (click)="zoomIn()" *ngIf="editor.ingredient.children.length > 0">
+                <i class="fa fa-search-plus"></i>
+              </button>
+
+              <button class="btn btn-primary" (click)="zoomOut()" *ngIf="editor.ingredient.parent_id && editor.ingredient.parent_id !== application.id">
+                <i class="fa fa-search-minus"></i>
+              </button>
+            </div>
+
             <cs-stove-editor-dependency-constraint
-              *ngFor="let constraint of dependencies"
+              *ngFor="let constraint of editor.dependencies"
               [constraint]="constraint"
               class="svg"
               >
             </cs-stove-editor-dependency-constraint>
 
             <cs-stove-editor-ingredient
-              *ngFor="let ingredient of application.children; trackBy: ingredient?.id; let i = index"
-              [ngClass]="{ 'active': activeIngredient == ingredient }"
+              *ngFor="let ingredient of editor.application.children; trackBy: ingredient?.id; let i = index"
+              [ngClass]="{ 'active': editor.ingredient == ingredient }"
               [ingredient]="ingredient"
               (edit)="openModal($event)"
               (select)="selectIngredient($event)"
@@ -98,7 +102,7 @@
       <div class="col-lg-3">
 
         <!-- display detail of ingredients in editor mode -->
-        <cs-ingredient-detail [hidden]="editorMode.type != 'editor'" [(ingredient)]="activeIngredient"></cs-ingredient-detail>
+        <cs-ingredient-detail [hidden]="editorMode.type != 'editor'" [(ingredient)]="editor.ingredient"></cs-ingredient-detail>
 
         <!-- display list of recommendations in recommender mode -->
         <div [hidden]="editorMode.type != 'recommender'" class="animated-list" *ngFor="let rec of recommendations">
@@ -116,9 +120,9 @@
     </div>
 
     <cs-stove-editor-dependency-modal
-      *ngIf="activeIngredient"
-      [source]="activeIngredient"
-      [targets]="application.children">
+      *ngIf="editor.ingredient"
+      [source]="editor.ingredient"
+      [targets]="editor.application.children">
      </cs-stove-editor-dependency-modal>
 
   </div>

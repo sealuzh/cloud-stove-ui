@@ -35,10 +35,17 @@ export class ConnectionDirective implements AfterContentInit, OnInit {
     }).flatMap(() => this.mousemove.map((event: MouseEvent) => {
       return;
     }).takeUntil(this.mouseup));
+
   }
 
   ngAfterContentInit() {
     this.drawConstraints();
+
+    // subscribe to cover events that swap constraints
+    this.constraints.changes.subscribe(
+      change => this.drawConstraints(),
+      error => console.log(error)
+    );
   }
 
   drawConstraints() {
