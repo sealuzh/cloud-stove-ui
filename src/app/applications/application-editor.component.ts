@@ -48,9 +48,9 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
 
 export class ApplicationEditorComponent implements OnInit {
 
+    editor: { parent?: Ingredient, application?: Ingredient, ingredient?: Ingredient, dependencies?: Constraint[] } = {};
+
     application: Ingredient;
-    dependencies: Constraint[];
-    activeIngredient: Ingredient;
     recommendations: Recommendation[] = [];
 
     status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
@@ -83,13 +83,13 @@ export class ApplicationEditorComponent implements OnInit {
 
     }
 
-    openModal(event) {
-      this.selectIngredient(event);
+    openModal(ingredient) {
+      this.selectIngredient(ingredient);
       this.stoveEditorDependencyModalComponent.show();
     }
 
-    selectIngredient(event) {
-      this.activeIngredient = event;
+    selectIngredient(ingredient) {
+      this.editor.ingredient = ingredient;
     }
 
     ngOnInit(): void {
@@ -127,6 +127,25 @@ export class ApplicationEditorComponent implements OnInit {
       );
     }
 
+    zoomIn() {
+      this.zoomTo(this.editor.ingredient);
+    }
+
+    zoomOut() {
+      if (this.editor.parent) {
+        this.zoomTo(this.editor.parent);
+        return;
+      }
+    }
+
+    zoomTo(ingredient: Ingredient) {
+      this.editor.parent = this.editor.application;
+      this.editor.application = ingredient;
+      this.editor.ingredient = this.editor.application.children[0]; // select first as default
+      this.editor.dependencies = this.extractConstraints(this.editor.application);
+      this._ref.detectChanges();
+    }
+
     loadIngredient(id: number) {
         this._ingredientService.get(id, null).subscribe(
             application => {
@@ -153,15 +172,14 @@ export class ApplicationEditorComponent implements OnInit {
                   }
                 }
 
-                this.dependencies = this.extractConstraints(application);
-                this._ref.markForCheck();
+                this.zoomTo(this.application);
 
             },
             error => console.log(error)
         );
     }
 
-    extractConstraints(ingredient: Ingredient): any[] {
+    private extractConstraints(ingredient: Ingredient): Constraint[] {
       let links = [];
 
       if (ingredient.children) {

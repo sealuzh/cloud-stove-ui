@@ -18,7 +18,7 @@ export class StoveEditorDependencyConstraintComponent {
     x2: number = 0;
     y2: number = 0;
 
-    constructor(private ref: ChangeDetectorRef) {
+    constructor(private _ref: ChangeDetectorRef) {
 
     }
 
@@ -27,7 +27,7 @@ export class StoveEditorDependencyConstraintComponent {
       this.y1 = y1;
       this.x2 = x2;
       this.y2 = y2;
-      this.ref.detectChanges();
+      this._ref.detectChanges();
     }
 
 }
