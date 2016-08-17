@@ -21,16 +21,18 @@ import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
 import {PositionDirective} from './editor/position.directive';
 
+import {WorkloadModelerComponent} from '../workload/workload-modeler.component';
+
 import {PropertyPipe} from '../shared/property.pipe';
 
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     template: require('./application-editor.component.html'),
     styles: [require('./application-editor.component.scss')],
     directives: [
       ROUTER_DIRECTIVES,
-      MODAL_DIRECTVES,
+      MODAL_DIRECTIVES,
       DROPDOWN_DIRECTIVES,
       StoveEditorIngredientComponent,
       StoveEditorDependencyConstraintComponent,
@@ -39,7 +41,8 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boots
       DraggableDirective,
       LoadingComponent,
       ConnectionDirective,
-      IngredientDetailComponent
+      IngredientDetailComponent,
+      WorkloadModelerComponent
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
     pipes: [PropertyPipe],
@@ -83,6 +86,19 @@ export class ApplicationEditorComponent implements OnInit {
 
     }
 
+    ngOnInit(): void {
+        this._route.params.subscribe(params => {
+          let id = params['id'];
+          let mode = params['mode'];
+
+          if (mode) {
+            this.editorMode.type = mode;
+          }
+
+          this.loadIngredient(parseInt(id, null));
+        });
+    }
+
     openModal(ingredient) {
       this.selectIngredient(ingredient);
       this.stoveEditorDependencyModalComponent.show();
@@ -90,13 +106,6 @@ export class ApplicationEditorComponent implements OnInit {
 
     selectIngredient(ingredient) {
       this.editor.ingredient = ingredient;
-    }
-
-    ngOnInit(): void {
-        this._route.params.subscribe(params => {
-          let id = params['id'];
-          this.loadIngredient(parseInt(id, null));
-        });
     }
 
     changeEditorMode(type: string) {

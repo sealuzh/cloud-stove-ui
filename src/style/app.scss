@@ -34,6 +34,12 @@ h3 {
   height: 100%;
 }
 
+
+.glyphicon {
+  font-family: 'FontAwesome';
+  font: normal normal normal 14px/1 FontAwesome; // fa fix until ng2-bootstrap lets us choose
+}
+
 @import 'table';
 @import 'panel';
 @import 'form';

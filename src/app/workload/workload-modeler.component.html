@@ -1,0 +1,15 @@
+<h1>Workload</h1>
+<p>
+  We need some tidbits about what workload you are facing with your application, to give you an honest recommendation.
+  Tell us, what minimum requirements for all services are necessary to run?
+</p>
+
+<h2>CPU</h2>
+<p>
+  <rating [(ngModel)]="cpu_step" max="7" stateOn="fa fa-dot-circle-o" stateOff="fa fa-circle-o" (onHover)="hoverCPU($event)" (onLeave)="resetCPU($event)"></rating> {{ cpu[(cpu_hover ? cpu_hover : cpu_step) - 1] }} Cores
+</p>
+
+<h2>RAM</h2>
+<p>
+  <rating [(ngModel)]="ram_step" max="7" stateOn="fa fa-dot-circle-o" stateOff="fa fa-circle-o" (onHover)="hoverRAM($event)" (onLeave)="resetRAM($event)">></rating> {{ ram[(ram_hover ? ram_hover : ram_step) - 1] }}MB of RAM
+</p>

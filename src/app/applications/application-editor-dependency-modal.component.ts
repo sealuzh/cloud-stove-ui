@@ -5,14 +5,14 @@ import {Constraint} from '../dtos/constraint.dto';
 
 import {ConstraintService} from '../services/constraint';
 
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     selector: 'cs-stove-editor-dependency-modal',
     template: require('./application-editor-dependency-modal.component.html'),
     styles: [require('./application-editor-dependency-modal.component.scss')],
     directives: [
-      MODAL_DIRECTVES,
+      MODAL_DIRECTIVES,
       DROPDOWN_DIRECTIVES
     ],
     viewProviders: [BS_VIEW_PROVIDERS]
