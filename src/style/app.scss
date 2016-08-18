@@ -9,6 +9,7 @@ $brand-alert: #DC3522;
 // Importing Bootstrap SASS
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "nouislider/distribute/nouislider.min";
 
 body {
   background-color: lighten($brand-accent, 35%);
@@ -47,3 +48,4 @@ h3 {
 @import 'animations';
 @import 'loading';
 @import 'markdown';
+@import 'nouislider';

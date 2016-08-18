@@ -1,15 +1,19 @@
 <h1>Workload</h1>
-<p>
-  We need some tidbits about what workload you are facing with your application, to give you an honest recommendation.
-  Tell us, what minimum requirements for all services are necessary to run?
-</p>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      We need some tidbits about what workload you are facing with your application, to give you an honest recommendation.
+      Tell us, what minimum requirements for all services are necessary to run?
+    </p>
 
-<h2>CPU</h2>
-<p>
-  <rating [(ngModel)]="cpu_step" max="7" stateOn="fa fa-dot-circle-o" stateOff="fa fa-circle-o" (onHover)="hoverCPU($event)" (onLeave)="resetCPU($event)"></rating> {{ cpu[(cpu_hover ? cpu_hover : cpu_step) - 1] }} Cores
-</p>
+    <div class="form-group form-slider">
+        <label class="form-control-label">CPU (~{{ cpu[(cpu_hover ? cpu_hover : cpu_step) - 1] }} Cores)</label>
+        <div nouislider [config]="sliderConfig" [step]="1" [min]="0" [max]="7" [(ngModel)]="cpu_step"></div>
+    </div>
 
-<h2>RAM</h2>
-<p>
-  <rating [(ngModel)]="ram_step" max="7" stateOn="fa fa-dot-circle-o" stateOff="fa fa-circle-o" (onHover)="hoverRAM($event)" (onLeave)="resetRAM($event)">></rating> {{ ram[(ram_hover ? ram_hover : ram_step) - 1] }}MB of RAM
-</p>
+    <div class="form-group form-slider">
+        <label class="form-control-label">RAM (~{{ ram[(ram_hover ? ram_hover : ram_step) - 1] }}MB of RAM)</label>
+        <div nouislider [config]="sliderConfig" [step]="1" [min]="0" [max]="7" [(ngModel)]="ram_step"></div>
+    </div>
+  </div>
+</div>
