@@ -6,14 +6,26 @@
       Tell us, what minimum requirements for all services are necessary to run?
     </p>
 
+    <cs-workload-form [workload]="workload"></cs-workload-form>
+
+    <!--
     <div class="form-group form-slider">
-        <label class="form-control-label">CPU (~{{ cpu[(cpu_hover ? cpu_hover : cpu_step) - 1] }} Cores)</label>
-        <div nouislider [config]="sliderConfig" [step]="1" [min]="0" [max]="7" [(ngModel)]="cpu_step"></div>
+        <label class="form-control-label">CPU ({{ cpuCategories[(cpu_hover ? cpu_hover : cpu_step) - 1] }} Cores)</label>
+        <div nouislider [config]="sliderConfig" [step]="1" [min]="1" [max]="5" [(ngModel)]="cpu_step"></div>
     </div>
 
     <div class="form-group form-slider">
-        <label class="form-control-label">RAM (~{{ ram[(ram_hover ? ram_hover : ram_step) - 1] }}MB of RAM)</label>
-        <div nouislider [config]="sliderConfig" [step]="1" [min]="0" [max]="7" [(ngModel)]="ram_step"></div>
+        <label class="form-control-label">RAM ({{ ramCategories[(ram_hover ? ram_hover : ram_step) - 1] }}MB)</label>
+        <div nouislider [config]="sliderConfig" [step]="1" [min]="1" [max]="5" [(ngModel)]="ram_step"></div>
     </div>
+
+    <hr>
+
+    <div class="form-group form-slider">
+        <label class="form-control-label">Users ({{ user_step }} per Hour)</label>
+        <div nouislider [config]="userSliderconfig" [step]="50" [min]="0" [max]="50000" [(ngModel)]="user_step"></div>
+    </div>
+    -->
+
   </div>
 </div>

@@ -25,3 +25,19 @@ select {
   right: 5px;
   margin-top: 30px;
 }
+
+.ng-valid {
+  border-color: $brand-success;
+}
+
+.ng-valid.ng-pristine {
+  border-color: lighten($brand-accent, 20%);
+}
+
+.ng-invalid {
+  box-shadow: inset 0 1px 1px rgba($brand-warning, 0.075), 0 0 8px rgba($brand-warning, 0.3);
+}
+
+.ng-invalid.ng-pristine {
+  box-shadow: none;
+}

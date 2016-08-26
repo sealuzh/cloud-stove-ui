@@ -64,7 +64,7 @@ export class StoveEditorDependencyModalComponent {
         this._ref.markForCheck();
     }
 
-    private selectDependency(ingredient: Ingredient) {
+    selectDependency(ingredient: Ingredient) {
         this.targetIngredient = ingredient;
     }
 
