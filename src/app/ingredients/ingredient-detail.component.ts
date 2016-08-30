@@ -18,13 +18,20 @@ import {PropertyPipe} from '../shared/property.pipe';
 import {Observable} from 'rxjs/Rx';
 
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+import {WorkloadFormComponent} from '../forms/workload.component';
 
 @Component({
     selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
     styles: [require('./ingredient-detail.component.scss')],
-    directives: [REACTIVE_FORM_DIRECTIVES, DROPDOWN_DIRECTIVES, CpuConstraintFormComponent, RamConstraintFormComponent, RegionConstraintFormComponent],
-    providers: [IngredientService, ConstraintService],
+    directives: [
+      REACTIVE_FORM_DIRECTIVES,
+      DROPDOWN_DIRECTIVES,
+      CpuConstraintFormComponent,
+      RamConstraintFormComponent,
+      RegionConstraintFormComponent,
+      WorkloadFormComponent
+    ],
     pipes: [PropertyPipe]
 })
 

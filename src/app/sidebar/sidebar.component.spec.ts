@@ -20,6 +20,7 @@ describe('Component: Sidebar', () => {
         SidebarComponent,
         provide(Router, {useValue: jasmine.createSpyObj('Router', ['navigate'])})
     ]);
+    
     beforeEach(inject([TestComponentBuilder], function (tcb:TestComponentBuilder) {
         builder = tcb;
     }));
@@ -39,4 +40,3 @@ describe('Component: Sidebar', () => {
 })
 class SidebarComponentTestController {
 }
-

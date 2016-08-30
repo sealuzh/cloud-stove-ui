@@ -12,7 +12,7 @@ import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms'
         <button class="btn btn-xs btn-warning btn-remove-constraint" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
         <div class="form-group">
             <label class="form-control-label">CPU-Cores:</label>
-            <input class="form-control" type="text" formControlName="min_cpus" [ngModel]="constraint.min_cpus">
+            <input class="form-control" type="text" formControlName="min_cpus" [ngModel]="constraint.min_cpus" disabled>
         </div>
       </form>
     `,

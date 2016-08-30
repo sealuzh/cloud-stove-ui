@@ -8,7 +8,7 @@
           <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-xs btn-default pull-right" (click)="copyIngredient(ingredient)">
             <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
           </button>
-          <a [routerLink]="['/applications/', ingredient.id, '/editor']">{{ingredient.name}}</a><br>
+          <a [routerLink]="['/applications/', ingredient.id, '/editor/recommender']">{{ingredient.name}}</a><br>
           <small>{{countIngredients(ingredient)}} ingredients, {{countConstraints(ingredient)}} constraints</small>
         </h3>
       </div>
