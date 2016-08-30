@@ -40,6 +40,8 @@
         </ul>
       </div>
 
+      <cs-user-workload-slider *ngIf="editor.ingredient" [ingredient]="editor.ingredient"></cs-user-workload-slider>
+
       <div class="navbar-btn-group btn-group">
         <button [ngClass]="{'disabled': recommendation.isGenerating}" class="btn btn-primary" (click)="triggerRecommendation(editor.application)">
           <i [ngClass]="{ 'fa-copy': !recommendation.isGenerating, 'fa-spin': recommendation.isGenerating, 'fa-circle-o-notch': recommendation.isGenerating}" class="fa"></i>
