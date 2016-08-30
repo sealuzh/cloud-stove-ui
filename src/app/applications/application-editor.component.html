@@ -50,7 +50,6 @@
     </div>
 
     <ul class="nav navbar-nav pull-right">
-      <li [ngClass]="{'active': editorMode.type == 'workload'}"><a (click)="changeEditorMode('workload')"><i class="fa fa-edit"></i> Workload</a></li>
       <li [ngClass]="{'active': editorMode.type == 'editor'}"><a (click)="changeEditorMode('editor')"><i class="fa fa-edit"></i> Editor</a></li>
       <li [ngClass]="{'active': editorMode.type == 'recommender'}"><a (click)="changeEditorMode('recommender')"><i class="fa fa-copy"></i> Recommender</a></li>
     </ul>
@@ -62,9 +61,7 @@
 
   <cs-loading *ngIf="!editor.application"></cs-loading>
 
-  <cs-workload-modeler *ngIf="editorMode.type == 'workload'"></cs-workload-modeler>
-
-  <div *ngIf="editor.application && editorMode.type != 'workload'">
+  <div *ngIf="editor.application">
     <div class="row">
       <div class="col-lg-9">
         <div class="overflow-hidden">

@@ -21,8 +21,6 @@ import {DraggableDirective} from './editor/draggable.directive';
 import {ConnectionDirective} from './editor/connection.directive';
 import {PositionDirective} from './editor/position.directive';
 
-import {WorkloadModelerComponent} from '../workload/workload-modeler.component';
-
 import {PropertyPipe} from '../shared/property.pipe';
 
 import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
@@ -41,8 +39,7 @@ import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boot
       DraggableDirective,
       LoadingComponent,
       ConnectionDirective,
-      IngredientDetailComponent,
-      WorkloadModelerComponent
+      IngredientDetailComponent
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
     pipes: [PropertyPipe],
