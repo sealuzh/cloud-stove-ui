@@ -9,6 +9,7 @@ import {JobService} from '../services/job';
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
 import {Recommendation} from '../dtos/recommendation.dto';
+import {UserWorkload} from '../dtos/workload/user-workload.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
@@ -22,7 +23,7 @@ import {ConnectionDirective} from './editor/connection.directive';
 import {PositionDirective} from './editor/position.directive';
 
 import {PropertyPipe} from '../shared/property.pipe';
-
+import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
 import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
@@ -39,7 +40,8 @@ import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boot
       DraggableDirective,
       LoadingComponent,
       ConnectionDirective,
-      IngredientDetailComponent
+      IngredientDetailComponent,
+      UserWorkloadSliderComponent
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
     pipes: [PropertyPipe],
@@ -71,6 +73,8 @@ export class ApplicationEditorComponent implements OnInit {
     ];
 
     selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace'];
+
+    userWorkload: UserWorkload = {num_simultaneous_users: 100};
 
     @ViewChild(StoveEditorDependencyModalComponent) stoveEditorDependencyModalComponent: StoveEditorDependencyModalComponent;
 

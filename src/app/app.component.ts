@@ -9,7 +9,8 @@ import {SidebarComponent} from './sidebar/index';
 import {IngredientService} from './services/ingredient';
 import {ConstraintService} from './services/constraint';
 import {RAMWorkloadService} from './services/ram-workload';
-import {CPUWorkloadService} from './services/cpu-workload'; 
+import {CPUWorkloadService} from './services/cpu-workload';
+import {UserWorkloadService} from './services/user-workload'; 
 
 import '../style/app.scss';
 
@@ -29,7 +30,8 @@ import '../style/app.scss';
       IngredientService,
       ConstraintService,
       RAMWorkloadService,
-      CPUWorkloadService
+      CPUWorkloadService,
+      UserWorkloadService
     ]
 })
 
