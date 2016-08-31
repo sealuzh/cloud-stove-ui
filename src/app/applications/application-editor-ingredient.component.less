@@ -1,0 +1,116 @@
+@import "../../style/app";
+
+h1 {
+  margin-top: -20px;
+}
+
+.ingredient.children {
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.2);
+  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.2);
+}
+
+.ingredient {
+  display: inline-block;
+  width: 250px;
+  height: 150px;
+  color: @brand-dark;
+  position: relative;
+}
+
+.ingredient.low {
+  border: 3px solid @brand-success;
+}
+
+.ingredient.normal {
+  border: 3px solid @brand-warning;
+}
+
+.ingredient.high {
+  border: 3px solid @brand-alert;
+}
+
+a {
+  color: lighten(@brand-accent, 35%);
+}
+
+a:hover {
+  color: @brand-primary;
+}
+
+.details {
+  color: lighten(@brand-accent, 35%);
+
+  .details-title {
+    font-weight: bolder;
+  }
+
+  .details-body {
+    color: lighten(@brand-accent, 45%);
+  }
+}
+
+.content {
+  padding: 5px;
+}
+
+.edit {
+  float: right;
+}
+
+.recommendation {
+  background-color: lighten(@brand-accent, 10%);
+  color: lighten(@brand-accent, 35%);
+  font-size: 1em;
+  bottom: 0;
+  position: absolute;
+  padding: 5px;
+  width: 100%;
+}
+
+.no-recommendation {
+  background-color: lighten(@brand-primary, 10%);
+  color: white;
+}
+
+.label-Rackspace {
+  background-color: #c40022;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label-Amazon {
+  background-color:#ff9900;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label-Google {
+  background-color: #4285f4;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label-MicrosoftAzure {
+  background-color: #45ace8;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label-Joyent {
+  background-color: #868780;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label.DigitalOcean {
+  background-color: #00fcff;
+  color: white;
+  padding-left: 0.6em;
+}
+
+.label.Rackspace {
+  background-color: #c40022;
+  color: white;
+  padding-left: 0.6em;
+}

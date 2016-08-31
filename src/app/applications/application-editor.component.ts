@@ -28,7 +28,7 @@ import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boot
 
 @Component({
     template: require('./application-editor.component.html'),
-    styles: [require('./application-editor.component.scss')],
+    styles: [require('./application-editor.component.less')],
     directives: [
       ROUTER_DIRECTIVES,
       MODAL_DIRECTIVES,

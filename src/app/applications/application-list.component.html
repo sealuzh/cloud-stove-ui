@@ -1,17 +1,25 @@
-<h1>Applications</h1>
+<div class="dashhead">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">All your applications</h6>
+    <h3 class="dashhead-title">Applications</h3>
+  </div>
+</div>
+
 <cs-loading *ngIf="!ingredients"></cs-loading>
 <div class="row">
-  <div class="col-lg-12 animated-list" *ngFor="let ingredient of ingredients">
-    <div class="panel panel-default panel-application">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-xs btn-default pull-right" (click)="copyIngredient(ingredient)">
-            <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
-          </button>
-          <a [routerLink]="['/applications/', ingredient.id, '/editor/recommender']">{{ingredient.name}}</a><br>
-          <small>{{countIngredients(ingredient)}} ingredients, {{countConstraints(ingredient)}} constraints</small>
-        </h3>
-      </div>
+  <div class="col-lg-12" *ngFor="let ingredient of ingredients">
+    <div class="jumbotron">
+      <h2>
+        <a [routerLink]="['/applications/', ingredient.id, '/editor/recommender']">{{ingredient.name}}</a>
+      </h2>
+      <p>
+        <small>{{countIngredients(ingredient)}} ingredients, {{countConstraints(ingredient)}} constraints</small>
+      </p>
+      <p>
+        <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-default" (click)="copyIngredient(ingredient)">
+          <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
+        </button>
+      </p>
     </div>
   </div>
 </div>

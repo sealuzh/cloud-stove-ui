@@ -1,0 +1,118 @@
+@import "../../style/app";
+
+.navbar-editor-content {
+  padding-top: 50px;
+}
+
+.navbar-editor {
+  top: 50px;
+  background-color: @brand-accent;
+  border-bottom: none;
+  color: white;
+
+  .navbar-nav > .active > a {
+    background-color: @brand-primary;
+  }
+
+  .navbar-nav > .active > a:hover {
+    background-color: darken(@brand-primary, 20%);
+  }
+
+  .navbar-nav > li > a {
+      color: white;
+  }
+
+  .navbar-nav > li > a:hover {
+      color: lighten(@brand-accent, 20%);
+  }
+
+  .navbar-btn-group > .btn {
+    background-color: transparent;
+    border: none;
+    margin: 10px;
+  }
+
+  .navbar-btn-group > .btn-primary {
+    background-color: @brand-primary;
+  }
+
+  .btn-group.open .dropdown-toggle, .btn-group:active .dropdown-toggle {
+    box-shadow: none;
+    color: @brand-dark;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+}
+
+.modal-body {
+  .row {
+    margin: 0;
+  }
+}
+
+.panel-title > a {
+  color: white;
+}
+
+.panel-application {
+  border: 2px lighten(@brand-accent, 30%) solid;
+}
+
+.recommendation-active {
+  border: 2px @brand-accent dotted;
+
+  .panel-heading {
+    background-color: white;
+  }
+
+}
+
+[csdraggable] {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+cs-stove-editor-ingredient {
+  background-color: @brand-accent;
+}
+
+cs-stove-editor-ingredient.active {
+  background-color: darken(@brand-accent, 20%);
+}
+
+.application-editor {
+  position: relative;
+  height: 900px;
+  background: lighten(@brand-accent, 30%);
+  border-radius: 5px;
+
+  .zoom-controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+}
+
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
