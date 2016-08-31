@@ -1,68 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
+import {Component, OnInit, Input} from '@angular/core';
+import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 
-import {IngredientService} from '../services/ingredient';
-import {JobService} from '../services/job';
-
+import {RecommendationService} from '../services/recommendation';
 import {Recommendation} from '../dtos/recommendation.dto';
-import {TimerWrapper} from '@angular/core/src/facade/async';
-
-import {SumMonthlyPipe} from './sumMonthly.pipe';
-import {SumHourlyPipe} from './sumHourly.pipe';
+import {Ingredient} from '../dtos/ingredient.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
 @Component({
     template: require('./recommendation-detail.component.html'),
     styles: [require('./recommendation-detail.component.less')],
-    directives: [ROUTER_DIRECTIVES, LoadingComponent],
-    pipes: [SumMonthlyPipe, SumHourlyPipe]
+    directives: [ROUTER_DIRECTIVES, LoadingComponent]
 })
 
 export class RecommendationDetailComponent implements OnInit {
 
-    private applicationId: number;
-    public recommendation: Recommendation;
+    @Input()
+    application: Ingredient;
 
-    public recommendationNotFound: boolean;
-    public generatingRecommendation: boolean;
+    public recommendation: Recommendation[];
 
-    constructor(private _ingredientService: IngredientService, private _jobService: JobService, private _route: ActivatedRoute) {
+    constructor(private _recommendationService: RecommendationService, private _route: ActivatedRoute) {
+
     }
 
     ngOnInit(): void {
-        this._route.params.subscribe(params => {
-          this.applicationId = +params['id'];
-          this.loadRecommendation(this.applicationId);
-        });
-    }
-
-    loadRecommendation(id: number) {
-
-    }
-
-    triggerRecommendation() {
-      this.generatingRecommendation = true;
-      this._ingredientService.triggerRecommendation(this.applicationId).subscribe(
-        result => {
-          let jobUUID = result.job_id;
-          this.fetchJobStatus(jobUUID);
-        },
-        error => console.log(error)
-      );
-    }
-
-    fetchJobStatus(uuid: string) {
-      this._jobService.get(uuid, null).subscribe(jobResult => {
-        if (jobResult.delayed_job.attempts === 1) {
-          this.loadRecommendation(this.applicationId);
-        } else {
-          TimerWrapper.setTimeout(() => {
-            this.fetchJobStatus(uuid);
-          }, 5000);
-        }
-      }, error => {
-        this.loadRecommendation(this.applicationId);
+      this._route.params.subscribe(params => {
+        let recommendationId = +params['id'];
+        //this._recommendationService.get(recommendationId).subscribe(result => this.recommendation = result, error => console.error(error));
       });
     }
 

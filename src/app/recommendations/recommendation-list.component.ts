@@ -1,48 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
-import {RecommendationService} from '../services/recommendation';
-import {Recommendation} from '../dtos/recommendation.dto';
+import {IngredientService} from '../services/ingredient';
+import {Ingredient} from '../dtos/ingredient.dto';
+
+import {LoadingComponent} from '../shared/loading.component';
 
 @Component({
     template: require('./recommendation-list.component.html'),
-    directives: [ROUTER_DIRECTIVES]
+    styles: [require('./recommendation-list.component.less')],
+    directives: [ROUTER_DIRECTIVES, LoadingComponent]
 })
 
 export class RecommendationListComponent implements OnInit {
 
-    public recommendations: Recommendation[];
-    public status: { isGenerating: boolean } = { isGenerating: false };
+    public applications: Ingredient[];
 
-    constructor(
-      private _router: Router,
-      private _recommendationService: RecommendationService,
-      private _route: ActivatedRoute) {
+    constructor(private _ingredientService: IngredientService) {
 
     }
 
     ngOnInit(): void {
-        this.loadRecommendations();
-    }
-
-    loadRecommendations() {
-      /*
-      this.status.isGenerating = true;
-      this._recommendationService.loadRecommendation(application).subscribe(
-        result => {
-          this.recommendations.push(result);
-          this.status.isGenerating = false;
-        },
-        error => {
-          console.log(error);
-          this.status.isGenerating = false;
-        }
-      );
-      */
-    }
-
-    goToRecommendation(id: number) {
-        this._router.navigate(['recommendations', id]);
+      this._ingredientService.applications().subscribe(result => this.applications = result, error => console.error(error));
     }
 
 }
