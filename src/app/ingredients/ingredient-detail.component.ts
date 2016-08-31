@@ -23,7 +23,7 @@ import {WorkloadFormComponent} from '../forms/workload.component';
 @Component({
     selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
-    styles: [require('./ingredient-detail.component.scss')],
+    styles: [require('./ingredient-detail.component.less')],
     directives: [
       REACTIVE_FORM_DIRECTIVES,
       DROPDOWN_DIRECTIVES,

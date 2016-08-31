@@ -5,7 +5,7 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({
     selector: 'cs-sidebar',
     template: require('./sidebar.component.html'),
-    styles: [require('./sidebar.component.scss')],
+    styles: [require('./sidebar.component.less')],
     directives: [DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES],
 })
 

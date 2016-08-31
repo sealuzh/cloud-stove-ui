@@ -6,16 +6,16 @@
 
 .navbar-editor {
   top: 50px;
-  background-color: $brand-accent;
+  background-color: @brand-accent;
   border-bottom: none;
   color: white;
 
   .navbar-nav > .active > a {
-    background-color: $brand-primary;
+    background-color: @brand-primary;
   }
 
   .navbar-nav > .active > a:hover {
-    background-color: darken($brand-primary, 20%);
+    background-color: darken(@brand-primary, 20%);
   }
 
   .navbar-nav > li > a {
@@ -23,7 +23,7 @@
   }
 
   .navbar-nav > li > a:hover {
-      color: lighten($brand-accent, 20%);
+      color: lighten(@brand-accent, 20%);
   }
 
   .navbar-btn-group > .btn {
@@ -33,12 +33,12 @@
   }
 
   .navbar-btn-group > .btn-primary {
-    background-color: $brand-primary;
+    background-color: @brand-primary;
   }
 
   .btn-group.open .dropdown-toggle, .btn-group:active .dropdown-toggle {
     box-shadow: none;
-    color: $brand-dark;
+    color: @brand-dark;
   }
 
   [hidden] {
@@ -58,11 +58,11 @@
 }
 
 .panel-application {
-  border: 2px lighten($brand-accent, 30%) solid;
+  border: 2px lighten(@brand-accent, 30%) solid;
 }
 
 .recommendation-active {
-  border: 2px $brand-accent dotted;
+  border: 2px @brand-accent dotted;
 
   .panel-heading {
     background-color: white;
@@ -77,17 +77,17 @@
 }
 
 cs-stove-editor-ingredient {
-  background-color: $brand-accent;
+  background-color: @brand-accent;
 }
 
 cs-stove-editor-ingredient.active {
-  background-color: darken($brand-accent, 20%);
+  background-color: darken(@brand-accent, 20%);
 }
 
 .application-editor {
   position: relative;
   height: 900px;
-  background: lighten($brand-accent, 30%);
+  background: lighten(@brand-accent, 30%);
   border-radius: 5px;
 
   .zoom-controls {

@@ -14,39 +14,39 @@ h1 {
   display: inline-block;
   width: 250px;
   height: 150px;
-  color: $brand-dark;
+  color: @brand-dark;
   position: relative;
 }
 
 .ingredient.low {
-  border: 3px solid $brand-success;
+  border: 3px solid @brand-success;
 }
 
 .ingredient.normal {
-  border: 3px solid $brand-warning;
+  border: 3px solid @brand-warning;
 }
 
 .ingredient.high {
-  border: 3px solid $brand-alert;
+  border: 3px solid @brand-alert;
 }
 
 a {
-  color: lighten($brand-accent, 35%);
+  color: lighten(@brand-accent, 35%);
 }
 
 a:hover {
-  color: $brand-primary;
+  color: @brand-primary;
 }
 
 .details {
-  color: lighten($brand-accent, 35%);
+  color: lighten(@brand-accent, 35%);
 
   .details-title {
     font-weight: bolder;
   }
 
   .details-body {
-    color: lighten($brand-accent, 45%);
+    color: lighten(@brand-accent, 45%);
   }
 }
 
@@ -59,8 +59,8 @@ a:hover {
 }
 
 .recommendation {
-  background-color: lighten($brand-accent, 10%);
-  color: lighten($brand-accent, 35%);
+  background-color: lighten(@brand-accent, 10%);
+  color: lighten(@brand-accent, 35%);
   font-size: 1em;
   bottom: 0;
   position: absolute;
@@ -69,7 +69,7 @@ a:hover {
 }
 
 .no-recommendation {
-  background-color: lighten($brand-primary, 10%);
+  background-color: lighten(@brand-primary, 10%);
   color: white;
 }
 

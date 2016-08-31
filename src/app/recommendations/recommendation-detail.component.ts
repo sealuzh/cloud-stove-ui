@@ -14,7 +14,7 @@ import {LoadingComponent} from '../shared/loading.component';
 
 @Component({
     template: require('./recommendation-detail.component.html'),
-    styles: [require('./recommendation-detail.component.scss')],
+    styles: [require('./recommendation-detail.component.less')],
     directives: [ROUTER_DIRECTIVES, LoadingComponent],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })

@@ -1,32 +1,36 @@
-$brand-primary: #DC3522;
-$brand-dark: #3b322f;
-$brand-accent: lighten($brand-dark, 40%);
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap";
 
-$brand-success: #3cdc22;
-$brand-warning: #dcc022;
-$brand-alert: #DC3522;
+@brand-primary: #DC3522;
+@brand-dark: #3b322f;
+@brand-accent: lighten(@brand-dark, 40%);
+@brand-success: #3cdc22;
+@brand-warning: #dcc022;
+@brand-alert: #DC3522;
 
+@import './theme/toolkit-inverse';
+
+/*
 // Importing Bootstrap SASS
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap-sass/assets/stylesheets/_bootstrap";
-@import "nouislider/distribute/nouislider.min";
 
 body {
-  background-color: lighten($brand-accent, 35%);
+  background-color: lighten(@brand-accent, 35%);
   overflow-y: scroll;
 }
 
 h1 {
-  color: $brand-accent;
+  color: @brand-accent;
   margin-bottom: 20px;
 }
 
 h2 {
-  color: lighten($brand-accent, 10%);
+  color: lighten(@brand-accent, 10%);
 }
 
 h3 {
-  color: darken($brand-accent, 20%);
+  color: darken(@brand-accent, 20%);
 }
 
 .overflow-hidden {
@@ -49,3 +53,4 @@ h3 {
 @import 'loading';
 @import 'markdown';
 @import 'nouislider';
+*/

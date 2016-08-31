@@ -123,6 +123,7 @@ module.exports = function makeWebpackConfig() {
             // all css required in src/app files will be merged in js files
             {test: /\.css$/, include: root('src', 'app'), loader: 'raw!postcss'},
 
+            /*
             // support for .scss files
             // use 'null' loader in test mode (https://github.com/webpack/null-loader)
             // all css in src/style will be bundled in an external css file
@@ -134,6 +135,19 @@ module.exports = function makeWebpackConfig() {
 
             // all css required in src/app files will be merged in js files
             {test: /\.scss$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))},
+            */
+
+            // support for .less files
+            // use 'null' loader in test mode (https://github.com/webpack/null-loader)
+            // all css in src/style will be bundled in an external css file
+            {
+                test: /\.less$/,
+                exclude: root('src', 'app'),
+                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!less?includePaths[]=' + (path.resolve(__dirname, "./node_modules")))
+            },
+
+            // all css required in src/app files will be merged in js files
+            {test: /\.less$/, exclude: root('src', 'style'), loader: 'raw!postcss!less?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))},
 
             // support for .html as raw text
             // todo: change the loader to something that adds a hash to images
@@ -248,9 +262,11 @@ module.exports = function makeWebpackConfig() {
      * Reference: https://github.com/jtangelder/sass-loader
      * Transforms .scss files to .css
      */
+    /*
     config.sassLoader = {
         //includePaths: [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
     };
+    */
 
     /**
      * Apply the tslint loader as pre/postLoader
