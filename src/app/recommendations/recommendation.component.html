@@ -1,0 +1,149 @@
+<div *ngIf="application">
+  <div class="dashhead">
+    <div class="dashhead-titles">
+      <h6 class="dashhead-subtitle">{{application.name}}</h6>
+      <h3 class="dashhead-title">Recommendations</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
+        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+          {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+          <li role="menuitem"  *ngFor='let region of selectableRegions'>
+            <a class="dropdown-item" (click)="changeRegion(region.id)">{{region.name}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.providerIsOpen">
+        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+          {{providerConstraint.preferred_providers.length == 0 ? 'Provider' : providerConstraint.preferred_providers.join(', ') }} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+          <li role="menuitem" *ngFor='let provider of selectableProviders'>
+            <a class="dropdown-item" (click)="selectProvider(provider)">
+              {{providerConstraint.preferred_providers.indexOf(provider) > -1 ? '✓' : '' }} {{provider}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
+        <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
+        Generate Recommendation
+      </button>
+
+      <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <canvas
+          class="ex-line-graph"
+          data-chart="line"
+          data-scale-line-color="transparent"
+          data-scale-grid-line-color="rgba(255,255,255,.05)"
+          data-scale-font-color="#a2a2a2"
+          data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']"
+          data-value="[{fillColor: 'rgba(28,168,221,.03)', data: [2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]}]">
+        </canvas>
+    </div>
+  </div>
+
+  <div class="hr-divider">
+    <h3 class="hr-divider-content hr-divider-heading">
+      Generated Recommendations
+    </h3>
+  </div>
+
+  <div class="row" *ngIf="recommendations && recommendations.length > 0">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+          <thead>
+          <tr>
+              <th>Monthly Cost</th>
+              <th>Created At</th>
+              <th># Users</th>
+              <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let recommendation of recommendations">
+              <td>{{ recommendation.vm_cost }}$</td>
+              <td>{{ recommendation.created_at | date: 'medium' }}</td>
+              <td>500</td>
+              <td>
+
+              </td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="recommendations && recommendations.length === 0">
+    <div class="center-block col-lg-12">
+      Oops. No recommendations generated yet.
+    </div>
+  </div>
+
+</div>
+<!--
+<cs-loading *ngIf="!recommendation && !recommendationNotFound"></cs-loading>
+<cs-loading *ngIf="generatingRecommendation" message="Crunching numbers..."></cs-loading>
+<div *ngIf="recommendationNotFound && !generatingRecommendation">
+  <div class="col-lg-12">
+      <div class="row text-center">
+        <p class="recommendation-not-found-msg">
+          We have not analyzed this application yet. Would you like to generate a recommendation?
+        </p>
+        <button class="btn btn-success" (click)="triggerRecommendation()">Generate Recommendation</button>
+      </div>
+    </div>
+</div>
+<div *ngIf="recommendation">
+    <h1>Deployment Recommendation</h1>
+    <h3>{{recommendation.application.name}}</h3>
+    <div class="col-lg-12">
+        <div class="row">
+          <table class="table table-striped">
+              <thead>
+              <tr>
+                  <th>Ingredient</th>
+                  <th>Recommendation</th>
+                  <th>Hourly Cost</th>
+                  <th>Monthly Cost</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let recommendation of recommendation.recommendation">
+                  <td>{{recommendation.ingredient.name}}</td>
+                  <td>
+                    <strong>{{recommendation.resource.provider}}</strong><br>
+                    {{recommendation.resource.name}}<br>
+                    <small>{{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM</small>
+                  </td>
+                  <td>{{recommendation.resource.price_per_hour}}$</td>
+                  <td>{{recommendation.resource.price_per_month}}$</td>
+              </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td><strong>{{ recommendation.recommendation | csSumHourly }}$</strong></td>
+                  <td><strong>{{ recommendation.recommendation | csSumMonthly }}$</strong></td>
+                </tr>
+              </tfoot>
+          </table>
+        </div>
+    </div>
+</div>
+-->

@@ -8,9 +8,11 @@ import {RequestService} from './services/request';
 import {SidebarComponent} from './sidebar/index';
 import {IngredientService} from './services/ingredient';
 import {ConstraintService} from './services/constraint';
+import {JobService} from './services/job';
+import {RecommendationService} from './services/recommendation';
 import {RAMWorkloadService} from './services/ram-workload';
 import {CPUWorkloadService} from './services/cpu-workload';
-import {UserWorkloadService} from './services/user-workload'; 
+import {UserWorkloadService} from './services/user-workload';
 
 import '../style/app.less';
 
@@ -31,7 +33,9 @@ import '../style/app.less';
       ConstraintService,
       RAMWorkloadService,
       CPUWorkloadService,
-      UserWorkloadService
+      UserWorkloadService,
+      JobService,
+      RecommendationService
     ]
 })
 

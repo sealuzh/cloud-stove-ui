@@ -4,20 +4,26 @@
   </a>
   <div class="iconav-slider">
     <ul class="nav nav-pills iconav-nav">
-      <li >
-        <a [routerLink]="['welcome']" title="Overview" data-toggle="tooltip" data-placement="right" data-container="body">
+      <li>
+        <a [routerLink]="['welcome']" [routerLinkActive]="'active'" title="Overview" data-toggle="tooltip" data-placement="right" data-container="body">
           <span class="icon icon-home"></span>
           <small class="iconav-nav-label visible-xs-block">Overview</small>
         </a>
       </li>
       <li >
-        <a [routerLink]="['/templates']" title="Templates" data-toggle="tooltip" data-placement="right" data-container="body">
+        <a [routerLink]="['/templates']" [routerLinkActive]="'active'" title="Templates" data-toggle="tooltip" data-placement="right" data-container="body">
           <span class="icon icon-text-document"></span>
           <small class="iconav-nav-label visible-xs-block">Templates</small>
         </a>
       </li>
-      <li class="active">
-        <a [routerLink]="['/applications']" title="Recommendations" data-toggle="tooltip" data-placement="right" data-container="body">
+      <li >
+        <a [routerLink]="['/applications']" [routerLinkActive]="'active'" title="Applications" data-toggle="tooltip" data-placement="right" data-container="body">
+          <span class="icon icon-list"></span>
+          <small class="iconav-nav-label visible-xs-block">Applications</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/recommendations']" [routerLinkActive]="'active'" data-toggle="tooltip" data-placement="right" data-container="body">
           <span class="icon icon-area-graph"></span>
           <small class="iconav-nav-label visible-xs-block">Recommendations</small>
         </a>

@@ -123,20 +123,6 @@ module.exports = function makeWebpackConfig() {
             // all css required in src/app files will be merged in js files
             {test: /\.css$/, include: root('src', 'app'), loader: 'raw!postcss'},
 
-            /*
-            // support for .scss files
-            // use 'null' loader in test mode (https://github.com/webpack/null-loader)
-            // all css in src/style will be bundled in an external css file
-            {
-                test: /\.scss$/,
-                exclude: root('src', 'app'),
-                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?includePaths[]=' + (path.resolve(__dirname, "./node_modules")))
-            },
-
-            // all css required in src/app files will be merged in js files
-            {test: /\.scss$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))},
-            */
-
             // support for .less files
             // use 'null' loader in test mode (https://github.com/webpack/null-loader)
             // all css in src/style will be bundled in an external css file
@@ -185,6 +171,11 @@ module.exports = function makeWebpackConfig() {
         // Inject d3.js into application
         new webpack.ProvidePlugin({
             d3: 'd3',
+        }),
+
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         }),
 
         // client-side config
