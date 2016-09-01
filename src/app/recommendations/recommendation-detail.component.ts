@@ -1,34 +1,30 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
+import {Component, OnChanges, Input} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
-import {RecommendationService} from '../services/recommendation';
 import {Recommendation} from '../dtos/recommendation.dto';
-import {Ingredient} from '../dtos/ingredient.dto';
-
 import {LoadingComponent} from '../shared/loading.component';
+import {SumMonthlyPipe} from './sumMonthly.pipe';
+import {SumHourlyPipe} from './sumHourly.pipe';
 
 @Component({
+    selector: 'cs-recommendation-detail',
     template: require('./recommendation-detail.component.html'),
     styles: [require('./recommendation-detail.component.less')],
-    directives: [ROUTER_DIRECTIVES, LoadingComponent]
+    directives: [ROUTER_DIRECTIVES, LoadingComponent],
+    pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
-export class RecommendationDetailComponent implements OnInit {
+export class RecommendationDetailComponent implements OnChanges {
 
     @Input()
-    application: Ingredient;
+    recommendation: Recommendation;
 
-    public recommendation: Recommendation[];
-
-    constructor(private _recommendationService: RecommendationService, private _route: ActivatedRoute) {
+    constructor() {
 
     }
 
-    ngOnInit(): void {
-      this._route.params.subscribe(params => {
-        let recommendationId = +params['id'];
-        //this._recommendationService.get(recommendationId).subscribe(result => this.recommendation = result, error => console.error(error));
-      });
+    ngOnChanges(changes: any): void {
+
     }
 
 }

@@ -1,9 +1,32 @@
-<div *ngFor="let child of ingredient.children">
-  <div class="recommendation" [ngClass]="[child.recommendation.provider.replace(' ','')]">
-    <span class="label label-default" [ngClass]="['label-' + child.recommendation.provider.replace(' ','')]">{{child.recommendation.provider}}</span><br>
-    <span class="label label-default">{{child.recommendation.price_per_month}}$ / month</span>
-    <br />
-    {{child.recommendation.name}}<br>
-    {{child.recommendation.cores}} Cores / {{child.recommendation.mem_gb}}GB RAM
-  </div>
-</div>
+<table class="table" *ngIf="recommendation">
+    <thead>
+    <tr>
+        <th>Ingredient</th>
+        <th>Recommendation</th>
+        <th>Hourly Cost</th>
+        <th>Monthly Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let recommendation of recommendation.recommendation">
+        <td>{{recommendation.ingredient.name}}</td>
+        <td>
+          <span class="label label-default" [ngClass]="['label-' + recommendation.resource.provider.replace(' ','')]">{{recommendation.resource.provider}}</span><br>
+          <small>
+            {{recommendation.resource.name}}<br>
+            {{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM
+          </small>
+        </td>
+        <td>{{recommendation.resource.price_per_hour}}$</td>
+        <td>{{recommendation.resource.price_per_month}}$</td>
+    </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><strong>{{ recommendation.recommendation | csSumHourly }}$</strong></td>
+        <td><strong>{{ recommendation.recommendation | csSumMonthly }}$</strong></td>
+      </tr>
+    </tfoot>
+</table>
