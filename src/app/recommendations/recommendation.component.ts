@@ -9,19 +9,18 @@ import {Recommendation} from '../dtos/recommendation.dto';
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
 
-import {TimerWrapper} from '@angular/core/src/facade/async';
-
 import {SumMonthlyPipe} from './sumMonthly.pipe';
 import {SumHourlyPipe} from './sumHourly.pipe';
 
 import {LoadingComponent} from '../shared/loading.component';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
+import {RecommendationDetailComponent} from './recommendation-detail.component';
 
 @Component({
     template: require('./recommendation.component.html'),
     styles: [require('./recommendation.component.less')],
-    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, UserWorkloadSliderComponent, LoadingComponent],
+    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, UserWorkloadSliderComponent, LoadingComponent, RecommendationDetailComponent],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
