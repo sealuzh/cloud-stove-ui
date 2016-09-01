@@ -23,6 +23,7 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/router": "3.0.0-beta.1",
+    "angular2-token": "git@github.com:neroniaky/angular2-token.git#ff1dfcb7f5231ad9ff6d39be7d31fdcde9097246",
     "chart.js": "^2.2.2",
     "es6-shim": "^0.35.0",
     "express": "^4.13.4",
