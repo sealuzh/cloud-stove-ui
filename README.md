@@ -11,20 +11,28 @@ deployment strategies. Deployment recommendations are created by optimizing the
 use of available provider offerings with respect to the captured application
 specifications and requirements.
 
+Backend: https://github.com/inz/cloud-stove
+
 ## Setting Up a Development Environment
 
-* Clone the Cloud Stove Frontend repository
+1. Clone the Cloud Stove Frontend repository
   
   ```
   git clone git@github.com:inz/cloud-stove-ui.git
   ```
     
-* Install Node (https://nodejs.org/).
+2. Install Node (https://nodejs.org/)
 
-* Run the test suite to see if everything works:
-  
+3. Install dependencies
+
   ```
-  npm run test
+  npm install
+  ```
+
+4. Start the Node server
+
+  ```
+  npm start
   ```
 
 ## Making Changes
