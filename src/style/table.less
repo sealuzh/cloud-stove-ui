@@ -1,0 +1,34 @@
+.table > tr {
+  border: none;
+}
+
+.table > thead > tr > th {
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid @gray-darker;
+  font-weight: lighter;
+  color: @gray-darker;
+  font-size: 14px;
+}
+
+.table > tbody > tr > td {
+  border: none;
+  padding: 10px;
+
+  a {
+    color: darken(@brand-primary, 80%);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+}
+
+.table-hover > tr:hover {
+  background-color: lighten(@brand-primary, 20%);
+}
+
+.table-hover > tbody {
+  cursor: pointer;
+}

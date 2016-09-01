@@ -1,53 +1,52 @@
 <div *ngIf="ingredient" class="animated-list">
-  <div class="col-lg-12">
-      <div class="row">
-        <div class="btn-group pull-right" dropdown [(isOpen)]="constraintDropdown.isOpen">
-          <button type="button" class="btn btn-xs btn-primary" dropdownToggle>
+  <div class="row">
+    <div class="col-lg-12">
+        <h2>{{ingredient.name}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+
+        <!-- Form -->
+      <form [formGroup]="ingredientForm">
+        <div class="form-group">
+            <label class="form-control-label">Name:</label>
+            <input class="form-control" type="text" formControlName="name" [ngModel]="ingredient.name">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Description:</label>
+            <textarea class="form-control" formControlName="body" [ngModel]="ingredient.body"></textarea>
+        </div>
+
+        <div class="btn-group" dropdown [(isOpen)]="constraintDropdown.isOpen">
+          <button type="button" class="btn btn-primary" dropdownToggle>
             Add Constraint <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-            <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('CpuConstraint')">CPU Constraint</a></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('RamConstraint')">RAM Constraint</a></li>
             <li role="menuitem"><a class="dropdown-item" (click)="addConstraint('PreferredRegionAreaConstraint')">Region Constraint</a></li>
           </ul>
         </div>
 
-        <!-- Form -->
-        <form [formGroup]="ingredientForm">
-          <div class="form-group">
-              <label class="form-control-label">Name:</label>
-              <input class="form-control" type="text" formControlName="name" [ngModel]="ingredient.name">
-          </div>
-          <div class="form-group">
-              <label class="form-control-label">Description:</label>
-              <textarea class="form-control" formControlName="body" [ngModel]="ingredient.body"></textarea>
-          </div>
+        <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
+          <cs-region-constraint-form *ngIf="constraint.type == 'PreferredRegionAreaConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-region-constraint-form>
+        </div>
 
-          <h2>Workload</h2>
+        <div class="form-group">
+          <label class="form-control-label">Depends on</label>
+          <ul>
+            <li *ngFor="let constraint of ingredient.constraints | csProperty : [[{type: 'DependencyConstraint'}], 'type']">
+              Target: {{constraint.target_id}} <button class="btn btn-xs btn-warning" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
+            </li>
+           </ul>
+        </div>
 
-          <!-- Workload -->
-          <cs-workload-form [ingredient]="ingredient"></cs-workload-form>
-
-          <div *ngFor="let constraint of ingredient.constraints | csProperty : [constraintFilter, 'type']">
-            <cs-cpu-constraint-form *ngIf="constraint.type == 'CpuConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-cpu-constraint-form>
-            <cs-ram-constraint-form *ngIf="constraint.type == 'RamConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-ram-constraint-form>
-            <cs-region-constraint-form *ngIf="constraint.type == 'PreferredRegionAreaConstraint'" [constraint]="constraint" (removed)="removeConstraint(constraint)"></cs-region-constraint-form>
-          </div>
-
-          <div class="form-group">
-            <label class="form-control-label">Depends on</label>
-            <ul>
-              <li *ngFor="let constraint of ingredient.constraints | csProperty : [[{type: 'DependencyConstraint'}], 'type']">
-                Target: {{constraint.target_id}} <button class="btn btn-xs btn-warning" (click)="removeConstraint(constraint)"><i class="fa fa-remove"></i></button>
-              </li>
-             </ul>
-          </div>
-
-          <div class="form-group">
-              <button (click)="submit(ingredient)" class="btn btn-success" [disabled]="!ingredientForm.valid">Save</button>
-          </div>
+        <div class="form-group">
+            <button (click)="submit(ingredient)" class="btn btn-success" [disabled]="!ingredientForm.valid">Save</button>
+        </div>
       </form>
-
-      </div>
+    </div>
+    <div class="col-lg-6">
+      <cs-workload-form [(ingredient)]="ingredient"></cs-workload-form>
+    </div>
   </div>
 </div>

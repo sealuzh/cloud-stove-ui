@@ -10,7 +10,7 @@ import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-boot
 @Component({
     selector: 'cs-stove-editor-dependency-modal',
     template: require('./application-editor-dependency-modal.component.html'),
-    styles: [require('./application-editor-dependency-modal.component.scss')],
+    styles: [require('./application-editor-dependency-modal.component.less')],
     directives: [
       MODAL_DIRECTIVES,
       DROPDOWN_DIRECTIVES

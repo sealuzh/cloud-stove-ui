@@ -9,7 +9,7 @@ import {LoadingComponent} from '../shared/loading.component.ts';
 
 @Component({
     template: require('./application-list.component.html'),
-    styles: [require('./application-list.component.scss')],
+    styles: [require('./application-list.component.less')],
     directives: [ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent],
     providers: [IngredientService]
 })

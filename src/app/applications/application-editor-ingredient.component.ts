@@ -5,7 +5,7 @@ import {LoadingComponent} from '../shared/loading.component';
 @Component({
     selector: 'cs-stove-editor-ingredient',
     template: require('./application-editor-ingredient.component.html'),
-    styles: [require('./application-editor-ingredient.component.scss')],
+    styles: [require('./application-editor-ingredient.component.less')],
     directives: [LoadingComponent],
 })
 

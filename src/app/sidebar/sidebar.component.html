@@ -1,13 +1,43 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['welcome']"><img src="/img/flame.svg"> Cloudstove</a>
-    <ul class="nav navbar-nav">
-        <li><a [routerLink]="['/templates']">Templates</a></li>
-        <li><a [routerLink]="['/applications']">Applications</a></li>
+<nav class="iconav">
+  <a class="iconav-brand" href="#">
+    <span class="icon icon-cloudstove iconav-brand-icon"></span>
+  </a>
+  <div class="iconav-slider">
+    <ul class="nav nav-pills iconav-nav">
+      <li>
+        <a [routerLink]="['welcome']" [routerLinkActive]="'active'" title="Overview" data-toggle="tooltip" data-placement="right" data-container="body">
+          <span class="icon icon-home"></span>
+          <small class="iconav-nav-label visible-xs-block">Overview</small>
+        </a>
+      </li>
+      <li >
+        <a [routerLink]="['/templates']" [routerLinkActive]="'active'" title="Templates" data-toggle="tooltip" data-placement="right" data-container="body">
+          <span class="icon icon-text-document"></span>
+          <small class="iconav-nav-label visible-xs-block">Templates</small>
+        </a>
+      </li>
+      <li >
+        <a [routerLink]="['/applications']" [routerLinkActive]="'active'" title="Applications" data-toggle="tooltip" data-placement="right" data-container="body">
+          <span class="icon icon-list"></span>
+          <small class="iconav-nav-label visible-xs-block">Applications</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/recommendations']" [routerLinkActive]="'active'" data-toggle="tooltip" data-placement="right" data-container="body">
+          <span class="icon icon-area-graph"></span>
+          <small class="iconav-nav-label visible-xs-block">Recommendations</small>
+        </a>
+      </li>
+      <li>
+        <a href="#" title="Signed in as mdo" data-toggle="tooltip" data-placement="right" data-container="body">
+          <img src="../assets/img/avatar-mdo.png" alt="" class="img-circle img-responsive">
+          <small class="iconav-nav-label visible-xs-block">@mdo</small>
+        </a>
+      </li>
     </ul>
   </div>
-</div>
+</nav>
 
-<div class="container-fluid container-navbar-top">
+<div class="container container-navbar-top">
   <ng-content></ng-content>
 </div>

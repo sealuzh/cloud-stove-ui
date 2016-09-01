@@ -1,0 +1,30 @@
+// import bootstrap dashboard theme
+@import './theme/toolkit-inverse';
+
+@brand-primary: #DC3522;
+@brand-dark: #3b322f;
+@brand-accent: lighten(@brand-dark, 40%);
+@brand-success: #3cdc22;
+@brand-warning: #dcc022;
+@brand-alert: #DC3522;
+
+.overflow-hidden {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.loading {
+  height: 300px;
+  padding-top: 200px;
+  color: @brand-primary;
+}
+
+@import './form';
+@import './loading';
+@import './markdown';
+@import './table';
+@import './nouislider';
+@import './animations';
+@import './jumbotron';
+@import './dashhead';

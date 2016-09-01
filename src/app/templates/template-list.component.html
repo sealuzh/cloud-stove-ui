@@ -1,18 +1,18 @@
+<div class="dashhead">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">What about a good starting point?</h6>
+    <h3 class="dashhead-title">Templates</h3>
+  </div>
+</div>
+
 <cs-loading *ngIf="!ingredients"></cs-loading>
-<div class="row">
-  <div class="col-lg-4 animated-list" *ngFor="let ingredient of ingredients">
-    <div class="panel panel-default panel-application">
-      <div class="panel-heading">
-        <h2 class="panel-title">
-          <a [routerLink]="['/applications', ingredient.id]">{{ingredient.name}}</a>
-        </h2>
-      </div>
-      <div class="panel-body panel-cap-300">
-        <div [data]="ingredient.body" csMarkdown></div>
-      </div>
-      <div class="panel-footer">
-        <button class="btn btn-block btn-success" (click)="instantiate(ingredient.id)"><i class="fa fa-copy"></i> Instantiate</button>
-      </div>
+
+<div class="row" *ngFor="let ingredient of ingredients">
+  <div class="col-lg-12">
+    <div class="jumbotron">
+      <h2>{{ingredient.name}}</h2>
+      <p [data]="ingredient.body" csMarkdown></p>
+      <button class="btn btn-primary btn-lg" (click)="instantiate(ingredient.id)"> Instantiate</button>
     </div>
   </div>
 </div>

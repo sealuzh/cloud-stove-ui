@@ -6,7 +6,7 @@ import {LoadingComponent} from '../shared/loading.component';
 
 @Component({
     template: require('./ingredient-list.component.html'),
-    styles: [require('./ingredient-list.component.scss')],
+    styles: [require('./ingredient-list.component.less')],
     directives: [ROUTER_DIRECTIVES, LoadingComponent],
     providers: [IngredientService]
 })
