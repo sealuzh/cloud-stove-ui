@@ -11,6 +11,8 @@ deployment strategies. Deployment recommendations are created by optimizing the
 use of available provider offerings with respect to the captured application
 specifications and requirements.
 
+Backend: https://github.com/inz/cloud-stove
+
 ## Setting Up a Development Environment
 
 1. Clone the Cloud Stove Frontend repository
