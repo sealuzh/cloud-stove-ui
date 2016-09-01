@@ -38,7 +38,7 @@ export class TemplateListComponent implements OnInit {
     instantiate(id: number) {
       this._ingredientService.instantiate(id).subscribe(
         instanciatedIngredient => {
-          this._router.navigate(['ingredients', instanciatedIngredient.id]);
+          this._router.navigate(['applications', instanciatedIngredient.id]);
         },
         error => console.log(error)
       );
