@@ -13,8 +13,8 @@ export class PositionDirective implements OnInit {
   }
 
   ngOnInit() {
-    let left = (this.csPosition % 3) * 320;
-    let top = Math.floor(this.csPosition / 3) * 220;
+    let left = (this.csPosition % 3) * 320 + 10;
+    let top = Math.floor(this.csPosition / 3) * 220 + 10;
     this.element.nativeElement.style.transform = 'translate3d(' + left + 'px,' + top + 'px, 0)';
     this.element.nativeElement.editorPosition = { left: left, top: top };
   }
