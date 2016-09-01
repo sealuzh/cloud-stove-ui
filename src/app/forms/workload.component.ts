@@ -38,6 +38,7 @@ import {UniversalValidators} from 'ng2-validators';
             <input class="form-control" type="text" formControlName="parallelism" [ngModel]="cpuWorkload.parallelism">
         </div>
       </form>
+      <button class="btn btn-success" (click)="save()" [disabled]="!ramWorkloadForm.valid || !cpuWorkloadForm.valid">Update</button>
     `,
     directives: [REACTIVE_FORM_DIRECTIVES]
 })
@@ -68,23 +69,19 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
 
         this.cpuWorkloadForm.valueChanges
           .filter((value) => this.cpuWorkloadForm.valid)
-          .debounceTime(500)
           .subscribe((value) => {
              this.cpuWorkload['cspu_user_capacity'] = +value['cspu_user_capacity'];
              this.cpuWorkload['parallelism'] = +value['parallelism'];
              this.cpuWorkload['ingredient_id'] = this.ingredient.id;
-             this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => this.cpuWorkload = cpuWorkload, (error) => console.error(error));
           });
 
         this.ramWorkloadForm.valueChanges
           .filter((value) => this.ramWorkloadForm.valid)
-          .debounceTime(500)
           .subscribe((value) => {
              this.ramWorkload['ram_mb_required'] = +value['ram_mb_required'];
              this.ramWorkload['ram_mb_growth_per_user'] = +value['ram_mb_growth_per_user'];
              this.ramWorkload['ram_mb_required_user_capacity'] = +value['ram_mb_required_user_capacity'];
              this.ramWorkload['ingredient_id'] = this.ingredient.id;
-             this._ramWorkloadService.save(this.ramWorkload).subscribe((ramWorkload) => this.ramWorkload = ramWorkload, (error) => console.error(error));
           });
 
     }
@@ -111,6 +108,24 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
       } else {
         this.ramWorkload = {};
       }
+    }
+
+    save() {
+      this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => {
+        this.cpuWorkload = cpuWorkload;
+        if (!this.ingredient.workloads) {
+          this.ingredient.workloads = {};
+        }
+        this.ingredient.workloads.cpu_workload = cpuWorkload;
+      }, (error) => console.error(error));
+
+      this._ramWorkloadService.save(this.ramWorkload).subscribe((ramWorkload) => {
+        this.ramWorkload = ramWorkload;
+        if (!this.ingredient.workloads) {
+          this.ingredient.workloads = {};
+        }
+        this.ingredient.workloads.ram_workload = ramWorkload;
+      }, (error) => console.error(error));
     }
 
 }

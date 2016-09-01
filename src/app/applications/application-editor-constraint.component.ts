@@ -4,7 +4,7 @@ import {Constraint} from '../dtos/constraint.dto';
 @Component({
     selector: 'cs-stove-editor-dependency-constraint',
     template: require('./application-editor-constraint.component.html'),
-    styles: [require('./application-editor-constraint.component.scss')],
+    styles: [require('./application-editor-constraint.component.less')],
     properties: ['constraint']
 })
 

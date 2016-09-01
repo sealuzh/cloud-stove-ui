@@ -8,11 +8,13 @@ import {RequestService} from './services/request';
 import {SidebarComponent} from './sidebar/index';
 import {IngredientService} from './services/ingredient';
 import {ConstraintService} from './services/constraint';
+import {JobService} from './services/job';
+import {RecommendationService} from './services/recommendation';
 import {RAMWorkloadService} from './services/ram-workload';
 import {CPUWorkloadService} from './services/cpu-workload';
-import {UserWorkloadService} from './services/user-workload'; 
+import {UserWorkloadService} from './services/user-workload';
 
-import '../style/app.scss';
+import '../style/app.less';
 
 /*
  * App Component
@@ -21,7 +23,7 @@ import '../style/app.scss';
 @Component({
     selector: 'cs-app',
     template: require('./app.component.html'),
-    styles: [require('./app.component.scss')],
+    styles: [require('./app.component.less')],
     directives: [ROUTER_DIRECTIVES, SidebarComponent],
     providers: [
       HTTP_PROVIDERS,
@@ -31,7 +33,9 @@ import '../style/app.scss';
       ConstraintService,
       RAMWorkloadService,
       CPUWorkloadService,
-      UserWorkloadService
+      UserWorkloadService,
+      JobService,
+      RecommendationService
     ]
 })
 

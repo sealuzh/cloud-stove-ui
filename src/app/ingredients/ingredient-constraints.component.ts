@@ -9,8 +9,6 @@ import {ConstraintService} from '../services/constraint';
 
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
 
-import {CpuConstraintFormComponent} from '../forms/cpu-constraint.component';
-import {RamConstraintFormComponent} from '../forms/ram-constraint.component';
 import {RegionConstraintFormComponent} from '../forms/region-constraint.component';
 
 import {PropertyPipe} from '../shared/property.pipe';
@@ -18,29 +16,22 @@ import {PropertyPipe} from '../shared/property.pipe';
 import {Observable} from 'rxjs/Rx';
 
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
-import {WorkloadFormComponent} from '../forms/workload.component';
 
 @Component({
-    selector: 'cs-ingredient-detail',
-    template: require('./ingredient-detail.component.html'),
-    styles: [require('./ingredient-detail.component.less')],
+    selector: 'cs-ingredient-constraints',
+    template: require('./ingredient-constraints.component.html'),
     directives: [
       REACTIVE_FORM_DIRECTIVES,
       DROPDOWN_DIRECTIVES,
-      CpuConstraintFormComponent,
-      RamConstraintFormComponent,
-      RegionConstraintFormComponent,
-      WorkloadFormComponent
+      RegionConstraintFormComponent
     ],
     pipes: [PropertyPipe]
 })
 
-export class IngredientDetailComponent {
+export class IngredientConstraintsComponent {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
     public constraintFilter: { type: string }[] = [
-      {type: 'CpuConstraint'},
-      {type: 'RamConstraint'},
       {type: 'PreferredRegionAreaConstraint'}
     ];
 
@@ -69,6 +60,7 @@ export class IngredientDetailComponent {
           .filter((value) => this.ingredientForm.valid)
           .subscribe((value) => {
              Object.assign(this.ingredient, value);
+             this.submit(this.ingredient);
           });
 
     }

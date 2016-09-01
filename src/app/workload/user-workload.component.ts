@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnChanges} from '@angular/core';
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-import {Nouislider} from 'ng2-nouislider';
+//import {Nouislider} from 'ng2-nouislider';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {UserWorkloadService} from '../services/user-workload';
@@ -10,7 +10,7 @@ import {UniversalValidators} from 'ng2-validators';
 
 @Component({
     selector: 'cs-user-workload-slider',
-    styles: [require('./user-workload.component.scss')],
+    styles: [require('./user-workload.component.less')],
     template: `
       <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
         <input class="form-control" type="text" formControlName="num_simultaneous_users" [ngModel]="userWorkload.num_simultaneous_users">

@@ -11,7 +11,7 @@ import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     template: require('./template-list.component.html'),
-    styles: [require('./template-list.component.scss')],
+    styles: [require('./template-list.component.less')],
     directives: [CAROUSEL_DIRECTIVES, ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent],
     providers: [IngredientService]
 })
@@ -38,7 +38,7 @@ export class TemplateListComponent implements OnInit {
     instantiate(id: number) {
       this._ingredientService.instantiate(id).subscribe(
         instanciatedIngredient => {
-          this._router.navigate(['ingredients', instanciatedIngredient.id]);
+          this._router.navigate(['applications', instanciatedIngredient.id]);
         },
         error => console.log(error)
       );
