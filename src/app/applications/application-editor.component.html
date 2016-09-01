@@ -9,11 +9,12 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="navbar-btn-group btn-group" *ngIf="editor.ingredient">
-        <button type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">
+        <button *ngIf="editor.ingredient" type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">
           Add Dependency <span class="caret"></span>
         </button>
-      </div>
+        <button  type="button" class="btn btn-primary pull-right" [routerLink]="['/recommendations', editor.application.id]">
+          Recommendations
+        </button>
     </div>
   </div>
 
@@ -75,64 +76,3 @@
 
   </div>
 </div>
-
-<!--
-<div class="navbar navbar-inverse navbar-fixed-top navbar-editor">
-  <div class="container-fluid">
-
-    <div [hidden]="editorMode.type != 'editor'" class="pull-left">
-
-      <div class="navbar-btn-group btn-group" *ngIf="editor.ingredient">
-        <button type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">
-          Add Dependency <span class="caret"></span>
-        </button>
-      </div>
-
-    </div>
-
-    <div [hidden]="editorMode.type != 'recommender'" class="pull-left">
-
-      <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
-        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
-          {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-          <li role="menuitem"  *ngFor='let region of selectableRegions'>
-            <a class="dropdown-item" (click)="changeRegion(region.id)">{{region.name}}</a>
-          </li>
-        </ul>
-      </div>
-
-
-      <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.providerIsOpen">
-        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
-          {{providerConstraint.preferred_providers.length == 0 ? 'Provider' : providerConstraint.preferred_providers.join(', ') }} <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-          <li role="menuitem" *ngFor='let provider of selectableProviders'>
-            <a class="dropdown-item" (click)="selectProvider(provider)">
-              {{providerConstraint.preferred_providers.indexOf(provider) > -1 ? '✓' : '' }} {{provider}}
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <cs-user-workload-slider *ngIf="editor.application" [ingredient]="editor.application"></cs-user-workload-slider>
-
-      <div class="navbar-btn-group btn-group">
-        <button [ngClass]="{'disabled': recommendation.isGenerating}" class="btn btn-primary" (click)="triggerRecommendation(editor.application)">
-          <i [ngClass]="{ 'fa-copy': !recommendation.isGenerating, 'fa-spin': recommendation.isGenerating, 'fa-circle-o-notch': recommendation.isGenerating}" class="fa"></i>
-          Generate Recommendation
-        </button>
-      </div>
-
-    </div>
-
-    <ul class="nav navbar-nav pull-right">
-      <li [ngClass]="{'active': editorMode.type == 'editor'}"><a (click)="changeEditorMode('editor')"><i class="fa fa-edit"></i> Editor</a></li>
-      <li [ngClass]="{'active': editorMode.type == 'recommender'}"><a (click)="changeEditorMode('recommender')"><i class="fa fa-copy"></i> Recommender</a></li>
-    </ul>
-
-  </div>
-</div>
--->
