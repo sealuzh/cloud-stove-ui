@@ -20,6 +20,17 @@
   color: @brand-primary;
 }
 
+// responsive fix using ico-nav
+@media (min-width: @screen-sm) {
+  .container {
+    padding-left: @iconav-width;
+  }
+
+  .container-navbar-top {
+    padding-top: @iconav-width;
+  }
+}
+
 @import './form';
 @import './loading';
 @import './markdown';
