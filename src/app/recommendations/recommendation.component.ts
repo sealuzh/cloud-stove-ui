@@ -17,10 +17,21 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
 import {RecommendationDetailComponent} from './recommendation-detail.component';
 
+import {RecommendationDistributionChartComponent} from './charts/distribution-chart.component';
+import {RecommendationSensitivityChartComponent} from './charts/sensitivity-chart.component';
+
 @Component({
     template: require('./recommendation.component.html'),
     styles: [require('./recommendation.component.less')],
-    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, UserWorkloadSliderComponent, LoadingComponent, RecommendationDetailComponent],
+    directives: [
+        ROUTER_DIRECTIVES,
+        DROPDOWN_DIRECTIVES,
+        UserWorkloadSliderComponent,
+        LoadingComponent,
+        RecommendationDetailComponent,
+        RecommendationDistributionChartComponent,
+        RecommendationSensitivityChartComponent
+    ],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 

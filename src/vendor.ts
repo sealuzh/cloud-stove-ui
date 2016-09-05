@@ -14,5 +14,4 @@ import 'rxjs';
 import 'font-awesome-sass-loader';
 
 // Chart.js
-import 'chart.js';
-import './public/js/chartjs-data-api';
+import 'Chart.js';
