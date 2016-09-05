@@ -1,5 +1,4 @@
 import {Component, OnChanges, Input} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {Recommendation} from './../../dtos/recommendation.dto';
 
@@ -7,7 +6,7 @@ import {Recommendation} from './../../dtos/recommendation.dto';
     selector: 'cs-recommendation-distribution-chart',
     template: require('./distribution-chart.component.html'),
     styles: [require('./distribution-chart.component.less')],
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES]
+    directives: [CHART_DIRECTIVES]
 })
 
 export class RecommendationDistributionChartComponent implements OnChanges {

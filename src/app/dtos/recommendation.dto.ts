@@ -9,4 +9,5 @@ export interface Recommendation extends RestObject {
     updated_at: Date,
     vm_cost: number;
     total_cost: number;
+    num_simultaneous_users: number;
 }

@@ -1,5 +1,4 @@
 import {Component, OnChanges, Input} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {Recommendation} from './../../dtos/recommendation.dto';
 
@@ -7,50 +6,48 @@ import {Recommendation} from './../../dtos/recommendation.dto';
     selector: 'cs-recommendation-sensitivity-chart',
     template: require('./sensitivity-chart.component.html'),
     styles: [require('./sensitivity-chart.component.less')],
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES]
+    directives: [CHART_DIRECTIVES]
 })
 
 export class RecommendationSensitivityChartComponent implements OnChanges {
 
-    @Input()
-    recommendations: Recommendation[];
+  @Input()
+  recommendations: Recommendation[];
 
-    private chartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-    private chartData: number[] = [350, 450, 100];
-    private chartOptions: any = {
-      responsive: true,
-      animation: false,
-      cutoutPercentage: 75,
-      legend: {
-        position: 'left'
-      }
-    };
+  private chartLabels: number[] = [];
+  private chartData: any[] = [{data: [], label: 'Monthly Cost', backgroundColor: '#1CA8DD'}];
 
-    private chartColors: any = [
-      {
-        borderWidth: 5,
-        borderColor: '#252830',
-        backgroundColor: ['#1CA8DD', '#1BC98E', '#9F86FF', '#E4D836', '#E64759', '#aaa', '#fff']
-      }
-    ];
-
-    constructor() {
-
+  private chartOptions: any = {
+    responsive: true,
+    animation: false,
+    cutoutPercentage: 75,
+    legend: {
+      position: 'left'
     }
+  };
 
-    ngOnChanges(changes: any): void {
-      if (changes.recommendations.currentValue) {
-        this.fillChart(changes.recommendations.currentValue);
-      }
+  constructor() {
+
+  }
+
+  ngOnChanges(changes: any): void {
+    if (changes.recommendations.currentValue) {
+      this.fillChart(changes.recommendations.currentValue);
     }
+  }
 
-    fillChart(recommendations: Recommendation[]) {
-      this.chartLabels = [];
-      this.chartData = [];
+  fillChart(recommendationArray: Recommendation[]) {
+    this.chartLabels = [];
+    this.chartData[0].data = [];
 
-      for (let recommendation of recommendations) {
-        
-      }
+    for (let recommendation of recommendationArray.sort((a, b) => { if (a.num_simultaneous_users >= b.num_simultaneous_users) {
+      return 1;
+    } else {
+      return -1;
+    }; })) {
+      this.chartLabels.push(recommendation.num_simultaneous_users);
+      this.chartData[0].data.push(recommendation.vm_cost);
     }
+  }
 
 }
