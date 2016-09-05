@@ -27,6 +27,15 @@ export class RequestService {
         requestOptions.headers.append('Accept', 'application/json');
         requestOptions.headers.append('Content-Type', 'application/json');
 
+
+        if (localStorage.getItem('access-token')) {
+            requestOptions.headers.append('access-token', localStorage.getItem('access-token'));
+            requestOptions.headers.append('token-type', localStorage.getItem('token-type'));
+            requestOptions.headers.append('client', localStorage.getItem('client'));
+            requestOptions.headers.append('uid', localStorage.getItem('uid'));
+            requestOptions.headers.append('expiry', localStorage.getItem('expiry'));
+        }
+
         return requestOptions;
     }
 }

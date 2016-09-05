@@ -31,7 +31,7 @@ export class AuthService {
     }
 
     getUser() {
-        return JSON.parse(localStorage.getItem('colibrief_user'));
+        return localStorage.getItem('uid');
     }
 
     authToken(): string {
