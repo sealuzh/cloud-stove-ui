@@ -14,15 +14,33 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   @Input()
   recommendations: Recommendation[];
 
-  private chartLabels: number[] = [];
-  private chartData: any[] = [{data: [], label: 'Monthly Cost', backgroundColor: '#1CA8DD'}];
+  chartLabels: number[] = [];
+  chartData: any[] = [{
+      data: [],
+      label: 'Monthly Cost',
+      backgroundColor: '#1CA8DD',
+      borderWidth: 0,
+      pointBackgroundColor: '#1CA8DD',
+      pointBorderColor: '#1CA8DD',
+      pointBorderWidth: 1,
+      lineTension: 0,
+      fill: false
+    }];
 
-  private chartOptions: any = {
+  chartOptions: any = {
     responsive: true,
     animation: false,
     cutoutPercentage: 75,
     legend: {
       position: 'left'
+    },
+    scales: {
+      yAxes: [{
+          ticks: {
+            suggestedMin: 100,
+            suggestedMax: 20000
+          }
+      }]
     }
   };
 
@@ -40,11 +58,10 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
     this.chartLabels = [];
     this.chartData[0].data = [];
 
-    for (let recommendation of recommendationArray.sort((a, b) => { if (a.num_simultaneous_users >= b.num_simultaneous_users) {
-      return 1;
-    } else {
-      return -1;
-    }; })) {
+    let array = recommendationArray.slice(0); // clone array to prevent sorting issues
+    array.sort((a, b) => { return a.num_simultaneous_users >= b.num_simultaneous_users ? 1 : -1; });
+
+    for (let recommendation of array) {
       this.chartLabels.push(recommendation.num_simultaneous_users);
       this.chartData[0].data.push(recommendation.vm_cost);
     }
