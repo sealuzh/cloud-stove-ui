@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnChanges} from '@angular/core';
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-//import {Nouislider} from 'ng2-nouislider';
+// import {Nouislider} from 'ng2-nouislider';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {UserWorkloadService} from '../services/user-workload';

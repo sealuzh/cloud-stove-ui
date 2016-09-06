@@ -8,7 +8,6 @@ import {JobService} from '../services/job';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {Constraint} from '../dtos/constraint.dto';
-import {Recommendation} from '../dtos/recommendation.dto';
 
 import {LoadingComponent} from '../shared/loading.component';
 
