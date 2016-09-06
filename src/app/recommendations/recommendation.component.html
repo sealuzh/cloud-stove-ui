@@ -6,17 +6,8 @@
     </div>
   </div>
 
-  <div class="row padded-row">
-    <div class="col-lg-6 col-md-12">
-      <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
-    </div>
-  </div>
-
-  <div class="row padded-row">
-    <div class="col-lg-3 text-center">
+  <div class="row">
+    <div class="col-xs-12">
       <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
         <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
           {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
@@ -41,7 +32,19 @@
         </ul>
       </div>
     </div>
+  </div>
+
+  <div class="row padded-row">
     <div class="col-lg-6 col-md-12">
+      <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
+    </div>
+  </div>
+
+  <div class="row padded-row">
+    <div class="col-offset-lg-1 col-lg-8 col-md-12">
       <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
     </div>
     <div class="col-lg-3 text-center">
