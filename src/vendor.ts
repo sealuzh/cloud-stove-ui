@@ -14,4 +14,4 @@ import 'rxjs';
 import 'font-awesome-sass-loader';
 
 // Chart.js
-import 'Chart.js';
+import 'chart.js';
