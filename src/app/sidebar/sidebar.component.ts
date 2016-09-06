@@ -22,7 +22,7 @@ export class SidebarComponent {
         console.log('Dropdown is now: ', open);
     }
 
-    isUserLoggedIn():boolean {
+    isUserLoggedIn(): boolean {
         return this._auth.isLoggedIn();
     }
 
