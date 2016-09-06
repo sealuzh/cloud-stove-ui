@@ -7,7 +7,7 @@
                 <input class="form-control form-control-padded" type="text" formControlName="email" [ngModel]="register.email">
             </div>
             <div class="form-group" [ngClass]="{'has-error': !registerForm.controls.password.valid && !registerForm.controls.password.pristine}">
-                <label class="form-control-label">Password (at least 8 symbols)</label>
+                <label class="form-control-label">Password (at least 6 symbols)</label>
                 <input class="form-control form-control-padded" type="password" formControlName="password" [ngModel]="register.password">
             </div>
             <div class="form-group" [ngClass]="{'has-error': !registerForm.controls.password_confirm.valid && !registerForm.controls.password_confirm.pristine}">
