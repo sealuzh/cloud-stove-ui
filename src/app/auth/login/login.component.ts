@@ -46,8 +46,13 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this._authService.login(this.login.email, this.login.password).subscribe(
                 result => {
-                    console.log(result);
+                    //TODO: save user
+                    this._router.navigateByUrl('/applications');
+                },
+                error => {
+                    this.error = true;
                 }
+
             );
         }
     }

@@ -20,6 +20,10 @@ export class AuthService {
                         this.handleLogin(result);
                         subscriber.next(result);
                         subscriber.complete();
+                    },
+                    error => {
+                        subscriber.error(error);
+                        subscriber.complete();
                     }
                 );
             }
@@ -37,6 +41,10 @@ export class AuthService {
                     result => {
                         this.handleLogin(result);
                         subscriber.next(result);
+                        subscriber.complete();
+                    },
+                    error => {
+                        subscriber.error(error);
                         subscriber.complete();
                     }
                 );
@@ -66,13 +74,7 @@ export class AuthService {
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
 
-        return this._http.post(url, JSON.stringify(payload), {headers: headers})
-            .catch(err => this.handleError(err));
-    }
-
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return this._http.post(url, JSON.stringify(payload), {headers: headers});
     }
 
     private handleLogin(result: Response) {
