@@ -33,7 +33,7 @@
     "morgan": "^1.7.0",
     "ng2-bootstrap": "1.0.24",
     "ng2-charts": "^1.1.0",
-    "ng2-nouislider": "^0.5.0",
+    "ng2-nouislider": "^0.7.0",
     "ng2-slider-component": "^1.0.8",
     "ng2-validators": "^1.2.1",
     "nouislider": "^8.5.1",
