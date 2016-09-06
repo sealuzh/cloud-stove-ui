@@ -17,10 +17,21 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
 import {RecommendationDetailComponent} from './recommendation-detail.component';
 
+import {RecommendationDistributionChartComponent} from './charts/distribution-chart.component';
+import {RecommendationSensitivityChartComponent} from './charts/sensitivity-chart.component';
+
 @Component({
     template: require('./recommendation.component.html'),
     styles: [require('./recommendation.component.less')],
-    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES, UserWorkloadSliderComponent, LoadingComponent, RecommendationDetailComponent],
+    directives: [
+        ROUTER_DIRECTIVES,
+        DROPDOWN_DIRECTIVES,
+        UserWorkloadSliderComponent,
+        LoadingComponent,
+        RecommendationDetailComponent,
+        RecommendationDistributionChartComponent,
+        RecommendationSensitivityChartComponent
+    ],
     pipes: [SumMonthlyPipe, SumHourlyPipe]
 })
 
@@ -77,7 +88,7 @@ export class RecommendationComponent implements OnInit {
         // fetch recommendations
         this._ingredientService.recommendations(applicationId).subscribe(
           result => {
-            this.recommendations = result.reverse();
+            this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           }, error => console.log(error)
         );
 
@@ -88,7 +99,7 @@ export class RecommendationComponent implements OnInit {
       this.generatingRecommendation = true;
       this._recommendationService.get(this.application.id).subscribe(
         result => {
-          this.recommendations = result.reverse();
+          this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           this.generatingRecommendation = false;
         },
         error => {
