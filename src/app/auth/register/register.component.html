@@ -22,6 +22,13 @@
             <div class="text-right">
                 <button (click)="submit(registerForm)" class="btn btn-primary" [ngClass]="{'btn-success': registerForm.valid}" [disabled]="!registerForm.valid">Register</button>
             </div>
+
+            <div class="alert alert-warning text-center" *ngIf="error != null">
+                <p>
+                    E-Mail already in use!
+                </p>
+            </div>
+
             <hr>
             <p class="text-center">
                 <a [routerLink]="['/login']">Already have an account? Log in here!</a>
