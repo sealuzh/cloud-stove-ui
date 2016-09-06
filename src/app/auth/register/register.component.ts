@@ -22,7 +22,6 @@ export class RegisterComponent {
             'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')])],
             'password': ['', Validators.required],
             'password_confirm': ['', Validators.required],
-            'accept_agb': ['', Validators.required]
         }, {validator: this.matchingPasswords('password', 'password_confirm')});
 
         this.registerForm.valueChanges
@@ -37,19 +36,12 @@ export class RegisterComponent {
     submit(registerForm): void {
         console.log(registerForm.valid);
         if (registerForm.valid) {
-            // this._auth.register(this.register.email, this.register.password).subscribe(
-            //     result => {
-            //         console.log(result);
-            //         this._router.navigate(['login'], {queryParams: {'email': this.register.email}});
-            //     },
-            //     error => {
-            //         console.log(error);
-            //         // 409 already exists
-            //         // 400 bad request
-            //         // generic
-            //     }
-            // )
-
+            this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
+              result => {
+                  console.log(result);
+                  //TODO: do something useful with response
+              }
+            );
         }
     }
 
