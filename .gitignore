@@ -27,3 +27,6 @@ testem.log
 
 #System Files
 .DS_Store
+
+#Build Files
+.wercker
