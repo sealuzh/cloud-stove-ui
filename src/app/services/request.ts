@@ -28,12 +28,12 @@ export class RequestService {
         requestOptions.headers.append('Content-Type', 'application/json');
 
 
-        if (localStorage.getItem('access-token')) {
-            requestOptions.headers.append('access-token', localStorage.getItem('access-token'));
-            requestOptions.headers.append('token-type', localStorage.getItem('token-type'));
-            requestOptions.headers.append('client', localStorage.getItem('client'));
-            requestOptions.headers.append('uid', localStorage.getItem('uid'));
-            requestOptions.headers.append('expiry', localStorage.getItem('expiry'));
+        if (localStorage.getItem('Access-Token')) {
+            requestOptions.headers.append('Access-Token', localStorage.getItem('Access-Token'));
+            requestOptions.headers.append('Token-Type', localStorage.getItem('Token-Type'));
+            requestOptions.headers.append('Client', localStorage.getItem('Client'));
+            requestOptions.headers.append('Uid', localStorage.getItem('Uid'));
+            requestOptions.headers.append('Expiry', localStorage.getItem('Expiry'));
         }
 
         return requestOptions;

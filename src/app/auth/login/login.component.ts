@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
     loginAction() {
         console.log(this.loginForm.valid);
         if (this.loginForm.valid) {
-            // this._authService.login(this.login.email, this.login.password, () => {
-            //     this._router.navigate(['documents']);
-            // }, (err) => {
-            //     this.error = err;
-            // });
+            this._authService.login(this.login.email, this.login.password).subscribe(
+                result => {
+                    console.log(result);
+                }
+            );
         }
     }
 
