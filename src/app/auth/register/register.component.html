@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 card card-form">
+        <h1>Register</h1>
+        <form [formGroup]="registerForm">
+            <div class="form-group" [ngClass]="{'has-error': !registerForm.controls.email.valid && !registerForm.controls.email.pristine}">
+                <label class="form-control-label">E-Mail</label>
+                <input class="form-control form-control-padded" type="text" formControlName="email" [ngModel]="register.email">
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': !registerForm.controls.password.valid && !registerForm.controls.password.pristine}">
+                <label class="form-control-label">Password (at least 8 symbols)</label>
+                <input class="form-control form-control-padded" type="password" formControlName="password" [ngModel]="register.password">
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': !registerForm.controls.password_confirm.valid && !registerForm.controls.password_confirm.pristine}">
+                <label class="form-control-label">Confirm password</label>
+                <input class="form-control form-control-padded" type="password" formControlName="password_confirm" [ngModel]="register.password_confirm">
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="form-control-label">-->
+                    <!--<input type="checkbox" formControlName="accept_agb"> Ich akzeptiere die <a target="_blank" href="http://colibrief.com/agbs/">allgemeinen Geschäftsbedingungen</a>-->
+                <!--</label>-->
+            <!--</div>-->
+            <div class="text-right">
+                <button (click)="submit(registerForm)" class="btn btn-primary" [ngClass]="{'btn-success': registerForm.valid}" [disabled]="!registerForm.valid">Register</button>
+            </div>
+
+            <div class="alert alert-warning text-center" *ngIf="error != null">
+                <p>
+                    E-Mail already in use!
+                </p>
+            </div>
+
+            <hr>
+            <p class="text-center">
+                <a [routerLink]="['/login']">Already have an account? Log in here!</a>
+            </p>
+        </form>
+    </div>
+</div>
