@@ -1,0 +1,22 @@
+<div class="dashhead">
+    <div class="dashhead-titles">
+        <h6 class="dashhead-subtitle">Edit your account or log out.</h6>
+        <h3 class="dashhead-title">My Account</h3>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <div class="row">
+            <p>
+                E-Mail: {{ getUserName() }}
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                <button (click)="logout()" class="btn btn-primary" >Log out</button>
+            </p>
+        </div>
+    </div>
+</div>
