@@ -1,12 +1,13 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
 // Components
-import {WelcomeComponent} from './welcome/welcome.component';
+import {LoginComponent} from './auth/login/login.component';
 
 import {applicationRoutes} from './applications/application.routes';
 import {ingredientRoutes} from './ingredients/ingredient.routes';
 import {recommendationRoutes} from './recommendations/recommendation.routes';
 import {templateRoutes} from './templates/template.routes';
+import {authRoutes} from './auth/auth.routes';
 
 const routes: RouterConfig = [
 
@@ -14,9 +15,10 @@ const routes: RouterConfig = [
   ...ingredientRoutes,
   ...recommendationRoutes,
   ...templateRoutes,
+  ...authRoutes,
 
   // Welcome
-  {path: '**', component: WelcomeComponent},
+  {path: '**', component: LoginComponent},
 
 ];
 
