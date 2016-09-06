@@ -36,7 +36,7 @@
       </li>
       <li *ngIf="isUserLoggedIn()">
         <a href="#" title="Signed in as mdo" data-toggle="tooltip" data-placement="right" data-container="body">
-          <img src="../assets/img/avatar-mdo.png" alt="" class="img-circle img-responsive">
+          <img gravatar [email]="getEmailAddress()" [size]="16"  class="img-circle img-responsive">
           <small class="iconav-nav-label visible-xs-block">@mdo</small>
         </a>
       </li>
