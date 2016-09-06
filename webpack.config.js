@@ -118,10 +118,15 @@ module.exports = function makeWebpackConfig() {
             {
                 test: /\.css$/,
                 exclude: root('src', 'app'),
-                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
+                loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?includePaths[]=' + (path.resolve(__dirname, "./node_modules")))
             },
+
             // all css required in src/app files will be merged in js files
-            {test: /\.css$/, include: root('src', 'app'), loader: 'raw!postcss'},
+            {
+                test: /\.css$/,
+                include: root('src', 'app', 'style'),
+                loader: 'raw!postcss!less?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))
+            },
 
             // support for .less files
             // use 'null' loader in test mode (https://github.com/webpack/null-loader)
@@ -133,11 +138,18 @@ module.exports = function makeWebpackConfig() {
             },
 
             // all css required in src/app files will be merged in js files
-            {test: /\.less$/, exclude: root('src', 'style'), loader: 'raw!postcss!less?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))},
+            {
+              test: /\.less$/,
+              exclude: root('src', 'style'),
+              loader: 'raw!postcss!less?includePaths[]=' + (path.resolve(__dirname, "./node_modules"))
+            },
 
             // support for .html as raw text
             // todo: change the loader to something that adds a hash to images
-            {test: /\.html$/, loader: 'raw'}
+            {
+              test: /\.html$/,
+              loader: 'raw'
+            }
         ],
         postLoaders: [],
         noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
