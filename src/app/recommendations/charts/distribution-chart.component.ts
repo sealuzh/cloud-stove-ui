@@ -21,7 +21,7 @@ export class RecommendationDistributionChartComponent implements OnChanges {
       animation: false,
       cutoutPercentage: 75,
       legend: {
-        position: 'left'
+        position: 'top'
       }
     };
 
