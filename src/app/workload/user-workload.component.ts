@@ -1,23 +1,26 @@
 import {Component, Input, OnInit, OnChanges} from '@angular/core';
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-// import {Nouislider} from 'ng2-nouislider';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 import {UserWorkloadService} from '../services/user-workload';
 import {UserWorkload} from '../dtos/workload/user-workload.dto';
 
 import {UniversalValidators} from 'ng2-validators';
+import {Nouislider} from 'ng2-nouislider';
 
 @Component({
     selector: 'cs-user-workload-slider',
     styles: [require('./user-workload.component.less')],
     template: `
       <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
-        <input class="form-control" type="text" formControlName="num_simultaneous_users" [ngModel]="userWorkload.num_simultaneous_users">
-        <span> Users</span>
+        <input type="hidden" formControlName="ingredient_id" [ngModel]="ingredient.id">
+        <nouislider formControlName="num_simultaneous_users" [connect]="lower" [min]="0" [max]="50000" [step]="50" [(ngModel)]="userWorkload.num_simultaneous_users"></nouislider>
+        <div class="text-center">
+          {{ userWorkload.num_simultaneous_users }} concurrent users
+        </div>
       </form>
     `,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    directives: [REACTIVE_FORM_DIRECTIVES, Nouislider]
 })
 
 export class UserWorkloadSliderComponent implements OnInit, OnChanges {
@@ -26,22 +29,20 @@ export class UserWorkloadSliderComponent implements OnInit, OnChanges {
     ingredient: Ingredient;
 
     userWorkload: UserWorkload = {num_simultaneous_users: 100}; // default
-
     userWorkloadForm;
 
     constructor(private _fb: FormBuilder, private _userWorkloadService: UserWorkloadService) {
 
       this.userWorkloadForm = this._fb.group({
           'num_simultaneous_users': ['', Validators.compose([Validators.required, UniversalValidators.isNumber])],
+          'ingredient_id': ['', Validators.compose([Validators.required, UniversalValidators.isNumber])],
       });
 
       this.userWorkloadForm.valueChanges
         .filter((value) => this.userWorkloadForm.valid)
         .debounceTime(500)
         .subscribe((value) => {
-           this.userWorkload['num_simultaneous_users'] = +value['num_simultaneous_users'];
-           this.userWorkload['ingredient_id'] = this.ingredient.id;
-           this._userWorkloadService.save(this.userWorkload).subscribe((cpuWorkload) => this.userWorkload = cpuWorkload, (error) => console.error(error));
+           this._userWorkloadService.save(this.userWorkload).subscribe((cpuWorkload) => { }, (error) => console.error(error));
         });
 
     }
@@ -52,6 +53,7 @@ export class UserWorkloadSliderComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: any): void {
       if (changes.ingredient) {
+        this.userWorkload['ingredient_id'] = changes.ingredient.id;
         this.loadWorkload();
       }
     }

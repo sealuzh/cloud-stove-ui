@@ -32,7 +32,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
     animation: false,
     cutoutPercentage: 75,
     legend: {
-      position: 'left'
+      position: 'top'
     },
     scales: {
       yAxes: [{

@@ -15,3 +15,6 @@ import 'font-awesome-sass-loader';
 
 // Chart.js
 import 'chart.js';
+
+// nouislider css
+import 'nouislider/distribute/nouislider.min.css';

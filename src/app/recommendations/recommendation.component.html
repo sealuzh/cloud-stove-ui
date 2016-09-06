@@ -6,9 +6,17 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-12">
+  <div class="row padded-row">
+    <div class="col-lg-6 col-md-12">
+      <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
+    </div>
+  </div>
 
+  <div class="row padded-row">
+    <div class="col-lg-3 text-center">
       <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
         <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
           {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
@@ -32,23 +40,15 @@
           </li>
         </ul>
       </div>
-
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
+    </div>
+    <div class="col-lg-3 text-center">
       <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
         <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
         Generate Recommendation
       </button>
-
-      <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-6">
-      <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
-    </div>
-    <div class="col-lg-6">
-      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
     </div>
   </div>
 
