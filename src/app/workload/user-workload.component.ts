@@ -43,7 +43,7 @@ export class UserWorkloadSliderComponent implements OnChanges {
         .debounceTime(500)
         .subscribe((value) => {
            console.log(this.userWorkload);
-           //this._userWorkloadService.save(this.userWorkload).subscribe((cpuWorkload) => { }, (error) => console.error(error));
+           this._userWorkloadService.save(this.userWorkload).subscribe((cpuWorkload) => { }, (error) => console.error(error));
         });
 
     }

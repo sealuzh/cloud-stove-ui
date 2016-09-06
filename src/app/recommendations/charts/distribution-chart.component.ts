@@ -15,7 +15,7 @@ export class RecommendationDistributionChartComponent implements OnChanges {
     recommendation: Recommendation;
 
     chartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-    chartData: number[] = [350, 450, 100];
+    chartData: number[];
     chartOptions: any = {
       responsive: true,
       animation: false,

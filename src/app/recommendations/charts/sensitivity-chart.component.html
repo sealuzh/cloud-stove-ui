@@ -1,4 +1,4 @@
-<base-chart class="line-chart"
+<base-chart *ngIf="chartLabels" class="line-chart"
     [datasets]="chartData"
     [labels]="chartLabels"
     [chartType]="'line'"
