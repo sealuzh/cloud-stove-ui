@@ -14,6 +14,7 @@ import {AuthService} from '../../services/auth';
 export class RegisterComponent {
 
     registerForm;
+    error: any = null;
     private register: {account_type?: string, email?: string, password?: string, password_confirm?: string} = {};
 
     constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
@@ -37,10 +38,13 @@ export class RegisterComponent {
         console.log(registerForm.valid);
         if (registerForm.valid) {
             this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
-              result => {
-                  console.log(result);
-                  //TODO: do something useful with response
-              }
+                result => {
+                    //TODO: save user
+                    this._router.navigateByUrl('/applications');
+                },
+                error => {
+                    this.error = true;
+                }
             );
         }
     }
