@@ -14,9 +14,9 @@ export class RecommendationDistributionChartComponent implements OnChanges {
     @Input()
     recommendation: Recommendation;
 
-    private chartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-    private chartData: number[] = [350, 450, 100];
-    private chartOptions: any = {
+    chartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+    chartData: number[] = [350, 450, 100];
+    chartOptions: any = {
       responsive: true,
       animation: false,
       cutoutPercentage: 75,
@@ -25,7 +25,7 @@ export class RecommendationDistributionChartComponent implements OnChanges {
       }
     };
 
-    private chartColors: any = [
+    chartColors: any = [
       {
         borderWidth: 5,
         borderColor: '#252830',

@@ -88,7 +88,7 @@ export class RecommendationComponent implements OnInit {
         // fetch recommendations
         this._ingredientService.recommendations(applicationId).subscribe(
           result => {
-            this.recommendations = result.reverse();
+            this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           }, error => console.log(error)
         );
 
@@ -99,7 +99,7 @@ export class RecommendationComponent implements OnInit {
       this.generatingRecommendation = true;
       this._recommendationService.get(this.application.id).subscribe(
         result => {
-          this.recommendations = result.reverse();
+          this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           this.generatingRecommendation = false;
         },
         error => {
