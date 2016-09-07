@@ -60,14 +60,19 @@ export class IngredientDetailComponent {
             'body': ['']
         });
 
+        this.ingredientForm.valueChanges
+          .filter((value) => this.ingredientForm.valid)
+          .subscribe((value) => {
+            this.ingredient.name = value.name;
+            this.ingredient.body = value.body;
+          });
+
     }
 
     submit(ingredientObj: Ingredient) {
-      console.log(ingredientObj);
       this._ingredientService.save(ingredientObj).subscribe(result => {
         this.ingredient.name = result.name;
         this.ingredient.body = result.body;
-        console.log(this.ingredient);
       }, error => console.error(error));
     }
 
