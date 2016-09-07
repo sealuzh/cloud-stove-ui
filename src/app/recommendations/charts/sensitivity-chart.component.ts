@@ -35,11 +35,9 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
       position: 'top'
     },
     scales: {
-      yAxes: [{
-          ticks: {
-            suggestedMin: 100,
-            suggestedMax: 20000
-          }
+      xAxes: [{
+          type: 'linear',
+          position: 'bottom'
       }]
     }
   };
@@ -66,7 +64,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
 
     for (let recommendation of array) {
       this.chartLabels.push(recommendation.num_simultaneous_users);
-      this.chartData[0].data.push(recommendation.vm_cost);
+      this.chartData[0].data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
     }
   }
 
