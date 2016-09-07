@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {ConfigService} from './configs';
-
 
 @Injectable()
 export class AuthService {
@@ -11,7 +10,7 @@ export class AuthService {
     }
 
     register(email: string, password: string, password_confirmation: string): Observable<any>  {
-        let user = {email: email, password: password, password_confirmation:password_confirmation, confirm_success_url:''};
+        let user = {email: email, password: password, password_confirmation: password_confirmation, confirm_success_url: ''};
         let headers = new Headers();
 
         return Observable.create( subscriber => {
@@ -33,7 +32,7 @@ export class AuthService {
 
 
     login(email: string, password: string): Observable<any> {
-        let user = {email: email, password: password, confirm_success_url:''};
+        let user = {email: email, password: password, confirm_success_url: ''};
         let headers = new Headers();
 
         return Observable.create( subscriber => {
@@ -70,16 +69,14 @@ export class AuthService {
         return localStorage.getItem('Access-Token');
     }
 
-    private POST(headers: Headers, payload: any, url:string): Observable<any> {
+    private POST(headers: Headers, payload: any, url: string): Observable<any> {
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
-
         return this._http.post(url, JSON.stringify(payload), {headers: headers});
     }
 
     private handleLogin(result: Response) {
         let response_headers = result.headers;
-        console.log(result.headers);
         localStorage.setItem('Access-Token', response_headers.get('Access-Token'));
         localStorage.setItem('Token-Type', response_headers.get('Token-Type'));
         localStorage.setItem('Client', response_headers.get('Client'));

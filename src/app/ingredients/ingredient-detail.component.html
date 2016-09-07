@@ -18,6 +18,7 @@
             <textarea class="form-control" formControlName="body" [ngModel]="ingredient.body"></textarea>
         </div>
 
+        <!--
         <div class="btn-group" dropdown [(isOpen)]="constraintDropdown.isOpen">
           <button type="button" class="btn btn-primary" dropdownToggle>
             Add Constraint <span class="caret"></span>
@@ -39,6 +40,7 @@
             </li>
            </ul>
         </div>
+        -->
 
         <div class="form-group">
             <button (click)="submit(ingredient)" class="btn btn-success" [disabled]="!ingredientForm.valid">Save</button>
