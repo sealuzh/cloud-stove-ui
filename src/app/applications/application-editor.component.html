@@ -25,6 +25,7 @@
           <div class="application-editor" csConnection>
 
             <div class="zoom-controls" *ngIf="editor.ingredient">
+              <!--
               <button class="btn btn-primary" (click)="zoomIn()" *ngIf="editor.ingredient.children.length > 0">
                 <i class="fa fa-search-plus"></i>
               </button>
@@ -32,6 +33,7 @@
               <button class="btn btn-primary" (click)="zoomOut()" *ngIf="editor.ingredient.parent_id && editor.ingredient.parent_id !== application.id">
                 <i class="fa fa-search-minus"></i>
               </button>
+              -->
             </div>
 
             <cs-stove-editor-dependency-constraint

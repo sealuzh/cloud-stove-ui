@@ -49,11 +49,6 @@ export class IngredientDetailComponent {
     @Input()
     ingredient: Ingredient;
 
-    @Output() ingredientChange: any = new EventEmitter(); updateData(event) {
-      this.ingredient = event;
-      this.ingredientChange.emit(event);
-    }
-
     constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
@@ -65,31 +60,15 @@ export class IngredientDetailComponent {
             'body': ['']
         });
 
-        this.ingredientForm.valueChanges
-          .filter((value) => this.ingredientForm.valid)
-          .subscribe((value) => {
-             Object.assign(this.ingredient, value);
-          });
-
     }
 
     submit(ingredientObj: Ingredient) {
-        let updates = [];
-
-        for (let constraint of ingredientObj.constraints) {
-          updates.push(this._constraintService.save(constraint));
-        }
-
-        updates.push(this._ingredientService.save(ingredientObj));
-
-        if (updates.length > 0) {
-          Observable.forkJoin(updates).subscribe(result => {
-            this.updateData(ingredientObj);
-          });
-        } else {
-          this.updateData(ingredientObj);
-        }
-
+      console.log(ingredientObj);
+      this._ingredientService.save(ingredientObj).subscribe(result => {
+        this.ingredient.name = result.name;
+        this.ingredient.body = result.body;
+        console.log(this.ingredient);
+      }, error => console.error(error));
     }
 
     addConstraint(constraintType: string) {

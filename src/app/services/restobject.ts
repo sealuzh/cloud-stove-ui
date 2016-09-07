@@ -49,7 +49,7 @@ export class RestObjectService {
         // ignore certain attributes when POST/PUT
         if (this.ignoreAttributes) {
           for (let attribute of this.ignoreAttributes) {
-            delete restObj[attribute];
+            delete saveObject[attribute];
           }
         }
 
