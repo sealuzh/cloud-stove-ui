@@ -35,9 +35,19 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
       position: 'top'
     },
     scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: '$/month'
+        }
+      }],
       xAxes: [{
           type: 'linear',
-          position: 'bottom'
+          position: 'bottom',
+          scaleLabel: {
+            display: true,
+            labelString: 'Users'
+          }
       }]
     }
   };
