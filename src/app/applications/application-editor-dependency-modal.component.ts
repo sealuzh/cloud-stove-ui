@@ -61,6 +61,7 @@ export class StoveEditorDependencyModalComponent {
     private addedDependency(constraint: Constraint) {
         this.source.constraints.push(constraint);
         this.add.emit(constraint);
+        this.modal.hide();
         this._ref.markForCheck();
     }
 
