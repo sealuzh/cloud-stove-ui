@@ -38,6 +38,7 @@ import {RecommendationSensitivityChartComponent} from './charts/sensitivity-char
 export class RecommendationComponent implements OnInit {
 
     public application: Ingredient;
+    public selectedRecommendation: Recommendation;
     public recommendations: Recommendation[];
     public generatingRecommendation: boolean = false;
 
@@ -89,6 +90,7 @@ export class RecommendationComponent implements OnInit {
         this._ingredientService.recommendations(applicationId).subscribe(
           result => {
             this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
+            this.selectedRecommendation = this.recommendations[0];
           }, error => console.log(error)
         );
 

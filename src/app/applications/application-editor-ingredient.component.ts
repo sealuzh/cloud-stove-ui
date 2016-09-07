@@ -33,7 +33,10 @@ export class StoveEditorIngredientComponent {
     }
 
     hasChildren() {
-      return this.ingredient.children.length > 0;
+      if (this.ingredient.children) {
+        return this.ingredient.children.length > 0;
+      }
+      return false;
     }
 
     isHigh() {

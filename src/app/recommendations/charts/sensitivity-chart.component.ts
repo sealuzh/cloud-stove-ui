@@ -14,7 +14,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   @Input()
   recommendations: Recommendation[];
 
-  chartLabels: number[] = [];
+  chartLabels: number[];
   chartData: any[] = [{
       data: [],
       label: 'Monthly Cost',
@@ -36,9 +36,17 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
     },
     scales: {
       yAxes: [{
-          ticks: {
-            suggestedMin: 100,
-            suggestedMax: 20000
+        scaleLabel: {
+          display: true,
+          labelString: '$/month'
+        }
+      }],
+      xAxes: [{
+          type: 'linear',
+          position: 'bottom',
+          scaleLabel: {
+            display: true,
+            labelString: 'Users'
           }
       }]
     }
@@ -55,15 +63,18 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   }
 
   fillChart(recommendationArray: Recommendation[]) {
-    this.chartLabels = [];
-    this.chartData[0].data = [];
+
+    if (recommendationArray.length > 0) {
+      this.chartLabels = [];
+      this.chartData[0].data = [];
+    }
 
     let array = recommendationArray.slice(0); // clone array to prevent sorting issues
     array.sort((a, b) => { return a.num_simultaneous_users >= b.num_simultaneous_users ? 1 : -1; });
 
     for (let recommendation of array) {
       this.chartLabels.push(recommendation.num_simultaneous_users);
-      this.chartData[0].data.push(recommendation.vm_cost);
+      this.chartData[0].data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
     }
   }
 

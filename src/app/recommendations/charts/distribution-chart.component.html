@@ -1,4 +1,4 @@
-<base-chart class="distribution-chart"
+<base-chart *ngIf="chartData" class="distribution-chart"
     [data]="chartData"
     [labels]="chartLabels"
     [chartType]="'doughnut'"
