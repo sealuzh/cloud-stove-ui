@@ -59,14 +59,14 @@ export class StoveEditorDependencyModalComponent {
     }
 
     private addedDependency(constraint: Constraint) {
-        this.source.constraints.push(constraint);
-        this.add.emit(constraint);
-        this._ref.markForCheck();
-        this.modal.hide();
+      this.source.constraints.push(constraint);
+      this.add.emit(constraint);
+      this._ref.markForCheck();
+      this.modal.hide();
     }
 
     selectDependency(ingredient: Ingredient) {
-        this.targetIngredient = ingredient;
+      this.targetIngredient = ingredient;
     }
 
 }
