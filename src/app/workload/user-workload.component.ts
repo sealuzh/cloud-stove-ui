@@ -42,8 +42,7 @@ export class UserWorkloadSliderComponent implements OnChanges {
         .filter((value) => this.userWorkloadForm.valid)
         .debounceTime(500)
         .subscribe((value) => {
-           console.log(this.userWorkload);
-           this._userWorkloadService.save(this.userWorkload).subscribe((cpuWorkload) => { }, (error) => console.error(error));
+           this._userWorkloadService.save(this.userWorkload).subscribe((userWorkload) => { this.userWorkload = userWorkload }, (error) => console.error(error));
         });
 
     }
@@ -56,7 +55,7 @@ export class UserWorkloadSliderComponent implements OnChanges {
 
     private loadWorkload() {
       this.userWorkload.ingredient_id = this.ingredient.id;
-      if (this.ingredient.workloads.user_workload) {
+      if (this.ingredient.workloads && this.ingredient.workloads.user_workload) {
         this._userWorkloadService.get(this.ingredient.workloads.user_workload.id).subscribe((userWorkload) => this.userWorkload = userWorkload, (error) => console.error(error));
       }
   }
