@@ -73,6 +73,7 @@
           <tr>
               <th>Monthly Cost</th>
               <th>Created At</th>
+              <th>Provider</th>
               <th># Users</th>
               <th></th>
           </tr>
@@ -80,7 +81,8 @@
           <tbody>
           <tr *ngFor="let recommendation of recommendations" (click)="selectedRecommendation = recommendation" [ngClass]="{'active': selectedRecommendation === recommendation}">
               <td>{{ recommendation.status === 'satisfiable' ? recommendation.vm_cost + '$' : 'No solution found!'}}</td>
-              <td>{{ recommendation.created_at | date: 'medium' }}</td>
+              <td>{{ recommendation.status === 'satisfiable' ? (recommendation.created_at | date: 'medium'): '---' }}</td>
+              <td>{{ recommendation.status === 'satisfiable' ? recommendation.recommendation[0].resource.provider:'---' }} </td>
               <td>{{ recommendation.num_simultaneous_users }}</td>
               <td>
 
