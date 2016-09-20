@@ -72,12 +72,14 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
       this.chartLabels.push(recommendation.num_simultaneous_users);
 
       let providerName = recommendation.recommendation[0].resource.provider;
-      let data = this.chartData.filter((obj) => obj.label === providerName);
+      let regionName = recommendation.recommendation[0].resource.region_area;
+      
+      let data = this.chartData.filter((obj) => obj.label === providerName + ' [' + regionName + ']');
 
       if (data.length === 0) {
         let newProvider = {
           data: [],
-          label: providerName,
+          label: providerName + ' [' + regionName + ']',
           backgroundColor: '#1CA8DD',
           borderWidth: 0,
           pointBackgroundColor: '#1CA8DD',
