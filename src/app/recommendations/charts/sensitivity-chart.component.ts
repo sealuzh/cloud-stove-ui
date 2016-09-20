@@ -37,13 +37,17 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
           scaleLabel: {
             display: true,
             labelString: 'Users'
+          },
+          gridLines: {
+            color: '#6f7890'
           }
       }]
     }
   };
 
   constructor() {
-
+    Chart.defaults.global.defaultFontColor = '#6f7890';
+    Chart.defaults.global.defaultFontSize = 14;
   }
 
   ngOnChanges(changes: any): void {
@@ -73,7 +77,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
 
       let providerName = recommendation.recommendation[0].resource.provider;
       let regionName = recommendation.recommendation[0].resource.region_area;
-      
+
       let data = this.chartData.filter((obj) => obj.label === providerName + ' [' + regionName + ']');
 
       if (data.length === 0) {
