@@ -12,13 +12,18 @@ import {Nouislider} from 'ng2-nouislider';
     selector: 'cs-user-workload-slider',
     styles: [require('./user-workload.component.less')],
     template: `
-      <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
-        <input type="hidden" formControlName="ingredient_id" [(ngModel)]="userWorkload.ingredient_id">
-        <nouislider [config]="sliderConfig" formControlName="num_simultaneous_users" [connect]="lower" [min]="0" [max]="50000" [step]="50" [(ngModel)]="userWorkload.num_simultaneous_users"></nouislider>
-        <div class="text-center">
-          {{ userWorkload.num_simultaneous_users }} concurrent users
+      <div class="row">
+        <div class="col-xs-12">
+          <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
+            <input type="hidden" formControlName="ingredient_id" [(ngModel)]="userWorkload.ingredient_id">
+            <!--
+            <nouislider [config]="sliderConfig" formControlName="num_simultaneous_users" [connect]="lower" [min]="0" [max]="50000" [step]="50" [ngModel]="userWorkload.num_simultaneous_users"></nouislider>
+            -->
+            <input style="width: 150px" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
+            Users
+          </form>
         </div>
-      </form>
+      </div>
     `,
     directives: [REACTIVE_FORM_DIRECTIVES, Nouislider]
 })
@@ -29,7 +34,6 @@ export class UserWorkloadSliderComponent implements OnChanges {
     ingredient: Ingredient;
 
     sliderConfig: any = {};
-
     userWorkload: UserWorkload = {num_simultaneous_users: 100}; // default
     userWorkloadForm;
 
