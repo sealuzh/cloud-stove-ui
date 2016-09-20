@@ -40,19 +40,16 @@
   </div>
 
   <div class="row padded-row">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-12">
       <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
     </div>
   </div>
 
   <div class="row padded-row">
-    <div class="col-offset-lg-1 col-lg-8 col-md-12">
+    <div class="col-lg-8">
       <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
     </div>
-    <div class="col-lg-3 text-center">
+    <div class="col-lg-4 text-right">
       <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
         <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
         Generate Recommendation
@@ -92,6 +89,7 @@
       </table>
     </div>
     <div class="col-lg-6">
+      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
       <cs-recommendation-detail [recommendation]="selectedRecommendation"></cs-recommendation-detail>
     </div>
   </div>
