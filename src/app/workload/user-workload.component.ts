@@ -19,7 +19,7 @@ import {Nouislider} from 'ng2-nouislider';
             <!--
             <nouislider [config]="sliderConfig" formControlName="num_simultaneous_users" [connect]="lower" [min]="0" [max]="50000" [step]="50" [ngModel]="userWorkload.num_simultaneous_users"></nouislider>
             -->
-            <input style="width: 150px" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
+            <input style="width: 150px; text-align: center;" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
             Users
           </form>
         </div>
