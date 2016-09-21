@@ -58,13 +58,15 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
 
   fillChart(recommendationArray: Recommendation[]) {
 
-    if (recommendationArray.length > 0) {
-      this.chartLabels = [];
-      this.chartData = [];
-    }
-
     let array = recommendationArray.slice(0).filter((obj) => { return obj.status === 'satisfiable'; }); // clone array to prevent sorting issues
     array.sort((a, b) => { return a.num_simultaneous_users >= b.num_simultaneous_users ? 1 : -1; });
+
+    if (array.length > 0) {
+      this.chartLabels = [];
+      this.chartData = [];
+    } else {
+      return;
+    }
 
     let providers = array.map((obj) => {
       return obj.recommendation[0].resource.provider;
