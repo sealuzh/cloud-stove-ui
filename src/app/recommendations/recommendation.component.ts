@@ -54,7 +54,7 @@ export class RecommendationComponent implements OnInit {
       {id: 'SA', name: 'South America'}
     ];
 
-    public selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace'];
+    public selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace', 'Joyent'];
 
     constructor(
       private _ingredientService: IngredientService,
