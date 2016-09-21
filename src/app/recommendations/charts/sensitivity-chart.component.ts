@@ -15,17 +15,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   recommendations: Recommendation[];
 
   chartLabels: number[];
-  chartData: any[] = [{
-      data: [],
-      label: 'Monthly Cost',
-      backgroundColor: '#1CA8DD',
-      borderWidth: 0,
-      pointBackgroundColor: '#1CA8DD',
-      pointBorderColor: '#1CA8DD',
-      pointBorderWidth: 1,
-      lineTension: 0,
-      fill: false
-    }];
+  chartData: any[] = [];
 
   chartOptions: any = {
     responsive: true,
@@ -47,13 +37,17 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
           scaleLabel: {
             display: true,
             labelString: 'Users'
+          },
+          gridLines: {
+            color: '#6f7890'
           }
       }]
     }
   };
 
   constructor() {
-
+    Chart.defaults.global.defaultFontColor = '#6f7890';
+    Chart.defaults.global.defaultFontSize = 14;
   }
 
   ngOnChanges(changes: any): void {
@@ -66,15 +60,44 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
 
     if (recommendationArray.length > 0) {
       this.chartLabels = [];
-      this.chartData[0].data = [];
+      this.chartData = [];
     }
 
-    let array = recommendationArray.slice(0); // clone array to prevent sorting issues
+    let array = recommendationArray.slice(0).filter((obj) => { return obj.status === 'satisfiable'; }); // clone array to prevent sorting issues
     array.sort((a, b) => { return a.num_simultaneous_users >= b.num_simultaneous_users ? 1 : -1; });
+
+    let providers = array.map((obj) => {
+      return obj.recommendation[0].resource.provider;
+    });
+
+    providers = providers.filter((v,i) => { return providers.indexOf(v) === i; });
 
     for (let recommendation of array) {
       this.chartLabels.push(recommendation.num_simultaneous_users);
-      this.chartData[0].data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
+
+      let providerName = recommendation.recommendation[0].resource.provider;
+      let regionName = recommendation.recommendation[0].resource.region_area;
+
+      let data = this.chartData.filter((obj) => obj.label === providerName + ' [' + regionName + ']');
+
+      if (data.length === 0) {
+        let newProvider = {
+          data: [],
+          label: providerName + ' [' + regionName + ']',
+          backgroundColor: '#1CA8DD',
+          borderWidth: 0,
+          pointBackgroundColor: '#1CA8DD',
+          pointBorderColor: '#1CA8DD',
+          pointBorderWidth: 1,
+          lineTension: 0,
+          fill: false
+        };
+        newProvider.data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
+        this.chartData.push(newProvider);
+      } else if (data.length > 0) {
+        data[0].data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
+      }
+
     }
   }
 

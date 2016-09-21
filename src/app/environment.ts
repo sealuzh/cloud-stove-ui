@@ -3,5 +3,6 @@
 // The build system defaults to the dev environment
 
 export const environment = {
-  production: process.env.ENV === 'build' ? true : false
+  production: process.env.ENV === 'build' ? true : false,
+  USERBACK_TOKEN: process.env.USERBACK_TOKEN
 };

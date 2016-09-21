@@ -5,22 +5,26 @@
         <th>Recommendation</th>
         <th>Hourly Cost</th>
         <th>Monthly Cost</th>
-        <th>Region</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let recommendation of recommendation.recommendation">
         <td>{{recommendation.ingredient.name}}</td>
         <td>
-          <span class="label label-default" [ngClass]="['label-' + recommendation.resource.provider.replace(' ','')]">{{recommendation.resource.provider}}</span><br>
+          <span class="label label-default" [ngClass]="['label-' + recommendation.resource.provider.replace(' ','')]">
+            {{recommendation.resource.provider}}
+          </span>
+          <span style="margin-left: 3px" class="label label-default">
+            {{recommendation.resource.region_area}}
+          </span>
+          <br>
           <small>
             {{recommendation.resource.name}}<br>
             {{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM
           </small>
         </td>
-        <td>{{recommendation.resource.price_per_hour}}$</td>
-        <td>{{recommendation.resource.price_per_month}}$</td>
-        <td>{{recommendation.resource.region_area}}</td>
+        <td>{{recommendation.resource.price_per_hour}} $</td>
+        <td>{{recommendation.resource.price_per_month}} $</td>
     </tr>
     </tbody>
     <tfoot>
