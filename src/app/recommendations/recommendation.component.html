@@ -40,19 +40,16 @@
   </div>
 
   <div class="row padded-row">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-12">
       <cs-recommendation-sensitivity-chart [recommendations]="recommendations"></cs-recommendation-sensitivity-chart>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
     </div>
   </div>
 
   <div class="row padded-row">
-    <div class="col-offset-lg-1 col-lg-8 col-md-12">
+    <div class="col-lg-8">
       <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
     </div>
-    <div class="col-lg-3 text-center">
+    <div class="col-lg-4 text-right">
       <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
         <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
         Generate Recommendation
@@ -73,23 +70,24 @@
           <tr>
               <th>Monthly Cost</th>
               <th>Created At</th>
+              <th>Provider</th>
               <th># Users</th>
-              <th></th>
+              <th>Region</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let recommendation of recommendations" (click)="selectedRecommendation = recommendation" [ngClass]="{'active': selectedRecommendation === recommendation}">
               <td>{{ recommendation.status === 'satisfiable' ? recommendation.vm_cost + '$' : 'No solution found!'}}</td>
-              <td>{{ recommendation.created_at | date: 'medium' }}</td>
+              <td>{{ recommendation.status === 'satisfiable' ? (recommendation.created_at | date: 'medium'): '---' }}</td>
+              <td>{{ recommendation.status === 'satisfiable' ? recommendation.recommendation[0].resource.provider: '---' }} </td>
               <td>{{ recommendation.num_simultaneous_users }}</td>
-              <td>
-
-              </td>
+              <td>{{ recommendation.recommendation.length > 0 ? recommendation.recommendation[0].resource.region_area : '---' }}</td>
           </tr>
           </tbody>
       </table>
     </div>
     <div class="col-lg-6">
+      <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
       <cs-recommendation-detail [recommendation]="selectedRecommendation"></cs-recommendation-detail>
     </div>
   </div>

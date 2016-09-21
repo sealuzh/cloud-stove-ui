@@ -86,6 +86,7 @@ module.exports = function makeWebpackConfig() {
     config.module = {
         preLoaders: isTest ? [] : [{test: /\.ts$/, loader: 'tslint'}],
         loaders: [
+
             // Support for .ts files.
             {
                 test: /\.ts$/,
@@ -176,7 +177,8 @@ module.exports = function makeWebpackConfig() {
         new webpack.DefinePlugin({
             // Environment helpers
             'process.env': {
-              ENV: JSON.stringify(ENV)
+              ENV: JSON.stringify(ENV),
+              USERBACK_TOKEN: JSON.stringify(process.env.USERBACK_TOKEN)
             }
         }),
 
