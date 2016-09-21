@@ -57,8 +57,27 @@ export class AuthService {
         localStorage.clear();
     }
 
-    isLoggedIn(): boolean {
+    tokenPresent(): boolean {
         return localStorage.getItem('Access-Token') != null;
+    }
+
+    validate(): Observable<any> {
+        if (this.tokenPresent()){
+            let headers = new Headers();
+            headers.append('Access-Token', localStorage.getItem('Access-Token'));
+            headers.append('Token-Type', localStorage.getItem('Token-Type'));
+            headers.append('Client', localStorage.getItem('Client'));
+            headers.append('Expiry', localStorage.getItem('Expiry'));
+            headers.append('Uid', localStorage.getItem('Uid'));
+            return this._http.get(this._config.apiUrl + '/api/auth/validate_token',{headers: headers});
+        }else{
+            return Observable.create(observer => {
+                // Yield a single value and complete
+                observer.error('invalid');
+                observer.complete();
+                return
+            });
+        }
     }
 
     getUser() {

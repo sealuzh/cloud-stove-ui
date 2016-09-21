@@ -1,6 +1,6 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component, ViewContainerRef, OnInit} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 // Services
 import {ConfigService} from './services/configs';
@@ -13,6 +13,7 @@ import {RecommendationService} from './services/recommendation';
 import {RAMWorkloadService} from './services/ram-workload';
 import {CPUWorkloadService} from './services/cpu-workload';
 import {UserWorkloadService} from './services/user-workload';
+import {AuthService} from './services/auth';
 
 import '../style/app.less';
 
@@ -35,16 +36,35 @@ import '../style/app.less';
       CPUWorkloadService,
       UserWorkloadService,
       JobService,
-      RecommendationService
+      RecommendationService,
+      AuthService
     ]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
 
     viewContainerRef: any;
+    authService: any;
+    router: any;
 
-    constructor(viewContainerRef: ViewContainerRef) {
-      this.viewContainerRef = viewContainerRef;
+    constructor(viewContainerRef: ViewContainerRef, authService: AuthService, router: Router) {
+        this.viewContainerRef = viewContainerRef;
+        this.authService = authService;
+        this.router = router;
+    }
+
+    ngOnInit(): any {
+        //check if token is still valid
+
+        this.authService.validate().subscribe(
+          result =>{
+              this.router.navigateByUrl('/applications');
+          },
+          error => {
+              this.router.navigateByUrl('/login');
+          }
+        );
+        return undefined;
     }
 
 }

@@ -23,7 +23,7 @@ export class SidebarComponent {
     }
 
     isUserLoggedIn(): boolean {
-        return this._auth.isLoggedIn();
+        return this._auth.tokenPresent();
     }
 
     getEmailAddress(): string {
