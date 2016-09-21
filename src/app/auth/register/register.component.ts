@@ -15,14 +15,16 @@ export class RegisterComponent {
 
     registerForm;
     error: any = null;
+    errorMessage: string;
+
     private register: {account_type?: string, email?: string, password?: string, password_confirm?: string} = {};
 
     constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
 
         this.registerForm = this._fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')])],
-            'password': ['', Validators.required],
-            'password_confirm': ['', Validators.required],
+            'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+            'password_confirm': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
         }, {validator: this.matchingPasswords('password', 'password_confirm')});
 
         this.registerForm.valueChanges
@@ -43,6 +45,16 @@ export class RegisterComponent {
                     this._router.navigateByUrl('/applications');
                 },
                 error => {
+                    let errorType = error['_body'].constructor.name;
+                    if(errorType === 'String'){
+                        let errors = JSON.parse(error['_body']);
+                        if(errors.hasOwnProperty('errors')){
+                            this.errorMessage = errors['errors']['full_messages'][0];
+                        }
+                    }else{
+                        this.errorMessage = 'Something went wrong. Check your Internet connection!';
+                    }
+
                     this.error = true;
                 }
             );

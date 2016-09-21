@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     loginForm;
     login: {email?: string, password?: string} = {};
     error: any = null;
+    errormessage: string;
 
     constructor(private _router: Router, private _fb: FormBuilder, private _authService: AuthService, private _activatedRoute: ActivatedRoute) {
 
@@ -50,6 +51,16 @@ export class LoginComponent implements OnInit {
                     this._router.navigateByUrl('/applications');
                 },
                 error => {
+                    let errorType = error['_body'].constructor.name;
+                    if(errorType === 'String'){
+                        let errors = JSON.parse(error['_body']);
+                        if(errors.hasOwnProperty('errors')){
+                            this.errormessage = 'Please check your E-Mail and password.';
+                        }
+                    }else{
+                        this.errormessage = 'Something went wrong. Check your Internet connection!';
+                    }
+
                     this.error = true;
                 }
             );
