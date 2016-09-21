@@ -21,8 +21,8 @@ export class RegisterComponent {
 
         this.registerForm = this._fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')])],
-            'password': ['', Validators.required],
-            'password_confirm': ['', Validators.required],
+            'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+            'password_confirm': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
         }, {validator: this.matchingPasswords('password', 'password_confirm')});
 
         this.registerForm.valueChanges
