@@ -3,11 +3,12 @@ import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 import {ControlGroup} from '@angular/common';
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
 import {AuthService} from '../../services/auth';
+import {IngredientService} from '../../services/ingredient';
 
 @Component({
     template: require('./register.component.html'),
     styles: [require('./register.component.less')],
-    providers: [AuthService],
+    providers: [AuthService, IngredientService],
     directives: [REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES],
 })
 
@@ -19,7 +20,7 @@ export class RegisterComponent {
 
     private register: {account_type?: string, email?: string, password?: string, password_confirm?: string} = {};
 
-    constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
+    constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _ingredients: IngredientService) {
 
         this.registerForm = this._fb.group({
             'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')])],
@@ -41,9 +42,16 @@ export class RegisterComponent {
         if (registerForm.valid) {
             this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
                 result => {
-                    //TODO: save user
-                    //TODO: redirect to recommendation of first application, means, get list of applications via REST
-                    this._router.navigateByUrl('/applications');
+                    this._ingredients.applications().subscribe(
+                        ingredients => {
+                            let firstIngredient = ingredients[0];
+                            this._router.navigateByUrl('/recommendations/' + firstIngredient.id);
+                        },
+                        error => {
+                            this._router.navigateByUrl('/applications');
+                            console.log(error);
+                        }
+                    );
                 },
                 error => {
                     let errorType = error['_body'].constructor.name;
