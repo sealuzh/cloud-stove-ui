@@ -8,10 +8,14 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-12">
-        <button *ngIf="editor.ingredient" type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">
-          Add Dependency <span class="caret"></span>
-        </button>
+    <div class="col-lg-6">
+      <button (click)="openAppNameModal()" type="button" class="btn btn-default pull-left">Change app name</button>
+    </div>
+    <div class="col-lg-6">
+        <!--<button *ngIf="editor.ingredient" type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">-->
+          <!--Add Dependency <span class="caret"></span>-->
+        <!--</button>-->
+
         <button  type="button" class="btn btn-primary pull-right" [routerLink]="['/recommendations', editor.application.id]">
           Recommendations
         </button>
@@ -75,6 +79,36 @@
       [source]="editor.ingredient"
       [targets]="editor.application.children">
      </cs-stove-editor-dependency-modal>
+
+    <div bsModal #changeAppNameModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" (click)="changeAppNameModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Edit the application name:</h4>
+          </div>
+
+          <div class="modal-body">
+            <form [formGroup]="changeNameForm">
+              <div class="form-group">
+                <label class="form-control-label">New application name</label>
+                <input class="form-control form-control-padded" type="text" formControlName="appName" [ngModel]="changeName.appName">
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <div class="text-right">
+              <button (click)="changeAppName()" class="btn btn-primary" [ngClass]="{'btn-success': changeNameForm.valid}" [disabled]="!changeNameForm.valid">Change</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>

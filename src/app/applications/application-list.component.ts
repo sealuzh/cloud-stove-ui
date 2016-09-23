@@ -47,6 +47,16 @@ export class ApplicationListComponent implements OnInit {
       );
     }
 
+    deleteIngredient(ingredient: any) {
+        this._ingredientService.delete(ingredient).subscribe(
+            result => {
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
+
     countConstraints(ingredient: Ingredient, count?: number): number {
       if (!count) {
         count = ingredient.constraints.length;
