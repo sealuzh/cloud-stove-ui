@@ -36,7 +36,11 @@
                 <button [ngClass]="{'disabled': ingredient.isCopying}" class="btn btn-xs btn-info" (click)="copyIngredient(ingredient)">
                   <i [ngClass]="{'fa-copy': !ingredient.isCopying, 'fa-spin': ingredient.isCopying, 'fa-circle-o-notch': ingredient.isCopying}" class="fa"></i> Copy
                 </button>
+                <button class="btn btn-xs btn-danger" (click)="deleteIngredient(ingredient)">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
               </td>
+
           </tr>
           </tbody>
       </table>
