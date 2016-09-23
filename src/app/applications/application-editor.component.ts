@@ -24,6 +24,8 @@ import {PropertyPipe} from '../shared/property.pipe';
 import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 import {IngredientConstraintsComponent} from './../ingredients/ingredient-constraints.component';
+import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
+
 
 @Component({
     template: require('./application-editor.component.html'),
@@ -40,7 +42,8 @@ import {IngredientConstraintsComponent} from './../ingredients/ingredient-constr
       LoadingComponent,
       ConnectionDirective,
       IngredientDetailComponent,
-      IngredientConstraintsComponent
+      IngredientConstraintsComponent,
+      REACTIVE_FORM_DIRECTIVES
     ],
     viewProviders: [BS_VIEW_PROVIDERS],
     pipes: [PropertyPipe],
@@ -54,11 +57,27 @@ export class ApplicationEditorComponent implements OnInit {
 
     @ViewChild(StoveEditorDependencyModalComponent) stoveEditorDependencyModalComponent: StoveEditorDependencyModalComponent;
 
+    @ViewChild('changeAppNameModal') modal: any;
+
+    changeNameForm;
+    changeName: {appName?: string} = {};
+
     constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
       private _ref: ChangeDetectorRef,
-      private _route: ActivatedRoute) {
+      private _route: ActivatedRoute,
+      private _fb : FormBuilder) {
+
+        this.changeNameForm = this._fb.group({
+            'appName': ['', Validators.compose([Validators.required])],
+        });
+
+        this.changeNameForm.valueChanges
+            .filter((value) => this.changeNameForm.valid)
+            .subscribe((value) => {
+                this.changeName['appName'] = value['appName'];
+            });
 
     }
 
@@ -106,6 +125,19 @@ export class ApplicationEditorComponent implements OnInit {
             },
             error => console.log(error)
         );
+    }
+
+    openAppNameModal(){
+        this.modal.show();
+    }
+
+    changeAppName(){
+        this.modal.hide();
+        this.application.name = this.changeName.appName;
+        this._ingredientService.save(this.application).subscribe(result => {
+            this.application = result;
+            console.log(this.application);
+        }, error => console.error(error));
     }
 
     private extractConstraints(ingredient: Ingredient): Constraint[] {
