@@ -10,8 +10,15 @@
         <p>
             E-Mail: {{ getUserName() }}
         </p>
-        <p>
-            <button (click)="logout()" class="btn btn-primary" >Log out</button>
-        </p>
+        <hr>
+        <div class="row">
+            <div class="col-xs-6">
+                <p>
+                    <button (click)="logout()" class="btn btn-primary" >Log out</button>
+                    <button [routerLink]="['/password']" class="btn btn-primary" >Change password</button>
+                    <!--<button (click)="logout()" class="btn btn-primary" >Delete account</button>-->
+                </p>
+            </div>
+        </div>
     </div>
 </div>
