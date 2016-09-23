@@ -26,7 +26,7 @@ export class UserComponent {
 
     logout() {
         this._auth.logout();
-        this._router.navigate(['/']);
+        this._router.navigate(['/goodbye']);
     }
 
     showDeleteAccountModal(){
@@ -39,7 +39,7 @@ export class UserComponent {
             result =>{
                 let status = JSON.parse(result['_body']);
                 if(status['status']==='success'){
-                    this._router.navigateByUrl('/login');
+                    this._router.navigateByUrl('/goodbye');
                 }else{
                     alert('Something went wrong during account deletion. Please contact the administrators.');
                 }
