@@ -9,6 +9,62 @@ export class AuthService {
     constructor(private _http: Http, private _config: ConfigService) {
     }
 
+    changePassword(password: string, password_confirmation: string){
+        let user = {password: password, password_confirmation: password_confirmation};
+        let headers = new Headers();
+
+        if (localStorage.getItem('Access-Token')) {
+            headers.append('Access-Token', localStorage.getItem('Access-Token'));
+            headers.append('Token-Type', localStorage.getItem('Token-Type'));
+            headers.append('Client', localStorage.getItem('Client'));
+            headers.append('Uid', localStorage.getItem('Uid'));
+            headers.append('Expiry', localStorage.getItem('Expiry'));
+        }
+
+        return Observable.create( subscriber => {
+                this.PUT(headers, user, this._config.apiUrl + '/api/auth/password').subscribe(
+                    result => {
+                        this.handleLogin(result);
+                        subscriber.next(result);
+                        subscriber.complete();
+                    },
+                    error => {
+                        subscriber.error(error);
+                        subscriber.complete();
+                    }
+                );
+            }
+        );
+
+    }
+
+    deleteAccount(){
+        let headers = new Headers();
+
+        if (localStorage.getItem('Access-Token')) {
+            headers.append('Access-Token', localStorage.getItem('Access-Token'));
+            headers.append('Token-Type', localStorage.getItem('Token-Type'));
+            headers.append('Client', localStorage.getItem('Client'));
+            headers.append('Uid', localStorage.getItem('Uid'));
+            headers.append('Expiry', localStorage.getItem('Expiry'));
+        }
+
+        return Observable.create( subscriber => {
+                this.DELETE(headers, this._config.apiUrl + '/api/auth/').subscribe(
+                    result => {
+                        this.logout();
+                        subscriber.next(result);
+                        subscriber.complete();
+                    },
+                    error => {
+                        subscriber.error(error);
+                        subscriber.complete();
+                    }
+                );
+            }
+        );
+    }
+
     register(email: string, password: string, password_confirmation: string): Observable<any>  {
         let user = {email: email, password: password, password_confirmation: password_confirmation, confirm_success_url: ''};
         let headers = new Headers();
@@ -92,6 +148,20 @@ export class AuthService {
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
         return this._http.post(url, JSON.stringify(payload), {headers: headers});
+    }
+
+    private DELETE(headers: Headers, url: string): Observable<any> {
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        return this._http.delete(url, {headers: headers});
+    }
+
+
+
+    private PUT(headers: Headers, payload: any, url: string): Observable<any> {
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        return this._http.put(url, JSON.stringify(payload), {headers: headers});
     }
 
     private handleLogin(result: Response) {
