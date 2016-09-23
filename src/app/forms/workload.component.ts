@@ -5,6 +5,7 @@ import {Ingredient} from '../dtos/ingredient.dto';
 
 import {CPUWorkloadService} from '../services/cpu-workload';
 import {RAMWorkloadService} from '../services/ram-workload';
+import {IngredientService} from '../services/ingredient';
 
 import {CPUWorkload} from '../dtos/workload/cpu-workload.dto';
 import {RAMWorkload} from '../dtos/workload/ram-workload.dto';
@@ -39,7 +40,7 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
     cpuWorkloadForm;
     ramWorkloadForm;
 
-    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService) {
+    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService, private _ingredientService : IngredientService) {
 
     }
 
@@ -106,7 +107,18 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
     }
 
     beforeSave() {
-        this.modal.show();
+        this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
+            hasRecommendations =>{
+                if(hasRecommendations){
+                    this.modal.show();
+                }else{
+                    this.save();
+                }
+            },
+            error => {
+               console.log(error);
+            }
+        )
     }
 
     save() {
