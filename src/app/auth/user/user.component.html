@@ -10,8 +10,41 @@
         <p>
             E-Mail: {{ getUserName() }}
         </p>
-        <p>
-            <button (click)="logout()" class="btn btn-primary" >Log out</button>
-        </p>
+        <hr>
+        <div class="row">
+            <div class="col-xs-6">
+                <p>
+                    <button (click)="logout()" class="btn btn-primary" >Log out</button>
+                    <button [routerLink]="['/password']" class="btn btn-primary" >Change password</button>
+                    <button (click)="showDeleteAccountModal()" class="btn btn-primary" >Delete account</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #deleteAccountModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" (click)="deleteAccountModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Warning</h4>
+            </div>
+
+            <div class="modal-body">
+                Are you sure that you want to delete your account? You will lose all your recommendations!
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="deleteAccount()">
+                    Delete
+                </button>
+            </div>
+
+        </div>
     </div>
 </div>
