@@ -1,46 +1,29 @@
-import {Component, Input, OnInit, OnChanges} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, ViewChild} from '@angular/core';
 import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
 
 import {Ingredient} from '../dtos/ingredient.dto';
 
 import {CPUWorkloadService} from '../services/cpu-workload';
 import {RAMWorkloadService} from '../services/ram-workload';
+import {IngredientService} from '../services/ingredient';
 
 import {CPUWorkload} from '../dtos/workload/cpu-workload.dto';
 import {RAMWorkload} from '../dtos/workload/ram-workload.dto';
 
 import {UniversalValidators} from 'ng2-validators';
 
+import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+
+
 @Component({
     selector: 'cs-workload-form',
-    template: `
-      <form [formGroup]="ramWorkloadForm" *ngIf="ramWorkloadForm">
-        <div class="form-group">
-            <label class="form-control-label">Minimum RAM:</label>
-            <input class="form-control" type="text" name="ram_mb_required" [(ngModel)]="ramWorkload.ram_mb_required">
-        </div>
-        <div class="form-group">
-            <label class="form-control-label">User Capacity for Minimum RAM:</label>
-            <input class="form-control" type="text" name="ram_mb_required_user_capacity" [(ngModel)]="ramWorkload.ram_mb_required_user_capacity">
-        </div>
-        <div class="form-group">
-            <label class="form-control-label">RAM Growth per User:</label>
-            <input class="form-control" type="text" name="ram_mb_growth_per_user" [(ngModel)]="ramWorkload.ram_mb_growth_per_user">
-        </div>
-      </form>
-      <form [formGroup]="cpuWorkloadForm" *ngIf="cpuWorkloadForm">
-        <div class="form-group">
-            <label class="form-control-label">User Capacity for 1 CPU:</label>
-            <input class="form-control" type="text" name="cspu_user_capacity" [(ngModel)]="cpuWorkload.cspu_user_capacity">
-        </div>
-        <div class="form-group">
-            <label class="form-control-label">Parallelism:</label>
-            <input class="form-control" type="text" name="parallelism" [(ngModel)]="cpuWorkload.parallelism">
-        </div>
-      </form>
-      <button class="btn btn-success" (click)="save()" *ngIf="cpuWorkloadForm && ramWorkloadForm" [disabled]="!ramWorkloadForm.valid || !cpuWorkloadForm.valid">Update</button>
-    `,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template: require('./workload.component.html'),
+    directives: [
+        REACTIVE_FORM_DIRECTIVES,
+        MODAL_DIRECTIVES,
+        DROPDOWN_DIRECTIVES
+    ],
+    viewProviders: [BS_VIEW_PROVIDERS]
 })
 
 export class WorkloadFormComponent implements OnInit, OnChanges {
@@ -48,13 +31,16 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
     @Input()
     ingredient: Ingredient;
 
+    @ViewChild('deleteModal') modal: any;
+
+
     cpuWorkload: CPUWorkload = {};
     ramWorkload: RAMWorkload = {};
 
     cpuWorkloadForm;
     ramWorkloadForm;
 
-    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService) {
+    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService, private _ingredientService : IngredientService) {
 
     }
 
@@ -120,7 +106,23 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
       }
     }
 
+    beforeSave() {
+        this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
+            hasRecommendations =>{
+                if(hasRecommendations){
+                    this.modal.show();
+                }else{
+                    this.save();
+                }
+            },
+            error => {
+               console.log(error);
+            }
+        )
+    }
+
     save() {
+      this.modal.hide();
       this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => {
         this.cpuWorkload = cpuWorkload;
         if (!this.ingredient.workloads) {
