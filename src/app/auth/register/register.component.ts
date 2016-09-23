@@ -42,6 +42,7 @@ export class RegisterComponent {
             this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
                 result => {
                     //TODO: save user
+                    //TODO: redirect to recommendation of first application, means, get list of applications via REST
                     this._router.navigateByUrl('/applications');
                 },
                 error => {
