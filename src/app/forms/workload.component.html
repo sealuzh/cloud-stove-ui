@@ -1,0 +1,53 @@
+<form [formGroup]="ramWorkloadForm" *ngIf="ramWorkloadForm">
+    <div class="form-group">
+        <label class="form-control-label">Minimum RAM:</label>
+        <input class="form-control" type="text" name="ram_mb_required" [(ngModel)]="ramWorkload.ram_mb_required">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">User Capacity for Minimum RAM:</label>
+        <input class="form-control" type="text" name="ram_mb_required_user_capacity" [(ngModel)]="ramWorkload.ram_mb_required_user_capacity">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">RAM Growth per User:</label>
+        <input class="form-control" type="text" name="ram_mb_growth_per_user" [(ngModel)]="ramWorkload.ram_mb_growth_per_user">
+    </div>
+</form>
+<form [formGroup]="cpuWorkloadForm" *ngIf="cpuWorkloadForm">
+    <div class="form-group">
+        <label class="form-control-label">User Capacity for 1 CPU:</label>
+        <input class="form-control" type="text" name="cspu_user_capacity" [(ngModel)]="cpuWorkload.cspu_user_capacity">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Parallelism:</label>
+        <input class="form-control" type="text" name="parallelism" [(ngModel)]="cpuWorkload.parallelism">
+    </div>
+</form>
+<button class="btn btn-success" (click)="beforeSave()" *ngIf="cpuWorkloadForm && ramWorkloadForm" [disabled]="!ramWorkloadForm.valid || !cpuWorkloadForm.valid">Update</button>
+
+
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Warning</h4>
+            </div>
+
+            <div class="modal-body">
+                If you change the workloads of an application after you have already generated recommendations, the recommendations
+                will be invalidated and deleted.
+                Are you sure that you want to do this?
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="save()">
+                    Confirm and delete recommendations
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
