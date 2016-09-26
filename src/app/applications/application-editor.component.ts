@@ -136,7 +136,6 @@ export class ApplicationEditorComponent implements OnInit {
         this.application.name = this.changeName.appName;
         this._ingredientService.save(this.application).subscribe(result => {
             this.application = result;
-            console.log(this.application);
         }, error => console.error(error));
     }
 
