@@ -12,6 +12,8 @@ import {Constraint} from '../dtos/constraint.dto';
 import {SumMonthlyPipe} from './sumMonthly.pipe';
 import {SumHourlyPipe} from './sumHourly.pipe';
 
+import {TimeAgoPipe} from 'angular2-moment';
+
 import {LoadingComponent} from '../shared/loading.component';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
@@ -32,7 +34,7 @@ import {RecommendationSensitivityChartComponent} from './charts/sensitivity-char
         RecommendationDistributionChartComponent,
         RecommendationSensitivityChartComponent
     ],
-    pipes: [SumMonthlyPipe, SumHourlyPipe]
+    pipes: [SumMonthlyPipe, SumHourlyPipe, TimeAgoPipe]
 })
 
 export class RecommendationComponent implements OnInit {
@@ -108,6 +110,13 @@ export class RecommendationComponent implements OnInit {
           console.log(error);
           this.generatingRecommendation = false;
         }
+      );
+    }
+
+    removeRecommendation(recommendation: Recommendation) {
+      this._recommendationService.delete(recommendation).subscribe(
+        result => this.recommendations.splice(this.recommendations.indexOf(recommendation), 1),
+        error => console.log(error)
       );
     }
 
