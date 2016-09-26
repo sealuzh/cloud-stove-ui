@@ -73,15 +73,17 @@
               <th>Provider</th>
               <th># Users</th>
               <th>Region</th>
+              <th></th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let recommendation of recommendations" (click)="selectedRecommendation = recommendation" [ngClass]="{'active': selectedRecommendation === recommendation}">
               <td>{{ recommendation.status === 'satisfiable' ? recommendation.vm_cost + '$' : 'No solution found!'}}</td>
-              <td>{{ recommendation.status === 'satisfiable' ? (recommendation.created_at | date: 'medium'): '---' }}</td>
+              <td>{{ recommendation.status === 'satisfiable' ? (recommendation.created_at | amTimeAgo ): '---' }}</td>
               <td>{{ recommendation.status === 'satisfiable' ? recommendation.recommendation[0].resource.provider: '---' }} </td>
               <td>{{ recommendation.num_simultaneous_users }}</td>
               <td>{{ recommendation.recommendation.length > 0 ? recommendation.recommendation[0].resource.region_area : '---' }}</td>
+              <td><i class="fa fa-trash" (click)="removeRecommendation(recommendation)"></i></td>
           </tr>
           </tbody>
       </table>

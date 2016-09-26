@@ -40,7 +40,7 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
     cpuWorkloadForm;
     ramWorkloadForm;
 
-    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService, private _ingredientService : IngredientService) {
+    constructor(private _fb: FormBuilder, private _cpuWorkloadService: CPUWorkloadService, private _ramWorkloadService: RAMWorkloadService, private _ingredientService: IngredientService) {
 
     }
 
@@ -122,22 +122,23 @@ export class WorkloadFormComponent implements OnInit, OnChanges {
     }
 
     save() {
-      this.modal.hide();
-      this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => {
-        this.cpuWorkload = cpuWorkload;
-        if (!this.ingredient.workloads) {
-          this.ingredient.workloads = {};
-        }
-        this.ingredient.workloads.cpu_workload = cpuWorkload;
-      }, (error) => console.error(error));
+      if(this.ramWorkloadForm.valid && this.cpuWorkloadForm.valid){
+          this.modal.hide();
+          this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => {
+              this.cpuWorkload = cpuWorkload;
+              if (!this.ingredient.workloads) {
+                  this.ingredient.workloads = {};
+              }
+              this.ingredient.workloads.cpu_workload = cpuWorkload;
+          }, (error) => console.error(error));
 
-      this._ramWorkloadService.save(this.ramWorkload).subscribe((ramWorkload) => {
-        this.ramWorkload = ramWorkload;
-        if (!this.ingredient.workloads) {
-          this.ingredient.workloads = {};
-        }
-        this.ingredient.workloads.ram_workload = ramWorkload;
-      }, (error) => console.error(error));
+          this._ramWorkloadService.save(this.ramWorkload).subscribe((ramWorkload) => {
+              this.ramWorkload = ramWorkload;
+              if (!this.ingredient.workloads) {
+                  this.ingredient.workloads = {};
+              }
+              this.ingredient.workloads.ram_workload = ramWorkload;
+          }, (error) => console.error(error));
+      }
     }
-
 }

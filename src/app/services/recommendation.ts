@@ -7,11 +7,16 @@ import {Recommendation} from '../dtos/recommendation.dto';
 import {JobService} from './job';
 import {IngredientService} from './ingredient';
 
+import {Http} from '@angular/http';
+import {ConfigService} from './configs';
+import {RestObjectService} from './restobject';
+import {RequestService} from './request';
+
 @Injectable()
-export class RecommendationService {
+export class RecommendationService extends RestObjectService {
 
-    constructor(private _ingredientService: IngredientService, private _jobService: JobService) {
-
+    constructor(private _ingredientService: IngredientService, private _jobService: JobService,  http: Http, configs: ConfigService, request: RequestService) {
+        super(http, configs, 'recommendation', request, null);
     }
 
     get(ingredientId: number): Observable<Recommendation[]> {

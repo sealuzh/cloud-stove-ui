@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 
 import {Ingredient} from '../dtos/ingredient.dto';
@@ -17,7 +17,7 @@ import {PropertyPipe} from '../shared/property.pipe';
 
 import {Observable} from 'rxjs/Rx';
 
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+import {DROPDOWN_DIRECTIVES, MODAL_DIRECTIVES, ModalDirective} from 'ng2-bootstrap';
 import {WorkloadFormComponent} from '../forms/workload.component';
 
 @Component({
@@ -27,6 +27,7 @@ import {WorkloadFormComponent} from '../forms/workload.component';
     directives: [
       REACTIVE_FORM_DIRECTIVES,
       DROPDOWN_DIRECTIVES,
+      MODAL_DIRECTIVES,
       CpuConstraintFormComponent,
       RamConstraintFormComponent,
       RegionConstraintFormComponent,
@@ -49,6 +50,8 @@ export class IngredientDetailComponent {
     @Input()
     ingredient: Ingredient;
 
+    @ViewChild('workloadForm') workloadForm: WorkloadFormComponent;
+
     constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
@@ -70,6 +73,7 @@ export class IngredientDetailComponent {
     }
 
     submit(ingredientObj: Ingredient) {
+      this.workloadForm.save();
       this._ingredientService.save(ingredientObj).subscribe(result => {
         this.ingredient.name = result.name;
         this.ingredient.body = result.body;
