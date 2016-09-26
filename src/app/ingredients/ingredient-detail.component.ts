@@ -59,12 +59,13 @@ export class IngredientDetailComponent {
       private _fb: FormBuilder) {
 
         this.ingredientForm = this._fb.group({
-            'name': ['', Validators.required],
-            'body': ['']
+            'name': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+            'body': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
         });
 
         this.ingredientForm.valueChanges
           .filter((value) => this.ingredientForm.valid)
+          .debounceTime(500)
           .subscribe((value) => {
             this.ingredient.name = value.name;
             this.ingredient.body = value.body;
