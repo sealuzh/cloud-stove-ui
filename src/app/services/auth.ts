@@ -166,10 +166,10 @@ export class AuthService {
 
     private handleLogin(result: Response) {
         let response_headers = result.headers;
-        localStorage.setItem('Access-Token', response_headers.get('Access-Token'));
-        localStorage.setItem('Token-Type', response_headers.get('Token-Type'));
-        localStorage.setItem('Client', response_headers.get('Client'));
-        localStorage.setItem('Expiry', response_headers.get('Expiry'));
-        localStorage.setItem('Uid', response_headers.get('Uid'));
+        localStorage.setItem('Access-Token', response_headers.get('Access-Token') ? response_headers.get('Access-Token') : response_headers.get('access-token'));
+        localStorage.setItem('Token-Type', response_headers.get('Token-Type') ? response_headers.get('Token-Type') : response_headers.get('token-type'));
+        localStorage.setItem('Client', response_headers.get('Client') ? response_headers.get('Client') : response_headers.get('client'));
+        localStorage.setItem('Expiry', response_headers.get('Expiry') ? response_headers.get('Expiry') : response_headers.get('expiry'));
+        localStorage.setItem('Uid', response_headers.get('Uid') ? response_headers.get('Uid') : response_headers.get('uid'));
     }
 }
