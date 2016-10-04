@@ -16,10 +16,7 @@ import {Nouislider} from 'ng2-nouislider';
         <div class="col-xs-12">
           <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
             <input type="hidden" formControlName="ingredient_id" [(ngModel)]="userWorkload.ingredient_id">
-            <!--
-            <nouislider [config]="sliderConfig" formControlName="num_simultaneous_users" [connect]="lower" [min]="0" [max]="50000" [step]="50" [ngModel]="userWorkload.num_simultaneous_users"></nouislider>
-            -->
-            <input style="width: 150px; text-align: center;" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
+            <input [disabled]="disabled" style="width: 150px; text-align: center;" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
             Users
           </form>
         </div>
@@ -32,6 +29,9 @@ export class UserWorkloadSliderComponent implements OnChanges {
 
     @Input()
     ingredient: Ingredient;
+
+    @Input()
+    disabled: boolean = false;
 
     sliderConfig: any = {};
     userWorkload: UserWorkload = {num_simultaneous_users: 100}; // default
