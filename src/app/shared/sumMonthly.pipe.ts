@@ -7,7 +7,7 @@ export class SumMonthlyPipe implements PipeTransform {
   transform(value: {ingredient: Ingredient, resource: Resource}[]): number {
     let monthlyCosts = 0;
     for (let recommendation of value) {
-      monthlyCosts += +recommendation.resource.price_per_month;
+      monthlyCosts += recommendation.resource_count * recommendation.resource.price_per_month;
     }
     return Math.round(monthlyCosts * 100) / 100;
   }
