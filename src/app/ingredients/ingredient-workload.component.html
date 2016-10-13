@@ -1,3 +1,9 @@
+<form [formGroup]="scalingWorkloadForm" *ngIf="scalingWorkloadForm">
+  <div class="form-group">
+    <label class="form-control-label">Scale component horizontally</label>
+    <input class="form-control" type="checkbox" name="scale_ingredient" [(ngModel)]="scalingWorkload.scale_ingredient">
+  </div>
+</form>
 <form [formGroup]="ramWorkloadForm" *ngIf="ramWorkloadForm">
     <div class="form-group">
         <label class="form-control-label">Minimum RAM:</label>
@@ -24,7 +30,6 @@
 </form>
 
 <button class="btn btn-success" (click)="beforeSave()" *ngIf="cpuWorkloadForm && ramWorkloadForm" [disabled]="!ramWorkloadForm.valid || !cpuWorkloadForm.valid">Update</button>
-
 
 <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
