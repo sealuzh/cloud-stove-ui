@@ -7,6 +7,7 @@ export interface Constraint extends RestObject {
     target_id?: number;
     min_cpus?: number;
     min_ram?: number;
+    max_num_instances?: number;
     preferred_region_area?: string;
     preferred_providers?: string[];
 }

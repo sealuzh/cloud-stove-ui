@@ -5,11 +5,12 @@ import { Ingredient } from '../api/dtos/ingredient.dto';
 
 import { CPUWorkload } from '../api/dtos/workload/cpu-workload.dto';
 import { RAMWorkload } from '../api/dtos/workload/ram-workload.dto';
+import { ScalingWorkload } from '../api/dtos/workload/scaling-workload.dto';
 
 import { CPUWorkloadService } from '../api/services/cpu-workload.service';
 import { RAMWorkloadService } from '../api/services/ram-workload.service';
 import { IngredientService } from '../api/services/ingredient.service';
-
+import { ScalingWorkloadService } from '../api/services/scaling-workload.service';
 import { UniversalValidators } from 'ng2-validators';
 
 @Component({
@@ -26,14 +27,17 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
 
     cpuWorkload: CPUWorkload = {};
     ramWorkload: RAMWorkload = {};
+    scalingWorkload: ScalingWorkload = {};
 
     cpuWorkloadForm;
     ramWorkloadForm;
+    scalingWorkloadForm;
 
     constructor(
       private _fb: FormBuilder,
       private _cpuWorkloadService: CPUWorkloadService,
       private _ramWorkloadService: RAMWorkloadService,
+      private _scalingWorkloadService: ScalingWorkloadService,
       private _ingredientService: IngredientService) {
 
     }
@@ -80,6 +84,18 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
         });
     }
 
+    initScalingForm() {
+      this.scalingWorkloadForm = this._fb.group({
+        'scale_ingredient': [this.scalingWorkload.scale_ingredient, Validators.compose([Validators.required])]
+      });
+
+      this.scalingWorkloadForm.valueChanges
+        .filter((value) => this.scalingWorkloadForm.valid)
+        .subscribe((value) => {
+          this.scalingWorkload['scale_ingredient'] = value['scale_ingredient'];
+        });
+    }
+
     private loadWorkloads() {
       if (this.ingredient.workloads && this.ingredient.workloads.cpu_workload) {
         this._cpuWorkloadService.get(this.ingredient.workloads.cpu_workload.id).subscribe((cpuWorkload) => {
@@ -97,6 +113,15 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
         }, (error) => console.error(error));
       } else {
         this.ramWorkload = {};
+      }
+
+      if (this.ingredient.workloads && this.ingredient.workloads.scaling_workload) {
+        this._scalingWorkloadService.get(this.ingredient.workloads.scaling_workload.id).subscribe((scalingWorkload) => {
+          this.scalingWorkload = scalingWorkload;
+          this.initScalingForm();
+        }, (error) => console.error(error));
+      } else {
+        this.scalingWorkload = {};
       }
     }
 
@@ -116,7 +141,7 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
     }
 
     save() {
-      if (this.ramWorkloadForm.valid && this.cpuWorkloadForm.valid) {
+      if (this.ramWorkloadForm.valid && this.cpuWorkloadForm.valid && this.scalingWorkloadForm.valid) {
           this.modal.hide();
           this._cpuWorkloadService.save(this.cpuWorkload).subscribe((cpuWorkload) => {
               this.cpuWorkload = cpuWorkload;
@@ -132,6 +157,14 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
                   this.ingredient.workloads = {};
               }
               this.ingredient.workloads.ram_workload = ramWorkload;
+          }, (error) => console.error(error));
+
+          this._scalingWorkloadService.save(this.scalingWorkload).subscribe((scalingWorkload) => {
+              this.scalingWorkload = scalingWorkload;
+              if (!this.ingredient.workloads) {
+                  this.ingredient.workloads = {};
+              }
+              this.ingredient.workloads.scaling_workload = scalingWorkload;
           }, (error) => console.error(error));
       }
     }
