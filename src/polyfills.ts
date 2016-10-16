@@ -1,6 +1,5 @@
 import 'es6-shim';
 import 'reflect-metadata';
-import { environment } from './app/environment';
 import { enableProdMode } from '@angular/core';
 
 // Polyfill the ECMA-402 Intl API
@@ -12,7 +11,9 @@ require('zone.js/dist/zone');
 
 import 'ts-helpers';
 
-if (!environment.production) {
+if (process.env.ENV === 'build') {
+    enableProdMode();
+} else {
     Error['stackTraceLimit'] = Infinity;
     require('zone.js/dist/long-stack-trace-zone');
 }
