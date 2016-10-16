@@ -15,14 +15,13 @@
             <div class="col-xs-6">
                 <p>
                     <button (click)="logout()" class="btn btn-primary" >Log out</button>
-                    <button [routerLink]="['/password']" class="btn btn-primary" >Change password</button>
+                    <button routerLink="/password" class="btn btn-primary" >Change password</button>
                     <button (click)="showDeleteAccountModal()" class="btn btn-primary" >Delete account</button>
                 </p>
             </div>
         </div>
     </div>
 </div>
-
 
 <div bsModal #deleteAccountModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">

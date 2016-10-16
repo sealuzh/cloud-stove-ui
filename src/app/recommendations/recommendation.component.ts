@@ -1,40 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {IngredientService} from '../services/ingredient';
-import {RecommendationService} from '../services/recommendation';
-import {ConstraintService} from '../services/constraint';
+import { IngredientService } from '../api/services/ingredient.service';
+import { RecommendationService } from '../api/services/recommendation.service';
+import { ConstraintService } from '../api/services/constraint.service';
 
-import {Recommendation} from '../dtos/recommendation.dto';
-import {Ingredient} from '../dtos/ingredient.dto';
-import {Constraint} from '../dtos/constraint.dto';
-
-import {SumMonthlyPipe} from './sumMonthly.pipe';
-import {SumHourlyPipe} from './sumHourly.pipe';
-
-import {TimeAgoPipe} from 'angular2-moment';
-
-import {LoadingComponent} from '../shared/loading.component';
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
-import {UserWorkloadSliderComponent} from '../workload/user-workload.component';
-import {RecommendationDetailComponent} from './recommendation-detail.component';
-
-import {RecommendationDistributionChartComponent} from './charts/distribution-chart.component';
-import {RecommendationSensitivityChartComponent} from './charts/sensitivity-chart.component';
+import { Recommendation } from '../api/dtos/recommendation.dto';
+import { Ingredient } from '../api/dtos/ingredient.dto';
+import { Constraint } from '../api/dtos/constraint.dto';
 
 @Component({
     template: require('./recommendation.component.html'),
-    styles: [require('./recommendation.component.less')],
-    directives: [
-        ROUTER_DIRECTIVES,
-        DROPDOWN_DIRECTIVES,
-        UserWorkloadSliderComponent,
-        LoadingComponent,
-        RecommendationDetailComponent,
-        RecommendationDistributionChartComponent,
-        RecommendationSensitivityChartComponent
-    ],
-    pipes: [SumMonthlyPipe, SumHourlyPipe, TimeAgoPipe]
+    styles: [require('./recommendation.component.less')]
 })
 
 export class RecommendationComponent implements OnInit {
@@ -45,7 +22,7 @@ export class RecommendationComponent implements OnInit {
     public generatingRecommendation: boolean = false;
 
     public status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
-    recommendationOptions: { region: string } = { region: 'EU' };
+    public recommendationOptions: { region: string } = { region: 'EU' };
 
     public regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
     public providerConstraint: Constraint = { type: 'ProviderConstraint', preferred_providers: [] };

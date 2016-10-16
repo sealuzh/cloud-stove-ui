@@ -1,14 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {IngredientService} from '../services/ingredient';
-import {Ingredient} from '../dtos/ingredient.dto';
-import {LoadingComponent} from '../shared/loading.component';
+import { Component, OnInit } from '@angular/core';
+import { IngredientService } from '../api/services/ingredient.service';
+import { Ingredient } from '../api/dtos/ingredient.dto';
 
 @Component({
     template: require('./ingredient-list.component.html'),
-    styles: [require('./ingredient-list.component.less')],
-    directives: [ROUTER_DIRECTIVES, LoadingComponent],
-    providers: [IngredientService]
+    styles: [require('./ingredient-list.component.less')]
 })
 
 export class IngredientListComponent implements OnInit {
