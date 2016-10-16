@@ -1,39 +1,20 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
-import {Location} from '@angular/common';
+import { Component, Input, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 
-import {Ingredient} from '../dtos/ingredient.dto';
-import {Constraint} from '../dtos/constraint.dto';
+import { Ingredient } from '../api/dtos/ingredient.dto';
+import { Constraint } from '../api/dtos/constraint.dto';
 
-import {IngredientService} from '../services/ingredient';
-import {ConstraintService} from '../services/constraint';
+import { IngredientService } from '../api/services/ingredient.service';
+import { ConstraintService } from '../api/services/constraint.service';
 
-import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
+import { IngredientWorkloadFormComponent } from './ingredient-workload.component';
 
-import {CpuConstraintFormComponent} from '../forms/cpu-constraint.component';
-import {RamConstraintFormComponent} from '../forms/ram-constraint.component';
-import {RegionConstraintFormComponent} from '../forms/region-constraint.component';
-
-import {PropertyPipe} from '../shared/property.pipe';
-
-import {Observable} from 'rxjs/Rx';
-
-import {DROPDOWN_DIRECTIVES, MODAL_DIRECTIVES, ModalDirective} from 'ng2-bootstrap';
-import {WorkloadFormComponent} from '../forms/workload.component';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'cs-ingredient-detail',
     template: require('./ingredient-detail.component.html'),
-    styles: [require('./ingredient-detail.component.less')],
-    directives: [
-      REACTIVE_FORM_DIRECTIVES,
-      DROPDOWN_DIRECTIVES,
-      MODAL_DIRECTIVES,
-      CpuConstraintFormComponent,
-      RamConstraintFormComponent,
-      RegionConstraintFormComponent,
-      WorkloadFormComponent
-    ],
-    pipes: [PropertyPipe]
+    styles: [require('./ingredient-detail.component.less')]
 })
 
 export class IngredientDetailComponent {
@@ -50,7 +31,7 @@ export class IngredientDetailComponent {
     @Input()
     ingredient: Ingredient;
 
-    @ViewChild('workloadForm') workloadForm: WorkloadFormComponent;
+    @ViewChild('workloadForm') workloadForm: IngredientWorkloadFormComponent;
 
     constructor(
       private _ingredientService: IngredientService,

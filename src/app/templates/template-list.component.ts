@@ -1,19 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {IngredientService} from '../services/ingredient';
-import {Ingredient} from '../dtos/ingredient.dto';
-
-import {MarkdownDirective} from '../shared/markdown.component';
-import {LoadingComponent} from '../shared/loading.component.ts';
-
-import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
+import { IngredientService } from '../api/services/ingredient.service';
+import { Ingredient } from '../api/dtos/ingredient.dto';
 
 @Component({
     template: require('./template-list.component.html'),
-    styles: [require('./template-list.component.less')],
-    directives: [CAROUSEL_DIRECTIVES, ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent],
-    providers: [IngredientService]
+    styles: [require('./template-list.component.less')]
 })
 
 export class TemplateListComponent implements OnInit {

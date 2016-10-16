@@ -1,31 +1,12 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { WelcomeComponent } from './welcome/welcome.component';
 
-// Components
-import {LoginComponent} from './auth/login/login.component';
-import {WelcomeComponent} from './welcome/welcome.component';
-
-// Routes
-import {applicationRoutes} from './applications/application.routes';
-import {ingredientRoutes} from './ingredients/ingredient.routes';
-import {recommendationRoutes} from './recommendations/recommendation.routes';
-import {templateRoutes} from './templates/template.routes';
-import {authRoutes} from './auth/auth.routes';
-
-const routes: RouterConfig = [
-
-  ...applicationRoutes,
-  ...ingredientRoutes,
-  ...recommendationRoutes,
-  ...templateRoutes,
-  ...authRoutes,
-
-  {path: 'welcome', component: WelcomeComponent},
-
-  // Default
-  {path: '**', component: LoginComponent},
-
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/welcome',  pathMatch: 'full' },
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'auth', loadChildren: 'app/auth/auth.module#AuthModule' },
+  { path: '**', redirectTo: '/login',  pathMatch: 'full' }
 ];
 
-export const appRouterProviders = [
-  provideRouter(routes)
-];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
