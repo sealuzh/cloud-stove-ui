@@ -70,7 +70,7 @@ module.exports = function makeWebpackConfig() {
         cache: !isTest,
         root: root(),
         // only discover files that have those extensions
-        extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
+        extensions: ['', '.ts', '.js', '.json', '.css', '.less', '.html'],
         alias: {
             'app': 'src/app',
             'common': 'src/common'
@@ -104,11 +104,10 @@ module.exports = function makeWebpackConfig() {
             },
 
             // copy those assets to output
-            {test: /\.(png|jpe?g|gif|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
+            {test: /.(png|ico|jpe?g|gif)(\?\S*)?$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
 
             // support font-awesome
-            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+            {test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/, loader: 'url?limit=100000&name=[name].[ext]'},
 
             // Support for *.json files.
             {test: /\.json$/, loader: 'json'},
@@ -172,31 +171,21 @@ module.exports = function makeWebpackConfig() {
      * List: http://webpack.github.io/docs/list-of-plugins.html
      */
     config.plugins = [
+
         // Define env variables to help with builds
         // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new webpack.DefinePlugin({
             // Environment helpers
             'process.env': {
               ENV: JSON.stringify(ENV),
+              API_URL: JSON.stringify(process.env.API_URL),
               USERBACK_TOKEN: JSON.stringify(process.env.USERBACK_TOKEN)
             }
-        }),
-
-        // Inject d3.js into application
-        new webpack.ProvidePlugin({
-            d3: 'd3',
         }),
 
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
-        }),
-
-        // client-side config
-        new webpack.DefinePlugin({
-            'config': {
-              API_URL: JSON.stringify(process.env.API_URL)
-            }
         })
 
     ];
@@ -238,9 +227,7 @@ module.exports = function makeWebpackConfig() {
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
             new webpack.optimize.UglifyJsPlugin({
-                // Angular 2 is broken again, disabling mangle until beta 6 that should fix the thing
-                // Todo: remove this with beta 6
-                mangle: false
+              mangle: false
             }),
 
             // Copy assets from the public folder
@@ -261,17 +248,6 @@ module.exports = function makeWebpackConfig() {
             browsers: ['last 2 version']
         })
     ];
-
-    /**
-     * Sass
-     * Reference: https://github.com/jtangelder/sass-loader
-     * Transforms .scss files to .css
-     */
-    /*
-    config.sassLoader = {
-        //includePaths: [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
-    };
-    */
 
     /**
      * Apply the tslint loader as pre/postLoader
