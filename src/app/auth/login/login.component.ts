@@ -1,13 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
-import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-import {AuthService} from '../../services/auth';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
     template: require('./login.component.html'),
-    styles: [require('./login.component.less')],
-    directives: [REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES],
-    providers: [AuthService]
+    styles: [require('./login.component.less')]
 })
 
 export class LoginComponent implements OnInit {
@@ -36,8 +34,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        // TODO: RC5 moves this to QueryParams
-        this._router.routerState.queryParams.subscribe(queryParams => {
+        this._activatedRoute.queryParams.subscribe(queryParams => {
             this.login['email'] = queryParams['email'];
         });
     }
@@ -47,17 +44,17 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.valid) {
             this._authService.login(this.login.email, this.login.password).subscribe(
                 result => {
-                    //TODO: save user
+                    // TODO: save user
                     this._router.navigateByUrl('/applications');
                 },
                 error => {
                     let errorType = error['_body'].constructor.name;
-                    if(errorType === 'String'){
+                    if (errorType === 'String') {
                         let errors = JSON.parse(error['_body']);
-                        if(errors.hasOwnProperty('errors')){
+                        if (errors.hasOwnProperty('errors')) {
                             this.errormessage = 'Please check your E-Mail and password.';
                         }
-                    }else{
+                    } else {
                         this.errormessage = 'Something went wrong. Check your Internet connection!';
                     }
 

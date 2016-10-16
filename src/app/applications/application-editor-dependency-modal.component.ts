@@ -1,21 +1,14 @@
 import {Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef} from '@angular/core';
 
-import {Ingredient} from '../dtos/ingredient.dto';
-import {Constraint} from '../dtos/constraint.dto';
+import {Ingredient} from '../api/dtos/ingredient.dto';
+import {Constraint} from '../api/dtos/constraint.dto';
 
-import {ConstraintService} from '../services/constraint';
-
-import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
+import {ConstraintService} from '../api/services/constraint.service';
 
 @Component({
     selector: 'cs-stove-editor-dependency-modal',
     template: require('./application-editor-dependency-modal.component.html'),
-    styles: [require('./application-editor-dependency-modal.component.less')],
-    directives: [
-      MODAL_DIRECTIVES,
-      DROPDOWN_DIRECTIVES
-    ],
-    viewProviders: [BS_VIEW_PROVIDERS]
+    styles: [require('./application-editor-dependency-modal.component.less')]
 })
 
 export class StoveEditorDependencyModalComponent {

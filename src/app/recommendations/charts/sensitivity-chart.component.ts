@@ -1,12 +1,10 @@
 import {Component, OnChanges, Input} from '@angular/core';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {Recommendation} from './../../dtos/recommendation.dto';
+import {Recommendation} from './../../api/dtos/recommendation.dto';
 
 @Component({
     selector: 'cs-recommendation-sensitivity-chart',
     template: require('./sensitivity-chart.component.html'),
-    styles: [require('./sensitivity-chart.component.less')],
-    directives: [CHART_DIRECTIVES]
+    styles: [require('./sensitivity-chart.component.less')]
 })
 
 export class RecommendationSensitivityChartComponent implements OnChanges {
@@ -72,7 +70,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
       return obj.recommendation[0].resource.provider;
     });
 
-    providers = providers.filter((v,i) => { return providers.indexOf(v) === i; });
+    providers = providers.filter((v, i) => { return providers.indexOf(v) === i; });
 
     for (let recommendation of array) {
       this.chartLabels.push(recommendation.num_simultaneous_users);

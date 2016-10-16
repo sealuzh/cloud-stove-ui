@@ -1,12 +1,10 @@
 import {Component, OnChanges, Input} from '@angular/core';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {Recommendation} from './../../dtos/recommendation.dto';
+import {Recommendation} from './../../api/dtos/recommendation.dto';
 
 @Component({
     selector: 'cs-recommendation-distribution-chart',
     template: require('./distribution-chart.component.html'),
-    styles: [require('./distribution-chart.component.less')],
-    directives: [CHART_DIRECTIVES]
+    styles: [require('./distribution-chart.component.less')]
 })
 
 export class RecommendationDistributionChartComponent implements OnChanges {

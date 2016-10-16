@@ -5,31 +5,31 @@
   <div class="iconav-slider">
     <ul class="nav nav-pills iconav-nav">
       <li>
-        <a [routerLink]="['welcome']" [routerLinkActive]="'active'" title="Overview">
+        <a routerLink="/welcome" routerLinkActive="active" title="Overview">
           <span class="icon icon-home"></span>
           <small class="iconav-nav-label visible-xs-block">Overview</small>
         </a>
       </li>
       <li >
-        <a [routerLink]="['/templates']" [routerLinkActive]="'active'" title="Templates">
+        <a routerLink="/templates" routerLinkActive="active" title="Templates">
           <span class="icon icon-text-document"></span>
           <small class="iconav-nav-label visible-xs-block">Templates</small>
         </a>
       </li>
       <li *ngIf="isUserLoggedIn()">
-        <a [routerLink]="['/applications']" [routerLinkActive]="'active'" title="Applications">
+        <a routerLink="/applications" routerLinkActive="active" title="Applications">
           <span class="icon icon-list"></span>
           <small class="iconav-nav-label visible-xs-block">Applications</small>
         </a>
       </li>
       <li *ngIf="isUserLoggedIn()">
-        <a [routerLink]="['/recommendations']" [routerLinkActive]="'active'">
+        <a routerLink="/recommendations" routerLinkActive="active">
           <span class="icon icon-area-graph"></span>
           <small class="iconav-nav-label visible-xs-block">Recommendations</small>
         </a>
       </li>
       <li *ngIf="isUserLoggedIn()">
-        <a [routerLink]="['/user']" [routerLinkActive]="'active'" >
+        <a routerLink="/user" routerLinkActive="active" >
           <img gravatar [email]="getEmailAddress()" [size]="16"  class="img-circle img-responsive">
           <small class="iconav-nav-label visible-xs-block">My Account</small>
         </a>

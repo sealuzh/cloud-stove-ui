@@ -10,9 +10,6 @@ import 'showdown';
 // RxJS
 import 'rxjs';
 
-// Font Awesome
-import 'font-awesome-sass-loader';
-
 // Chart.js
 import 'chart.js';
 

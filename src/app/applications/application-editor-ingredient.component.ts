@@ -1,12 +1,10 @@
-import {Component, ChangeDetectorRef, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {Ingredient} from '../dtos/ingredient.dto';
-import {LoadingComponent} from '../shared/loading.component';
+import { Component, ChangeDetectorRef, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Ingredient } from '../api/dtos/ingredient.dto';
 
 @Component({
     selector: 'cs-stove-editor-ingredient',
     template: require('./application-editor-ingredient.component.html'),
-    styles: [require('./application-editor-ingredient.component.less')],
-    directives: [LoadingComponent],
+    styles: [require('./application-editor-ingredient.component.less')]
 })
 
 export class StoveEditorIngredientComponent {
