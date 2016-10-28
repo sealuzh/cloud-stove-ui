@@ -3,6 +3,7 @@ import { MockBackend } from '@angular/http/testing';
 import { } from 'jasmine';
 
 import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ApiModule } from '../../../app/api/api.module';
 import { ResourceService } from '../../../app/api/services/resource.service';
@@ -14,7 +15,7 @@ describe('API: JobService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ApiModule],
+            imports: [ApiModule, RouterTestingModule],
             providers: [
                 MockBackend,
                 BaseRequestOptions,

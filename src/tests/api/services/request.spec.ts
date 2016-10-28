@@ -4,12 +4,13 @@ import { } from 'jasmine';
 import { Headers } from '@angular/http';
 import { RequestService } from '../../../app/api/services/request.service';
 import { ApiModule } from '../../../app/api/api.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('API: RequestService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ApiModule]
+            imports: [ApiModule, RouterTestingModule]
         });
     });
 
