@@ -3,6 +3,7 @@ import { MockBackend } from '@angular/http/testing';
 import { } from 'jasmine';
 
 import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ApiModule } from '../../../app/api/api.module';
 import { ConstraintService } from '../../../app/api/services/constraint.service';
@@ -14,7 +15,7 @@ describe('API: ConstraintService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ApiModule],
+            imports: [RouterTestingModule, ApiModule],
             providers: [
                 MockBackend,
                 BaseRequestOptions,
