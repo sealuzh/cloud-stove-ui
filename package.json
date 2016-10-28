@@ -26,6 +26,7 @@
     "@angular/upgrade": "2.0.0",
     "angular2-moment": "^0.8.2",
     "angular2-token": "0.1.14",
+    "angulartics2": "^1.1.12",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.2.2",
     "core-js": "^2.4.1",
