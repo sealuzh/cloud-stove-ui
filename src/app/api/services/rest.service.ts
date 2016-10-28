@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
-import {ConfigService} from './config.service';
-import {RestObject} from '../dtos/restobject.dto';
-import {RequestService} from './request.service';
+import { ConfigService } from './config.service';
+import { RestObject } from '../dtos/restobject.dto';
+import { RequestService } from './request.service';
 
 @Injectable()
 export class RestService {
@@ -16,7 +17,8 @@ export class RestService {
       protected configs: ConfigService,
       protected resourceName: string,
       protected request: RequestService,
-      private ignoreAttributes: [string]) {
+      private ignoreAttributes: [string],
+      protected router: Router) {
     }
 
     query(search: string): Observable<any[]> {
@@ -71,8 +73,11 @@ export class RestService {
           .catch(err => this.handleError(err));
     }
 
-    protected handleError(error: Response) {
-        console.error(error);
+    protected handleError = (error: Response) => {
+        if (error.status === 401) {
+          this.router.navigateByUrl('/applications');
+        }
+
         return Observable.throw(error.json().error || 'Server error');
     }
 
