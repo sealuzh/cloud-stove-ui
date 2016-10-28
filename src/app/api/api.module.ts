@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule } from '@angular/router';
 import { RequestService } from './services/request.service';
 import { ConfigService } from './services/config.service';
 import { IngredientService } from './services/ingredient.service';
@@ -16,6 +16,7 @@ import { JobService } from './services/job.service';
 @NgModule({
   imports: [
     BrowserModule,
+    RouterModule
   ],
   providers: [
     ConfigService,

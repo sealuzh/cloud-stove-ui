@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Headers} from '@angular/http';
-import {RequestOptions, URLSearchParams} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Headers } from '@angular/http';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class RequestService {

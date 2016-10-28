@@ -1,20 +1,22 @@
-import {Injectable} from '@angular/core';
-import {Observable, Subscriber} from 'rxjs/Rx';
-import {Recommendation} from '../dtos/recommendation.dto';
+import { Injectable } from '@angular/core';
+import { Observable, Subscriber } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
-import {JobService} from './job.service';
-import {IngredientService} from './ingredient.service';
+import { Recommendation } from '../dtos/recommendation.dto';
 
-import {Http} from '@angular/http';
-import {ConfigService} from './config.service';
-import {RestService} from './rest.service';
-import {RequestService} from './request.service';
+import { JobService } from './job.service';
+import { IngredientService } from './ingredient.service';
+
+import { Http } from '@angular/http';
+import { ConfigService } from './config.service';
+import { RestService } from './rest.service';
+import { RequestService } from './request.service';
 
 @Injectable()
 export class RecommendationService extends RestService {
 
-    constructor(private _ingredientService: IngredientService, private _jobService: JobService,  http: Http, configs: ConfigService, request: RequestService) {
-        super(http, configs, 'recommendation', request, null);
+    constructor(private _ingredientService: IngredientService, private _jobService: JobService,  http: Http, configs: ConfigService, request: RequestService, router: Router) {
+        super(http, configs, 'recommendation', request, null, router);
     }
 
     get(ingredientId: number): Observable<Recommendation[]> {

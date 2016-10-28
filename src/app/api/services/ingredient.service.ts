@@ -1,19 +1,20 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
-import {Ingredient} from '../dtos/ingredient.dto';
-import {Recommendation} from '../dtos/recommendation.dto';
+import { Ingredient } from '../dtos/ingredient.dto';
+import { Recommendation } from '../dtos/recommendation.dto';
 
-import {ConfigService} from './config.service';
-import {RestService} from './rest.service';
-import {RequestService} from './request.service';
+import { ConfigService } from './config.service';
+import { RestService } from './rest.service';
+import { RequestService } from './request.service';
 
 @Injectable()
 export class IngredientService extends RestService {
 
-    constructor(http: Http, configs: ConfigService, request: RequestService) {
-        super(http, configs, 'ingredient', request, ['children', 'constraints']);
+    constructor(http: Http, configs: ConfigService, request: RequestService, router: Router) {
+        super(http, configs, 'ingredient', request, ['children', 'constraints'], router);
     }
 
     query(search?: string): Observable<Ingredient[]> {
