@@ -1,17 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
 
-import {IngredientService} from '../services/ingredient';
-import {Ingredient} from '../dtos/ingredient.dto';
-
-import {MarkdownDirective} from '../shared/markdown.component';
-import {LoadingComponent} from '../shared/loading.component.ts';
+import {IngredientService} from '../api/services/ingredient.service';
+import {Ingredient} from '../api/dtos/ingredient.dto';
 
 @Component({
     template: require('./application-list.component.html'),
-    styles: [require('./application-list.component.less')],
-    directives: [ROUTER_DIRECTIVES, MarkdownDirective, LoadingComponent],
-    providers: [IngredientService]
+    styles: [require('./application-list.component.less')]
 })
 
 export class ApplicationListComponent implements OnInit {

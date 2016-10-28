@@ -1,22 +1,15 @@
-import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {Gravatar} from 'ng2-gravatar-directive';
-import {AuthService} from '../services/auth';
-
+import { Component } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
     selector: 'cs-sidebar',
     template: require('./sidebar.component.html'),
-    styles: [require('./sidebar.component.less')],
-    directives: [DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES, Gravatar],
-    providers: [AuthService]
+    styles: [require('./sidebar.component.less')]
 })
 
 export class SidebarComponent {
 
-
-    constructor( private _auth: AuthService) {}
+    constructor(private _auth: AuthService) {}
 
     public toggled(open: boolean): void {
         console.log('Dropdown is now: ', open);
@@ -29,7 +22,5 @@ export class SidebarComponent {
     getEmailAddress(): string {
         return this._auth.getUser();
     }
-
-
 
 }
