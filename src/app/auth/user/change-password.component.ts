@@ -1,14 +1,12 @@
-import {Component} from '@angular/core';
-import {Router, ROUTER_DIRECTIVES} from '@angular/router';
-import {ControlGroup} from '@angular/common';
-import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-import {AuthService} from '../../services/auth';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { PasswordMatcher } from '../validators/matcher.validator';
 
 @Component({
     template: require('./change-password.component.html'),
-    styles: [require('./change-password.component.less')],
-    providers: [AuthService],
-    directives: [REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES],
+    styles: [require('./change-password.component.less')]
 })
 
 export class ChangePasswordComponent {
@@ -26,7 +24,7 @@ export class ChangePasswordComponent {
         this.changePasswordForm = this._fb.group({
             'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
             'password_confirm': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-        }, {validator: this.matchingPasswords('password', 'password_confirm')});
+        }, {validator: PasswordMatcher.matchingPasswords});
 
         this.changePasswordForm.valueChanges
             .filter((value) => this.changePasswordForm.valid)
@@ -44,35 +42,25 @@ export class ChangePasswordComponent {
 
             this._auth.changePassword(this.change.password, this.change.password_confirm).subscribe(
                 result => {
-                    //TODO: save user
+                    // TODO: save user
                     this.successMessage = 'Password changed successfully!';
                     this.success = true;
                     // this._router.navigateByUrl('/applications');
                 },
                 error => {
                     let errorType = error['_body'].constructor.name;
-                    if(errorType === 'String'){
+                    if (errorType === 'String') {
                         let errors = JSON.parse(error['_body']);
-                        if(errors.hasOwnProperty('errors')){
+                        if (errors.hasOwnProperty('errors')) {
                             this.errorMessage = errors['errors']['full_messages'][0];
                         }
-                    }else{
+                    } else {
                         this.errorMessage = 'Something went wrong. Check your Internet connection!';
                     }
 
                     this.error = true;
                 }
             );
-        }
-    }
-
-    matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-        return (group: ControlGroup) => {
-            let passwordInput = group.controls[passwordKey];
-            let passwordConfirmationInput = group.controls[confirmPasswordKey];
-            if (passwordInput.value !== passwordConfirmationInput.value) {
-                return passwordConfirmationInput.setErrors({notEquivalent: true})
-            }
         }
     }
 

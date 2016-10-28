@@ -1,53 +1,18 @@
-import {Component, ViewChild, ChangeDetectorRef, OnInit} from '@angular/core';
-import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {IngredientService} from '../services/ingredient';
-import {RecommendationService} from '../services/recommendation';
-import {ConstraintService} from '../services/constraint';
-import {JobService} from '../services/job';
+import { IngredientService } from '../api/services/ingredient.service';
+import { ConstraintService } from '../api/services/constraint.service';
+import { Ingredient } from '../api/dtos/ingredient.dto';
+import { Constraint } from '../api/dtos/constraint.dto';
 
-import {Ingredient} from '../dtos/ingredient.dto';
-import {Constraint} from '../dtos/constraint.dto';
+import { Validators, FormBuilder } from '@angular/forms';
 
-import {LoadingComponent} from '../shared/loading.component';
-
-import {IngredientDetailComponent} from '../ingredients/ingredient-detail.component';
-import {StoveEditorIngredientComponent} from './application-editor-ingredient.component';
-import {StoveEditorDependencyConstraintComponent} from './application-editor-constraint.component';
-import {StoveEditorDependencyModalComponent} from './application-editor-dependency-modal.component';
-
-import {DraggableDirective} from './editor/draggable.directive';
-import {ConnectionDirective} from './editor/connection.directive';
-import {PositionDirective} from './editor/position.directive';
-
-import {PropertyPipe} from '../shared/property.pipe';
-import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
-
-import {IngredientConstraintsComponent} from './../ingredients/ingredient-constraints.component';
-import {REACTIVE_FORM_DIRECTIVES, Validators, FormBuilder} from '@angular/forms';
-
+import { StoveEditorDependencyModalComponent } from './application-editor-dependency-modal.component';
 
 @Component({
     template: require('./application-editor.component.html'),
     styles: [require('./application-editor.component.less')],
-    directives: [
-      ROUTER_DIRECTIVES,
-      MODAL_DIRECTIVES,
-      DROPDOWN_DIRECTIVES,
-      StoveEditorIngredientComponent,
-      StoveEditorDependencyConstraintComponent,
-      StoveEditorDependencyModalComponent,
-      PositionDirective,
-      DraggableDirective,
-      LoadingComponent,
-      ConnectionDirective,
-      IngredientDetailComponent,
-      IngredientConstraintsComponent,
-      REACTIVE_FORM_DIRECTIVES
-    ],
-    viewProviders: [BS_VIEW_PROVIDERS],
-    pipes: [PropertyPipe],
-    providers: [IngredientService, RecommendationService, ConstraintService, JobService]
 })
 
 export class ApplicationEditorComponent implements OnInit {
@@ -67,7 +32,7 @@ export class ApplicationEditorComponent implements OnInit {
       private _constraintService: ConstraintService,
       private _ref: ChangeDetectorRef,
       private _route: ActivatedRoute,
-      private _fb : FormBuilder) {
+      private _fb: FormBuilder) {
 
         this.changeNameForm = this._fb.group({
             'appName': ['', Validators.compose([Validators.required])],
@@ -127,11 +92,11 @@ export class ApplicationEditorComponent implements OnInit {
         );
     }
 
-    openAppNameModal(){
+    openAppNameModal() {
         this.modal.show();
     }
 
-    changeAppName(){
+    changeAppName() {
         this.modal.hide();
         this.application.name = this.changeName.appName;
         this._ingredientService.save(this.application).subscribe(result => {

@@ -1,70 +1,33 @@
-import {Component, ViewContainerRef, OnInit} from '@angular/core';
-import {HTTP_PROVIDERS} from '@angular/http';
-import {ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
-// Services
-import {ConfigService} from './services/configs';
-import {RequestService} from './services/request';
-import {SidebarComponent} from './sidebar/index';
-import {IngredientService} from './services/ingredient';
-import {ConstraintService} from './services/constraint';
-import {JobService} from './services/job';
-import {RecommendationService} from './services/recommendation';
-import {RAMWorkloadService} from './services/ram-workload';
-import {CPUWorkloadService} from './services/cpu-workload';
-import {UserWorkloadService} from './services/user-workload';
-import {AuthService} from './services/auth';
-
-import '../style/app.less';
-
-/*
- * App Component
- * Top Level Component
- */
 @Component({
-    selector: 'cs-app',
-    template: require('./app.component.html'),
-    styles: [require('./app.component.less')],
-    directives: [ROUTER_DIRECTIVES, SidebarComponent],
-    providers: [
-      HTTP_PROVIDERS,
-      ConfigService,
-      RequestService,
-      IngredientService,
-      ConstraintService,
-      RAMWorkloadService,
-      CPUWorkloadService,
-      UserWorkloadService,
-      JobService,
-      RecommendationService,
-      AuthService
-    ]
+  selector: 'cs-app',
+  template: require('./app.component.html')
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-    viewContainerRef: any;
-    authService: any;
-    router: any;
+  // necessary for ng2-bootstrap
+  private viewContainerRef: ViewContainerRef;
 
-    constructor(viewContainerRef: ViewContainerRef, authService: AuthService, router: Router) {
-        this.viewContainerRef = viewContainerRef;
-        this.authService = authService;
-        this.router = router;
-    }
+  public constructor(viewContainerRef: ViewContainerRef) {
+    this.viewContainerRef = viewContainerRef;
+  }
 
-    ngOnInit(): any {
-        //check if token is still valid
+  ngOnInit() {
 
-        this.authService.validate().subscribe(
-          result =>{
-              this.router.navigateByUrl('/applications');
-          },
-          error => {
-              this.router.navigateByUrl('/login');
-          }
-        );
-        return undefined;
-    }
+      // check if token is still valid
+      /*
+      this.authService.validate().subscribe(
+        result =>{
+            this.router.navigateByUrl('/applications');
+        },
+        error => {
+            this.router.navigateByUrl('/login');
+        }
+      );
+      */
+
+  }
 
 }

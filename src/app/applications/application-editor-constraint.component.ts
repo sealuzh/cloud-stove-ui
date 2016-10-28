@@ -1,15 +1,15 @@
-import {Component, ChangeDetectorRef} from '@angular/core';
-import {Constraint} from '../dtos/constraint.dto';
+import {Component, ChangeDetectorRef, Input} from '@angular/core';
+import {Constraint} from '../api/dtos/constraint.dto';
 
 @Component({
     selector: 'cs-stove-editor-dependency-constraint',
     template: require('./application-editor-constraint.component.html'),
-    styles: [require('./application-editor-constraint.component.less')],
-    properties: ['constraint']
+    styles: [require('./application-editor-constraint.component.less')]
 })
 
 export class StoveEditorDependencyConstraintComponent {
 
+    @Input()
     constraint: Constraint;
 
     x1: number = 0;

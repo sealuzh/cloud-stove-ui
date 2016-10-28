@@ -47,7 +47,7 @@
 
   <div class="row padded-row">
     <div class="col-lg-8">
-      <cs-user-workload-slider [ingredient]="application"></cs-user-workload-slider>
+      <cs-user-workload-slider [ingredient]="application" [disabled]="generatingRecommendation"></cs-user-workload-slider>
     </div>
     <div class="col-lg-4 text-right">
       <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">

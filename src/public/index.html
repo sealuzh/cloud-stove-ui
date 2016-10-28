@@ -1,32 +1,33 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Cloudstove</title>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <base href="/">
-</head>
-<body>
-<cs-app>
-  <div class="loading text-center">
-      <p>
-          <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
-      </p>
-  </div>
-</cs-app>
-<script>
-    Userback = window.Userback || {};
+  <head>
+      <meta charset="utf-8">
+      <title>Cloudstove</title>
+      <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <base href="/">
+  </head>
+  <body>
+  <cs-app>
+    <div class="loading text-center">
+        <p>
+            <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+        </p>
+    </div>
+  </cs-app>
+  <script>
+      Userback = window.Userback || {};
 
-    (function(id) {
-        if (document.getElementById(id)) {return;}
-        var s = document.createElement('script');
-        s.id = id;
-        s.src = 'https://app.userback.io/widget.js';
-        var parent_node = document.head || document.body;
-        parent_node.appendChild(s);
-    })('userback-sdk');
+      (function(id) {
+          if (document.getElementById(id)) {return;}
+          var s = document.createElement('script');
+          s.id = id;
+          s.src = 'https://app.userback.io/widget.js';
+          var parent_node = document.head || document.body;
+          parent_node.appendChild(s);
+      })('userback-sdk');
 
-    Userback.access_token = '346|400|Z7ztSEbVlSR1b1caiHZIIOncJrfPNDGMKfgDTryfkphvrtFJaF';
-</script>
-</body>
+      Userback.access_token = '346|400|Z7ztSEbVlSR1b1caiHZIIOncJrfPNDGMKfgDTryfkphvrtFJaF';
+  </script>
+  </body>
 </html>

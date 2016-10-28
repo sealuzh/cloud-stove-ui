@@ -7,6 +7,9 @@
     "sourceMap": true,
     "noEmitHelpers": true
   },
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "node_modules",
     "typings/main",
