@@ -27,7 +27,8 @@ export class ApplicationListComponent implements OnInit {
         );
     }
 
-    copyIngredient(ingredient: any) {
+    copyIngredient(ingredient: any, event: MouseEvent) {
+      event.stopPropagation();
       ingredient.isCopying = true;
       this._ingredientService.copy(ingredient.id).subscribe(
         copiedIngredient => {
@@ -41,12 +42,14 @@ export class ApplicationListComponent implements OnInit {
       );
     }
 
-    deleteIngredient(ingredient: any) {
+    deleteIngredient(ingredient: any, event: MouseEvent) {
+        event.stopPropagation();
         this._ingredientService.delete(ingredient).subscribe(
             result => {
+              this.loadApplications();
             },
             error => {
-                console.log(error);
+              console.log(error);
             }
         );
     }
