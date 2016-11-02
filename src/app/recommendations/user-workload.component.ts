@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {Validators, FormBuilder} from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
 import { Ingredient } from '../api/dtos/ingredient.dto';
 import { UserWorkloadService } from '../api/services/user-workload.service';
@@ -15,7 +15,7 @@ import { UniversalValidators } from 'ng2-validators';
         <div class="col-xs-12">
           <form [formGroup]="userWorkloadForm" class="form-inline form-user-workload">
             <input type="hidden" formControlName="ingredient_id" [(ngModel)]="userWorkload.ingredient_id">
-            <input [disabled]="disabled" style="width: 150px; text-align: center;" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
+            <input style="width: 150px; text-align: center;" class="form-control" formControlName="num_simultaneous_users" type="text" [(ngModel)]="userWorkload.num_simultaneous_users">
             Users
           </form>
         </div>
@@ -38,7 +38,7 @@ export class UserWorkloadSliderComponent implements OnChanges {
     constructor(private _fb: FormBuilder, private _userWorkloadService: UserWorkloadService) {
 
       this.userWorkloadForm = this._fb.group({
-          'num_simultaneous_users': ['', Validators.compose([Validators.required, UniversalValidators.isNumber])],
+          'num_simultaneous_users': [{value: '', disabled: this.disabled}, Validators.compose([Validators.required, UniversalValidators.isNumber])],
           'ingredient_id': ['', Validators.compose([Validators.required, UniversalValidators.isNumber])],
       });
 
