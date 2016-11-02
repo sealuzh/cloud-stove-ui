@@ -1,7 +1,7 @@
 <form [formGroup]="scalingWorkloadForm" *ngIf="scalingWorkloadForm">
   <div class="form-group">
-    <label class="form-control-label">Scale component horizontally</label>
-    <input class="form-control" type="checkbox" name="scale_ingredient" [(ngModel)]="scalingWorkload.scale_ingredient">
+    <label class="form-control-label">Scale component horizontally</label><br>
+    <input type="checkbox" formControlName="scale_ingredient" [ngModel]="scalingWorkload.scale_ingredient">
   </div>
 </form>
 <form [formGroup]="ramWorkloadForm" *ngIf="ramWorkloadForm">
