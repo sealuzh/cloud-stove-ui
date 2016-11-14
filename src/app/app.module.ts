@@ -5,8 +5,7 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routes';
 
 // Analytics
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-ga';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 /* Feature Modules */
 import { AuthModule } from './auth/auth.module';
