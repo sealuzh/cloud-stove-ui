@@ -39,7 +39,7 @@ export class RegisterComponent {
         if (registerForm.valid) {
             this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
                 result => {
-                    // TODO: Navigate to first ingredient, without using the ingredient service in here!
+                    this._router.navigateByUrl('/applications');
                 },
                 error => {
                     let errorType = error['_body'].constructor.name;
