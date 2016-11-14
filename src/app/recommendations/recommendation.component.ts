@@ -67,8 +67,8 @@ export class RecommendationComponent implements OnInit {
 
         // fetch recommendations
         this._ingredientService.recommendations(applicationId).subscribe(
-          result => {
-            this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
+          res => {
+            this.recommendations = res.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
             this.selectedRecommendation = this.recommendations[0];
           }, error => console.log(error)
         );
