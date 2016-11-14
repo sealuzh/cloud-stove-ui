@@ -47,7 +47,7 @@ export class RecommendationDistributionChartComponent implements OnChanges {
 
       for (let obj of rec.recommendation) {
         this.chartLabels.push(obj.ingredient.name);
-        this.chartData.push(obj.resource.price_per_month);
+        this.chartData.push(obj.resource_count * obj.resource.price_per_month);
       }
     }
 

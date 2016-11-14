@@ -4,11 +4,11 @@ import { Ingredient } from '../api/dtos/ingredient.dto';
 
 @Pipe({name: 'csSumHourly'})
 export class SumHourlyPipe implements PipeTransform {
-  transform(value: {ingredient: Ingredient, resource: Resource}[]): number {
-    let monthlyCosts = 0;
+  transform(value: {ingredient: Ingredient, resource: Resource, resource_count: number}[]): number {
+    let hourlyCosts = 0;
     for (let recommendation of value) {
-      monthlyCosts += +recommendation.resource.price_per_hour;
+      hourlyCosts += recommendation.resource_count * recommendation.resource.price_per_hour;
     }
-    return Math.round(monthlyCosts * 100) / 100;
+    return Math.round(hourlyCosts * 100) / 100;
   }
 }
