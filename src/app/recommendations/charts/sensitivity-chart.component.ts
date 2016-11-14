@@ -1,5 +1,6 @@
-import {Component, OnChanges, Input} from '@angular/core';
-import {Recommendation} from './../../api/dtos/recommendation.dto';
+import { Component, OnChanges, Input } from '@angular/core';
+import { Recommendation } from './../../api/dtos/recommendation.dto';
+import { ProviderColorService } from './../../shared/providercolor.service';
 
 @Component({
     selector: 'cs-recommendation-sensitivity-chart',
@@ -43,7 +44,9 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
     }
   };
 
-  constructor() {
+  chartColors: any[];
+
+  constructor(private _providerColorService: ProviderColorService) {
     Chart.defaults.global.defaultFontColor = '#6f7890';
     Chart.defaults.global.defaultFontSize = 14;
   }
@@ -51,7 +54,6 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   ngOnChanges(changes: any): void {
     if (changes.recommendations.currentValue) {
       this.fillChart(changes.recommendations.currentValue);
-      console.log(changes.recommendations.currentValue.length);
     }
   }
 
@@ -63,6 +65,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
     if (array.length > 0) {
       this.chartLabels = [];
       this.chartData = [];
+      this.chartColors = [];
     } else {
       return;
     }
@@ -85,21 +88,28 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
         let newProvider = {
           data: [],
           label: providerName + ' [' + regionName + ']',
-          backgroundColor: '#1CA8DD',
-          borderWidth: 0,
-          pointBackgroundColor: '#1CA8DD',
-          pointBorderColor: '#1CA8DD',
-          pointBorderWidth: 1,
-          lineTension: 0,
           fill: false
         };
         newProvider.data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
         this.chartData.push(newProvider);
+
+        this.chartColors.push({
+          backgroundColor: this._providerColorService.getColorForProvider(providerName),
+          borderColor: this._providerColorService.getColorForProvider(providerName),
+          pointBackgroundColor: this._providerColorService.getColorForProvider(providerName),
+          pointBorderColor: this._providerColorService.getColorForProvider(providerName),
+          pointHoverBackgroundColor: this._providerColorService.getColorForProvider(providerName),
+          pointHoverBorderColor: this._providerColorService.getColorForProvider(providerName)
+        });
+
       } else if (data.length > 0) {
         data[0].data.push({x: recommendation.num_simultaneous_users, y: recommendation.vm_cost});
       }
 
     }
+
+    console.log(this.chartColors);
+
   }
 
 }
