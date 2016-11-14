@@ -35,7 +35,6 @@ export class RegisterComponent {
     }
 
     submit(registerForm): void {
-        console.log(registerForm.valid);
         if (registerForm.valid) {
             this._auth.register(this.register.email, this.register.password, this.register.password_confirm).subscribe(
                 result => {
