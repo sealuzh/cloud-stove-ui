@@ -51,6 +51,7 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
   ngOnChanges(changes: any): void {
     if (changes.recommendations.currentValue) {
       this.fillChart(changes.recommendations.currentValue);
+      console.log(changes.recommendations.currentValue.length);
     }
   }
 

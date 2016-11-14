@@ -13,5 +13,8 @@ import 'rxjs';
 // Chart.js
 import 'chart.js';
 
+// font awesome
+import 'font-awesome-webpack';
+
 // nouislider css
 import 'nouislider/distribute/nouislider.min.css';
