@@ -3,7 +3,7 @@ import {Ingredient} from './ingredient.dto';
 import {Resource} from './resource.dto';
 
 export interface Recommendation extends RestObject {
-    recommendation: {ingredient: Ingredient, resource: Resource}[];
+    recommendation: {ingredient: Ingredient, resource: Resource, resource_count: number}[];
     application: Ingredient;
     created_at: string,
     updated_at: string,

@@ -19,20 +19,20 @@
           </span>
           <br>
           <small>
-            {{recommendation.resource.name}}<br>
+            {{recommendation.resource_count}}x {{recommendation.resource.name}}<br>
             {{recommendation.resource.cores}} Cores / {{recommendation.resource.mem_gb}} GB RAM
           </small>
         </td>
-        <td>{{recommendation.resource.price_per_hour}} $</td>
-        <td>{{recommendation.resource.price_per_month}} $</td>
+        <td>{{recommendation.resource_count * recommendation.resource.price_per_hour | number:'1.2-2'}} $</td>
+        <td>{{recommendation.resource_count * recommendation.resource.price_per_month | number:'1.2-2'}} $</td>
     </tr>
     </tbody>
     <tfoot>
       <tr>
         <td></td>
         <td></td>
-        <td><strong>{{ recommendation.recommendation | csSumHourly }}$</strong></td>
-        <td><strong>{{ recommendation.recommendation | csSumMonthly }}$</strong></td>
+        <td><strong>{{ recommendation.recommendation | csSumHourly | number:'1.2-2' }}$</strong></td>
+        <td><strong>{{ recommendation.recommendation | csSumMonthly | number:'1.2-2' }}$</strong></td>
       </tr>
     </tfoot>
 </table>
