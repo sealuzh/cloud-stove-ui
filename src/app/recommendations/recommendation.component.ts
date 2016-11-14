@@ -92,7 +92,10 @@ export class RecommendationComponent implements OnInit {
 
     removeRecommendation(recommendation: Recommendation) {
       this._recommendationService.delete(recommendation).subscribe(
-        result => this.recommendations.splice(this.recommendations.indexOf(recommendation), 1).slice(),
+        result => {
+          this.recommendations.splice(this.recommendations.indexOf(recommendation), 1);
+          this.recommendations = this.recommendations.slice();
+        },
         error => console.log(error)
       );
     }
