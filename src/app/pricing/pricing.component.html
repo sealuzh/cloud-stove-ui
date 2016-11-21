@@ -1,0 +1,20 @@
+<div class="dashhead">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Bringing order to data</h6>
+    <h3 class="dashhead-title">Pricing Overview</h3>
+  </div>
+</div>
+
+<div class="btn-group" dropdown keyboardNav="true">
+    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
+      Region {{ config.filtering.regionFilter }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('US')">US</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('EU')">EU</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('ASIA')">ASIA</a></li>
+    </ul>
+</div>
+
+<ng-table [config]="config" [rows]="filteredResources" [columns]="columns" (tableChanged)="onChangeTable(config)"></ng-table>
+
