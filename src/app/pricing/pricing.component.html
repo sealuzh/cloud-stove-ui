@@ -9,10 +9,19 @@
     <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
       Region {{ config.filtering.regionFilter }} <span class="caret"></span>
     </button>
+
     <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
-      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('US')">US</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('EU')">EU</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="setRegion('ASIA')">ASIA</a></li>
+      <li *ngFor="let region of regions" role="menuitem"><a class="dropdown-item" (click)="setRegion(region)">{{ region }}</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown keyboardNav="true">
+    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
+      Provider {{ config.filtering.providerFilter }} <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+      <li *ngFor="let provider of providers" role="menuitem"><a class="dropdown-item" (click)="setProvider(provider)">{{ provider }}</a></li>
     </ul>
 </div>
 
