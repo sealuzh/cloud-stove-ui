@@ -19,7 +19,9 @@ export class PricingComponent implements OnInit {
         {title: 'CPU-Cores (#)', name: 'cores'},
         {title: 'Memory (GB)', name: 'mem_gb'},
         {title: 'Price per Hour ($)', name: 'price_per_hour'},
-        {title: 'Price per Month ($)', name: 'price_per_month', className: 'test'}
+        {title: 'Price per Month ($)', name: 'price_per_month'},
+        {title: 'Price per vCPU ($)', name: 'price_per_vcpu'},
+        {title: 'Price per GB of RAM ($)', name: 'price_per_ram_gb'},
     ];
 
     public config: any = {
@@ -40,6 +42,12 @@ export class PricingComponent implements OnInit {
     loadResources() {
         this._resourceService.query().subscribe(result => {
             this.resources = result;
+
+            for (let resource of this.resources){
+                resource.price_per_vcpu = Math.round(resource.price_per_hour / resource.cores * 1000) / 1000;
+                resource.price_per_ram_gb = Math.round(resource.price_per_hour / resource.mem_gb * 1000) / 1000;
+            }
+
             this.onChangeTable(this.config);
         }, error => {
 
