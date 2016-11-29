@@ -11,7 +11,7 @@ export class PricingComponent implements OnInit {
 
     public resources: Resource[];
     public filteredResources: Resource[];
-    
+
     public providers: String[];
     public regions: String[];
 
@@ -56,7 +56,7 @@ export class PricingComponent implements OnInit {
                 resource.price_per_ram_gb = Math.round(resource.price_per_hour / resource.mem_gb * 1000) / 1000;
             }
 
-            this.onChangeTable(this.config);
+            this.onChangeTable();
         }, error => {
 
         });
@@ -69,7 +69,7 @@ export class PricingComponent implements OnInit {
             this.config.filtering.regionFilter = region;
         }
 
-        this.onChangeTable(this.config);
+        this.onChangeTable();
     }
 
     setProvider(provider: string) {
@@ -79,17 +79,19 @@ export class PricingComponent implements OnInit {
             this.config.filtering.providerFilter = provider;
         }
 
-        this.onChangeTable(this.config);
+        this.onChangeTable();
     }
 
-    onChangeTable(config: any) {
-        if (config.sorting) {
-            Object.assign(this.config.sorting, config.sorting);
-        }
-
+    onChangeTable() {
         this.filteredResources = this.changeFilter(this.resources, this.config);
         this.changeSort(this.filteredResources, this.config);
+    }
 
+    orderBy(column: any) {
+        let sort = column.sort;
+        this.columns.forEach(item => item.sort = false);
+        column.sort = sort === 'desc' ? 'asc' : 'desc';
+        this.onChangeTable();
     }
 
     changeFilter(data: Resource[], config: any): Resource[] {
@@ -112,7 +114,7 @@ export class PricingComponent implements OnInit {
         let sort: string = void 0;
 
         for (let i = 0; i < columns.length; i++) {
-            if (columns[i].sort !== '' && columns[i].sort !== false) {
+            if (columns[i].sort !== undefined && columns[i].sort !== false) {
                 columnName = columns[i].name;
                 sort = columns[i].sort;
             }
