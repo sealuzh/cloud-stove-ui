@@ -25,5 +25,19 @@
     </ul>
 </div>
 
-<ng-table [config]="config" [rows]="filteredResources" [columns]="columns" (tableChanged)="onChangeTable(config)"></ng-table>
+<table class="table table-striped table-pricing" role="grid" style="width: 100%;">
+  <thead>
+    <tr role="row">
+      <th *ngFor="let column of columns" (click)="orderBy(column)">
+        {{column.title}}
+        <i class="pull-right fa fa-fw" [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}">&nbsp;</i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resource of filteredResources">
+      <td *ngFor="let column of columns">{{ resource[column.name] }}</td>
+    </tr>
+  </tbody>
+</table>
 
