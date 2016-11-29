@@ -11,12 +11,15 @@ export class PricingComponent implements OnInit {
 
     public resources: Resource[];
     public filteredResources: Resource[];
-    public regionDropdown: { isOpen: boolean } = { isOpen: false };
+    
+    public providers: String[];
+    public regions: String[];
 
     public columns: any = [
         {title: 'Name', name: 'name'},
+        {title: 'Region', name: 'region_area'},
         {title: 'Provider', name: 'provider'},
-        {title: 'CPU-Cores (#)', name: 'cores'},
+        {title: 'Cores (#)', name: 'cores'},
         {title: 'Memory (GB)', name: 'mem_gb'},
         {title: 'Price per Hour ($)', name: 'price_per_hour'},
         {title: 'Price per Month ($)', name: 'price_per_month'},
@@ -42,6 +45,11 @@ export class PricingComponent implements OnInit {
     loadResources() {
         this._resourceService.query().subscribe(result => {
             this.resources = result;
+            this.providers = this.resources.map(item => item.provider);
+            this.providers = this.providers.filter((item, pos) => this.providers.indexOf(item) === pos);
+
+            this.regions = this.resources.map(item => item.region_area);
+            this.regions = this.regions.filter((item, pos) => this.regions.indexOf(item) === pos);
 
             for (let resource of this.resources){
                 resource.price_per_vcpu = Math.round(resource.price_per_hour / resource.cores * 1000) / 1000;
@@ -55,7 +63,22 @@ export class PricingComponent implements OnInit {
     }
 
     setRegion(region: string) {
-        this.config.filtering.regionFilter = region;
+        if (this.config.filtering.regionFilter === region) {
+            this.config.filtering.regionFilter = null;
+        } else {
+            this.config.filtering.regionFilter = region;
+        }
+
+        this.onChangeTable(this.config);
+    }
+
+    setProvider(provider: string) {
+        if (this.config.filtering.providerFilter === provider) {
+            this.config.filtering.providerFilter = null;
+        } else {
+            this.config.filtering.providerFilter = provider;
+        }
+
         this.onChangeTable(this.config);
     }
 
