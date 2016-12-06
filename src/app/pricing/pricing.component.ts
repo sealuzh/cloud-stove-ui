@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '../api/services/resource.service';
+import { ProviderService } from '../api/services/provider.service';
 import { Resource } from '../api/dtos/resource.dto';
+import { URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+
 let groupBy = require('lodash.groupby');
 
 @Component({
@@ -23,27 +27,50 @@ export class PricingComponent implements OnInit {
         {title: 'Cores (#)', name: 'cores'},
         {title: 'Memory (GB)', name: 'mem_gb'},
         {title: 'Price per Hour ($)', name: 'price_per_hour_range'},
-        {title: 'Price per vCPU per Hour ($)', name: 'price_per_vcpu_range'},
-        {title: 'Price per GB of RAM per Hour ($)', name: 'price_per_ram_gb_range'},
+        {title: 'vCPU per Hour ($)', name: 'price_per_vcpu_range'},
+        {title: 'GB of RAM per Hour ($)', name: 'price_per_ram_gb_range'},
     ];
 
     public config: any = {
-        paging: false,
         sorting: {columns: this.columns},
-        filtering: {regionFilter: 'US'},
-        className: ['table-striped', 'table-pricing']
+        filtering: {regionFilter: null, providerFilter: null}
     };
 
-    constructor(private _resourceService: ResourceService) {
+    constructor(private _resourceService: ResourceService, private _providerService: ProviderService) {
 
     }
 
     ngOnInit(): void {
-        this.loadResources();
+        let areasObservable = this._resourceService.regionAreas();
+        areasObservable.subscribe(result => {
+            this.regions = result;
+            this.config.filtering.regionFilter = this.regions[0];
+        });
+
+        let providerObservable = this._providerService.names();
+        providerObservable.subscribe(result => {
+            this.providers = result;
+            this.config.filtering.providerFilter = this.providers[0];
+        });
+
+        Observable.zip(areasObservable, providerObservable).subscribe(result => {
+            this.loadResources();
+        });
     }
 
     loadResources() {
-        this._resourceService.query().subscribe(result => {
+        this.resources = null;
+        let searchParams = new URLSearchParams();
+
+        if (this.config.filtering.regionFilter) {
+            searchParams.set('region_area', this.config.filtering.regionFilter);
+        }
+
+        if (this.config.filtering.providerFilter) {
+            searchParams.set('provider_name', this.config.filtering.providerFilter);
+        }
+
+        this._resourceService.query(searchParams).subscribe(result => {
             this.resources = [];
             let groupedByRegion: any[] = groupBy(result, 'region_area');
 
@@ -77,12 +104,6 @@ export class PricingComponent implements OnInit {
                 }
             }
 
-            this.providers = this.resources.map(item => item.provider);
-            this.providers = this.providers.filter((item, pos) => this.providers.indexOf(item) === pos);
-
-            this.regions = this.resources.map(item => item.region_area);
-            this.regions = this.regions.filter((item, pos) => this.regions.indexOf(item) === pos);
-
             this.onChangeTable();
         }, error => {
 
@@ -100,7 +121,7 @@ export class PricingComponent implements OnInit {
             this.config.filtering.regionFilter = region;
         }
 
-        this.onChangeTable();
+        this.loadResources();
     }
 
     setProvider(provider: string) {
@@ -110,7 +131,7 @@ export class PricingComponent implements OnInit {
             this.config.filtering.providerFilter = provider;
         }
 
-        this.onChangeTable();
+        this.loadResources();
     }
 
     onChangeTable() {
@@ -130,6 +151,10 @@ export class PricingComponent implements OnInit {
 
         if (config.filtering.regionFilter) {
             filteredData = filteredData.filter((item: Resource) => item.region_area === config.filtering.regionFilter);
+        }
+
+        if (config.filtering.providerFilter) {
+            filteredData = filteredData.filter((item: Resource) => item.provider === config.filtering.providerFilter);
         }
 
         return filteredData;
