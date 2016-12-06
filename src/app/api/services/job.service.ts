@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
@@ -16,11 +16,11 @@ export class JobService extends RestService {
         super(http, configs, 'job', request, null, router);
     }
 
-    query(search?: string): Observable<Job[]> {
+    query(search?: URLSearchParams): Observable<Job[]> {
         return super.query(search);
     }
 
-    get(id: string, search?: string): Observable<Job> {
+    get(id: string, search?: URLSearchParams): Observable<Job> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(this.handleError);

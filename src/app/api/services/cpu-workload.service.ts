@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from './config.service';
 import { RestService } from './rest.service';
@@ -14,11 +14,11 @@ export class CPUWorkloadService extends RestService {
         super(http, configs, 'cpu_workload', request, null, router);
     }
 
-    query(search?: string): Observable<CPUWorkload[]> {
+    query(search?: URLSearchParams): Observable<CPUWorkload[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<CPUWorkload> {
+    get(id: number, search?: URLSearchParams): Observable<CPUWorkload> {
         return super.get(id, search);
     }
 

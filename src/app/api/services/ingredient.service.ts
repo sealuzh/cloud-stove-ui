@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
@@ -17,11 +17,11 @@ export class IngredientService extends RestService {
         super(http, configs, 'ingredient', request, ['children', 'constraints'], router);
     }
 
-    query(search?: string): Observable<Ingredient[]> {
+    query(search?: URLSearchParams): Observable<Ingredient[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<Ingredient> {
+    get(id: number, search?: URLSearchParams): Observable<Ingredient> {
         return super.get(id, search);
     }
 
