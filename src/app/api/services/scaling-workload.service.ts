@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { ConfigService } from './config.service';
@@ -14,11 +14,11 @@ export class ScalingWorkloadService extends RestService {
         super(http, configs, 'scaling_workload', request, null, router);
     }
 
-    query(search?: string): Observable<ScalingWorkload[]> {
+    query(search?: URLSearchParams): Observable<ScalingWorkload[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<ScalingWorkload> {
+    get(id: number, search?: URLSearchParams): Observable<ScalingWorkload> {
         return super.get(id, search);
     }
 

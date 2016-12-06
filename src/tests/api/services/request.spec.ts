@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { } from 'jasmine';
 
-import { Headers } from '@angular/http';
+import { Headers, URLSearchParams } from '@angular/http';
 import { RequestService } from '../../../app/api/services/request.service';
 import { ApiModule } from '../../../app/api/api.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -28,7 +28,7 @@ describe('API: RequestService', () => {
     }));
 
     it('should include search-params', inject([RequestService], (service: RequestService) => {
-        let requestOptions = service.getOptions(null, 'this=is&a=test');
+        let requestOptions = service.getOptions(null, new URLSearchParams('this=is&a=test'));
         expect(requestOptions.search.get('this')).toBe('is');
         expect(requestOptions.search.get('a')).toBe('test');
     }));

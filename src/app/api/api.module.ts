@@ -12,6 +12,7 @@ import { UserWorkloadService } from './services/user-workload.service';
 import { RecommendationService } from './services/recommendation.service';
 import { ResourceService } from './services/resource.service';
 import { ScalingWorkloadService } from './services/scaling-workload.service';
+import { ProviderService } from './services/provider.service';
 import { JobService } from './services/job.service';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { JobService } from './services/job.service';
     TrafficWorkloadService,
     UserWorkloadService,
     ScalingWorkloadService,
+    ProviderService,
     JobService
   ]
 })

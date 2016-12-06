@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
@@ -16,12 +16,18 @@ export class ResourceService extends RestService {
         super(http, configs, 'resource', request, null, router);
     }
 
-    query(search?: string): Observable<Resource[]> {
+    query(search?: URLSearchParams): Observable<Resource[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<Resource> {
+    get(id: number, search?: URLSearchParams): Observable<Resource> {
         return super.get(id, search);
+    }
+
+    regionAreas(): Observable<string[]> {
+        return this.http.get(this.configs.apiUrl + '/resources_region_areas', this.request.getOptions(null, null))
+            .map(res => <this[]> res.json())
+            .catch(err => this.handleError(err));
     }
 
 }
