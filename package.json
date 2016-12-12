@@ -92,7 +92,7 @@
     "tslint": "^3.15.1",
     "tslint-loader": "^2.1.0",
     "typedoc": "^0.4.5",
-    "typescript": "^2.0.2",
+    "typescript": "2.0.x",
     "url-loader": "^0.5.7",
     "webdriver-manager": "^10.0.2",
     "webpack": "^1.12.13",
