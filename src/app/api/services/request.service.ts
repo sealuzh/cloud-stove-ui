@@ -7,15 +7,13 @@ export class RequestService {
 
     private urlSearchParams: URLSearchParams;
 
-    getOptions(headers?: Headers, search?: string): RequestOptions {
+    getOptions(headers?: Headers, search?: URLSearchParams): RequestOptions {
         if (!headers) {
             headers = new Headers();
         }
 
         if (search) {
-           this.urlSearchParams = new URLSearchParams(search);
-        } else {
-           this.urlSearchParams = new URLSearchParams();
+           this.urlSearchParams = search;
         }
 
         let requestOptions: RequestOptions = new RequestOptions({

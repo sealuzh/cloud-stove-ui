@@ -14,6 +14,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ApplicationsModule } from './applications/applications.module';
 import { ApiModule } from './api/api.module';
+import { PricingModule } from './pricing/pricing.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 
 import '../style/app.less';
@@ -28,6 +29,7 @@ import '../style/app.less';
    ApplicationsModule,
    ApiModule,
    RecommendationsModule,
+   PricingModule,
    routing
  ],
  declarations: [

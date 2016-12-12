@@ -29,6 +29,12 @@
         </a>
       </li>
       <li *ngIf="isUserLoggedIn()">
+        <a routerLink="/pricing" routerLinkActive="active" >
+          <span class="icon icon-calculator"></span>
+          <small class="iconav-nav-label visible-xs-block">Pricing</small>
+        </a>
+      </li>
+      <li *ngIf="isUserLoggedIn()">
         <a routerLink="/user" routerLinkActive="active" >
           <img gravatar [email]="getEmailAddress()" [size]="16"  class="img-circle img-responsive">
           <small class="iconav-nav-label visible-xs-block">My Account</small>

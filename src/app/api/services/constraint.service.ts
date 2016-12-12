@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
@@ -17,11 +17,11 @@ export class ConstraintService extends RestService {
         this.nestedUpdate = false;
     }
 
-    query(search?: string): Observable<Constraint[]> {
+    query(search?: URLSearchParams): Observable<Constraint[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<Constraint> {
+    get(id: number, search?: URLSearchParams): Observable<Constraint> {
         return super.get(id, search);
     }
 
