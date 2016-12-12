@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
@@ -15,11 +15,11 @@ export class RAMWorkloadService extends RestService {
         super(http, configs, 'ram_workload', request, null, router);
     }
 
-    query(search?: string): Observable<RAMWorkload[]> {
+    query(search?: URLSearchParams): Observable<RAMWorkload[]> {
         return super.query(search);
     }
 
-    get(id: number, search?: string): Observable<RAMWorkload> {
+    get(id: number, search?: URLSearchParams): Observable<RAMWorkload> {
         return super.get(id, search);
     }
 

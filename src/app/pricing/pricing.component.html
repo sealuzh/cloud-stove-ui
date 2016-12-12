@@ -1,0 +1,52 @@
+<div class="dashhead">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Bringing order to data</h6>
+    <h3 class="dashhead-title">Pricing Overview</h3>
+  </div>
+</div>
+
+<div class="btn-group" dropdown keyboardNav="true">
+    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
+      Region {{ config.filtering.regionFilter }} <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+      <li *ngFor="let region of regions" role="menuitem"><a class="dropdown-item" (click)="setRegion(region)">{{ region }}</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown keyboardNav="true">
+    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
+      Provider {{ config.filtering.providerFilter }} <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+      <li *ngFor="let provider of providers" role="menuitem"><a class="dropdown-item" (click)="setProvider(provider)">{{ provider }}</a></li>
+    </ul>
+</div>  
+
+<cs-loading *ngIf="!resources"></cs-loading>
+
+<table *ngIf="resources" class="table table-striped table-pricing" role="grid" style="width: 100%;">
+  <thead>
+    <tr role="row">
+      <th *ngFor="let column of columns" (click)="orderBy(column)">
+        {{column.title}}
+        <i class="pull-right fa fa-fw" [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}">&nbsp;</i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resource of filteredResources">
+      <td *ngFor="let column of columns">{{ resource[column.name] }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="resources && resources.length === 0" class="row">
+  <div class="col-xs-12">
+    <p class="text-center">
+      No resources for {{ config.filtering.regionFilter ? config.filtering.regionFilter + '-' : '' }}{{ config.filtering.providerFilter }}
+    </p>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { ConfigService } from './config.service';
@@ -21,13 +21,13 @@ export class RestService {
       protected router: Router) {
     }
 
-    query(search: string): Observable<any[]> {
+    query(search: URLSearchParams): Observable<any[]> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName(), this.request.getOptions(null, search))
             .map(res => <this[]> res.json())
             .catch(err => this.handleError(err));
     }
 
-    get(id: number | string, search: string): Observable<any> {
+    get(id: number | string, search: URLSearchParams): Observable<any> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id, this.request.getOptions(null, search))
             .map(res => <this> res.json())
             .catch(err => this.handleError(err));
