@@ -34,6 +34,33 @@ export class RecommendationService extends RestService {
         });
     }
 
+    triggerRange(ingredientId: number, min: number, max: number, step: number): Observable<Recommendation[]> {
+      return Observable.create(subscriber => {
+          // first, trigger the job to generate the recommendation
+          this._ingredientService.triggerRangeRecommendation(ingredientId, min, max, step).subscribe(
+            result => {
+              this.fetchRangeJobStatus(ingredientId, subscriber);
+            },
+            error => console.log(error)
+          );
+
+        });
+    }
+
+    private fetchRangeJobStatus(ingredientId: number, subscription: Subscriber<Recommendation[]>) {
+      this._ingredientService.recommendationsCompleted(ingredientId).subscribe(recommendationComplete => {
+        if (recommendationComplete) {
+          this.fetchRecommendation(ingredientId, subscription);
+        } else {
+          setTimeout(() => {
+            this.fetchRangeJobStatus(ingredientId, subscription);
+          }, 2500);
+        }
+      }, error => {
+        console.error(error);
+      });
+    }
+
     private fetchJobStatus(uuid: string, ingredientId: number, subscription: Subscriber<Recommendation[]>) {
       this._jobService.get(uuid).subscribe(jobResult => {
         if (jobResult.delayed_job.attempts === 1) {
