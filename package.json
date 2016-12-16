@@ -8,12 +8,13 @@
     "production": "node server/server.js",
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch",
-    "e2e": "protractor",
-    "webdriver-update": "webdriver-manager update",
-    "postinstall": "npm run webdriver-update && npm run build",
+    "webdriver:start": "node ./node_modules/protractor/bin/webdriver-manager start",
+    "webdriver:update": "node ./node_modules/protractor/bin/webdriver-manager update",
+    "build:e2e": "tsc -p ./tests/tsconfig.e2e.json",
+    "e2e": "npm run build:e2e && protractor ./protractor.config.js",
+    "postinstall": "npm run webdriver:update && npm run build",
     "mockdb": "json-server --watch docs/db.json",
     "typedoc": "typedoc --tsconfig tsconfig.typedoc.json --options typedoc.json"
-
   },
   "private": true,
   "dependencies": {
@@ -32,7 +33,6 @@
     "bootstrap": "^3.3.7",
     "chart.js": "2.2.x",
     "core-js": "^2.4.1",
-    "es6-shim": "^0.35.0",
     "express": "^4.13.4",
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
@@ -51,10 +51,7 @@
     "zone.js": "0.7.x"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.34",
-    "@types/es6-shim": "^0.31.32",
     "@types/jasmine": "^2.2.34",
-    "@types/moment": "^2.13.0",
     "@types/node": "^6.0.42",
     "@types/showdown": "^1.4.31",
     "autoprefixer": "^6.3.2",
@@ -84,7 +81,7 @@
     "null-loader": "0.1.1",
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-loader": "^0.9.1",
-    "protractor": "^3.1.1",
+    "protractor": "^4.0.11",
     "raw-loader": "0.5.1",
     "rimraf": "^2.5.1",
     "sass-loader": "^3.1.2",
@@ -98,7 +95,6 @@
     "typedoc-plugin-ui-router": "1.0.6",
     "typescript": "2.0.x",
     "url-loader": "^0.5.7",
-    "webdriver-manager": "^10.0.2",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   }

@@ -6,6 +6,8 @@ import { Component, OnChanges, Input } from '@angular/core';
 import { Recommendation } from './../../api/dtos/recommendation.dto';
 import { ProviderColorService } from './../../shared/providers/providercolor.service';
 
+declare var Chart: any;
+
 @Component({
     selector: 'cs-recommendation-sensitivity-chart',
     template: require('./sensitivity-chart.component.html'),
