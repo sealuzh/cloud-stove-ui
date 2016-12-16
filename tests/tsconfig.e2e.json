@@ -8,12 +8,13 @@
     "noEmitHelpers": true,
     "typeRoots": ["./node_modules/@types"],
     "types": [
-      "node"
+      "node", "jasmine"
     ],
-    "lib": ["es2016", "dom"]
+    "lib": ["es2016"],
+    "outDir": "../dist/tests/"
   },
   "include": [
-    "src/**/*"
+    "./**/*.e2e.ts"
   ],
   "exclude": [
     "node_modules"
