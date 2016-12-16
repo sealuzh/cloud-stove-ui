@@ -78,7 +78,7 @@ export class RecommendationComponent implements OnInit {
 
     triggerRecommendation() {
       this.generatingRecommendation = true;
-      this._recommendationService.get(this.application.id).subscribe(
+      this._recommendationService.triggerRange(this.application.id, 1000, 10000, 1000).subscribe(
         result => {
           this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           this.generatingRecommendation = false;
