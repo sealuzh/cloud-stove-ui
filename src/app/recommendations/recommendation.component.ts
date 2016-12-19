@@ -33,6 +33,17 @@ export class RecommendationComponent implements OnInit {
       {id: 'SA', name: 'South America'}
     ];
 
+    public recommendationRange: { config: any, min: number, max: number, range: number[], step: number } = { config: {
+      connect: true,
+      tooltips: [true, true],
+      pips: {
+        mode: 'range',
+        density: 5,
+        stepped: true
+      }
+    },
+    min: 0, max: 50000, range: [1000, 10000], step: 1000 };
+
     public selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace', 'Joyent'];
 
     constructor(
@@ -78,7 +89,7 @@ export class RecommendationComponent implements OnInit {
 
     triggerRecommendation() {
       this.generatingRecommendation = true;
-      this._recommendationService.triggerRange(this.application.id, 1000, 10000, 1000).subscribe(
+      this._recommendationService.triggerRange(this.application.id, this.recommendationRange.range[0], this.recommendationRange.range[1], this.recommendationRange.step).subscribe(
         result => {
           this.recommendations = result.sort((a, b) => { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); }).reverse();
           this.generatingRecommendation = false;

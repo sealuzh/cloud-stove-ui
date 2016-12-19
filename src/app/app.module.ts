@@ -21,7 +21,7 @@ import '../style/app.less';
 
 @NgModule({
  imports: [
-   Angulartics2Module.forRoot(),
+   Angulartics2Module.forRoot([]),
    BrowserModule,
    AuthModule,
    SidebarModule,

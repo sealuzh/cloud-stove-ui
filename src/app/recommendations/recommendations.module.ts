@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { SharedModule } from '../shared/shared.module';
 import { ApiModule } from '../api/api.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { NouisliderModule } from 'ng2-nouislider';
 
 import { routing } from './recommendations.routes';
 
@@ -31,6 +32,7 @@ import { TimeAgoPipe } from 'angular2-moment';
     ModalModule,
     FormsModule,
     ChartsModule,
+    NouisliderModule,
     ReactiveFormsModule,
     routing
   ],
