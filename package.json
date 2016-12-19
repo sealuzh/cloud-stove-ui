@@ -53,6 +53,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.2.34",
     "@types/node": "^6.0.42",
+    "@types/request-promise": "^4.1.33",
     "@types/showdown": "^1.4.31",
     "autoprefixer": "^6.3.2",
     "codelyzer": "0.0.26",
@@ -83,6 +84,8 @@
     "postcss-loader": "^0.9.1",
     "protractor": "^4.0.11",
     "raw-loader": "0.5.1",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
     "rimraf": "^2.5.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
