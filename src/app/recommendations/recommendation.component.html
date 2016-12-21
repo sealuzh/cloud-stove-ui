@@ -46,8 +46,8 @@
   </div>
 
   <div class="row padded-row">
-    <div class="col-lg-8">
-      <cs-user-workload-slider [ingredient]="application" [disabled]="generatingRecommendation"></cs-user-workload-slider>
+    <div class="col-lg-8 recommendation-range">
+      <nouislider [config]="recommendationRange.config" [min]="recommendationRange.min" [max]="recommendationRange.max" [step]="recommendationRange.step" [(ngModel)]="recommendationRange.range"></nouislider>
     </div>
     <div class="col-lg-4 text-right">
       <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="hr-divider">
+  <div class="hr-divider" style="padding-top: 20px">
     <h3 class="hr-divider-content hr-divider-heading">
       Generated Recommendations
     </h3>

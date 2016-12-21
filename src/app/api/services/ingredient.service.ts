@@ -43,6 +43,12 @@ export class IngredientService extends RestService {
           .catch(this.handleError);
     }
 
+    recommendationsCompleted(id: number): Observable<Recommendation[]> {
+      return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendations_completed', this.request.getOptions(null, null))
+          .map(res => <this> res.json())
+          .catch(this.handleError);
+    }
+
     findRecommendations(id: number): Observable<any> {
         return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/has_recommendations', this.request.getOptions(null, null))
             .map(res => <this> res.json())
@@ -57,6 +63,12 @@ export class IngredientService extends RestService {
 
     triggerRecommendation(id: number): Observable<{job_id: string}> {
       return this.http.put(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/trigger_recommendation', null, this.request.getOptions(null, null))
+          .map(res => <this> res.json())
+          .catch(this.handleError);
+    }
+
+    triggerRangeRecommendation(id: number, min: number, max: number, step: number): Observable<{job_id: string}> {
+      return this.http.post(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/trigger_range', {ingredient_id: id, min: min, max: max, step: step}, this.request.getOptions(null, null))
           .map(res => <this> res.json())
           .catch(this.handleError);
     }
