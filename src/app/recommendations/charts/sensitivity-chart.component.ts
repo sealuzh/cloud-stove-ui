@@ -108,8 +108,6 @@ export class RecommendationSensitivityChartComponent implements OnChanges {
 
     }
 
-    console.log(this.chartColors);
-
   }
 
 }
