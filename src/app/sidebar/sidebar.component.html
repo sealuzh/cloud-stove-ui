@@ -40,6 +40,12 @@
           <small class="iconav-nav-label visible-xs-block">My Account</small>
         </a>
       </li>
+      <li *ngIf="!isUserLoggedIn()">
+        <a routerLink="/login" routerLinkActive="active" >
+          <span class="icon icon-login"></span>
+          <small class="iconav-nav-label visible-xs-block">Login</small>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
