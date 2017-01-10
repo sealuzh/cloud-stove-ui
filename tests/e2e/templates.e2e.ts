@@ -1,6 +1,6 @@
 import { protractor, browser, by, element } from 'protractor';
 
-describe('App', () => {
+describe('/templates', () => {
 
   beforeEach(() => {
     browser.get('/templates');
