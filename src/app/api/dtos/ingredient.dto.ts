@@ -9,6 +9,7 @@ import {ScalingWorkload} from './workload/scaling-workload.dto';
 export interface Ingredient extends RestObject {
     name: string;
     body?: string;
+    icon?: string;
     parent_id?: number;
     template_id?: number;
     is_template?: boolean;
