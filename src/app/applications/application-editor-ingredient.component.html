@@ -10,7 +10,7 @@
     <div class="details">
       <div class="details-title">{{ingredient.name}}</div>
       <div class="details-body">
-        <i class="fa fa-database"></i>
+        <i class="fa" [ngClass]="[ingredient.icon ? 'fa-' + ingredient.icon : 'fa-server']"></i>
       </div>
     </div>
   </div>

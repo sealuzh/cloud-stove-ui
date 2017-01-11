@@ -41,7 +41,8 @@ export class IngredientDetailComponent {
 
         this.ingredientForm = this._fb.group({
             'name': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'body': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
+            'body': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+            'icon': ['']
         });
 
         this.ingredientForm.valueChanges
@@ -50,6 +51,7 @@ export class IngredientDetailComponent {
           .subscribe((value) => {
             this.ingredient.name = value.name;
             this.ingredient.body = value.body;
+            this.ingredient.icon = value.icon;
           });
 
     }
@@ -59,6 +61,7 @@ export class IngredientDetailComponent {
       this._ingredientService.save(ingredientObj).subscribe(result => {
         this.ingredient.name = result.name;
         this.ingredient.body = result.body;
+        this.ingredient.icon = result.icon;
       }, error => console.error(error));
     }
 
