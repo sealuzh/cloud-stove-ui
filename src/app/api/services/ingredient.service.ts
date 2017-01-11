@@ -43,6 +43,12 @@ export class IngredientService extends RestService {
           .catch(this.handleError);
     }
 
+    deleteRecommendations(id: number): Observable<any> {
+      return this.http.delete(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendations', this.request.getOptions(null, null))
+          .map(res => <this> res.json())
+          .catch(this.handleError);
+    }
+
     recommendationsCompleted(id: number): Observable<Recommendation[]> {
       return this.http.get(this.configs.apiUrl + '/' + this.pluralizedResourceName() + '/' + id + '/recommendations_completed', this.request.getOptions(null, null))
           .map(res => <this> res.json())

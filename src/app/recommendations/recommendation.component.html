@@ -50,7 +50,7 @@
       <nouislider [config]="recommendationRange.config" [min]="recommendationRange.min" [max]="recommendationRange.max" [step]="recommendationRange.step" [(ngModel)]="recommendationRange.range"></nouislider>
     </div>
     <div class="col-lg-4 text-right">
-      <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-primary" (click)="triggerRecommendation()">
+      <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-info" (click)="triggerRecommendation()">
         <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
         Generate Recommendation
       </button>
@@ -87,6 +87,10 @@
           </tr>
           </tbody>
       </table>
+      <button class="btn btn-xs btn-primary" (click)="deleteRecommendations()">
+        <i class="fa fa-trash"></i>
+        Delete Recommendations
+      </button>
     </div>
     <div class="col-lg-6">
       <cs-recommendation-distribution-chart [recommendation]="selectedRecommendation"></cs-recommendation-distribution-chart>
