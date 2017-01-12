@@ -111,6 +111,14 @@ export class RecommendationComponent implements OnInit {
       );
     }
 
+    deleteRecommendations() {
+       this._ingredientService.deleteRecommendations(this.application.id).subscribe(
+         result => {
+           this.recommendations = [];
+         }, error => console.log(error)
+       );
+    }
+
     changeRegion(region: string) {
       this.regionConstraint.ingredient_id = this.application.id;
       this.regionConstraint.preferred_region_area = region;
