@@ -31,3 +31,6 @@ testem.log
 
 #Build Files
 .wercker
+
+# Generated documentation
+/doc
