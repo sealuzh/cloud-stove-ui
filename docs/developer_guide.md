@@ -66,7 +66,15 @@ The project is structured as follows:
    Wercker build file that specifies how this project is built using the CI infrastructre of [wercker](https://www.wercker.com/).
 
 ## Modules
+<<<<<<< 404d52d7529d89ae06c39869b845e3bd4274789d
+<<<<<<< 5e9e24163a1bc43915b2bd236567ae9a5b0e2789
+The project is organized in [modules](https://angular.io/docs/ts/latest/guide/ngmodule.html) that help organize the application into blocks of functionality. Each folder in `src/app` usually contains a `.module.ts` file that specifies the module, its dependencies and its exports. Thus, functionality can be built in building blocks and be reused easily. To get a grasp what belongs into the same module, check out the [FAQ](https://angular.io/docs/ts/latest/cookbook/ngmodule-faq.html#!#q-module-recommendations) from the Angular Team.
+=======
 WIP
+>>>>>>> first draft on developer guide
+=======
+The project is organized in [modules](https://angular.io/docs/ts/latest/guide/ngmodule.html) that help organize the application into blocks of functionality. Each folder in `src/app` usually contains a `.module.ts` file that specifies the module, its dependencies and its exports. Thus, functionality can be built in building blocks and be reused easily. To get a grasp what belongs into the same module, check out the [FAQ](https://angular.io/docs/ts/latest/cookbook/ngmodule-faq.html#!#q-module-recommendations) from the Angular Team.
+>>>>>>> module section
 
 ## Build
 In order to deploy The Cloud Stove front end in production, you have a number of options.
