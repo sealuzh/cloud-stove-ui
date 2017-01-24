@@ -1,3 +1,7 @@
+/**
+ * @module PricingModule
+ */ /** */
+ 
 import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '../api/services/resource.service';
 import { ProviderService } from '../api/services/provider.service';

@@ -1,3 +1,10 @@
+/**
+ * @module TemplatesModule
+ * @preferred
+ * 
+ * This comment will be used to document the "thing2" module.
+ */ /** */
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

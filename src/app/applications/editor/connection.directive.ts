@@ -1,7 +1,9 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import {ContentChildren, AfterContentInit, ElementRef, Directive, QueryList, HostListener, EventEmitter, OnInit} from '@angular/core';
-
 import {Constraint} from '../../api/dtos/constraint.dto';
-
 import {StoveEditorIngredientComponent} from '../application-editor-ingredient.component';
 import {StoveEditorDependencyConstraintComponent} from '../application-editor-constraint.component';
 

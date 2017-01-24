@@ -1,3 +1,7 @@
+/**
+ * @module WelcomeModule
+ */ /** */
+ 
 import { Component } from '@angular/core';
 
 @Component({

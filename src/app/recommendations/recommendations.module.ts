@@ -1,3 +1,12 @@
+/**
+ * @module RecommendationsModule
+ * @preferred
+ *
+ * This module provides users with all information regarding their generated recommendations. Users can generate recommendations, delete them, and get visualized
+ * representations as graphs.
+ * 
+ */ /** */
+ 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

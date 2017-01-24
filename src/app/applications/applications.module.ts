@@ -1,3 +1,16 @@
+/**
+ * @module ApplicationsModule
+ * @preferred
+ *
+ * This module provides users with the functionality to
+ *
+ * - View all their applications under /applications
+ * - View and edit a specific application under /applications/:id
+ *
+ * It also includes the StoveEditor, which is an interactive drag-based modeler for Cloud Stove applications.
+ *
+ */ /** */
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,6 +34,15 @@ import { routing } from './applications.routes';
 import { DropdownModule } from 'ng2-bootstrap/components/dropdown';
 import { ModalModule } from 'ng2-bootstrap/components/modal';
 
+/**
+ * This module provides users with the functionality to
+ * 
+ * - View all their applications under /applications
+ * - View and edit a specific application under /applications/:id
+ * 
+ * It also includes the StoveEditor, which is an interactive drag-based modeler for Cloud Stove applications.
+ * 
+ */
 @NgModule({
   imports: [
     BrowserModule,

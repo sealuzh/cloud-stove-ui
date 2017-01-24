@@ -1,3 +1,7 @@
+/**
+ * @module IngredientsModule
+ */ /** */
+ 
 import { Component, Input, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 

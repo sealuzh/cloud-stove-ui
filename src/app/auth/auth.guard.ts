@@ -1,8 +1,6 @@
 /**
- * Created by gmazlami on 9/6/16.
- */
-
-// The following was taken from https://angular.io/docs/ts/latest/guide/router.html#!#can-activate-guard
+ * @module AuthModule
+ */ /** */
 
 import { Injectable }   from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';

@@ -1,3 +1,7 @@
+/**
+ * @module AuthModule
+ */ /** */
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';

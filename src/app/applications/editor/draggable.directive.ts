@@ -1,3 +1,7 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import {OnInit, ElementRef, Directive, EventEmitter, HostListener} from '@angular/core';
 
 @Directive({
