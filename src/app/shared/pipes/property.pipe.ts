@@ -1,3 +1,7 @@
+/**
+ * @module SharedModule
+ */ /** */
+ 
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({

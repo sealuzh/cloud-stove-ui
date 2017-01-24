@@ -1,3 +1,7 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import { Component, OnInit } from '@angular/core';
 
 import { IngredientService } from '../api/services/ingredient.service';
