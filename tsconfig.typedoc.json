@@ -4,11 +4,15 @@
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "noEmitHelpers": true
   },
   "include": [
-    "src/**/*"
+    "src/app/**/*",
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/typings.d.ts",
+    "src/vendor.ts"
   ],
   "exclude": [
     "node_modules"
