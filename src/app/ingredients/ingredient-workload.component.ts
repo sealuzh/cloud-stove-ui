@@ -1,3 +1,7 @@
+/**
+ * @module IngredientsModule
+ */ /** */
+ 
 import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 

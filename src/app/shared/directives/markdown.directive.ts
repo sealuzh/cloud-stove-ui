@@ -1,3 +1,7 @@
+/**
+ * @module SharedModule
+ */ /** */
+ 
 import { OnInit, Directive, ElementRef, Input } from '@angular/core';
 import * as Showdown from 'showdown';
 

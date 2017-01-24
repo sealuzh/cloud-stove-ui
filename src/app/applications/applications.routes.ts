@@ -1,3 +1,7 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ApplicationListComponent } from './application-list.component';

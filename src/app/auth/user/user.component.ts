@@ -1,3 +1,7 @@
+/**
+ * @module AuthModule
+ */ /** */
+
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';

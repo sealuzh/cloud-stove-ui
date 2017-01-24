@@ -1,3 +1,7 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 

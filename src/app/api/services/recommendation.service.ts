@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { Router } from '@angular/router';

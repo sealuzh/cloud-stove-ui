@@ -1,8 +1,10 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+ 
 import {Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef} from '@angular/core';
-
 import {Ingredient} from '../api/dtos/ingredient.dto';
 import {Constraint} from '../api/dtos/constraint.dto';
-
 import {ConstraintService} from '../api/services/constraint.service';
 
 @Component({
