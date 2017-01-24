@@ -5,6 +5,8 @@
   </div>
 </div>
 
+<cs-loading *ngIf="!applications"></cs-loading>
+
 <div class="row" *ngIf="applications && applications.length === 0">
   <div class="text-center col-lg-12">
     <hr>
