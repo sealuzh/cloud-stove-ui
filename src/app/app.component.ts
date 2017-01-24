@@ -1,3 +1,7 @@
+/**
+ * @module AppModule
+ */ /** */
+ 
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 @Component({

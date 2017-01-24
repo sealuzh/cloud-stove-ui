@@ -1,3 +1,7 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import {Input, OnInit, ElementRef, Directive} from '@angular/core';
 
 @Directive({

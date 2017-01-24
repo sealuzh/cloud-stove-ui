@@ -11,6 +11,7 @@ require('zone.js/dist/zone');
 
 import 'ts-helpers';
 
+// if our ENV is build and thus production, enable the prod mode for performance
 if (process.env.ENV === 'build') {
     enableProdMode();
 } else {

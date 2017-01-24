@@ -1,13 +1,14 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import { Component, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { IngredientService } from '../api/services/ingredient.service';
 import { ConstraintService } from '../api/services/constraint.service';
 import { Ingredient } from '../api/dtos/ingredient.dto';
 import { Constraint } from '../api/dtos/constraint.dto';
-
 import { Validators, FormBuilder } from '@angular/forms';
-
 import { StoveEditorDependencyModalComponent } from './application-editor-dependency-modal.component';
 
 @Component({

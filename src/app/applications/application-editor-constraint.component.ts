@@ -1,3 +1,7 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import {Component, ChangeDetectorRef, Input} from '@angular/core';
 import {Constraint} from '../api/dtos/constraint.dto';
 

@@ -1,3 +1,7 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RecommendationComponent } from './recommendation.component';
