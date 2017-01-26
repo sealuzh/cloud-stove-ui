@@ -75,10 +75,14 @@ In order to deploy The Cloud Stove front end in production, you have a number of
 Use `npm run build` to generate all static assets for production. You can start the supplied express server using `npm run production`.
 
 ### Docker
-Build the image on your machine using `docker build`, and start the container afterwards with your parameters of choice.
+Build the image on your machine using `docker build`, and start the container afterwards with your parameters of choice. Make sure to set the environment variables `API_URL` and/or `PORT` (defaults to 80) to your specific needs.
 
 ### Heroku
-WIP
+Make sure to set the `API_URL` config variable for your app to a running backend instance, e.g.:
+
+    heroku config:set API_URL=https://api.thestove.io
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Tests
 You can execute tests for the front end using one of two `npm` shortcuts.
