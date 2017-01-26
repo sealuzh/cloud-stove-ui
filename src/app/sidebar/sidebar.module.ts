@@ -3,6 +3,8 @@
  * @preferred
  * 
  * Displays the side navigation of the frontend.
+ * 
+ * 
  */ /** */
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
