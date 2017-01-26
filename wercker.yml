@@ -11,7 +11,6 @@ build:
           sudo npm install -g webpack-dev-server
           sudo npm install -g karma-cli
           sudo npm install -g protractor
-          sudo npm install -g typings
 
     # Installs all Dependencies. We cannot use npm-install as it ignores dev-dependencies
     - script:
