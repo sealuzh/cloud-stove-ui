@@ -36,4 +36,12 @@ export class LoginHelper {
         cb();
     }
 
+    get email() {
+        return this.userLogin.email;
+    }
+
+    get password() {
+        return this.userLogin.password;
+    }
+
 };

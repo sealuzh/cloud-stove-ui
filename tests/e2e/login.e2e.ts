@@ -1,6 +1,9 @@
 import { browser, by, element } from 'protractor';
+import {LoginHelper} from "./helper/loginHelper";
 
 describe('/login', () => {
+
+  let loginHelper = new LoginHelper(browser);
 
   beforeEach(() => {
     browser.get('/login');
@@ -52,8 +55,8 @@ describe('/login', () => {
     let password = element(by.css('[formcontrolname=password]'));
     let submit = element(by.css('button'));
 
-    email.sendKeys('admin@thestove.io');
-    password.sendKeys('stove-admin');
+    email.sendKeys(loginHelper.email);
+    password.sendKeys(loginHelper.password);
 
     submit.click();
 
