@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import {RestObject} from './restobject.dto';
 import {Ingredient} from './ingredient.dto';
 import {Resource} from './resource.dto';

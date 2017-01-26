@@ -1,3 +1,7 @@
+/**
+ * @module IngredientsModule
+ */ /** */
+ 
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IngredientDetailComponent } from './ingredient-detail.component';

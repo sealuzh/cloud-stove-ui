@@ -1,6 +1,10 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import { Component, OnChanges, Input } from '@angular/core';
 import { Recommendation } from './../../api/dtos/recommendation.dto';
-import { ProviderColorService } from './../../shared/providercolor.service';
+import { ProviderColorService } from './../../shared/providers/providercolor.service';
 
 @Component({
     selector: 'cs-recommendation-sensitivity-chart',

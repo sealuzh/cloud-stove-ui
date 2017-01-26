@@ -1,3 +1,12 @@
+/**
+ * @module ApiModule
+ * @preferred
+ * 
+ * This module exposes the backend REST API of Cloud Stove. Each service roughly corresponds to one specific REST-endpoint, 
+ * either providing generic REST methods on its resources like GET/PUT/POST/DELETE, or endpoint specific methods 
+ * when the functionality cannot be sufficiently mapped to a RESTful interface.
+ */ /** */
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';

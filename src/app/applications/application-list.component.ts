@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+/**
+ * @module ApplicationsModule
+ */ /** */
 
+import {Component, OnInit} from '@angular/core';
 import {IngredientService} from '../api/services/ingredient.service';
 import {Ingredient} from '../api/dtos/ingredient.dto';
 

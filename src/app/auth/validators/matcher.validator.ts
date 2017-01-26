@@ -1,3 +1,7 @@
+/**
+ * @module AuthModule
+ */ /** */
+
 import { FormGroup } from '@angular/forms';
 
 export class PasswordMatcher {

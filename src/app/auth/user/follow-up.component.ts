@@ -1,3 +1,7 @@
+/**
+ * @module AuthModule
+ */ /** */
+
 import {Component} from '@angular/core';
 
 @Component({

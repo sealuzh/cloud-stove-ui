@@ -1,3 +1,7 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import {Component, OnChanges, Input} from '@angular/core';
 import {Recommendation} from '../api/dtos/recommendation.dto';
 

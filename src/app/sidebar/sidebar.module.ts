@@ -1,3 +1,11 @@
+/**
+ * @module SidebarModule
+ * @preferred
+ * 
+ * Displays the side navigation of the frontend.
+ * 
+ */ /** */
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

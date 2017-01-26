@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import {RestObject} from './restobject.dto';
 
 export interface Job extends RestObject {

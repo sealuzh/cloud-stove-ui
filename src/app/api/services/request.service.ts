@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
 import { RequestOptions, URLSearchParams } from '@angular/http';

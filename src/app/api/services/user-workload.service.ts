@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';

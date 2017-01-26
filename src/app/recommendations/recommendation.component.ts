@@ -1,3 +1,7 @@
+/**
+ * @module RecommendationsModule
+ */ /** */
+ 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -26,6 +30,8 @@ export class RecommendationComponent implements OnInit {
 
     public regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
     public providerConstraint: Constraint = { type: 'ProviderConstraint', preferred_providers: [] };
+    
+    /** @todo regions are hardcoded currently, but there is an endpoint to fix this */
     public selectableRegions: {id: string, name: string}[] = [
       {id: 'US', name: 'United States'},
       {id: 'EU', name: 'Europe'},
@@ -33,17 +39,25 @@ export class RecommendationComponent implements OnInit {
       {id: 'SA', name: 'South America'}
     ];
 
-    public recommendationRange: { config: any, min: number, max: number, range: number[], step: number } = { config: {
-      connect: true,
-      tooltips: [true, true],
-      pips: {
-        mode: 'range',
-        density: 5,
-        stepped: true
-      }
-    },
-    min: 0, max: 50000, range: [1000, 10000], step: 1000 };
+    // ui-slider configuration, see https://github.com/tb/ng2-nouislider
+    public recommendationRange: { config: any, min: number, max: number, range: number[], step: number } = 
+    { 
+      config: {
+        connect: true,
+        tooltips: [true, true],
+        pips: {
+          mode: 'range',
+          density: 5,
+          stepped: true
+        }
+      },
+      min: 0, 
+      max: 50000, 
+      range: [1000, 10000], 
+      step: 1000 
+    };
 
+    /** @todo providers are hardcoded currently, but there is an endpoint to fix this */
     public selectableProviders: string[] = ['Google', 'Microsoft Azure', 'Digital Ocean', 'Atlantic.net', 'Amazon', 'Rackspace', 'Joyent'];
 
     constructor(
@@ -87,6 +101,9 @@ export class RecommendationComponent implements OnInit {
       }, error => console.log(error));
     }
 
+    /**
+     * Schedules recommendations for all in the range, giving a step size in the process.
+     */
     triggerRecommendation() {
       this.generatingRecommendation = true;
       this._recommendationService.triggerRange(this.application.id, this.recommendationRange.range[0], this.recommendationRange.range[1], this.recommendationRange.step).subscribe(
@@ -101,6 +118,9 @@ export class RecommendationComponent implements OnInit {
       );
     }
 
+    /**
+     * Removes a single recommendation
+     */
     removeRecommendation(recommendation: Recommendation) {
       this._recommendationService.delete(recommendation).subscribe(
         result => {
@@ -111,6 +131,9 @@ export class RecommendationComponent implements OnInit {
       );
     }
 
+    /**
+     * Removes ALL recommendations
+     */
     deleteRecommendations() {
        this._ingredientService.deleteRecommendations(this.application.id).subscribe(
          result => {
