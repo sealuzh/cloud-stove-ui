@@ -1,5 +1,6 @@
 /**
  * @module PricingModule
+ *
  */ /** */
  
 import { ModuleWithProviders }  from '@angular/core';

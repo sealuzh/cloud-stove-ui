@@ -5,6 +5,8 @@
  * This module provides users with all information regarding their generated recommendations. Users can generate recommendations, delete them, and get visualized
  * representations as graphs.
  * 
+ * ![alt text](media://recommendation-detail.PNG "Recommendation Detail View")
+ * 
  */ /** */
  
 import { BrowserModule } from '@angular/platform-browser';
