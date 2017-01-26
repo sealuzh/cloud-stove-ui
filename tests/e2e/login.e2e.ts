@@ -35,13 +35,13 @@ describe('/login', () => {
     expect(element(by.css('div.alert.alert-warning > p')).getText()).toEqual('Please check your E-Mail and password.');
   });
 
-  it('should require a minimum length of 8 characters for passwords', () => {
+  it('should require a minimum length of 5 characters for passwords', () => {
     let email = element(by.css('[formcontrolname=email]'));
     let password = element(by.css('[formcontrolname=password]'));
     let submit = element(by.css('button'));
 
     email.sendKeys('wrong@email.ch');
-    password.sendKeys('shortpw');
+    password.sendKeys('pw');
 
     expect(submit.isEnabled()).toBe(false);
 
