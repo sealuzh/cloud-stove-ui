@@ -4,7 +4,7 @@ import { LocalStorageHelper } from './localStorageHelper';
 export class LoginHelper {
 
     private apiUrl = process.env.API_URL || 'http://localhost:3000';
-    private userLogin = { email: 'admin@thestove.io', password: 'stove-admin' };
+    private userLogin = { email: 'admin@thestove.io', password: 'admin' };
     private localStorage: LocalStorageHelper;
 
     constructor(browser: any) {
