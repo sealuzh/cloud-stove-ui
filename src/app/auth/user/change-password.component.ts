@@ -26,8 +26,8 @@ export class ChangePasswordComponent {
     constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
 
         this.changePasswordForm = this._fb.group({
-            'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-            'password_confirm': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+            'password': ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+            'password_confirm': ['', Validators.compose([Validators.required, Validators.minLength(5)])],
         }, {validator: PasswordMatcher.matchingPasswords});
 
         this.changePasswordForm.valueChanges
