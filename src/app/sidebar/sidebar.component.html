@@ -1,52 +1,64 @@
-<nav class="iconav">
-  <a class="iconav-brand" href="#">
-    <span class="icon icon-cloudstove iconav-brand-icon"></span>
-  </a>
-  <div class="iconav-slider">
-    <ul class="nav nav-pills iconav-nav">
-      <li>
-        <a routerLink="/welcome" routerLinkActive="active" title="Overview">
-          <span class="icon icon-home"></span>
-          <small class="iconav-nav-label visible-xs-block">Overview</small>
-        </a>
-      </li>
-      <li >
-        <a routerLink="/templates" routerLinkActive="active" title="Templates">
-          <span class="icon icon-text-document"></span>
-          <small class="iconav-nav-label visible-xs-block">Templates</small>
-        </a>
-      </li>
-      <li *ngIf="isUserLoggedIn()">
-        <a routerLink="/applications" routerLinkActive="active" title="Applications">
-          <span class="icon icon-list"></span>
-          <small class="iconav-nav-label visible-xs-block">Applications</small>
-        </a>
-      </li>
-      <li *ngIf="isUserLoggedIn()">
-        <a routerLink="/recommendations" routerLinkActive="active">
-          <span class="icon icon-area-graph"></span>
-          <small class="iconav-nav-label visible-xs-block">Recommendations</small>
-        </a>
-      </li>
-      <li *ngIf="isUserLoggedIn()">
-        <a routerLink="/pricing" routerLinkActive="active" >
-          <span class="icon icon-calculator"></span>
-          <small class="iconav-nav-label visible-xs-block">Pricing</small>
-        </a>
-      </li>
-      <li *ngIf="isUserLoggedIn()">
-        <a routerLink="/user" routerLinkActive="active" >
-          <img gravatar [email]="getEmailAddress()" [size]="16"  class="img-circle img-responsive">
-          <small class="iconav-nav-label visible-xs-block">My Account</small>
-        </a>
-      </li>
-      <li *ngIf="!isUserLoggedIn()">
-        <a routerLink="/login" routerLinkActive="active" >
-          <span class="icon icon-login"></span>
-          <small class="iconav-nav-label visible-xs-block">Login</small>
-        </a>
-      </li>
-    </ul>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <span class="icon icon-cloudstove iconav-brand-icon"></span>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink="/welcome" routerLinkActive="active" title="Overview">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a routerLink="/templates" routerLinkActive="active" title="Templates">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            Templates
+          </a>
+        </li>
+        <li *ngIf="isUserLoggedIn()">
+          <a routerLink="/applications" routerLinkActive="active" title="Applications">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            Applications
+          </a>
+        </li>
+        <li *ngIf="isUserLoggedIn()">
+          <a routerLink="/recommendations" routerLinkActive="active">
+            <i class="fa fa-area-chart" aria-hidden="true"></i>
+            Recommendations
+          </a>
+        </li>
+        <li *ngIf="isUserLoggedIn()">
+          <a routerLink="/pricing" routerLinkActive="active" >
+            <i class="fa fa-calculator" aria-hidden="true"></i>
+            Pricing
+          </a>
+        </li>
+        <li *ngIf="isUserLoggedIn()">
+          <a routerLink="/user" routerLinkActive="active" >
+            <img gravatar [email]="getEmailAddress()" [size]="16"  class="img-circle">
+            My Account
+          </a>
+        </li>
+        <li *ngIf="!isUserLoggedIn()">
+          <a routerLink="/login" routerLinkActive="active" >
+            <span class="icon icon-login"></span>
+            Login
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
 

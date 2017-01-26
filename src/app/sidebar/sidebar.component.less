@@ -1,10 +1,32 @@
 @import "../../style/app";
 
-.icon-cloudstove {
-  content: url('/img/flame.svg');
-  width: 30px;
+.navbar-inverse {
+  border: none;
+
+  .navbar-toggle, .navbar-toggle:active {
+    background-color: @navbar-inverse-bg;
+  }
+
 }
 
-.nav > li > a:hover, .nav > li > a.active {
-  background-color: @gray-base;
+.navbar-inverse .navbar-nav > li > a.active {
+  background-color: @body-bg;
+}
+
+.container-navbar-top {
+  padding-top: 100px;
+}
+
+.icon-cloudstove {
+  content: url('/img/flame.svg');
+  width: 25px;
+}
+
+.navbar-brand {
+  background-color: #0f1013; 
+  margin-left: 0 !important; 
+}
+
+.navbar-brand:hover {
+  background-color: #0f1013; 
 }

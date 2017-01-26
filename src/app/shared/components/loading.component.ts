@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'cs-loading',
+    styles: [require('./loading.component.less')],
     template: `
         <div class="loading text-center">
             <p>

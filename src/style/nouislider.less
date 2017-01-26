@@ -13,9 +13,9 @@
 }
 
 .noUi-target {
-  background: @gray;
+  background: @brand-dark;
   box-shadow: none;
-  border: 1px solid @gray;
+  border: 1px solid @brand-dark;
 }
 
 .noUi-marker-sub {
@@ -27,9 +27,19 @@
 }
 
 .noUi-connect {
-  background: @gray-dark;
+  background: @brand-dark;
 }
 
 .noUi-pips {
-  color: @gray;
+  color: @headings-color;
+}
+
+.noUi-handle {
+  border: 1px solid lighten(@brand-dark, 5%);
+  background: lighten(@brand-dark, 10%);
+  color: @headings-color;
+}
+
+.noUi-handle:after, .noUi-handle:before {
+  background: lighten(@brand-dark, 5%);
 }

@@ -1,15 +1,48 @@
-@import './theme/variables';
+@import "~bootstrap/less/bootstrap.less";
 
-@icon-font-path: "../fonts/";
-
-@import './theme/toolkit-inverse';
-
+// bootstrap general overrides
+@body-bg: #252830;
 @brand-primary: #DC3522;
-@brand-dark: #3b322f;
+@brand-dark: #30343e;
+
+@gray-light: lighten(@brand-dark, 40%);
+
 @brand-accent: lighten(@brand-dark, 40%);
 @brand-success: #3cdc22;
 @brand-warning: #dcc022;
 @brand-alert: #DC3522;
+
+// general text styling
+@text-color: #cfd2da;
+@headings-color: #ffffff;
+
+// table
+@table-bg-accent: lighten(@brand-dark, 5%);
+@table-border-color: transparent;
+@table-bg: transparent;
+@table-bg-hover: lighten(@brand-dark, 10%);
+
+// navbar
+@navbar-inverse-bg: @brand-dark;
+@navbar-inverse-border: transparent;
+
+// jumbotron
+@jumbotron-bg: @brand-dark;
+
+// well
+@well-bg: @brand-dark;
+@well-border: transparent;
+
+// input
+@input-bg: @brand-dark;
+@input-color: @text-color;
+
+// modals
+@modal-content-bg: @brand-dark;
+@modal-content-border-color: lighten(@brand-dark, 5%);
+@modal-header-border-color: lighten(@brand-dark, 5%);
+
+@hr-border: @brand-dark;
 
 .overflow-hidden {
   overflow: hidden;
@@ -17,28 +50,13 @@
   height: 100%;
 }
 
-.loading {
-  height: 300px;
-  padding-top: 200px;
-  color: @brand-primary;
+.close, .close:hover {
+  color: @text-color;
 }
 
-// responsive fix using ico-nav
-@media (min-width: @screen-sm) {
-  .container {
-    padding-left: @iconav-width;
-  }
-
-  .container-navbar-top {
-    padding-top: @iconav-width;
-  }
-}
-
-@import './form';
-@import './loading';
-@import './markdown';
 @import './table';
+@import './form';
+@import './markdown';
 @import './nouislider';
 @import './animations';
-@import './jumbotron';
 @import './dashhead';

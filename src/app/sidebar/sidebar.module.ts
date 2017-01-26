@@ -14,6 +14,7 @@ import { AuthModule } from './../auth/auth.module';
 import { SidebarComponent } from './sidebar.component';
 import { Gravatar } from 'ng2-gravatar-directive';
 import { RouterModule }   from '@angular/router';
+import { CollapseModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { RouterModule }   from '@angular/router';
     FormsModule,
     AuthModule,
     ReactiveFormsModule,
+    CollapseModule,
     RouterModule
   ],
   declarations: [ SidebarComponent, Gravatar ],
