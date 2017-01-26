@@ -1,5 +1,5 @@
 /**
- * @module SharedModule
+ * @module AppModule
  */ /** */
  
 import { ModuleWithProviders }  from '@angular/core';

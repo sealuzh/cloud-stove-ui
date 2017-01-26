@@ -54,7 +54,4 @@ import '../style/app.less';
  ]
 })
 
-/**
- * APIMODULE DOC
- */
 export class AppModule { }
