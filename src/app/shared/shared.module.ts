@@ -2,7 +2,7 @@
  * @module SharedModule
  * @preferred
  *
- * This module provides a number of shared Pipes, Components, Directives and Services used the Cloud Stove front end.
+ * This module provides a number of shared Pipes, Components, Directives and Services used ny the Cloud Stove Front End.
  * 
  */ /** */
  
