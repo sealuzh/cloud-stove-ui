@@ -4,10 +4,13 @@ describe('/templates', () => {
 
   beforeEach(() => {
     browser.get('/templates');
+    
+    // clear local storage
+    browser.executeScript('window.localStorage.clear();');
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('Cloudstove');
+    expect(browser.getTitle()).toEqual('The Cloud Stove');
   });
 
   it('should have a header', () => {

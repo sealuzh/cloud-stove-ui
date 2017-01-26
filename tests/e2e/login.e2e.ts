@@ -10,7 +10,7 @@ describe('/login', () => {
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('Cloudstove');
+    expect(browser.getTitle()).toEqual('The Cloud Stove');
   });
 
   it('should display the login fields, if the user is not logged-in', () => {
