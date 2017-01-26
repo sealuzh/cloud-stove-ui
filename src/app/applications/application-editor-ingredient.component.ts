@@ -1,3 +1,7 @@
+/**
+ * @module ApplicationsModule
+ */ /** */
+
 import { Component, ChangeDetectorRef, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Ingredient } from '../api/dtos/ingredient.dto';
 

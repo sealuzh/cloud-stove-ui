@@ -1,3 +1,7 @@
+/**
+ * @module ApiModule
+ */ /** */
+
 import {Constraint} from './constraint.dto';
 import {Resource} from './resource.dto';
 import {RestObject} from './restobject.dto';

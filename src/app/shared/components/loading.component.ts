@@ -1,3 +1,7 @@
+/**
+ * @module SharedModule
+ */ /** */
+ 
 import { Component, Input } from '@angular/core';
 
 @Component({

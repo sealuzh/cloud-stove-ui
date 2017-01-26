@@ -11,7 +11,9 @@
     "e2e": "protractor",
     "webdriver-update": "webdriver-manager update",
     "postinstall": "npm run webdriver-update && npm run build",
-    "mockdb": "json-server --watch docs/db.json"
+    "mockdb": "json-server --watch docs/db.json",
+    "typedoc": "typedoc --tsconfig tsconfig.typedoc.json --options typedoc.json"
+
   },
   "private": true,
   "dependencies": {
@@ -35,7 +37,6 @@
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
     "intl": "^1.2.4",
-    "jquery": "^3.1.0",
     "lodash.groupby": "^4.6.0",
     "morgan": "^1.7.0",
     "ng2-bootstrap": "1.1.5",
@@ -45,9 +46,9 @@
     "ng2-validators": "1.5.1",
     "nouislider": "^9.1.0",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "5.0.0-rc.4",
     "showdown": "^1.4.1",
-    "zone.js": "^0.6.26"
+    "zone.js": "0.7.x"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.34",
@@ -92,7 +93,9 @@
     "ts-loader": "^0.8.1",
     "tslint": "^3.15.1",
     "tslint-loader": "^2.1.0",
-    "typedoc": "^0.4.5",
+    "typedoc": "~0.5.5",
+    "typedoc-plugin-external-module-name": "dschoeni/typedoc-plugin-external-module-name#caaaa0981342def876f923e92d1fd020d0a24840",
+    "typedoc-plugin-ui-router": "1.0.6",
     "typescript": "2.0.x",
     "url-loader": "^0.5.7",
     "webdriver-manager": "^10.0.2",

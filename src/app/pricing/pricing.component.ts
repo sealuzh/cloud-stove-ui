@@ -1,3 +1,7 @@
+/**
+ * @module PricingModule
+ */ /** */
+ 
 import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '../api/services/resource.service';
 import { ProviderService } from '../api/services/provider.service';
@@ -41,6 +45,7 @@ export class PricingComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // gather available areas and providers from API
         let areasObservable = this._resourceService.regionAreas();
         areasObservable.subscribe(result => {
             this.regions = result;
@@ -53,6 +58,7 @@ export class PricingComponent implements OnInit {
             this.config.filtering.providerFilter = this.providers[0];
         });
 
+        // using Observable.zip, we make sure both calls have finished before constructing our table
         Observable.zip(areasObservable, providerObservable).subscribe(result => {
             this.loadResources();
         });
@@ -74,6 +80,9 @@ export class PricingComponent implements OnInit {
             this.resources = [];
             let groupedByRegion: any[] = groupBy(result, 'region_area');
 
+            // merge duplicate resources as we don't allow users filtering per data-center. this calcs the min/max of prices
+            // for different regions, so that two identical resources (f.E. basic-a0) with different prices (5$ in eu-west-1 vs
+            // 10$ in eu-west-2) become one basic-a0 with a variable price range as property
             for (let regionKey in groupedByRegion) {
                 if (groupedByRegion.hasOwnProperty(regionKey)) {
                     let groupedByName: any[] = groupBy(groupedByRegion[regionKey], 'name');
@@ -136,7 +145,7 @@ export class PricingComponent implements OnInit {
 
     onChangeTable() {
         this.filteredResources = this.changeFilter(this.resources, this.config);
-        this.changeSort(this.filteredResources, this.config);
+        this.filteredResources = this.changeSort(this.filteredResources, this.config);
     }
 
     orderBy(column: any) {
@@ -189,6 +198,8 @@ export class PricingComponent implements OnInit {
             }
             return 0;
         });
+
+        return data;
   }
 
 }

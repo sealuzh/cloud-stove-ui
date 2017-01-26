@@ -1,3 +1,12 @@
+/**
+ * @module AuthModule
+ * @preferred
+ *
+ * Responsible for user authentication and authorisation. It also provides views for login, registration, password change and follow up after logouts.
+ * The provided AuthService can be used to determine if a user is currently logged in, the AuthGuard to block access to specific routes.
+ *
+ */ /** */
+ 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

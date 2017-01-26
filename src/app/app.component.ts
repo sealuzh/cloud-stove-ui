@@ -1,3 +1,9 @@
+/**
+ * @module AppModule
+ */ /** */
+ 
+import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service'; 
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -10,23 +16,21 @@ export class AppComponent implements OnInit {
   // necessary for ng2-bootstrap
   private viewContainerRef: ViewContainerRef;
 
-  public constructor(viewContainerRef: ViewContainerRef) {
+  public constructor(viewContainerRef: ViewContainerRef, private _authService: AuthService, private _router: Router) {
     this.viewContainerRef = viewContainerRef;
   }
 
   ngOnInit() {
 
       // check if token is still valid
-      /*
-      this.authService.validate().subscribe(
-        result =>{
-            this.router.navigateByUrl('/applications');
+      this._authService.validate().subscribe(
+        result => {
+            this._router.navigateByUrl('/applications');
         },
         error => {
-            this.router.navigateByUrl('/login');
+            this._router.navigateByUrl('/login');
         }
       );
-      */
 
   }
 
