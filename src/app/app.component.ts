@@ -1,9 +1,9 @@
-import { Router } from '@angular/router';
-import { AuthService } from './auth/auth.service';
 /**
  * @module AppModule
  */ /** */
  
+import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service'; 
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 @Component({
