@@ -61,7 +61,7 @@ export class IngredientDetailComponent {
     }
 
     submit(ingredientObj: Ingredient) {
-      this.workloadForm.save();
+      this.workloadForm.beforeSave();
       this._ingredientService.save(ingredientObj).subscribe(result => {
         this.ingredient.name = result.name;
         this.ingredient.body = result.body;
