@@ -2,59 +2,43 @@
  * @module ApplicationsModule
  */ /** */
 
-import { Component, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IngredientService } from '../api/services/ingredient.service';
 import { ConstraintService } from '../api/services/constraint.service';
 import { Ingredient } from '../api/dtos/ingredient.dto';
 import { Constraint } from '../api/dtos/constraint.dto';
-import { Validators, FormBuilder } from '@angular/forms';
-import { StoveEditorDependencyModalComponent } from './application-editor-dependency-modal.component';
+import { StoveEditorDependencyModalComponent } from './modals/dependency-modal.component';
+import { StoveEditorNameModalComponent } from './modals/name-modal.component';
 
 @Component({
     template: require('./application-editor.component.html'),
     styles: [require('./application-editor.component.less')],
 })
 
-export class ApplicationEditorComponent implements OnInit {
+export class ApplicationEditorComponent implements AfterViewInit {
 
     application: Ingredient;
     editor: { parent?: Ingredient, application?: Ingredient, ingredient?: Ingredient, dependencies?: Constraint[] } = {};
 
     @ViewChild(StoveEditorDependencyModalComponent) stoveEditorDependencyModalComponent: StoveEditorDependencyModalComponent;
-
-    @ViewChild('changeAppNameModal') modal: any;
-
-    changeNameForm;
-    changeName: {appName?: string} = {};
+    @ViewChild(StoveEditorNameModalComponent) stoveEditorNameModalComponent: StoveEditorNameModalComponent;
 
     constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
       private _ref: ChangeDetectorRef,
-      private _route: ActivatedRoute,
-      private _fb: FormBuilder) {
-
-        this.changeNameForm = this._fb.group({
-            'appName': ['', Validators.compose([Validators.required])],
-        });
-
-        this.changeNameForm.valueChanges
-            .filter((value) => this.changeNameForm.valid)
-            .subscribe((value) => {
-                this.changeName['appName'] = value['appName'];
-            });
+      private _route: ActivatedRoute) {
 
     }
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this._route.params.subscribe(params => {
-          let id = +params['id'];
-          this.loadIngredient(id);
+            this.loadIngredient(+params['id']);
         });
     }
 
-    openModal(ingredient) {
+    openDependencyModal(ingredient) {
       this.selectIngredient(ingredient);
       this.stoveEditorDependencyModalComponent.show();
     }
@@ -87,22 +71,13 @@ export class ApplicationEditorComponent implements OnInit {
             application => {
                 this.application = application;
                 this.zoomTo(this.application);
-
             },
             error => console.log(error)
         );
     }
 
-    openAppNameModal() {
-        this.modal.show();
-    }
-
-    changeAppName() {
-        this.modal.hide();
-        this.application.name = this.changeName.appName;
-        this._ingredientService.save(this.application).subscribe(result => {
-            this.application = result;
-        }, error => console.error(error));
+    addIngredient() {
+        this.application.children.push({name: 'New Ingredient '});
     }
 
     private extractConstraints(ingredient: Ingredient): Constraint[] {

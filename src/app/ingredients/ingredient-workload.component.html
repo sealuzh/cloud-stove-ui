@@ -4,6 +4,7 @@
     <input type="checkbox" formControlName="scale_ingredient" [ngModel]="scalingWorkload.scale_ingredient">
   </div>
 </form>
+
 <form [formGroup]="ramWorkloadForm" *ngIf="ramWorkloadForm">
     <div class="form-group">
         <label class="form-control-label">Minimum RAM:</label>
@@ -18,6 +19,7 @@
         <input class="form-control" type="text" formControlName="ram_mb_growth_per_user" [ngModel]="ramWorkload.ram_mb_growth_per_user">
     </div>
 </form>
+
 <form [formGroup]="cpuWorkloadForm" *ngIf="cpuWorkloadForm">
     <div class="form-group">
         <label class="form-control-label">User Capacity for 1 CPU:</label>
@@ -28,8 +30,6 @@
         <input class="form-control" type="text" formControlName="parallelism" [ngModel]="cpuWorkload.parallelism">
     </div>
 </form>
-
-<button class="btn btn-success" (click)="beforeSave()" *ngIf="cpuWorkloadForm && ramWorkloadForm" [disabled]="!ramWorkloadForm.valid || !cpuWorkloadForm.valid">Update</button>
 
 <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">

@@ -3,14 +3,13 @@
  */ /** */
  
 import {Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {Ingredient} from '../api/dtos/ingredient.dto';
-import {Constraint} from '../api/dtos/constraint.dto';
-import {ConstraintService} from '../api/services/constraint.service';
+import {Ingredient} from '../../api/dtos/ingredient.dto';
+import {Constraint} from '../../api/dtos/constraint.dto';
+import {ConstraintService} from '../../api/services/constraint.service';
 
 @Component({
     selector: 'cs-stove-editor-dependency-modal',
-    template: require('./application-editor-dependency-modal.component.html'),
-    styles: [require('./application-editor-dependency-modal.component.less')]
+    template: require('./dependency-modal.component.html')
 })
 
 export class StoveEditorDependencyModalComponent {

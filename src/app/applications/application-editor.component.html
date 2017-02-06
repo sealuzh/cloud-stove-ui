@@ -9,7 +9,11 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <button (click)="openAppNameModal()" type="button" class="btn btn-default pull-left">Change app name</button>
+      <div class="btn-group pull-left">
+        <button (click)="stoveEditorNameModalComponent.show()" type="button" class="btn btn-default">Change Name</button>
+        <button (click)="addIngredient()" type="button" class="btn btn-default">Add Ingredient</button>
+        <button (click)="openDependencyModal(editor.ingredient)" type="button" class="btn btn-default">Add Dependency</button>
+      </div>
     </div>
     <div class="col-lg-6">
         <!--<button *ngIf="editor.ingredient" type="button" class="btn btn-info" (click)="openModal(editor.ingredient)">-->
@@ -28,8 +32,8 @@
         <div class="overflow-hidden">
           <div class="application-editor" csConnection>
 
+            <!-- 
             <div class="zoom-controls" *ngIf="editor.ingredient">
-              <!--
               <button class="btn btn-primary" (click)="zoomIn()" *ngIf="editor.ingredient.children.length > 0">
                 <i class="fa fa-search-plus"></i>
               </button>
@@ -37,8 +41,8 @@
               <button class="btn btn-primary" (click)="zoomOut()" *ngIf="editor.ingredient.parent_id && editor.ingredient.parent_id !== application.id">
                 <i class="fa fa-search-minus"></i>
               </button>
-              -->
             </div>
+            -->
 
             <cs-stove-editor-dependency-constraint
               *ngFor="let constraint of editor.dependencies"
@@ -74,41 +78,8 @@
       </div>
     </div>
 
-    <cs-stove-editor-dependency-modal
-      *ngIf="editor.ingredient"
-      [source]="editor.ingredient"
-      [targets]="editor.application.children">
-     </cs-stove-editor-dependency-modal>
-
-    <div bsModal #changeAppNameModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" (click)="changeAppNameModal.hide()" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title">Edit the application name:</h4>
-          </div>
-
-          <div class="modal-body">
-            <form [formGroup]="changeNameForm">
-              <div class="form-group">
-                <label class="form-control-label">New application name</label>
-                <input class="form-control form-control-padded" type="text" formControlName="appName" [ngModel]="changeName.appName">
-              </div>
-            </form>
-          </div>
-
-          <div class="modal-footer">
-            <div class="text-right">
-              <button (click)="changeAppName()" class="btn btn-primary" [ngClass]="{'btn-success': changeNameForm.valid}" [disabled]="!changeNameForm.valid">Change</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    <cs-stove-editor-dependency-modal *ngIf="editor.ingredient" [source]="editor.ingredient" [targets]="editor.application.children"></cs-stove-editor-dependency-modal>
+    <cs-stove-editor-name-modal *ngIf="application" [application]="application"></cs-stove-editor-name-modal>
 
   </div>
 </div>
