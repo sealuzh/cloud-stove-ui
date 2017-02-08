@@ -63,6 +63,7 @@ export class IngredientDetailComponent {
     submit(ingredientObj: Ingredient) {
       this.workloadForm.beforeSave();
       this._ingredientService.save(ingredientObj).subscribe(result => {
+        this.ingredient.parent_id = result.parent_id;
         this.ingredient.name = result.name;
         this.ingredient.body = result.body;
         this.ingredient.icon = result.icon;

@@ -77,7 +77,7 @@ export class ApplicationEditorComponent implements AfterViewInit {
     }
 
     addIngredient() {
-        this.application.children.push({name: 'New Ingredient '});
+        this.application.children.push({name: 'New Ingredient ', parent_id: this.application.id});
     }
 
     private extractConstraints(ingredient: Ingredient): Constraint[] {
