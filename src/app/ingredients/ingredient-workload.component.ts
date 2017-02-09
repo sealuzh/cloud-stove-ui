@@ -130,18 +130,26 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
     }
 
     beforeSave() {
-        this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
-            hasRecommendations => {
-                if (hasRecommendations) {
-                    this.modal.show();
-                } else {
-                    this.save();
-                }
-            },
-            error => {
-               console.log(error);
-            }
-        );
+
+      // if the ingredient has not id, it is created newly and thus cannot have any recommendations to find yet
+      if (!this.ingredient.id) {
+        this.save();
+        return;
+      }
+
+      this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
+          hasRecommendations => {
+              if (hasRecommendations) {
+                  this.modal.show();
+              } else {
+                  this.save();
+              }
+          },
+          error => {
+              console.log(error);
+          }
+      );
+      
     }
 
     save() {
