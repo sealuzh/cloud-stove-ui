@@ -43,4 +43,6 @@ trigger_docs:
                    -H "Content-Type: application/json" \
                    -X POST \
                    -d "{\"pipelineId\":\"5885d76e50c9930100a025f4\"}" \
-                   "https://app.wercker.com/api/v3/runs"
+                   --retry 2 \
+                   --retry-max-time 15 \
+                   -- "https://app.wercker.com/api/v3/runs"
