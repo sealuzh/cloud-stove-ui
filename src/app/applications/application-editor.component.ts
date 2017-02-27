@@ -77,10 +77,10 @@ export class ApplicationEditorComponent implements AfterViewInit {
     }
 
     addIngredient() {
-        this.application.children.push({name: 'New Ingredient ', parent_id: this.application.id});
+        this.application.children.push({name: 'New Ingredient ', parent_id: this.application.id, body: 'Add a description of this ingredient.'});
     }
 
-    private extractConstraints(ingredient: Ingredient): Constraint[] {
+    extractConstraints(ingredient: Ingredient): Constraint[] {
       let links = [];
 
       if (ingredient.children) {
@@ -95,6 +95,10 @@ export class ApplicationEditorComponent implements AfterViewInit {
       }
 
       return links;
+    }
+
+    onConstraintAdd(constraint: Constraint) {
+      this.editor.dependencies.push(constraint);
     }
 
 }

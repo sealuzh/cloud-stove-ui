@@ -1,7 +1,7 @@
 /**
  * @module ApplicationsModule
  */ /** */
- 
+
 import {Component, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {Ingredient} from '../../api/dtos/ingredient.dto';
 import {Constraint} from '../../api/dtos/constraint.dto';
@@ -56,7 +56,6 @@ export class StoveEditorDependencyModalComponent {
       this.source.constraints.push(constraint);
       this.add.emit(constraint);
       this.modal.hide();
-      this._ref.markForCheck();
     }
 
     selectDependency(ingredient: Ingredient) {
