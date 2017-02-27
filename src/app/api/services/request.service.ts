@@ -9,20 +9,18 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 @Injectable()
 export class RequestService {
 
-    private urlSearchParams: URLSearchParams;
-
     getOptions(headers?: Headers, search?: URLSearchParams): RequestOptions {
         if (!headers) {
             headers = new Headers();
         }
 
-        if (search) {
-           this.urlSearchParams = search;
+        if (!search) {
+           search = new URLSearchParams();
         }
 
         let requestOptions: RequestOptions = new RequestOptions({
             headers: headers,
-            search: this.urlSearchParams
+            search: search
         });
 
         requestOptions.headers.append('Accept', 'application/json');
