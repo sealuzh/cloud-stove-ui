@@ -11,7 +11,7 @@
                 <input class="form-control form-control-padded" type="password" formControlName="password" [ngModel]="login.password">
             </div>
             <div class="text-right">
-                <button (click)="loginAction()" class="btn btn-primary" [ngClass]="{'btn-success': loginForm.valid}" [disabled]="!loginForm.valid">Login</button>
+                <button (click)="loginAction()" class="btn btn-default" [ngClass]="{'btn-success': loginForm.valid}" [disabled]="!loginForm.valid">Login</button>
             </div>
             <hr>
 

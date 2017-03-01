@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.regionIsOpen">
-        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+        <button type="button" class="btn btn-default" dropdownToggle [disabled]="disabled">
           {{regionConstraint.preferred_region_area == null ? 'Region' : 'Region: ' + regionConstraint.preferred_region_area}} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="navbar-btn-group btn-group" dropdown [(isOpen)]="status.providerIsOpen">
-        <button type="button" class="btn btn-info" dropdownToggle [disabled]="disabled">
+        <button type="button" class="btn btn-default" dropdownToggle [disabled]="disabled">
           {{providerConstraint.preferred_providers.length == 0 ? 'Provider' : providerConstraint.preferred_providers.join(', ') }} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
@@ -32,7 +32,7 @@
         </ul>
       </div>
 
-      <button  type="button" class="btn btn-primary pull-right" [routerLink]="['/applications', application.id]">
+      <button  type="button" class="btn btn-default pull-right" [routerLink]="['/applications', application.id]">
         Back to Application
       </button>
 
@@ -50,7 +50,7 @@
       <nouislider [config]="recommendationRange.config" [min]="recommendationRange.min" [max]="recommendationRange.max" [step]="recommendationRange.step" [(ngModel)]="recommendationRange.range"></nouislider>
     </div>
     <div class="col-lg-4 text-right">
-      <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-info" (click)="triggerRecommendation()">
+      <button [ngClass]="{'disabled': generatingRecommendation}" class="btn btn-success" (click)="triggerRecommendation()">
         <i [ngClass]="{ 'fa-copy': !generatingRecommendation, 'fa-spin': generatingRecommendation, 'fa-circle-o-notch': generatingRecommendation}" class="fa"></i>
         Generate Recommendation
       </button>
@@ -87,7 +87,7 @@
           </tr>
           </tbody>
       </table>
-      <button class="btn btn-xs btn-primary" (click)="deleteRecommendations()">
+      <button class="btn btn-xs btn-danger" (click)="deleteRecommendations()">
         <i class="fa fa-trash"></i>
         Delete Recommendations
       </button>

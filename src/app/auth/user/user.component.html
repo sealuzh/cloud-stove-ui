@@ -14,9 +14,9 @@
         <div class="row">
             <div class="col-xs-6">
                 <p>
-                    <button (click)="logout()" class="btn btn-primary" >Log out</button>
-                    <button routerLink="/password" class="btn btn-primary" >Change password</button>
-                    <button (click)="showDeleteAccountModal()" class="btn btn-primary" >Delete account</button>
+                    <button (click)="logout()" class="btn btn-default" >Log out</button>
+                    <button routerLink="/password" class="btn btn-default" >Change password</button>
+                    <button (click)="showDeleteAccountModal()" class="btn btn-danger" >Delete account</button>
                 </p>
             </div>
         </div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary" (click)="deleteAccount()">
+                <button class="btn btn-danger" (click)="deleteAccount()">
                     Delete
                 </button>
             </div>
