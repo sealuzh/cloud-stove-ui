@@ -47,6 +47,7 @@
             <cs-stove-editor-dependency-constraint
               *ngFor="let constraint of editor.dependencies"
               [constraint]="constraint"
+              (remove)="onConstraintRemove($event)"
               class="svg"
               >
             </cs-stove-editor-dependency-constraint>
@@ -74,12 +75,13 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <cs-ingredient-detail [(ingredient)]="editor.ingredient" (delete)="deleteIngredient($event)" (update)="updateIngredient($event)" (removeConstraint)="onConstraintRemove($event)"></cs-ingredient-detail>
+        <cs-ingredient-detail [(ingredient)]="editor.ingredient" (delete)="deleteIngredient($event)" (update)="updateIngredient($event)"></cs-ingredient-detail>
       </div>
     </div>
 
     <cs-stove-editor-dependency-modal *ngIf="editor.ingredient" [source]="editor.ingredient" [targets]="editor.application.children" (add)="onConstraintAdd($event)"></cs-stove-editor-dependency-modal>
     <cs-stove-editor-name-modal *ngIf="application" [application]="application"></cs-stove-editor-name-modal>
+    <cs-stove-editor-confirm-modal></cs-stove-editor-confirm-modal>
 
   </div>
 </div>

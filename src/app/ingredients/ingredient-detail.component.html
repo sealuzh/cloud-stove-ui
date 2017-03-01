@@ -32,15 +32,6 @@
         </div>
       </form>
 
-      <div>
-        <h3>Constraints</h3>
-        <ul>
-          <li *ngFor="let constraint of ingredient.constraints | csProperty : 'type' : 'DependencyConstraint'">
-            <i class="fa fa-trash" (click)="deleteConstraint(constraint)"></i> {{ingredient.name}} --> {{constraint.target_id}}
-          </li>
-        </ul>
-      </div>
-
     </div>
     <div class="col-lg-6">
       <cs-workload-form #workloadForm [(ingredient)]="ingredient"></cs-workload-form>
