@@ -10,14 +10,12 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 
 export class PropertyPipe implements PipeTransform {
-    transform(items: any[], args: any[]): any {
+    transform(items: any[], arg1, arg2): any {
         if (items == null) {
           return;
         }
 
-        let filter = args[0].map((obj) => { return obj[args[1]]; });
-
         // filter items array, items which match and return true will be kept, false will be filtered out
-        return items.filter(item => { return filter.indexOf(item[args[1]]) !== -1; });
+        return items.filter(item => { return item[arg1] === arg2; });
     }
 }

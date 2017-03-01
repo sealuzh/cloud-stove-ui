@@ -2,7 +2,7 @@
  * @module ApplicationsModule
  */ /** */
 
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IngredientService } from '../api/services/ingredient.service';
 import { ConstraintService } from '../api/services/constraint.service';
@@ -80,6 +80,17 @@ export class ApplicationEditorComponent implements AfterViewInit {
         this.application.children.push({name: 'New Ingredient ', parent_id: this.application.id, body: 'Add a description of this ingredient.'});
     }
 
+    deleteIngredient(ingredient) {
+        this.application.children.splice(this.application.children.indexOf(ingredient), 1);
+        this.zoomTo(this.application);
+    }
+
+    updateIngredient(ingredient) {
+        let ingredientIndex = this.editor.application.children.indexOf(this.editor.ingredient);
+        Object.assign(this.editor.application.children[ingredientIndex], ingredient);
+        this.selectIngredient(ingredient);
+    }
+
     extractConstraints(ingredient: Ingredient): Constraint[] {
       let links = [];
 
@@ -99,6 +110,10 @@ export class ApplicationEditorComponent implements AfterViewInit {
 
     onConstraintAdd(constraint: Constraint) {
       this.editor.dependencies.push(constraint);
+    }
+
+    onConstraintRemove(constraint: Constraint) {
+        this.editor.dependencies.splice(this.editor.dependencies.indexOf(constraint), 1);
     }
 
 }
