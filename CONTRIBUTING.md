@@ -31,7 +31,7 @@ Currently, the Cloud Stove is split across two repositories: the backend Rails a
 
 ## Making Changes
 
-* Pick a story from the backlog in the [List of issues](https://github.com/inz/cloud-stove-ui/issues) and assign yourself to it.
+* Pick a story from the backlog in the [List of issues](https://github.com/sealuzh/cloud-stove-ui/issues) and assign yourself to it.
 
 * Create a topic branch for your changes.
   
@@ -47,11 +47,11 @@ Currently, the Cloud Stove is split across two repositories: the backend Rails a
   npm run test
   ```
   
-  * The wiki has some [troubleshooting tips](https://github.com/inz/cloud-stove/wiki#troubleshooting) if tests fail.
+  * The wiki has some [troubleshooting tips](https://github.com/sealuzh/cloud-stove/wiki#troubleshooting) if tests fail.
 
 * Make sure that your code always has appropriate test coverage.
 
-* Push your topic branch and [submit a pull request](https://github.com/inz/cloud-stove-ui/compare). To keep our project history clean, always rebase your changes onto master.
+* Push your topic branch and [submit a pull request](https://github.com/sealuzh/cloud-stove-ui/compare). To keep our project history clean, always rebase your changes onto master.
 
 You should also periodically push your topic branches during development. That
 way, there will always be a reasonably current backup of your work in the
