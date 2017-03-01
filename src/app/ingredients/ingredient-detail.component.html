@@ -1,7 +1,12 @@
 <div *ngIf="ingredient" class="animated-list">
   <div class="row">
     <div class="col-lg-12">
-        <h2>{{ingredient.name}} <button (click)="submit(ingredient)" class="btn btn-xs btn-primary" [disabled]="!ingredientForm.valid">Save</button></h2>
+        <h2>{{ingredient.name}} <small>ID: {{ingredient.id}}</small>
+          <div class="btn-group pull-right">
+            <button (click)="submit(ingredient)" class="btn btn-success" [disabled]="!ingredientForm.valid">Save</button>
+            <button (click)="deleteIngredient(ingredient)" class="btn btn-danger" [disabled]="!ingredient.id">Delete</button>
+          </div>
+          </h2>
     </div>
   </div>
   <div class="row">
@@ -26,6 +31,7 @@
             </select>
         </div>
       </form>
+
     </div>
     <div class="col-lg-6">
       <cs-workload-form #workloadForm [(ingredient)]="ingredient"></cs-workload-form>

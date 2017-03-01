@@ -2,7 +2,7 @@
  * @module IngredientsModule
  */ /** */
  
-import { Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Ingredient } from '../api/dtos/ingredient.dto';
@@ -21,7 +21,7 @@ import { Validators, FormBuilder } from '@angular/forms';
     styles: [require('./ingredient-detail.component.less')]
 })
 
-export class IngredientDetailComponent {
+export class IngredientDetailComponent implements OnChanges {
 
     public constraintDropdown: { isOpen: boolean } = { isOpen: false };
     public constraintFilter: { type: string }[] = [
@@ -35,12 +35,22 @@ export class IngredientDetailComponent {
     @Input()
     ingredient: Ingredient;
 
+    @Output()
+    delete = new EventEmitter();
+
+    @Output()
+    removeConstraint = new EventEmitter();
+
+    @Output()
+    update = new EventEmitter();
+
     @ViewChild('workloadForm') workloadForm: IngredientWorkloadFormComponent;
 
     constructor(
       private _ingredientService: IngredientService,
       private _constraintService: ConstraintService,
       private _location: Location,
+      private _changeDetector: ChangeDetectorRef,
       private _fb: FormBuilder) {
 
         this.ingredientForm = this._fb.group({
@@ -60,12 +70,16 @@ export class IngredientDetailComponent {
 
     }
 
+    ngOnChanges(changes: any): void {
+      if (changes.ingredient) {
+        this.ingredientForm.markAsPristine();
+      }
+    }
+
     submit(ingredientObj: Ingredient) {
-      this.workloadForm.save();
+      this.workloadForm.beforeSave();
       this._ingredientService.save(ingredientObj).subscribe(result => {
-        this.ingredient.name = result.name;
-        this.ingredient.body = result.body;
-        this.ingredient.icon = result.icon;
+        this.update.emit(result);
       }, error => console.error(error));
     }
 
@@ -81,11 +95,10 @@ export class IngredientDetailComponent {
       );
     }
 
-    removeConstraint(constraint: Constraint) {
-      this._constraintService.delete(constraint).subscribe(
-        success => this.ingredient.constraints.splice(this.ingredient.constraints.indexOf(constraint), 1),
-        error => console.log(error)
-      );
+    deleteIngredient(ingredientObj: Ingredient) {
+      this._ingredientService.delete(ingredientObj).subscribe(result => {
+        this.delete.emit(ingredientObj);
+      }, error => console.error(error));
     }
 
 }

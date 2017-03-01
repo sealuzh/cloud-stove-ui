@@ -44,6 +44,10 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
       private _scalingWorkloadService: ScalingWorkloadService,
       private _ingredientService: IngredientService) {
 
+        this.initCPUForm();
+        this.initRAMForm();
+        this.initScalingForm();
+
     }
 
     ngOnInit(): void {
@@ -100,11 +104,11 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
         });
     }
 
-    private loadWorkloads() {
+    loadWorkloads() {
       if (this.ingredient.workloads && this.ingredient.workloads.cpu_workload) {
         this._cpuWorkloadService.get(this.ingredient.workloads.cpu_workload.id).subscribe((cpuWorkload) => {
           this.cpuWorkload = cpuWorkload;
-          this.initCPUForm();
+          this.cpuWorkloadForm.markAsPristine();
         }, (error) => console.error(error));
       } else {
         this.cpuWorkload = {};
@@ -113,7 +117,7 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
       if (this.ingredient.workloads && this.ingredient.workloads.ram_workload) {
         this._ramWorkloadService.get(this.ingredient.workloads.ram_workload.id).subscribe((ramWorkload) => {
           this.ramWorkload = ramWorkload;
-          this.initRAMForm();
+          this.ramWorkloadForm.markAsPristine();
         }, (error) => console.error(error));
       } else {
         this.ramWorkload = {};
@@ -122,7 +126,7 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
       if (this.ingredient.workloads && this.ingredient.workloads.scaling_workload) {
         this._scalingWorkloadService.get(this.ingredient.workloads.scaling_workload.id).subscribe((scalingWorkload) => {
           this.scalingWorkload = scalingWorkload;
-          this.initScalingForm();
+          this.scalingWorkloadForm.markAsPristine();
         }, (error) => console.error(error));
       } else {
         this.scalingWorkload = {};
@@ -130,18 +134,26 @@ export class IngredientWorkloadFormComponent implements OnInit, OnChanges {
     }
 
     beforeSave() {
-        this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
-            hasRecommendations => {
-                if (hasRecommendations) {
-                    this.modal.show();
-                } else {
-                    this.save();
-                }
-            },
-            error => {
-               console.log(error);
-            }
-        );
+
+      // if the ingredient has not id, it is created newly and thus cannot have any recommendations to find yet
+      if (!this.ingredient.id) {
+        this.save();
+        return;
+      }
+
+      this._ingredientService.findRecommendations(this.ingredient.id).subscribe(
+          hasRecommendations => {
+              if (hasRecommendations) {
+                  this.modal.show();
+              } else {
+                  this.save();
+              }
+          },
+          error => {
+              console.log(error);
+          }
+      );
+      
     }
 
     save() {
