@@ -1,5 +1,5 @@
 import { browser, by, element } from 'protractor';
-import {LoginHelper} from "./helper/loginHelper";
+import { LoginHelper } from "./helper/loginHelper";
 
 describe('/login', () => {
 
@@ -24,7 +24,7 @@ describe('/login', () => {
   it('should display an error message if the login is unsuccessful', () => {
     let email = element(by.css('[formcontrolname=email]'));
     let password = element(by.css('[formcontrolname=password]'));
-    let submit = element(by.css('button'));
+    let submit = element(by.buttonText('Login'));
 
     email.sendKeys('wrong@email.ch');
     password.sendKeys('wrongaswell');
@@ -38,7 +38,7 @@ describe('/login', () => {
   it('should require a minimum length of 5 characters for passwords', () => {
     let email = element(by.css('[formcontrolname=email]'));
     let password = element(by.css('[formcontrolname=password]'));
-    let submit = element(by.css('button'));
+    let submit = element(by.buttonText('Login'));
 
     email.sendKeys('wrong@email.ch');
     password.sendKeys('pw');
@@ -53,7 +53,7 @@ describe('/login', () => {
   it('should successfully log a user in', () => {
     let email = element(by.css('[formcontrolname=email]'));
     let password = element(by.css('[formcontrolname=password]'));
-    let submit = element(by.css('button'));
+    let submit = element(by.buttonText('Login'));
 
     email.sendKeys(loginHelper.email);
     password.sendKeys(loginHelper.password);
