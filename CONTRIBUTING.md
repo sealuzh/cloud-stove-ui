@@ -5,29 +5,28 @@ Thank you for your interest in contributing to the Cloud Stove. Please note that
 Currently, the Cloud Stove is split across two repositories: the backend Rails app, and the frontend AngularJS application. This guide focuses on the front end AngularJS app.
 
 ## Setting Up a Development Environment
+Check that you have `npm > 3` and `node > 5` installed on your system, visit [NodeJS](https://nodejs.org/) otherwise.
 
 1. Clone the Cloud Stove Frontend repository
   
   ```shell
-  git clone git@github.com:inz/cloud-stove-ui.git
+  git clone git@github.com:sealuzh/cloud-stove-ui.git
   cd cloud-stove-ui
   ```
-    
-2. Install Node (https://nodejs.org/)
 
-3. Install dependencies
+2. Install dependencies
 
   ```shell
   npm install
   ```
 
-4. Start the Node server
+3. Start the Webpack Development server
 
   ```shell
-  API_URL=http://localhost:5000 npm start
+  npm start
   ```
   
-  Make sure that `API_URL` points at a running backend installation. If you plan to _only_ work on the front end, you _could_ point your local app at the staging (`http://staging.backend.thestove.io/`) or production (`https://api.thestove.io`) backends. 
+  Make sure that your backend installation is running on `http://localhost:3000` or point `API_URL` to a running installation. If you plan to _only_ work on the front end, you _could_ point your local app at the staging (`http://staging.backend.thestove.io/`) or production (`https://api.thestove.io`) backends (keep in mind that you might need to disable the same-origin policy in your browser). 
 
 ## Making Changes
 

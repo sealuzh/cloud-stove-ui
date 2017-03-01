@@ -7,16 +7,6 @@ The Cloud Stove currently consists of two main components: The backend API imple
 ## Overview
 The front end is written entirely using the framework [Angular 2](https://angular.io/) and in [TypeScript](typescriptlang.org). If you find yourself unfamiliar with either of these two, the fastest way to get a grasp of the concepts is by following the excellent [Learning Angular](https://angular.io/docs/ts/latest/guide/learning-angular.html) section of the official documentation. The Cloud Stove project is heavily inspired by the official samples provided by Google in its structure and tool usage.
 
-### QuickStart
-To get up and running as quick as possible, simply:
-
-* Have `npm > 3` and `node > 5` installed on your system, visit [NodeJS](https://nodejs.org/) otherwise.
-* `git clone git@github.com:inz/cloud-stove-ui.git && cd cloud-stove-ui` to clone the project.
-* `npm install` to install all necessary dependencies.
-* `npm start` to start the development server.
-
-You can now start adding additional features, fixing bugs etc. The front end is configured that it automatically connects to the Cloud Stove back end on its default port. Live and hot reloading is enabled by default, and you do not have to restart the server after making changes.
-
 ### Structure, Configuration and important Files
 The project is structured as follows:
 
