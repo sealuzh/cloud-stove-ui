@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "2.3.x",
     "@angular/router": "3.3.x",
     "@angular/upgrade": "2.3.x",
-    "@types/jasmine": "^2.5.38",
+    "@types/jasmine": "2.5.38",
     "angular2-moment": "^1.0.0",
     "angular2-token": "0.1.14",
     "angulartics2": "^1.4.2",
