@@ -13,6 +13,11 @@ const server = function () {
     // serve static files
     app.use('/', express.static(path.join(__dirname, '../dist')));
 
+    // provide configuration for production
+    app.get('/config', (req, res) => {
+        return res.status(200).json({ "API_URL" : process.env.API_URL });
+    });
+
     // serve index.html for everything else
     app.get('*', function (_, res) {
         res.sendFile(path.join(__dirname, '/../dist/index.html'))

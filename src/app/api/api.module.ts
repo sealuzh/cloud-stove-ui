@@ -8,8 +8,9 @@
  */ /** */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Http, HttpModule } from '@angular/http';
 import { RequestService } from './services/request.service';
 import { ConfigService } from './services/config.service';
 import { IngredientService } from './services/ingredient.service';
@@ -27,10 +28,17 @@ import { JobService } from './services/job.service';
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule
+    RouterModule,
+    HttpModule,
   ],
   providers: [
     ConfigService,
+    {
+        provide: APP_INITIALIZER,
+        useFactory: (service: ConfigService) => () => service.load(),
+        deps: [ConfigService, Http],
+        multi: true
+    },
     IngredientService,
     RequestService,
     ConstraintService,

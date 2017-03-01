@@ -178,7 +178,7 @@ module.exports = function makeWebpackConfig() {
             // Environment helpers
             'process.env': {
               ENV: JSON.stringify(ENV),
-              API_URL: JSON.stringify(process.env.API_URL),
+              API_URL: JSON.stringify(process.env.API_URL || 'http://localhost:3000'),
               USERBACK_TOKEN: JSON.stringify(process.env.USERBACK_TOKEN)
             }
         })
