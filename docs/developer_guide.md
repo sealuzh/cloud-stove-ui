@@ -20,48 +20,48 @@ You can now start adding additional features, fixing bugs etc. The front end is 
 ### Structure, Configuration and important Files
 The project is structured as follows:
 
-* [docs](https://github.com/inz/cloud-stove-ui/tree/master/docs)
+* [docs](https://github.com/sealuzh/cloud-stove-ui/tree/master/docs)
 
    Contains the documentation you are currently reading ;)
 
-* [server](https://github.com/inz/cloud-stove-ui/tree/master/server)
+* [server](https://github.com/sealuzh/cloud-stove-ui/tree/master/server)
 
    A basic [ExpressJS](https://expressjs.com) server to serve the static contents of the front end, when compiled and deployed in production. You can also use any kind of webserver that is able to statically serve files to fulfill this task. The provided server is used when deploying the front end as Docker container.
 
-* [src](https://github.com/inz/cloud-stove-ui/tree/master/src)
-   * [app](https://github.com/inz/cloud-stove-ui/tree/master/app)
+* [src](https://github.com/sealuzh/cloud-stove-ui/tree/master/src)
+   * [app](https://github.com/sealuzh/cloud-stove-ui/tree/master/app)
 
       Contains all of the application code of the Cloud Stove front end.
 
-   * [public](https://github.com/inz/cloud-stove-ui/tree/master/public)
+   * [public](https://github.com/sealuzh/cloud-stove-ui/tree/master/public)
 
       Contains all resources such as images and additional font files (icons) that are used by the front end.
 
-   * [style](https://github.com/inz/cloud-stove-ui/tree/master/style)
+   * [style](https://github.com/sealuzh/cloud-stove-ui/tree/master/style)
 
       Contains application-wide `.scss` files to declare styles. Also embeds Bootstrap.
 
-* [Procfile](https://github.com/inz/cloud-stove-ui/blob/master/Procfile), [app.json](https://github.com/inz/cloud-stove-ui/blob/master/app.json)
+* [Procfile](https://github.com/sealuzh/cloud-stove-ui/blob/master/Procfile), [app.json](https://github.com/sealuzh/cloud-stove-ui/blob/master/app.json)
 
    Enables deployment on [Heroku](https://www.heroku.com/) and manages its configuration.
 
-* [karma-shim.js](https://github.com/inz/cloud-stove-ui/blob/master/karma-shim.js), [karma.conf.js](https://github.com/inz/cloud-stove-ui/blob/master/karma-shim.js)
+* [karma-shim.js](https://github.com/sealuzh/cloud-stove-ui/blob/master/karma-shim.js), [karma.conf.js](https://github.com/sealuzh/cloud-stove-ui/blob/master/karma-shim.js)
 
    Enables Unit-Testing using Karma.
 
-* [protractor.conf.js](https://github.com/inz/cloud-stove-ui/blob/master/protractor.conf.js)
+* [protractor.conf.js](https://github.com/sealuzh/cloud-stove-ui/blob/master/protractor.conf.js)
 
    Enables E2E using Protractor. By default, this project tests against Chrome. You can change this setting by overriding `{'browserName': 'chrome'}` in this file to your liking.
 
-* [tsconfig.json](https://github.com/inz/cloud-stove-ui/blob/master/tsconfig.json), [tslint.json](https://github.com/inz/cloud-stove-ui/blob/master/tslint.json), [typedoc.json](https://github.com/inz/cloud-stove-ui/blob/master/typedoc.json)
+* [tsconfig.json](https://github.com/sealuzh/cloud-stove-ui/blob/master/tsconfig.json), [tslint.json](https://github.com/sealuzh/cloud-stove-ui/blob/master/tslint.json), [typedoc.json](https://github.com/sealuzh/cloud-stove-ui/blob/master/typedoc.json)
 
    Configuration for various TypeScript-settings and linter settings. The `tslint` is mostly following Googles standard for Angular projects using TypeScript.
 
-* [webpack.config.js](https://github.com/inz/cloud-stove-ui/blob/master/webpack.config.js)
+* [webpack.config.js](https://github.com/sealuzh/cloud-stove-ui/blob/master/webpack.config.js)
 
    Config file for the [webpack](https://webpack.github.io/) module bundler. More information about the specific configuration can be found in the file itself. Most likely, you won't have to change it unless a new type of file should be included in the project or an update is necessary.
 
-* [wercker.yml](https://github.com/inz/cloud-stove-ui/blob/master/wercker.yml)
+* [wercker.yml](https://github.com/sealuzh/cloud-stove-ui/blob/master/wercker.yml)
 
    Wercker build file that specifies how this project is built using the CI infrastructre of [wercker](https://www.wercker.com/).
 

@@ -11,7 +11,7 @@ deployment strategies. Deployment recommendations are created by optimizing the
 use of available provider offerings with respect to the captured application
 specifications and requirements.
 
-Backend: <https://github.com/inz/cloud-stove>
+Backend: <https://github.com/sealuzh/cloud-stove>
 
 ## Quick Start
 
@@ -47,8 +47,8 @@ This would set the public Cloud Stove backend as API endpoint for your frontend 
 
 ## Communication & Organization
 
-Planning and development of the Cloud Stove is coordinated using GitHub [issues](https://github.com/inz/cloud-stove-ui/issues), [milestones](https://github.com/inz/cloud-stove-ui/milestones), and [pull requests](https://github.com/inz/cloud-stove-ui/pulls). 
+Planning and development of the Cloud Stove is coordinated using GitHub [issues](https://github.com/sealuzh/cloud-stove-ui/issues), [milestones](https://github.com/sealuzh/cloud-stove-ui/milestones), and [pull requests](https://github.com/sealuzh/cloud-stove-ui/pulls). 
 
-In the [Cloud Stove Roadmap](https://github.com/inz/cloud-stove/wiki/Roadmap) we discuss upcoming features for both, the backend and the frontend, and define milestones and issues to implement them.
+In the [Cloud Stove Roadmap](https://github.com/sealuzh/cloud-stove/wiki/Roadmap) we discuss upcoming features for both, the backend and the frontend, and define milestones and issues to implement them.
 
 Daily communication and coordination happens in `#cloud-stove` at the [s.e.a.l. Slack](https://cloudguysseal.slack.com/).
