@@ -1,3 +1,4 @@
+import { StoveEditorConfirmModalComponent } from './modals/confirm-modal.component';
 /**
  * @module ApplicationsModule
  */ /** */
@@ -23,6 +24,7 @@ export class ApplicationEditorComponent implements AfterViewInit {
 
     @ViewChild(StoveEditorDependencyModalComponent) stoveEditorDependencyModalComponent: StoveEditorDependencyModalComponent;
     @ViewChild(StoveEditorNameModalComponent) stoveEditorNameModalComponent: StoveEditorNameModalComponent;
+    @ViewChild(StoveEditorConfirmModalComponent) stoveEditorConfirmModalComponent: StoveEditorConfirmModalComponent;
 
     constructor(
       private _ingredientService: IngredientService,
@@ -113,7 +115,12 @@ export class ApplicationEditorComponent implements AfterViewInit {
     }
 
     onConstraintRemove(constraint: Constraint) {
-        this.editor.dependencies.splice(this.editor.dependencies.indexOf(constraint), 1);
+        this.stoveEditorConfirmModalComponent.show('Would you like to remove this dependency?', () => {
+            this._constraintService.delete(constraint).subscribe(
+            success => {
+                this.editor.dependencies.splice(this.editor.dependencies.indexOf(constraint), 1);
+            }, error => console.error(error));
+        });
     }
 
 }

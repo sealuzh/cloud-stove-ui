@@ -26,6 +26,8 @@ import { StoveEditorIngredientComponent } from './application-editor-ingredient.
 import { StoveEditorDependencyConstraintComponent } from './application-editor-constraint.component';
 import { StoveEditorDependencyModalComponent } from './modals/dependency-modal.component';
 import { StoveEditorNameModalComponent } from './modals/name-modal.component';
+import { StoveEditorConfirmModalComponent } from './modals/confirm-modal.component';
+
 import { DraggableDirective } from './editor/draggable.directive';
 import { ConnectionDirective } from './editor/connection.directive';
 import { PositionDirective } from './editor/position.directive';
@@ -63,6 +65,7 @@ import { ModalModule } from 'ng2-bootstrap/components/modal';
     StoveEditorIngredientComponent,
     StoveEditorDependencyConstraintComponent,
     StoveEditorDependencyModalComponent,
+    StoveEditorConfirmModalComponent,
     StoveEditorNameModalComponent,
     PositionDirective,
     DraggableDirective,

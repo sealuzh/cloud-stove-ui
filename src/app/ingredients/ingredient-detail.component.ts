@@ -101,14 +101,4 @@ export class IngredientDetailComponent implements OnChanges {
       }, error => console.error(error));
     }
 
-    deleteConstraint(constraint: Constraint) {
-      this._constraintService.delete(constraint).subscribe(
-        success => {
-          this.ingredient.constraints.splice(this.ingredient.constraints.indexOf(constraint), 1);
-          this.removeConstraint.emit(constraint);
-        },
-        error => console.log(error)
-      );
-    }
-
 }
