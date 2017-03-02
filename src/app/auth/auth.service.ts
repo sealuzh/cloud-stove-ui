@@ -2,16 +2,15 @@
  * @module AuthModule
  */ /** */
 
-import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { ConfigService } from '../api/services/config.service';
 
 @Injectable()
 export class AuthService {
 
-    private apiUrl = process.env.API_URL || 'http://localhost:3000';
-
-    constructor(private _http: Http) {
+    constructor(private _http: Http, private _configService: ConfigService) {
 
     }
 
@@ -28,7 +27,7 @@ export class AuthService {
         }
 
         return Observable.create( subscriber => {
-                this.PUT(headers, user, this.apiUrl + '/api/auth/password').subscribe(
+                this.PUT(headers, user, this._configService.apiUrl + '/api/auth/password').subscribe(
                     result => {
                         this.handleLogin(result);
                         subscriber.next(result);
@@ -56,7 +55,7 @@ export class AuthService {
         }
 
         return Observable.create( subscriber => {
-                this.DELETE(headers, this.apiUrl + '/api/auth/').subscribe(
+                this.DELETE(headers, this._configService.apiUrl + '/api/auth/').subscribe(
                     result => {
                         this.logout();
                         subscriber.next(result);
@@ -76,7 +75,7 @@ export class AuthService {
         let headers = new Headers();
 
         return Observable.create( subscriber => {
-                this.POST(headers, user, this.apiUrl + '/api/auth/').subscribe(
+                this.POST(headers, user, this._configService.apiUrl + '/api/auth/').subscribe(
                     result => {
                         this.handleLogin(result);
                         subscriber.next(result);
@@ -97,7 +96,7 @@ export class AuthService {
         let headers = new Headers();
 
         return Observable.create( subscriber => {
-                this.POST(headers, user, this.apiUrl + '/api/auth/sign_in').subscribe(
+                this.POST(headers, user, this._configService.apiUrl + '/api/auth/sign_in').subscribe(
                     result => {
                         this.handleLogin(result);
                         subscriber.next(result);
@@ -129,7 +128,7 @@ export class AuthService {
             headers.append('Client', localStorage.getItem('Client'));
             headers.append('Expiry', localStorage.getItem('Expiry'));
             headers.append('Uid', localStorage.getItem('Uid'));
-            return this._http.get(this.apiUrl + '/api/auth/validate_token', {headers: headers});
+            return this._http.get(this._configService.apiUrl + '/api/auth/validate_token', {headers: headers});
         } else {
             return Observable.create(observer => {
                 // Yield a single value and complete
