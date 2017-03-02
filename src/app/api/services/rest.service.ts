@@ -14,7 +14,7 @@ import { RequestService } from './request.service';
 @Injectable()
 export class RestService {
 
-    protected nestedUpdate: boolean = true;
+    protected nestedUpdate: Boolean = true;
 
     constructor(
       protected http: Http,

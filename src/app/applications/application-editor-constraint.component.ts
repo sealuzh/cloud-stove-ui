@@ -19,11 +19,11 @@ export class StoveEditorDependencyConstraintComponent {
     @Output()
     remove = new EventEmitter();
 
-    x1: number = 0;
-    y1: number = 0;
+    x1: Number = 0;
+    y1: Number = 0;
 
-    x2: number = 0;
-    y2: number = 0;
+    x2: Number = 0;
+    y2: Number = 0;
 
     constructor(private _ref: ChangeDetectorRef) {
 

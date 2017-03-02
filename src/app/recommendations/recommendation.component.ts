@@ -23,9 +23,9 @@ export class RecommendationComponent implements OnInit {
     public application: Ingredient;
     public selectedRecommendation: Recommendation;
     public recommendations: Recommendation[];
-    public generatingRecommendation: boolean = false;
+    public generatingRecommendation: Boolean = false;
 
-    public status: { regionIsOpen: boolean, providerIsOpen: boolean } = { regionIsOpen: false, providerIsOpen: false };
+    public status: { regionIsOpen: Boolean, providerIsOpen: Boolean } = { regionIsOpen: false, providerIsOpen: false };
     public recommendationOptions: { region: string } = { region: 'EU' };
 
     public regionConstraint: Constraint = { type: 'PreferredRegionAreaConstraint', preferred_region_area: null };
