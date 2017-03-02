@@ -1,4 +1,3 @@
-import { StoveEditorConfirmModalComponent } from './modals/confirm-modal.component';
 /**
  * @module ApplicationsModule
  */ /** */
@@ -11,6 +10,7 @@ import { Ingredient } from '../api/dtos/ingredient.dto';
 import { Constraint } from '../api/dtos/constraint.dto';
 import { StoveEditorDependencyModalComponent } from './modals/dependency-modal.component';
 import { StoveEditorNameModalComponent } from './modals/name-modal.component';
+import { StoveEditorConfirmModalComponent } from './modals/confirm-modal.component';
 
 @Component({
     template: require('./application-editor.component.html'),

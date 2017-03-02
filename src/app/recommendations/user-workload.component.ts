@@ -33,7 +33,7 @@ export class UserWorkloadSliderComponent implements OnChanges {
     ingredient: Ingredient;
 
     @Input()
-    disabled: boolean = false;
+    disabled: Boolean = false;
 
     sliderConfig: any = {};
     userWorkload: UserWorkload = {num_simultaneous_users: 100}; // default

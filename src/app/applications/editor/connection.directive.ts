@@ -54,8 +54,8 @@ export class ConnectionDirective implements AfterContentInit, OnInit {
     for (let comp of this.constraints.toArray()) {
       let constraint: Constraint = comp.constraint;
 
-      let sources = this.ingredients.filter(comp => comp.ingredient.id === constraint.source_id);
-      let targets = this.ingredients.filter(comp => comp.ingredient.id === constraint.target_id);
+      let sources = this.ingredients.filter(c => c.ingredient.id === constraint.source_id);
+      let targets = this.ingredients.filter(c => c.ingredient.id === constraint.target_id);
 
       if (sources.length > 0 && targets.length > 0) {
         let sourceIngredient = sources[0].element.nativeElement;

@@ -67,6 +67,28 @@ Use `npm run build` to generate all static assets for production. You can start 
 ### Docker
 Build the image on your machine using `docker build`, and start the container afterwards with your parameters of choice. Make sure to set the environment variables `API_URL` and/or `PORT` (defaults to 80) to your specific needs.
 
+#### Localhost
+
+See running [backend with Docker](https://github.com/sealuzh/cloud-stove/blob/master/CONTRIBUTING.md#run-development-environment-with-docker).
+
+1. Build image:
+
+	```shell
+	docker build -t cloud-stove-ui .
+	```
+
+2. Start frontend on port `1234`, assuming the backend is running on `localhost:3000`:
+
+	```shell
+	docker run -p 1234:80 -e API_URL='http://localhost:3000' cloud-stove-ui
+	```
+
+3. Login with an interactive shell
+
+	```shell
+	docker run --rm -it cloud-stove-ui /bin/bash
+	```
+
 ### Heroku
 Make sure to set the `API_URL` config variable for your app to a running backend instance, e.g.:
 
