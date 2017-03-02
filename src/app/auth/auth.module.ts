@@ -12,6 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
@@ -32,6 +34,7 @@ import { routing } from './auth.routes';
     BrowserModule,
     HttpModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
     routing
   ],
